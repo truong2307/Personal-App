@@ -47,6 +47,22 @@ namespace PersonalApp.DataAccess.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "bfd5dbb3-651c-461a-ac2f-6dfbe4b15ffe",
+                            ConcurrencyStamp = "6b422220-2d1d-4afa-a33a-cef9735fd2e4",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "304e18bb-e979-428a-a91f-e6a6c0fbe5ed",
+                            ConcurrencyStamp = "c392c08a-3095-46db-80df-9c26478d063c",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -221,6 +237,26 @@ namespace PersonalApp.DataAccess.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "ca751218-84b0-46cc-ad56-36346c8ea286",
+                            Email = "truongadmin@mail.com",
+                            EmailConfirmed = true,
+                            FullName = "Nguyen Van Truong",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "TRUONGADMIN@MAIL.COM",
+                            NormalizedUserName = "TRUONGNV",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJ/QTNd9rRFyFoY/kA2KcLa8lxWMHAEgGmTFXOaed/jRsZDdhhfWUlTpnuhhADxCWg==",
+                            PhoneNumber = "+111111111111",
+                            PhoneNumberConfirmed = true,
+                            SecurityStamp = "4bae3101-c03d-4ea2-91e9-60a661722e7e",
+                            TwoFactorEnabled = false,
+                            UserName = "truongnv"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

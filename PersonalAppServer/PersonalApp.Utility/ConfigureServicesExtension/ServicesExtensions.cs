@@ -3,8 +3,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using PersonalApp.DataAccess.AuthenticationService;
 using PersonalApp.DataAccess.Data;
 using PersonalApp.Models.Identity;
+using PersonalApp.Utility.Initializer;
+using System.Reflection;
 using System.Text;
 
 namespace PersonalApp.Utility.ConfigureServicesExtension
@@ -13,10 +16,13 @@ namespace PersonalApp.Utility.ConfigureServicesExtension
     {
         public static void ConfigureIdentity(this IServiceCollection services)
         {
-            var builder = services.AddIdentityCore<ApiUser>(q => q.User.RequireUniqueEmail = true);
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+            });
 
-            builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole), services);
-            builder.AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+            services.AddIdentity<ApiUser, IdentityRole>().AddDefaultTokenProviders()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
         }
 
         public static void ConfigureJWT(this IServiceCollection services, IConfiguration configuration)
@@ -41,6 +47,17 @@ namespace PersonalApp.Utility.ConfigureServicesExtension
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
                 };
             });
+        }
+
+        public static void ConfigureAutoMapper(this IServiceCollection services)
+        {
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        }
+
+        public static void ConfigureServiceLifeTime(this IServiceCollection services)
+        {
+            services.AddScoped<IAuthManager, AuthManager>();
+            services.AddTransient<IndentityUserSeeding>();
         }
 
     }
