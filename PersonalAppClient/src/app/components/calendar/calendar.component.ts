@@ -9,8 +9,21 @@ import dateOfWeek from 'src/shared/const/dateOfWeek';
 export class CalendarComponent implements OnInit {
 
   private days : Array<string>;
+  week1: number = 0;
+  week2: number = 0;
+  week3: number = 0;
+  week4: number = 0;
+  week5: number = 0;
+  week6: number = 0;
+  week1NextMonth: number = 0;
+  week2NextMonth: number = 0;
+  dayOfPreviousMonth: number = 0;
+  totalDayOfCurrentMonth: number = 0;
+  totalDayOfPreviousMonth: number = 0;
+  firstDayInCurrentMonth: string = '';
 
-  constructor() {
+  constructor(
+  ) {
     this.days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
   }
 
@@ -20,254 +33,281 @@ export class CalendarComponent implements OnInit {
 
   renderCalendar() : void{
     const date = new Date();
-    const totalDayOfCurrentMonth = new Date(date.getFullYear(), date.getMonth() +1, 0).getDate();
-    const totalDayOfPreviousMonth = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
-    const firstDayInCurrentMonth = this.days[new Date(date.getFullYear(), date.getMonth(), 1).getDay()];
-
-    var week1;
-    var week2;
-    var week3;
-    var week4;
-    var week5;
-    var week6;
-    var week1NextMonth;
-    var week2NextMonth;
-    var dayOfPreviousMonth
+    this.totalDayOfCurrentMonth = new Date(date.getFullYear(), date.getMonth() +1, 0).getDate();
+    this.totalDayOfPreviousMonth = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
+    this.firstDayInCurrentMonth = this.days[new Date(date.getFullYear(), date.getMonth(), 1).getDay()];
 
     switch (true) {
-
-      case firstDayInCurrentMonth === dateOfWeek.SUNDAY:
-        week1 = 7;
-        week2 = week1 + 7;
-        week3 = week2 + 7;
-        week4 = week3 + 7;
-        dayOfPreviousMonth = 0;
-        if(totalDayOfCurrentMonth === 31){
-          week5 = week4 + 3;
-          week6 = 0;
-          week1NextMonth = 7 - 3;
-          week2NextMonth = week1NextMonth + 7;
+      case this.firstDayInCurrentMonth === dateOfWeek.SUNDAY:
+        this.week1 = 7;
+        this.week2 = this.week1 + 7;
+        this.week3 = this.week2 + 7;
+        this.week4 = this.week3 + 7;
+        this.dayOfPreviousMonth = 0;
+        if(this.totalDayOfCurrentMonth === 31){
+          this.week5 = this.week4 + 3;
+          this.week6 = 0;
+          this.week1NextMonth = 7 - 3;
+          this.week2NextMonth = this.week1NextMonth + 7;
         }
-        else if(totalDayOfCurrentMonth === 30){
-          week5 = week4 + 2;
-          week6 = 0;
-          week1NextMonth = 7 - 2;
-          week2NextMonth = week1NextMonth + 7;
+        else if(this.totalDayOfCurrentMonth === 30){
+          this.week5 = this.week4 + 2;
+          this.week6 = 0;
+          this.week1NextMonth = 7 - 2;
+          this.week2NextMonth = this.week1NextMonth + 7;
         }
-        else if(totalDayOfCurrentMonth === 28){
-          week5 = 0;
-          week6 = 0;
-          week1NextMonth = 7;
-          week2NextMonth = week1NextMonth + 7;
+        else if(this.totalDayOfCurrentMonth === 28){
+          this.week5 = 0;
+          this.week6 = 0;
+          this.week1NextMonth = 7;
+          this.week2NextMonth = this.week1NextMonth + 7;
         }
-        else if(totalDayOfCurrentMonth === 29){
-          week5 = week4 + 1;
-          week6 = 0;
-          week1NextMonth = 7 - 1;
-          week2NextMonth = week1NextMonth + 7;
-        }
-        break;
-
-      case firstDayInCurrentMonth === dateOfWeek.MONDAY:
-        week1 = 6;
-        week2 = week1 + 7;
-        week3 = week2 + 7;
-        week4 = week3 + 7;
-        dayOfPreviousMonth = 1;
-        if(totalDayOfCurrentMonth === 31){
-          week5 = week4 + 4;
-          week6 = 0;
-          week1NextMonth = 7 - 4;
-          week2NextMonth = week1NextMonth + 7;
-        }
-        else if(totalDayOfCurrentMonth === 30){
-          week5 = week4 + 3;
-          week6 = 0;
-          week1NextMonth = 7 - 3;
-          week2NextMonth = week1NextMonth + 7;
-        }
-        else if(totalDayOfCurrentMonth === 28){
-          week5 = week4 + 1;
-          week6 = 0;
-          week1NextMonth = 7 - 1;
-          week2NextMonth = week1NextMonth + 7;
-        }
-        else if(totalDayOfCurrentMonth === 29){
-          week5 = week4 + 2;
-          week6 = 0;
-          week1NextMonth = 7 - 2;
-          week2NextMonth = week1NextMonth + 7;
+        else if(this.totalDayOfCurrentMonth === 29){
+          this.week5 = this.week4 + 1;
+          this.week6 = 0;
+          this.week1NextMonth = 7 - 1;
+          this.week2NextMonth = this.week1NextMonth + 7;
         }
         break;
 
-      case firstDayInCurrentMonth === dateOfWeek.TUESDAY:
-        week1 = 5;
-        week2 = week1 + 7;
-        week3 = week2 + 7;
-        week4 = week3 + 7;
-        dayOfPreviousMonth = 2;
-        if(totalDayOfCurrentMonth === 31){
-          week5 = week4 + 5;
-          week6 = 0;
-          week1NextMonth = 7 - 5;
-          week2NextMonth = week1NextMonth + 7;
+      case this.firstDayInCurrentMonth === dateOfWeek.MONDAY:
+        this.week1 = 6;
+        this.week2 = this.week1 + 7;
+        this.week3 = this.week2 + 7;
+        this.week4 = this.week3 + 7;
+        this.dayOfPreviousMonth = 1;
+        if(this.totalDayOfCurrentMonth === 31){
+          this.week5 = this.week4 + 4;
+          this.week6 = 0;
+          this.week1NextMonth = 7 - 4;
+          this.week2NextMonth = this.week1NextMonth + 7;
         }
-        else if(totalDayOfCurrentMonth === 30){
-          week5 = week4 + 4;
-          week6 = 0;
-          week1NextMonth = 7 - 4;
-          week2NextMonth = week1NextMonth + 7;
+        else if(this.totalDayOfCurrentMonth === 30){
+          this.week5 = this.week4 + 3;
+          this.week6 = 0;
+          this.week1NextMonth = 7 - 3;
+          this.week2NextMonth = this.week1NextMonth + 7;
         }
-        else if(totalDayOfCurrentMonth === 28){
-          week5 = week4 + 2;
-          week6 = 0;
-          week1NextMonth = 7 - 2;
-          week2NextMonth = week1NextMonth + 7;
+        else if(this.totalDayOfCurrentMonth === 28){
+          this.week5 = this.week4 + 1;
+          this.week6 = 0;
+          this.week1NextMonth = 7 - 1;
+          this.week2NextMonth = this.week1NextMonth + 7;
         }
-        else if(totalDayOfCurrentMonth === 29){
-          week5 = week4 + 3;
-          week6 = 0;
-          week1NextMonth = 7 - 3;
-          week2NextMonth = week1NextMonth + 7;
-        }
-        break;
-
-      case firstDayInCurrentMonth === dateOfWeek.WEDNESDAY:
-        week1 = 4;
-        week2 = week1 + 7;
-        week3 = week2 + 7;
-        week4 = week3 + 7;
-        dayOfPreviousMonth = 3;
-        if(totalDayOfCurrentMonth === 31){
-          week5 = week4 + 6;
-          week6 = 1;
-          week1NextMonth = 7 - 6;
-          week2NextMonth = week1NextMonth + 7;
-        }
-        else if(totalDayOfCurrentMonth === 30){
-          week5 = week4 + 5;
-          week6 = 2;
-          week1NextMonth = 7 - 5;
-          week2NextMonth = week1NextMonth + 7;
-        }
-        else if(totalDayOfCurrentMonth === 28){
-          week5 = week4 + 3;
-          week6 = 0;
-          week1NextMonth = 7 - 3;
-          week2NextMonth = week1NextMonth + 7;
-        }
-        else if(totalDayOfCurrentMonth === 29){
-          week5 = week4 + 4;
-          week6 = 0;
-          week1NextMonth = 7 - 4;
-          week2NextMonth = week1NextMonth + 7;
+        else if(this.totalDayOfCurrentMonth === 29){
+          this.week5 = this.week4 + 2;
+          this.week6 = 0;
+          this.week1NextMonth = 7 - 2;
+          this.week2NextMonth = this.week1NextMonth + 7;
         }
         break;
 
-      case firstDayInCurrentMonth === dateOfWeek.THURSDAY:
-        week1 = 3;
-        week2 = week1 + 7;
-        week3 = week2 + 7;
-        week4 = week3 + 7;
-        dayOfPreviousMonth = 4;
-        if(totalDayOfCurrentMonth === 31){
-          week5 = week4 + 7;
-          week6 = 0;
-          week1NextMonth = 0;
-          week2NextMonth = week1NextMonth + 7;
+      case this.firstDayInCurrentMonth === dateOfWeek.TUESDAY:
+        this.week1 = 5;
+        this.week2 = this.week1 + 7;
+        this.week3 = this.week2 + 7;
+        this.week4 = this.week3 + 7;
+        this.dayOfPreviousMonth = 2;
+        if(this.totalDayOfCurrentMonth === 31){
+          this.week5 = this.week4 + 5;
+          this.week6 = 0;
+          this.week1NextMonth = 7 - 5;
+          this.week2NextMonth = this.week1NextMonth + 7;
         }
-        else if(totalDayOfCurrentMonth === 30){
-          week5 = week4 + 6;
-          week6 = 0;
-          week1NextMonth = 7 - 6;
-          week2NextMonth = week1NextMonth + 7;
+        else if(this.totalDayOfCurrentMonth === 30){
+          this.week5 = this.week4 + 4;
+          this.week6 = 0;
+          this.week1NextMonth = 7 - 4;
+          this.week2NextMonth = this.week1NextMonth + 7;
         }
-        else if(totalDayOfCurrentMonth === 28){
-          week5 = week4 + 4;
-          week6 = 0;
-          week1NextMonth = 7 - 4;
-          week2NextMonth = week1NextMonth + 7;
+        else if(this.totalDayOfCurrentMonth === 28){
+          this.week5 = this.week4 + 2;
+          this.week6 = 0;
+          this.week1NextMonth = 7 - 2;
+          this.week2NextMonth = this.week1NextMonth + 7;
         }
-        else if(totalDayOfCurrentMonth === 29){
-          week5 = week4 + 5;
-          week6 = 0;
-          week1NextMonth = 7 - 5;
-          week2NextMonth = week1NextMonth + 7;
+        else if(this.totalDayOfCurrentMonth === 29){
+          this.week5 = this.week4 + 3;
+          this.week6 = 0;
+          this.week1NextMonth = 7 - 3;
+          this.week2NextMonth = this.week1NextMonth + 7;
         }
         break;
 
-      case firstDayInCurrentMonth === dateOfWeek.FRIDAY:
-        week1 = 2;
-        week2 = week1 + 7;
-        week3 = week2 + 7;
-        week4 = week3 + 7;
-        dayOfPreviousMonth = 5;
-        if(totalDayOfCurrentMonth === 31){
-          week5 = week4 + 7;
-          week6 = 1;
-          week1NextMonth = 0;
-          week2NextMonth = week1NextMonth + 6;
+      case this.firstDayInCurrentMonth === dateOfWeek.WEDNESDAY:
+        this.week1 = 4;
+        this.week2 = this.week1 + 7;
+        this.week3 = this.week2 + 7;
+        this.week4 = this.week3 + 7;
+        this.dayOfPreviousMonth = 3;
+        if(this.totalDayOfCurrentMonth === 31){
+          this.week5 = this.week4 + 6;
+          this.week6 = 1;
+          this.week1NextMonth = 7 - 6;
+          this.week2NextMonth = this.week1NextMonth + 7;
         }
-        else if(totalDayOfCurrentMonth === 30){
-          week5 = week4 + 7;
-          week6 = 0;
-          week1NextMonth = 0;
-          week2NextMonth = week1NextMonth + 7;
+        else if(this.totalDayOfCurrentMonth === 30){
+          this.week5 = this.week4 + 5;
+          this.week6 = 2;
+          this.week1NextMonth = 7 - 5;
+          this.week2NextMonth = this.week1NextMonth + 7;
         }
-        else if(totalDayOfCurrentMonth === 28){
-          week5 = week4 + 5;
-          week6 = 0;
-          week1NextMonth = 7 - 5;
-          week2NextMonth = week1NextMonth + 7;
+        else if(this.totalDayOfCurrentMonth === 28){
+          this.week5 = this.week4 + 3;
+          this.week6 = 0;
+          this.week1NextMonth = 7 - 3;
+          this.week2NextMonth = this.week1NextMonth + 7;
         }
-        else if(totalDayOfCurrentMonth === 29){
-          week5 = week4 + 6;
-          week6 = 0;
-          week1NextMonth = 7 - 6;
-          week2NextMonth = week1NextMonth + 7;
+        else if(this.totalDayOfCurrentMonth === 29){
+          this.week5 = this.week4 + 4;
+          this.week6 = 0;
+          this.week1NextMonth = 7 - 4;
+          this.week2NextMonth = this.week1NextMonth + 7;
+        }
+        break;
+
+      case this.firstDayInCurrentMonth === dateOfWeek.THURSDAY:
+        this.week1 = 3;
+        this.week2 = this.week1 + 7;
+        this.week3 = this.week2 + 7;
+        this.week4 = this.week3 + 7;
+        this.dayOfPreviousMonth = 4;
+        if(this.totalDayOfCurrentMonth === 31){
+          this.week5 = this.week4 + 7;
+          this.week6 = 0;
+          this.week1NextMonth = 0;
+          this.week2NextMonth = this.week1NextMonth + 7;
+        }
+        else if(this.totalDayOfCurrentMonth === 30){
+          this.week5 = this.week4 + 6;
+          this.week6 = 0;
+          this.week1NextMonth = 7 - 6;
+          this.week2NextMonth = this.week1NextMonth + 7;
+        }
+        else if(this.totalDayOfCurrentMonth === 28){
+          this.week5 = this.week4 + 4;
+          this.week6 = 0;
+          this.week1NextMonth = 7 - 4;
+          this.week2NextMonth = this.week1NextMonth + 7;
+        }
+        else if(this.totalDayOfCurrentMonth === 29){
+          this.week5 = this.week4 + 5;
+          this.week6 = 0;
+          this.week1NextMonth = 7 - 5;
+          this.week2NextMonth = this.week1NextMonth + 7;
+        }
+        break;
+
+      case this.firstDayInCurrentMonth === dateOfWeek.FRIDAY:
+        this.week1 = 2;
+        this.week2 = this.week1 + 7;
+        this.week3 = this.week2 + 7;
+        this.week4 = this.week3 + 7;
+        this.dayOfPreviousMonth = 5;
+        if(this.totalDayOfCurrentMonth === 31){
+          this.week5 = this.week4 + 7;
+          this.week6 = 1;
+          this.week1NextMonth = 0;
+          this.week2NextMonth = this.week1NextMonth + 6;
+        }
+        else if(this.totalDayOfCurrentMonth === 30){
+          this.week5 = this.week4 + 7;
+          this.week6 = 0;
+          this.week1NextMonth = 0;
+          this.week2NextMonth = this.week1NextMonth + 7;
+        }
+        else if(this.totalDayOfCurrentMonth === 28){
+          this.week5 = this.week4 + 5;
+          this.week6 = 0;
+          this.week1NextMonth = 7 - 5;
+          this.week2NextMonth = this.week1NextMonth + 7;
+        }
+        else if(this.totalDayOfCurrentMonth === 29){
+          this.week5 = this.week4 + 6;
+          this.week6 = 0;
+          this.week1NextMonth = 7 - 6;
+          this.week2NextMonth = this.week1NextMonth + 7;
         }
         break;
 
       default:
-        week1 = 1;
-        week2 = week1 + 7;
-        week3 = week2 + 7;
-        week4 = week3 + 7;
-        dayOfPreviousMonth = 6;
-        if(totalDayOfCurrentMonth === 31){
-          week5 = week4 + 7;
-          week6 = 2;
-          week1NextMonth = 0;
-          week2NextMonth = week1NextMonth + 5;
+        this.week1 = 1;
+        this.week2 = this.week1 + 7;
+        this.week3 = this.week2 + 7;
+        this.week4 = this.week3 + 7;
+        this.dayOfPreviousMonth = 6;
+        if(this.totalDayOfCurrentMonth === 31){
+          this.week5 = this.week4 + 7;
+          this.week6 = 2;
+          this.week1NextMonth = 0;
+          this.week2NextMonth = this.week1NextMonth + 5;
         }
-        else if(totalDayOfCurrentMonth === 30){
-          week5 = week4 + 7;
-          week6 = 1;
-          week1NextMonth = 0;
-          week2NextMonth = week1NextMonth + 6;
+        else if(this.totalDayOfCurrentMonth === 30){
+          this.week5 = this.week4 + 7;
+          this.week6 = 1;
+          this.week1NextMonth = 0;
+          this.week2NextMonth = this.week1NextMonth + 6;
         }
-        else if(totalDayOfCurrentMonth === 28){
-          week5 = week4 + 6;
-          week6 = 0;
-          week1NextMonth = 7 - 6;
-          week2NextMonth = week1NextMonth + 7;
+        else if(this.totalDayOfCurrentMonth === 28){
+          this.week5 = this.week4 + 6;
+          this.week6 = 0;
+          this.week1NextMonth = 7 - 6;
+          this.week2NextMonth = this.week1NextMonth + 7;
         }
-        else if(totalDayOfCurrentMonth === 29){
-          week5 = week4 + 7;
-          week6 = 0;
-          week1NextMonth = 0;
-          week2NextMonth = week1NextMonth + 7;
+        else if(this.totalDayOfCurrentMonth === 29){
+          this.week5 = this.week4 + 7;
+          this.week6 = 0;
+          this.week1NextMonth = 0;
+          this.week2NextMonth = this.week1NextMonth + 7;
         }
         break;
     }
+      console.log(this.week1);
 
-    console.log({
-      week1, week2,week3,week4,week5,week6,week1NextMonth,week2NextMonth
-    });
 
   }
 
+  counter(i: number, week: string) {
+    var array = new Array();
+    let index = 1;
 
+    if(week !== 'week1'){
+      switch (true) {
+        case week === 'week2':
+          index = this.week1 + 1;
+          break;
+        case week === 'week3':
+          index = this.week2 + 1;
+          break;
+        case week === 'week4':
+          index = this.week3 + 1;
+          break;
+        case week === 'week5':
+        index = this.week4 + 1;
+        break;
+        default:
+          index = this.week5 + 1;
+          break;
+      }
+    }
 
+    for (index; index <= i; index++) {
+      array.push(index);
+
+    }
+
+    if(this.week1NextMonth > 1 && week === 'week5'){
+      for (let i = 1; i <= this.week1NextMonth; i++) {
+          array.push(i);
+      }
+    }
+
+    if(this.week2NextMonth > 1 && week === 'week6'){
+      for (let i = this.week1NextMonth+1; i <= this.week2NextMonth; i++) {
+          array.push(i);
+      }
+    }
+    return array;
+  }
 
 }

@@ -46,49 +46,34 @@
       </thead>
       <tbody>
         <tr>
-          <td colspan="1" class="calendar-day">1</td>
-          <td colspan="1" class="calendar-day">2</td>
-          <td colspan="1" class="calendar-day">3</td>
-          <td colspan="1" class="calendar-day">4</td>
-          <td colspan="1" class="calendar-day">5</td>
-          <td colspan="1" class="calendar-day">6</td>
-          <td colspan="1" class="calendar-day">7</td>
+          <td colspan="1" class="calendar-day" *ngFor="let item of counter(week1, 'week1')">
+            {{item}}
+          </td>
         </tr>
         <tr>
-          <td colspan="1" class="calendar-day">8</td>
-          <td colspan="1" class="calendar-day">9</td>
-          <td colspan="1" class="calendar-day">10</td>
-          <td colspan="1" class="calendar-day">11</td>
-          <td colspan="1" class="calendar-day">12</td>
-          <td colspan="1" class="calendar-day">13</td>
-          <td colspan="1" class="calendar-day">14</td>
+          <td colspan="1" class="calendar-day" *ngFor="let item of counter(week2, 'week2')">
+            {{item}}
+          </td>
         </tr>
         <tr>
-          <td colspan="1" class="calendar-day">15</td>
-          <td colspan="1" class="calendar-day">16</td>
-          <td colspan="1" class="calendar-day">17</td>
-          <td colspan="1" class="calendar-day">18</td>
-          <td colspan="1" class="calendar-day">19</td>
-          <td colspan="1" class="calendar-day">20</td>
-          <td colspan="1" class="calendar-day">21</td>
+          <td colspan="1" class="calendar-day" *ngFor="let item of counter(week3, 'week3')">
+            {{item}}
+          </td>
         </tr>
         <tr>
-          <td colspan="1" class="calendar-day">22</td>
-          <td colspan="1" class="calendar-day">23</td>
-          <td colspan="1" class="calendar-day">24</td>
-          <td colspan="1" class="calendar-day">25</td>
-          <td colspan="1" class="calendar-day">26</td>
-          <td colspan="1" class="calendar-day">27</td>
-          <td colspan="1" class="calendar-day">28</td>
+          <td colspan="1" class="calendar-day" *ngFor="let item of counter(week4, 'week4')">
+            {{item}}
+          </td>
         </tr>
         <tr>
-          <td colspan="1" class="calendar-day">22</td>
-          <td colspan="1" class="calendar-day">23</td>
-          <td colspan="1" class="calendar-day">24</td>
-          <td colspan="1" class="calendar-day">25</td>
-          <td colspan="1" class="calendar-day">26</td>
-          <td colspan="1" class="calendar-day">27</td>
-          <td colspan="1" class="calendar-day">28</td>
+          <td colspan="1" class="calendar-day" *ngFor="let item of counter(week5, 'week5')">
+            {{item}}
+          </td>
+        </tr>
+        <tr>
+          <td colspan="1" class="calendar-day" *ngFor="let item of counter(week6, 'week6')">
+            {{item}}
+          </td>
         </tr>
       </tbody>
     </table>
