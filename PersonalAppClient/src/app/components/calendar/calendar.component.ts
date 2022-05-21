@@ -9,6 +9,7 @@ import dateOfWeek from 'src/shared/const/dateOfWeek';
 export class CalendarComponent implements OnInit {
 
   private days : Array<string>;
+  private month : Array<string>;
   week1: number = 0;
   week2: number = 0;
   week3: number = 0;
@@ -23,17 +24,20 @@ export class CalendarComponent implements OnInit {
   firstDayInCurrentMonth: string = '';
   dateCurrent : Date = new Date();
   currentMonthIsSelecting: number = this.dateCurrent.getMonth();
+  currentYearIsSelecting: number = this.dateCurrent.getFullYear();
+  currentMonthSelectName: string = '';
 
 
   constructor(
   ) {
     this.days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    this.month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   }
 
   ngOnInit(): void {
-    var dateCurrent = new Date();
-    this.renderCalendar(dateCurrent.getFullYear(), dateCurrent.getMonth());
-    // this.renderCalendar(dateCurrent.getFullYear(), 8);
+    this.currentMonthSelectName = this.month[this.currentMonthIsSelecting];
+    this.renderCalendar(this.currentYearIsSelecting, this.currentMonthIsSelecting);
+    // this.renderCalendar(this.currentYearIsSelecting + 1 , 2);
   }
 
   renderCalendar(year: number, month: number) : void{
@@ -146,7 +150,7 @@ export class CalendarComponent implements OnInit {
         this.dayOfPreviousMonth = 3;
         if(this.totalDayOfCurrentMonth === 31){
           this.week5 = this.week4 + 6;
-          this.week6 = this.week5 + 1;
+          this.week6 = 0;
           this.week1NextMonth = 7 - 6;
           this.week2NextMonth = this.week1NextMonth + 7;
         }
@@ -319,11 +323,35 @@ export class CalendarComponent implements OnInit {
 
   previousMonth(){
     this.currentMonthIsSelecting -= 1;
-    this.renderCalendar(this.dateCurrent.getFullYear(), this.currentMonthIsSelecting);
+    this.currentMonthSelectName = this.month[this.currentMonthIsSelecting];
+
+    if(this.currentMonthIsSelecting === 0){
+      this.currentMonthIsSelecting = 12;
+      this.currentYearIsSelecting = this.dateCurrent.getFullYear() - 1;
+    }
+
+    this.renderCalendar(this.currentYearIsSelecting, this.currentMonthIsSelecting);
+
   }
 
   nextMonth(){
     this.currentMonthIsSelecting += 1;
-    this.renderCalendar(this.dateCurrent.getFullYear(), this.currentMonthIsSelecting);
+
+    if(this.currentMonthIsSelecting === 12){
+      this.currentMonthIsSelecting = 1;
+      this.currentYearIsSelecting = this.dateCurrent.getFullYear() + 1;
+    }
+
+    this.currentMonthSelectName = this.month[this.currentMonthIsSelecting];
+    this.renderCalendar(this.currentYearIsSelecting, this.currentMonthIsSelecting);
+
+  }
+
+  backToCurrentDay(){
+    let date = new Date();
+    this.currentMonthIsSelecting = date.getMonth();
+    this.currentYearIsSelecting = date.getFullYear();
+    this.currentMonthSelectName = this.month[this.currentMonthIsSelecting];
+    this.renderCalendar(this.currentYearIsSelecting, this.currentMonthIsSelecting);
   }
 }

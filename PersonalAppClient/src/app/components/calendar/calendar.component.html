@@ -2,7 +2,7 @@
     <div class="calendar">
       <div class="calendar-header">
         <div class="calendar-header-group">
-            <div class="calendar-header-item calendar-header-item-back-today">
+            <div class="calendar-header-item calendar-header-item-back-today" (click)="backToCurrentDay()">
               Today
             </div>
             <div class="calendar-header-item calendar-header-item-icon-lr" (click)="previousMonth()">
@@ -12,7 +12,7 @@
                 <i class="fa-solid fa-angle-right"></i>
             </div>
             <div class="calendar-header-item calendar-header-item-icon-year-month">
-              May 2022
+              {{currentMonthSelectName}} {{currentYearIsSelecting}}
           </div>
         </div>
 
