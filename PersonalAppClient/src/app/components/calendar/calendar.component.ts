@@ -31,7 +31,8 @@ export class CalendarComponent implements OnInit {
   constructor(
   ) {
     this.days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-    this.month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    // this.month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    this.month = ["Tháng 1","Tháng 2","Tháng 3","Tháng 4","Tháng 5","Tháng 6","Tháng 7","Tháng 8","Tháng 9","Tháng 10","Tháng 11","Tháng 12"];
   }
 
   ngOnInit(): void {
@@ -323,13 +324,14 @@ export class CalendarComponent implements OnInit {
 
   previousMonth(){
     this.currentMonthIsSelecting -= 1;
-    this.currentMonthSelectName = this.month[this.currentMonthIsSelecting];
 
-    if(this.currentMonthIsSelecting === 0){
-      this.currentMonthIsSelecting = 12;
-      this.currentYearIsSelecting = this.dateCurrent.getFullYear() - 1;
+
+    if(this.currentMonthIsSelecting === -1){
+      this.currentMonthIsSelecting = 11;
+      this.currentYearIsSelecting -= 1;
     }
 
+    this.currentMonthSelectName = this.month[this.currentMonthIsSelecting];
     this.renderCalendar(this.currentYearIsSelecting, this.currentMonthIsSelecting);
 
   }
@@ -338,8 +340,8 @@ export class CalendarComponent implements OnInit {
     this.currentMonthIsSelecting += 1;
 
     if(this.currentMonthIsSelecting === 12){
-      this.currentMonthIsSelecting = 1;
-      this.currentYearIsSelecting = this.dateCurrent.getFullYear() + 1;
+      this.currentMonthIsSelecting = 0;
+      this.currentYearIsSelecting += 1;
     }
 
     this.currentMonthSelectName = this.month[this.currentMonthIsSelecting];
