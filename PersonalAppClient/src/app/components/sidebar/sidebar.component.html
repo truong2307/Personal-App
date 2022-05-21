@@ -8,31 +8,31 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item" (click)="selectOption('Home')">
-        <a href="#" [ngClass]="optionIsSelecting === optionConst.HOME ? 'nav-link active' : 'nav-link text-white'" aria-current="page">
+        <a href="" [ngClass]="optionIsSelecting === optionConst.HOME ? 'nav-link active' : 'nav-link text-white'" aria-current="page">
           <i class="fa-solid fa-house icon"></i>
           {{closeSidebar ? '' : 'Home'}}
         </a>
       </li>
       <li class="nav-item" (click)="selectOption('Calendar')">
-        <a href="#" [ngClass]="optionIsSelecting === optionConst.CALENDAR ? 'nav-link active' : 'nav-link text-white'">
+        <a routerLink="/calendar" [ngClass]="optionIsSelecting === optionConst.CALENDAR ? 'nav-link active' : 'nav-link text-white'">
           <i class="fa-solid fa-calendar icon"></i>
           {{closeSidebar ? '' : 'Calendar'}}
         </a>
       </li>
       <li class="nav-item" (click)="selectOption('Group Chat')">
-        <a href="#" [ngClass]="optionIsSelecting === optionConst.GROUP_CHAT ? 'nav-link active' : 'nav-link text-white'">
+        <a href="" [ngClass]="optionIsSelecting === optionConst.GROUP_CHAT ? 'nav-link active' : 'nav-link text-white'">
           <i class="fa-solid fa-comment icon"></i>
           {{closeSidebar ? '' : 'Group Chat'}}
         </a>
       </li>
       <li class="nav-item" (click)="selectOption('Manage for Admin')">
-        <a href="#"[ngClass]="optionIsSelecting === optionConst.MANAGE_FOR_ADMIN ? 'nav-link active' : 'nav-link text-white'">
+        <a href=""[ngClass]="optionIsSelecting === optionConst.MANAGE_FOR_ADMIN ? 'nav-link active' : 'nav-link text-white'">
           <i class="fa-solid fa-list-check icon"></i>
           {{closeSidebar ? '' : 'Manage for Admin'}}
         </a>
       </li>
       <li class="nav-item" (click)="selectOption('About me')">
-        <a href="#" [ngClass]="optionIsSelecting === optionConst.ABOUT_ME ? 'nav-link active' : 'nav-link text-white'">
+        <a href="" [ngClass]="optionIsSelecting === optionConst.ABOUT_ME ? 'nav-link active' : 'nav-link text-white'">
           <i class="fa-solid fa-circle-info icon"></i>
           {{closeSidebar ? '' : 'About me'}}
         </a>
@@ -40,7 +40,7 @@
     </ul>
 
     <hr>
-    <div class="dropdown">
+    <!-- <div class="dropdown">
       <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
         <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
         <strong>mdo</strong>
@@ -52,7 +52,7 @@
         <li><hr class="dropdown-divider"></li>
         <li><a class="dropdown-item" href="#">Sign out</a></li>
       </ul>
-    </div>
+    </div> -->
   </div>
 
 
