@@ -21,6 +21,9 @@ export class CalendarComponent implements OnInit {
   totalDayOfCurrentMonth: number = 0;
   totalDayOfPreviousMonth: number = 0;
   firstDayInCurrentMonth: string = '';
+  dateCurrent : Date = new Date();
+  currentMonthIsSelecting: number = this.dateCurrent.getMonth();
+
 
   constructor(
   ) {
@@ -28,14 +31,15 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.renderCalendar();
+    var dateCurrent = new Date();
+    this.renderCalendar(dateCurrent.getFullYear(), dateCurrent.getMonth());
+    // this.renderCalendar(dateCurrent.getFullYear(), 8);
   }
 
-  renderCalendar() : void{
-    const date = new Date();
-    this.totalDayOfCurrentMonth = new Date(date.getFullYear(), date.getMonth() +1, 0).getDate();
-    this.totalDayOfPreviousMonth = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
-    this.firstDayInCurrentMonth = this.days[new Date(date.getFullYear(), date.getMonth(), 1).getDay()];
+  renderCalendar(year: number, month: number) : void{
+    this.totalDayOfCurrentMonth = new Date(year, month + 1, 0).getDate();
+    this.totalDayOfPreviousMonth = new Date(year, month, 0).getDate();
+    this.firstDayInCurrentMonth = this.days[new Date(year, month, 1).getDay()];
 
     switch (true) {
       case this.firstDayInCurrentMonth === dateOfWeek.SUNDAY:
@@ -142,13 +146,13 @@ export class CalendarComponent implements OnInit {
         this.dayOfPreviousMonth = 3;
         if(this.totalDayOfCurrentMonth === 31){
           this.week5 = this.week4 + 6;
-          this.week6 = 1;
+          this.week6 = this.week5 + 1;
           this.week1NextMonth = 7 - 6;
           this.week2NextMonth = this.week1NextMonth + 7;
         }
         else if(this.totalDayOfCurrentMonth === 30){
           this.week5 = this.week4 + 5;
-          this.week6 = 2;
+          this.week6 = 0;
           this.week1NextMonth = 7 - 5;
           this.week2NextMonth = this.week1NextMonth + 7;
         }
@@ -206,7 +210,7 @@ export class CalendarComponent implements OnInit {
         this.dayOfPreviousMonth = 5;
         if(this.totalDayOfCurrentMonth === 31){
           this.week5 = this.week4 + 7;
-          this.week6 = 1;
+          this.week6 = this.week5 + 1;
           this.week1NextMonth = 0;
           this.week2NextMonth = this.week1NextMonth + 6;
         }
@@ -238,13 +242,13 @@ export class CalendarComponent implements OnInit {
         this.dayOfPreviousMonth = 6;
         if(this.totalDayOfCurrentMonth === 31){
           this.week5 = this.week4 + 7;
-          this.week6 = 2;
+          this.week6 = this.week5 + 2;
           this.week1NextMonth = 0;
           this.week2NextMonth = this.week1NextMonth + 5;
         }
         else if(this.totalDayOfCurrentMonth === 30){
           this.week5 = this.week4 + 7;
-          this.week6 = 1;
+          this.week6 = this.week5 + 1;
           this.week1NextMonth = 0;
           this.week2NextMonth = this.week1NextMonth + 6;
         }
@@ -262,9 +266,6 @@ export class CalendarComponent implements OnInit {
         }
         break;
     }
-      console.log(this.week1);
-
-
   }
 
   counter(i: number, week: string) {
@@ -291,23 +292,38 @@ export class CalendarComponent implements OnInit {
       }
     }
 
-    for (index; index <= i; index++) {
-      array.push(index);
-
+    if(this.week1 < 7 && week === 'week1'){
+      for (let i = this.totalDayOfPreviousMonth - (6 - this.week1); i <= this.totalDayOfPreviousMonth; i++) {
+        array.push(i);
+      }
     }
 
-    if(this.week1NextMonth > 1 && week === 'week5'){
+    for (index; index <= i; index++) {
+      array.push(index);
+    }
+
+    if(this.week1NextMonth >= 1 && week === 'week5'){
       for (let i = 1; i <= this.week1NextMonth; i++) {
           array.push(i);
       }
     }
 
-    if(this.week2NextMonth > 1 && week === 'week6'){
-      for (let i = this.week1NextMonth+1; i <= this.week2NextMonth; i++) {
+    if(this.week2NextMonth >= 1 && week === 'week6'){
+      for (let i = this.week1NextMonth + 1; i <= this.week2NextMonth; i++) {
           array.push(i);
       }
     }
+
     return array;
   }
 
+  previousMonth(){
+    this.currentMonthIsSelecting -= 1;
+    this.renderCalendar(this.dateCurrent.getFullYear(), this.currentMonthIsSelecting);
+  }
+
+  nextMonth(){
+    this.currentMonthIsSelecting += 1;
+    this.renderCalendar(this.dateCurrent.getFullYear(), this.currentMonthIsSelecting);
+  }
 }
