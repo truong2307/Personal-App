@@ -1,0 +1,9 @@
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace PersonalApp.Models.Identity
+{
+    public class ApiUser : IdentityUser
+    {
+        public string? FullName { get; set; }
+    }
+}
