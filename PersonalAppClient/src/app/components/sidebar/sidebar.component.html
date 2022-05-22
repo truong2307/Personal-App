@@ -14,7 +14,7 @@
         </a>
       </li>
       <li class="nav-item" (click)="selectOption('Calendar')">
-        <a routerLink="/calendar" [ngClass]="optionIsSelecting === optionConst.CALENDAR ? 'nav-link active' : 'nav-link text-white'">
+        <a routerLink="/admin/calendar" [ngClass]="optionIsSelecting === optionConst.CALENDAR ? 'nav-link active' : 'nav-link text-white'">
           <i class="fa-solid fa-calendar icon"></i>
           {{closeSidebar ? '' : 'Calendar'}}
         </a>
