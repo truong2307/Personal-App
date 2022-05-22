@@ -91,6 +91,17 @@
     }
   }
 
+  .day-current{
+    background-color: #edd7d7;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    border-radius: 50%;
+    position: relative;
+    right: -40%;
+  }
 
   .calendar-body{
     border: 1px solid #dddddd;
@@ -103,6 +114,7 @@
       border: 1px solid #dddddd;
       cursor: pointer;
       transition: .3s;
+
     }
 
     .calendar-title{

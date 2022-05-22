@@ -26,6 +26,12 @@ export class CalendarComponent implements OnInit {
   currentMonthIsSelecting: number = this.dateCurrent.getMonth();
   currentYearIsSelecting: number = this.dateCurrent.getFullYear();
   currentMonthSelectName: string = '';
+  today : number = this.dateCurrent.getDate();
+  currentMonth : number = this.dateCurrent.getMonth() + 1;
+  currentYear : number = this.dateCurrent.getFullYear();
+
+  anotherMonth : number = 0;
+  anotherYear : number = 0;
 
 
   constructor(
@@ -37,13 +43,15 @@ export class CalendarComponent implements OnInit {
   ngOnInit(): void {
     this.currentMonthSelectName = this.month[this.currentMonthIsSelecting];
     this.renderCalendar(this.currentYearIsSelecting, this.currentMonthIsSelecting);
-    // this.renderCalendar(this.currentYearIsSelecting + 1 , 2);
   }
 
   renderCalendar(year: number, month: number) : void{
     this.totalDayOfCurrentMonth = new Date(year, month + 1, 0).getDate();
     this.totalDayOfPreviousMonth = new Date(year, month, 0).getDate();
     this.firstDayInCurrentMonth = this.days[new Date(year, month, 1).getDay()];
+
+    this.anotherMonth = month + 1;
+    this.anotherYear = year;
 
     switch (true) {
       case this.firstDayInCurrentMonth === dateOfWeek.SUNDAY:

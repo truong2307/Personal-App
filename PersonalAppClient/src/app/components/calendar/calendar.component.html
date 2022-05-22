@@ -47,32 +47,48 @@
       <tbody>
         <tr>
           <td colspan="1" class="calendar-day" *ngFor="let item of counter(week1, 'week1')">
+          <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
             {{item}}
+          </div>
           </td>
         </tr>
         <tr>
           <td colspan="1" class="calendar-day" *ngFor="let item of counter(week2, 'week2')">
-            {{item}}
+            <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
+              {{item}}
+            </div>
           </td>
         </tr>
         <tr>
-          <td colspan="1" class="calendar-day" *ngFor="let item of counter(week3, 'week3')">
+          <td colspan="1" class="calendar-day"
+          *ngFor="let item of counter(week3, 'week3')">
+          <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
             {{item}}
+          </div>
           </td>
         </tr>
         <tr>
-          <td colspan="1" class="calendar-day" *ngFor="let item of counter(week4, 'week4')">
+          <td colspan="1" class="calendar-day"
+          *ngFor="let item of counter(week4, 'week4')">
+          <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
             {{item}}
+          </div>
           </td>
         </tr>
         <tr>
-          <td colspan="1" class="calendar-day" *ngFor="let item of counter(week5, 'week5')">
+          <td colspan="1" class="calendar-day"
+          *ngFor="let item of counter(week5, 'week5')">
+          <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
             {{item}}
+          </div>
           </td>
         </tr>
         <tr>
-          <td colspan="1" class="calendar-day" *ngFor="let item of counter(week6, 'week6')">
+          <td colspan="1" class="calendar-day"
+          *ngFor="let item of counter(week6, 'week6')">
+          <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
             {{item}}
+          </div>
           </td>
         </tr>
       </tbody>
