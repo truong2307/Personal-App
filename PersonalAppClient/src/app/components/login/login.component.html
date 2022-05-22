@@ -1,28 +1,36 @@
 <div class="limiter">
-  <div class="container-login100" style="background-image: url('https://danangfantasticity.com/wp-content/uploads/2018/03/da-nang-thanh-pho-cua-nhung-cay-cau-07.jpg');">
+  <div class="container-login100" style="background-image: url('../../../assets/image/backgroundLogin.png');">
     <div class="wrap-login100">
-      <form class="login100-form validate-form">
-        <span class="login100-form-logo">
+      <form class="login100-form validate-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <!-- <span class="login100-form-logo">
           <i class="zmdi zmdi-landscape"></i>
-        </span>
-
+        </span> -->
         <span class="login100-form-title p-b-34 p-t-27">
-          Log in
+          {{title}}
         </span>
+        <!-- use alert-validate to validate -->
 
-        <div class="wrap-input100 validate-input" data-validate = "Enter username">
-          <input class="input100" type="text" name="username" placeholder="Username">
+        <div class="wrap-input100 validate-input"
+        [ngClass]="loginForm.get('emailLogin')?.errors && loginForm.get('emailLogin')?.touched ? 'alert-validate' : '' "
+        [attr.data-validate]="loginForm.get('emailLogin')?.errors?.['email'] ? 'Error format email' : 'Enter username' "
+        >
+          <input [(ngModel)]="userLogin.email" formControlName="emailLogin"
+          name="email" class="input100" type="text" placeholder="Username" >
           <span class="focus-input100" data-placeholder="&#xf007;"></span>
         </div>
 
-        <div class="wrap-input100 validate-input" data-validate="Enter password">
-          <input class="input100" type="password" name="pass" placeholder="Password">
+        <div class="wrap-input100 validate-input "
+        [ngClass]="loginForm.get('password')?.errors && loginForm.get('password')?.touched ? 'alert-validate' : '' "
+        data-validate="Enter password"
+        >
+          <input [(ngModel)]="userLogin.password" formControlName="password"
+          name="password" class="input100" type="password" placeholder="Password">
           <span class="focus-input100" data-placeholder="&#xf2b9;"></span>
         </div>
 
         <div class="checkbox-form-login">
           <label class="toggle">
-            <input class="toggle__input" type="checkbox" checked>
+            <input class="toggle__input" type="checkbox">
             <span class="toggle__label">
               <span class="toggle__text">Remember Me!</span>
             </span>
@@ -30,7 +38,7 @@
         </div>
 
         <div class="container-login100-form-btn">
-          <button class="login100-form-btn">
+          <button class="login100-form-btn" [disabled]="loginForm.invalid">
             Login
           </button>
         </div>

@@ -67,7 +67,7 @@ namespace PersonalAppAPI.Controllers
                 bool loginUserSucceeded = await _authManager.ValidateUser(userRequest);
                 if (!loginUserSucceeded)
                 {
-                    return Unauthorized();
+                    return BadRequest("Sai mật khẩu");
                 }
 
                 return Accepted(new { token = await _authManager.CreateToken() });

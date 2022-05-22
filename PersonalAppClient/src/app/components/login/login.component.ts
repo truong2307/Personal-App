@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { UserLogin } from 'src/app/model/User.interface';
+import { AuthServicesService } from 'src/services/authServices.service';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +11,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  title: string = 'Log in';
+  userLogin : UserLogin = {} as UserLogin;
+  loginForm!: FormGroup
+
+  constructor(
+    private authService : AuthServicesService,
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService
+  )
+  {
+  }
 
   ngOnInit(): void {
+    this.loginForm = this.formBuilder.group({
+      emailLogin: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
+    })
+  }
+
+  onSubmit(){
+    console.log(this.userLogin);
+
+    this.authService.loginUser(this.userLogin).subscribe(
+      (result) => {
+        console.log(result);
+      },
+      (error) => {
+        console.log(error.error)
+        this.toastr.error(error.error);
+      }
+    )
   }
 
 }
