@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { UserLogin } from 'src/app/model/User.interface';
 import { AuthServicesService } from 'src/services/authServices.service';
+import { validatePassword } from 'src/shared/validatePattern/validatePassword';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,7 @@ import { AuthServicesService } from 'src/services/authServices.service';
 })
 export class LoginComponent implements OnInit {
 
+  patternValidatePassword = validatePassword.PATTERN_PASSWORD;
   title: string = 'Log in';
   userLogin : UserLogin = {} as UserLogin;
   loginForm!: FormGroup
@@ -26,7 +28,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       emailLogin: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
+      password: ['', [Validators.required, Validators.pattern]]
     })
   }
 

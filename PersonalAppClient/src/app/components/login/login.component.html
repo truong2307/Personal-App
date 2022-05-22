@@ -21,13 +21,13 @@
 
         <div class="wrap-input100 validate-input "
         [ngClass]="loginForm.get('password')?.errors && loginForm.get('password')?.touched ? 'alert-validate' : '' "
-        data-validate="Enter password"
+        data-validate="Password requires special characters, uppercase letters and numbers"
         >
           <input [(ngModel)]="userLogin.password" formControlName="password"
+          pattern="{{patternValidatePassword}}"
           name="password" class="input100" type="password" placeholder="Password">
           <span class="focus-input100" data-placeholder="&#xf2b9;"></span>
         </div>
-
         <div class="checkbox-form-login">
           <label class="toggle">
             <input class="toggle__input" type="checkbox">
