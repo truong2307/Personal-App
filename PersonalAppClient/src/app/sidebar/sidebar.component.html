@@ -7,32 +7,33 @@
     </div>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item" (click)="selectOption('Home')">
-        <a href="#" [ngClass]="optionIsSelecting === optionConst.HOME ? 'nav-link active' : 'nav-link text-white'" aria-current="page">
+      <li class="nav-item" >
+        <a routerLink="/admin" class="nav-link text-white"  aria-current="page" routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}">
           <i class="fa-solid fa-house icon"></i>
           {{closeSidebar ? '' : 'Home'}}
         </a>
       </li>
-      <li class="nav-item" (click)="selectOption('Calendar')">
-        <a routerLink="/admin/calendar" [ngClass]="optionIsSelecting === optionConst.CALENDAR ? 'nav-link active' : 'nav-link text-white'">
+      <li class="nav-item" >
+        <a routerLink="/admin/calendar" class="nav-link text-white" routerLinkActive="active">
           <i class="fa-solid fa-calendar icon"></i>
           {{closeSidebar ? '' : 'Calendar'}}
         </a>
       </li>
-      <li class="nav-item" (click)="selectOption('Group Chat')">
-        <a href="#" [ngClass]="optionIsSelecting === optionConst.GROUP_CHAT ? 'nav-link active' : 'nav-link text-white'">
+      <li class="nav-item">
+        <a href="#" class="nav-link text-white">
           <i class="fa-solid fa-comment icon"></i>
           {{closeSidebar ? '' : 'Group Chat'}}
         </a>
       </li>
-      <li class="nav-item" (click)="selectOption('Manage for Admin')">
-        <a href="#"[ngClass]="optionIsSelecting === optionConst.MANAGE_FOR_ADMIN ? 'nav-link active' : 'nav-link text-white'">
+      <li class="nav-item">
+        <a href="#" class="nav-link text-white">
           <i class="fa-solid fa-list-check icon"></i>
           {{closeSidebar ? '' : 'Manage for Admin'}}
         </a>
       </li>
-      <li class="nav-item" (click)="selectOption('About me')">
-        <a href="#" [ngClass]="optionIsSelecting === optionConst.ABOUT_ME ? 'nav-link active' : 'nav-link text-white'">
+      <li class="nav-item">
+        <a href="#" class="nav-link text-white">
           <i class="fa-solid fa-circle-info icon"></i>
           {{closeSidebar ? '' : 'About me'}}
         </a>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserLogin } from 'src/app/model/User.interface';
 import { AuthServicesService } from 'src/services/authServices.service';
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService : AuthServicesService,
     private formBuilder: FormBuilder,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   )
   {
   }
@@ -38,6 +40,7 @@ export class LoginComponent implements OnInit {
     this.authService.loginUser(this.userLogin).subscribe(
       (result) => {
         console.log(result);
+        this.router.navigate(['/admin'])
       },
       (error) => {
         console.log(error.error)

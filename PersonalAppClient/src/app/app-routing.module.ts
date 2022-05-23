@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminComponent } from './components/admin/admin.component';
-import { CalendarComponent } from './components/admin/calendar/calendar.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {
@@ -12,10 +10,9 @@ const routes: Routes = [
     path: 'login', component: LoginComponent
   },
   {
-    path: 'admin', component: AdminComponent, children :
-    [
-      {path: 'calendar', component: CalendarComponent}
-    ]
+    path: 'admin',
+    loadChildren: () => import('./modules/admin-side/admin-side.module')
+    .then(x => x.AdminSideModule)
   }
 ];
 

@@ -363,4 +363,5 @@ export class CalendarComponent implements OnInit {
     this.currentMonthSelectName = this.month[this.currentMonthIsSelecting];
     this.renderCalendar(this.currentYearIsSelecting, this.currentMonthIsSelecting);
   }
+
 }
