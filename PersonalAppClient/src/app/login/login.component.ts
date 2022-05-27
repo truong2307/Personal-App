@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { select, Store } from '@ngrx/store';
 import { UserLogin } from 'src/app/model/User.interface';
-import { AuthServicesService } from 'src/services/authServices.service';
 import { validatePassword } from 'src/shared/validatePattern/validatePassword';
+import { AdminloginAction } from '../stores/auth/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -15,14 +14,13 @@ export class LoginComponent implements OnInit {
 
   patternValidatePassword = validatePassword.PATTERN_PASSWORD;
   title: string = 'Log in';
-  userLogin : UserLogin = {} as UserLogin;
+  userLogin! : UserLogin;
   loginForm!: FormGroup
+  error: any;
 
   constructor(
-    private authService : AuthServicesService,
+    private store: Store,
     private formBuilder: FormBuilder,
-    private toastr: ToastrService,
-    private router: Router
   )
   {
   }
@@ -35,18 +33,14 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.userLogin);
+    var emailLogin =this.loginForm.get('emailLogin')?.value;
+    var pass =this.loginForm.get('password')?.value;
+    this.userLogin = {
+      email : emailLogin,
+      password : pass,
+    }
 
-    this.authService.loginUser(this.userLogin).subscribe(
-      (result) => {
-        console.log(result);
-        this.router.navigate(['/admin'])
-      },
-      (error) => {
-        console.log(error.error)
-        this.toastr.error(error.error);
-      }
-    )
+    this.store.dispatch(new AdminloginAction(this.userLogin));
   }
 
 }

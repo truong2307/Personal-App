@@ -11,6 +11,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { AdminSideComponent } from './modules/admin-side/admin-side.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthModule } from './stores/auth/auth.module';
 
 
 @NgModule({
@@ -29,6 +32,9 @@ import { AdminSideComponent } from './modules/admin-side/admin-side.component';
     BrowserAnimationsModule,
     FormsModule,
     ToastrModule.forRoot(),
+    StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([]),
+    AuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

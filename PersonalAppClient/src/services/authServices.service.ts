@@ -8,12 +8,12 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 
-export class AuthServicesService {
+export class AuthServices {
 
   constructor(private httpClient: HttpClient) { }
 
-    loginUser(user?: UserLogin) : Observable<UserLogin>{
-    return this.httpClient.post<UserLogin>(environment.baseUri + 'user/login', user);
+    loginUser(user?: UserLogin) : Observable<string>{
+    return this.httpClient.post<string>(environment.baseUri + 'user/login', user);
   }
 
 }

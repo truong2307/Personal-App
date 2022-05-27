@@ -14,8 +14,8 @@
         [ngClass]="loginForm.get('emailLogin')?.errors && loginForm.get('emailLogin')?.touched ? 'alert-validate' : '' "
         [attr.data-validate]="loginForm.get('emailLogin')?.errors?.['email'] ? 'Error format email' : 'Enter username' "
         >
-          <input [(ngModel)]="userLogin.email" formControlName="emailLogin"
-          name="email" class="input100" type="text" placeholder="Username" >
+          <input  formControlName="emailLogin"
+           class="input100" type="text" placeholder="Username" >
           <span class="focus-input100" data-placeholder="&#xf007;"></span>
         </div>
 
@@ -23,9 +23,9 @@
         [ngClass]="loginForm.get('password')?.errors && loginForm.get('password')?.touched ? 'alert-validate' : '' "
         data-validate="Password requires special characters, uppercase letters and numbers"
         >
-          <input [(ngModel)]="userLogin.password" formControlName="password"
+          <input formControlName="password"
           pattern="{{patternValidatePassword}}"
-          name="password" class="input100" type="password" placeholder="Password">
+          class="input100" type="password" placeholder="Password">
           <span class="focus-input100" data-placeholder="&#xf2b9;"></span>
         </div>
         <div class="checkbox-form-login">
