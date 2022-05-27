@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
+import { Router } from '@angular/router';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ToastrService } from 'ngx-toastr';
-import { Observable, of } from 'rxjs';
-import { map, mergeMap, catchError, tap, switchMap } from 'rxjs/operators';
+import {  of } from 'rxjs';
+import { map, catchError, tap, switchMap } from 'rxjs/operators';
 import { AuthServices } from 'src/services/authServices.service';
 
 import * as authAction from "./auth.actions"
@@ -14,10 +15,15 @@ export class AuthEffects {
     ofType(authAction.ADMIN_LOGIN),
     switchMap(userLogin =>
       this.AuthService.loginUser(userLogin['userLogin']).pipe(
-        map(token => new authAction.AdminloginSuccessAction(token)),
-        catchError(error => of(new authAction.AdminloginErrorAction(error['error'])))
-      )
-      )
+        map(token  =>
+          {
+            localStorage.setItem('token', Object.keys(token).map(key => token[key])[0])
+            return new authAction.AdminloginSuccessAction(token)
+          }),
+        catchError(error =>
+          of(new authAction.AdminloginErrorAction(error['error'])
+        ))
+      ))
   ));
 
   adminLoginSuccess$ = createEffect(
@@ -26,9 +32,9 @@ export class AuthEffects {
         ofType(authAction.ADMIN_LOGIN_SUCCESS),
         tap((token) => {
           this.toastr.success(
-            'login Ok'
+            'login success'
           )
-          // console.log(token);
+          this.router.navigate(['/admin']);
         })
       ),
     { dispatch: false }
@@ -53,5 +59,6 @@ export class AuthEffects {
     private actions$: Actions,
     private AuthService: AuthServices,
     private toastr: ToastrService,
+    private router: Router,
   ) {}
 }

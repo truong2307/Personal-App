@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { GuardAdminSide } from 'src/app/guard/guard.admin';
 import { AdminSideComponent } from './admin-side.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { HomeComponent } from './home/home.component';
@@ -7,9 +8,11 @@ import { HomeComponent } from './home/home.component';
 const routes: Routes = [
   {
     path: '', component:AdminSideComponent,
+
     children:[
       {
-        path: '', component: HomeComponent
+        path: '', component: HomeComponent,
+        canActivate : [GuardAdminSide],
       },
       {
         path: 'calendar', component: CalendarComponent

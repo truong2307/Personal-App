@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { select, Store } from '@ngrx/store';
+import {  Store } from '@ngrx/store';
 import { UserLogin } from 'src/app/model/User.interface';
 import { validatePassword } from 'src/shared/validatePattern/validatePassword';
-import { AdminloginAction } from '../stores/auth/auth.actions';
+import { AdminloginAction } from '../../../app/stores/auth/auth.actions';
 
 @Component({
   selector: 'app-login',
