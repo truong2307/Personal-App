@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-admin-side',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminSideComponent implements OnInit {
 
-  constructor() { }
+  constructor(private loader: NgxUiLoaderService) { }
 
   ngOnInit(): void {
+    this.loader.start();
+    this.loader.stop();
   }
 
 }

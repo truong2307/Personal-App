@@ -5,7 +5,7 @@ import { GuardAdminSide } from './guard/guard.admin';
 
 const routes: Routes = [
   {
-    path: '', redirectTo: "login", pathMatch: "full"
+    path: '', redirectTo: "admin", pathMatch: "full"
   },
   {
     path: 'login', component: LoginComponent

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {  Store } from '@ngrx/store';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { UserLogin } from 'src/app/model/User.interface';
 import { validatePassword } from 'src/shared/validatePattern/validatePassword';
-import { AdminloginAction } from '../../../app/stores/auth/auth.actions';
+import { AdminloginAction } from 'src/stores/auth/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private store: Store,
     private formBuilder: FormBuilder,
+    private loader: NgxUiLoaderService
   )
   {
   }
@@ -33,6 +35,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
+    this.loader.start();
     var emailLogin =this.loginForm.get('emailLogin')?.value;
     var pass =this.loginForm.get('password')?.value;
     this.userLogin = {
@@ -41,6 +44,7 @@ export class LoginComponent implements OnInit {
     }
 
     this.store.dispatch(new AdminloginAction(this.userLogin));
+    this.loader.stop();
   }
 
 }

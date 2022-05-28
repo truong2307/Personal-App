@@ -6,7 +6,6 @@ import { HomeComponent } from './home/home.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { GuardAdminSide } from 'src/app/guard/guard.admin';
 
-
 @NgModule({
   declarations: [
     HomeComponent,
@@ -14,7 +13,7 @@ import { GuardAdminSide } from 'src/app/guard/guard.admin';
   ],
   imports: [
     CommonModule,
-    AdminSideRoutingModule
+    AdminSideRoutingModule,
   ],
   providers: [GuardAdminSide],
 })

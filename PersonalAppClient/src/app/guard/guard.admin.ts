@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivate, CanLoad, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { Observable } from "rxjs";
-import { JwtHelpService } from "src/shared/jwtHelper/jwt-help.service";
+import { JwtHelpService } from "src/services/jwt-help.service";
 
 @Injectable()
 export class GuardAdminSide implements CanLoad, CanActivate {
@@ -17,7 +17,7 @@ export class GuardAdminSide implements CanLoad, CanActivate {
     const user = this.userService.getUserInfo();
     if(!user){
       this.router.navigate(['/login'])
-      this.toast.error('Bạn không có quyền truy cập admin');
+      this.toast.error('Vui lòng đăng nhập');
       return false;
     }
     if(user.role === 'Admin'){
@@ -30,7 +30,7 @@ export class GuardAdminSide implements CanLoad, CanActivate {
     const user = this.userService.getUserInfo();
     if(!user){
       this.router.navigate(['/login'])
-      this.toast.error('Bạn không có quyền truy cập admin');
+      this.toast.error('Vui lòng đăng nhập');
       return false;
     }
     if(user.role === 'Admin'){
