@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PersonalApp.DataAccess.Data;
-using PersonalApp.Utility.ConfigureServicesExtension;
-using PersonalApp.Utility.Initializer;
+using PersonalApp.DataAccess.Initializer;
+using PersonalAppAPI.ConfigureServicesExtension;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.

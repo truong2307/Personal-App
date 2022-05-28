@@ -17,8 +17,7 @@ export class AuthEffects {
       this.AuthService.loginUser(userLogin['userLogin']).pipe(
         map(token  =>
           {
-            localStorage.setItem('token', Object.keys(token).map(key => token[key])[0])
-            return new authAction.AdminloginSuccessAction(token)
+            return new authAction.AdminloginSuccessAction(token.token as any)
           }),
         catchError(error =>
           of(new authAction.AdminloginErrorAction(error['error'])
@@ -26,14 +25,40 @@ export class AuthEffects {
       ))
   ));
 
+  register$ = createEffect(() => this.actions$.pipe(
+    ofType(authAction.REGISTER),
+    switchMap(userRegister =>
+      this.AuthService.registerUser(userRegister['userRegister']).pipe(
+        map(()  =>
+          {
+            return new authAction.RegisterSuccessAction();
+          }),
+        catchError(error =>
+          of(new authAction.RegisterErrorAction()
+        ))
+      ))
+  ));
+
+  registerSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(authAction.REGISTER_SUCCESS),
+        tap(() => {
+          this.toastr.success(
+            'Đăng ký thành công'
+          )
+          this.router.navigate(['/login']);
+        })
+      ),
+    { dispatch: false }
+  );
+
   adminLoginSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(authAction.ADMIN_LOGIN_SUCCESS),
         tap((token) => {
-          this.toastr.success(
-            'login success'
-          )
+          localStorage.setItem('token', Object.keys(token).map(key => token[key])[0])
           this.router.navigate(['/admin']);
         })
       ),
@@ -52,8 +77,6 @@ export class AuthEffects {
       ),
     { dispatch: false }
   );
-
-
 
   constructor(
     private actions$: Actions,

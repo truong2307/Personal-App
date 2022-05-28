@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {  Store } from '@ngrx/store';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { UserLogin } from 'src/app/model/User.interface';
@@ -21,28 +21,35 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private store: Store,
-    private formBuilder: FormBuilder,
     private loader: NgxUiLoaderService
   )
   {
   }
 
   ngOnInit(): void {
-    this.loginForm = this.formBuilder.group({
-      emailLogin: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.pattern]]
+    this.initialForm();
+  }
+
+  initialForm (){
+    this.loginForm = new FormGroup({
+      emailLogin : new FormControl('', [Validators.required, Validators.email]),
+      password : new FormControl('', [Validators.required, Validators.pattern(this.patternValidatePassword)]),
     })
+  }
+
+  get emailLogin() {
+    return this.loginForm.get('emailLogin');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
   }
 
   onSubmit(){
     this.loader.start();
-    var emailLogin =this.loginForm.get('emailLogin')?.value;
-    var pass =this.loginForm.get('password')?.value;
-    this.userLogin = {
-      email : emailLogin,
-      password : pass,
-    }
-
+    const {emailLogin, ...data} = this.loginForm.value;
+    this.userLogin = data;
+    this.userLogin.email = emailLogin;
     this.store.dispatch(new AdminloginAction(this.userLogin));
     this.loader.stop();
   }

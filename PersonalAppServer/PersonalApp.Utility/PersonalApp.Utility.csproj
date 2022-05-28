@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PersonalApp.DataAccess\PersonalApp.DataAccess.csproj" />
     <ProjectReference Include="..\PersonalApp.Models\PersonalApp.Models.csproj" />
   </ItemGroup>
 

@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PersonalApp.Models\PersonalApp.Models.csproj" />
+    <ProjectReference Include="..\PersonalApp.Utility\PersonalApp.Utility.csproj" />
   </ItemGroup>
 
 </Project>

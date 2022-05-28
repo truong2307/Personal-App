@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using PersonalApp.Models.Dto;
 using PersonalApp.Models.Identity;
-using System.Diagnostics.Metrics;
 
-namespace PersonalApp.Utility.MapperConfig
+namespace PersonalAppAPI.MapperConfig
 {
     public class MapperInitilizer : Profile
     {

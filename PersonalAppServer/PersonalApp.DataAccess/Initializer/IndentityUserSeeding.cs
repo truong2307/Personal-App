@@ -3,7 +3,7 @@ using PersonalApp.DataAccess.Data;
 using PersonalApp.Models.Identity;
 using PersonalApp.Utility.BaseURI;
 
-namespace PersonalApp.Utility.Initializer
+namespace PersonalApp.DataAccess.Initializer
 {
     public class IndentityUserSeeding
     {

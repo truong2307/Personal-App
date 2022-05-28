@@ -5,6 +5,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import { RegisterComponent } from './components/register/register.component';
 
 
 
@@ -12,6 +13,7 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
   declarations: [
     SidebarComponent,
     LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     CommonModule,
@@ -22,6 +24,7 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
   exports: [
     SidebarComponent,
     LoginComponent,
+    RegisterComponent,
   ]
 })
 export class SharedModule { }

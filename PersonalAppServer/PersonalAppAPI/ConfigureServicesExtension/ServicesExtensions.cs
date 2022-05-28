@@ -1,16 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using PersonalApp.DataAccess.AuthenticationService;
 using PersonalApp.DataAccess.Data;
+using PersonalApp.DataAccess.Initializer;
 using PersonalApp.Models.Identity;
-using PersonalApp.Utility.Initializer;
 using System.Reflection;
 using System.Text;
 
-namespace PersonalApp.Utility.ConfigureServicesExtension
+namespace PersonalAppAPI.ConfigureServicesExtension
 {
     public static class ServicesExtensions
     {

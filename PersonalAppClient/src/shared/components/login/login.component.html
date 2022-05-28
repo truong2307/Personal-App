@@ -2,29 +2,20 @@
   <div class="container-login100" style="background-image: url('../../../assets/image/backgroundLogin.png');">
     <div class="wrap-login100">
       <form class="login100-form validate-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <!-- <span class="login100-form-logo">
-          <i class="zmdi zmdi-landscape"></i>
-        </span> -->
         <span class="login100-form-title p-b-34 p-t-27">
           {{title}}
         </span>
-        <!-- use alert-validate to validate -->
-
         <div class="wrap-input100 validate-input"
-        [ngClass]="loginForm.get('emailLogin')?.errors && loginForm.get('emailLogin')?.touched ? 'alert-validate' : '' "
-        [attr.data-validate]="loginForm.get('emailLogin')?.errors?.['email'] ? 'Error format email' : 'Enter username' "
-        >
+        [ngClass]="emailLogin?.errors && emailLogin?.touched ? 'alert-validate' : '' "
+        [attr.data-validate]="emailLogin?.errors?.['email'] ? 'Error format email' : 'Enter username' ">
           <input  formControlName="emailLogin"
-           class="input100" type="text" placeholder="Username" >
+           class="input100" type="text" placeholder="Email" >
           <span class="focus-input100" data-placeholder="&#xf007;"></span>
         </div>
-
         <div class="wrap-input100 validate-input "
-        [ngClass]="loginForm.get('password')?.errors && loginForm.get('password')?.touched ? 'alert-validate' : '' "
-        data-validate="Password requires special characters, uppercase letters and numbers"
-        >
+        [ngClass]="password?.errors && password?.touched ? 'alert-validate' : '' "
+        data-validate="Password requires special characters, uppercase letters and numbers">
           <input formControlName="password"
-          pattern="{{patternValidatePassword}}"
           class="input100" type="password" placeholder="Password">
           <span class="focus-input100" data-placeholder="&#xf2b9;"></span>
         </div>
@@ -36,16 +27,14 @@
             </span>
           </label>
         </div>
-
         <div class="container-login100-form-btn">
           <button class="login100-form-btn" [disabled]="loginForm.invalid">
             Login
           </button>
         </div>
-
         <div class="text-center p-t-90">
-          <a class="txt1" href="#">
-            Forgot Password?
+          <a class="txt1" routerLink="/register">
+            Register
           </a>
         </div>
       </form>

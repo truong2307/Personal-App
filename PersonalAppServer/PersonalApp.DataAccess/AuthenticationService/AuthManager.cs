@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using PersonalApp.Models.Dto;
 using PersonalApp.Models.Identity;
+using PersonalApp.Utility.BaseURI;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -50,14 +51,14 @@ namespace PersonalApp.DataAccess.AuthenticationService
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, _user.UserName)
+                new Claim(ClaimTypeUser.TYPE_NAME, _user.UserName)
             };
 
             var roles = await _userManager.GetRolesAsync(_user);
 
             foreach (var role in roles)
             {
-                claims.Add(new Claim(ClaimTypes.Role, role));
+                claims.Add(new Claim(ClaimTypeUser.TYPE_ROLE, role));
             }
 
             return claims;

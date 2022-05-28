@@ -1,10 +1,11 @@
-import { UserLogin } from "src/app/model/User.interface";
+import { UserLogin, UserRegister } from "src/app/model/User.interface";
 import { AuthState } from "./auth.state";
 
 import * as AuthAction from "./auth.actions"
 
 const initialState : AuthState = {
   item : {} as UserLogin,
+  itemRegister: {} as UserRegister,
   error : '',
   token : '',
 };
@@ -22,6 +23,12 @@ export function authReducer(
     case AuthAction.ADMIN_LOGIN_ERROR:
       return {...state, error: action.error, token: '', item : null as any};
     case AuthAction.ADMIN_LOG_OUT:
+      return {...state};
+      case AuthAction.REGISTER:
+      return {...state, itemRegister: action.userRegister};
+      case AuthAction.REGISTER_SUCCESS:
+      return {...state};
+      case AuthAction.REGISTER_ERROR:
       return {...state};
     default:
       return state;

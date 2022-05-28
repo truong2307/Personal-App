@@ -1,0 +1,59 @@
+<div class="limiter">
+  <div class="container-login100" style="background-image: url('../../../assets/image/backgroundLogin.png');">
+    <div class="wrap-login100">
+      <form class="login100-form validate-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <!-- <span class="login100-form-logo">
+          <i class="zmdi zmdi-landscape"></i>
+        </span> -->
+        <span class="login100-form-title p-b-34 p-t-27">
+          {{title}}
+        </span>
+        <!-- use alert-validate to validate -->
+        <div class="wrap-input100 validate-input"
+        [ngClass]="fullName?.errors && fullName?.touched ? 'alert-validate' : '' "
+        [attr.data-validate]="fullName?.errors?.['minLength'] ? 'Enter username' : 'Your name have min 4 characters' "
+        >
+          <input formControlName="fullName"
+           class="input100" type="text" placeholder="Full Name" >
+          <span class="focus-input100" data-placeholder="&#xf075;"></span>
+        </div>
+
+        <div class="wrap-input100 validate-input"
+        [ngClass]="emailLogin?.errors && emailLogin?.touched ? 'alert-validate' : '' "
+        [attr.data-validate]="emailLogin?.errors?.['email'] ? 'Error format email' : 'Enter username' "
+        >
+          <input  formControlName="emailLogin"
+           class="input100" type="text" placeholder="Email" >
+          <span class="focus-input100" data-placeholder="&#xf007;"></span>
+        </div>
+
+        <div class="wrap-input100 validate-input "
+        [ngClass]="password?.errors && password?.touched ? 'alert-validate' : '' "
+        data-validate="Password requires special characters, uppercase letters and numbers"
+        >
+          <input formControlName="password"
+          class="input100" type="password" placeholder="Password">
+          <span class="focus-input100" data-placeholder="&#xf2b9;"></span>
+        </div>
+
+        <div class="wrap-input100">
+          <input formControlName="phoneNumber"
+           class="input100" type="tel" placeholder="Phone Number" >
+          <span class="focus-input100" data-placeholder="&#xf27a;"></span>
+        </div>
+
+        <div class="container-login100-form-btn">
+          <button class="login100-form-btn" [disabled]="registerForm.invalid">
+            Register
+          </button>
+        </div>
+
+        <div class="text-center p-t-90">
+          <a class="txt1" routerLink="/login">
+            Login
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

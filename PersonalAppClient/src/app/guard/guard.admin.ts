@@ -36,6 +36,9 @@ export class GuardAdminSide implements CanLoad, CanActivate {
     if(user.role === 'Admin'){
       return true;
     }
+    else {
+      this.toast.error('Hệ hống đang giành cho admin, vui lòng quay lại sau');
+    }
     return false;
   }
 }

@@ -4,10 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using PersonalApp.DataAccess.AuthenticationService;
 using PersonalApp.Models.Dto;
 using PersonalApp.Models.Identity;
+using PersonalApp.Utility.BaseURI;
 
 namespace PersonalAppAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/user")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -45,6 +46,8 @@ namespace PersonalAppAPI.Controllers
                     return BadRequest(ModelState);
                 }
 
+                await _userManager.AddToRoleAsync(userToDb, Role.USER_ROLE);
+
                 return Accepted();
 
             }
@@ -56,7 +59,7 @@ namespace PersonalAppAPI.Controllers
 
         [HttpPost("Login")]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
-        public async Task<IActionResult> Login(LoginUserDto userRequest)
+        public async Task<IActionResult> Login([FromBody] LoginUserDto userRequest)
         {
             if (!ModelState.IsValid)
             {
