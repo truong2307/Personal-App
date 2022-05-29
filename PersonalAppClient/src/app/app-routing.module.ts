@@ -16,7 +16,7 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: () => import('./modules/admin-side/admin-side.module')
     .then(x => x.AdminSideModule),
-    canLoad: [GuardAdminSide],
+    // canLoad: [GuardAdminSide],
   },
   {
     path: 'register', component: RegisterComponent
