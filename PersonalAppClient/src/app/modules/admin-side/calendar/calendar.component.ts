@@ -26,6 +26,8 @@ export class CalendarComponent implements OnInit {
   currentMonthIsSelecting: number = this.dateCurrent.getMonth();
   currentYearIsSelecting: number = this.dateCurrent.getFullYear();
   currentMonthSelectName: string = '';
+
+
   today : number = this.dateCurrent.getDate();
   currentMonth : number = this.dateCurrent.getMonth() + 1;
   currentYear : number = this.dateCurrent.getFullYear();

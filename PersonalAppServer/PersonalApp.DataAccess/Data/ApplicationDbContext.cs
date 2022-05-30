@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using PersonalApp.Models.Entities;
 using PersonalApp.Models.Identity;
 
 namespace PersonalApp.DataAccess.Data
@@ -10,5 +11,6 @@ namespace PersonalApp.DataAccess.Data
         {
         }
 
+        public DbSet<Event> Events { get; set; }
     }
 }

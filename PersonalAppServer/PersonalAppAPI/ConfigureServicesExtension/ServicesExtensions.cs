@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using PersonalApp.DataAccess.AuthenticationService;
 using PersonalApp.DataAccess.Data;
+using PersonalApp.DataAccess.Data.Repository;
+using PersonalApp.DataAccess.Data.Repository.IRepository;
 using PersonalApp.DataAccess.Initializer;
 using PersonalApp.Models.Identity;
 using System.Reflection;
@@ -55,6 +57,7 @@ namespace PersonalAppAPI.ConfigureServicesExtension
         public static void ConfigureServiceLifeTime(this IServiceCollection services)
         {
             services.AddScoped<IAuthManager, AuthManager>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IndentityUserSeeding>();
         }
 
