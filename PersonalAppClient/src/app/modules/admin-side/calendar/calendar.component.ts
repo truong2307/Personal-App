@@ -306,7 +306,7 @@ export class CalendarComponent implements OnInit {
       }
     }
 
-    if(this.week1 < 7 && week === 'week1'){
+    if(this.week1 < 7 && week === 'week1InPreviousMonth'){
       for (let i = this.totalDayOfPreviousMonth - (6 - this.week1); i <= this.totalDayOfPreviousMonth; i++) {
         array.push(i);
       }
@@ -316,13 +316,13 @@ export class CalendarComponent implements OnInit {
       array.push(index);
     }
 
-    if(this.week1NextMonth >= 1 && week === 'week5'){
+    if(this.week1NextMonth >= 1 && week === 'week1NextMonth'){
       for (let i = 1; i <= this.week1NextMonth; i++) {
           array.push(i);
       }
     }
 
-    if(this.week2NextMonth >= 1 && week === 'week6'){
+    if(this.week2NextMonth >= 1 && week === 'week2NextMonth'){
       for (let i = this.week1NextMonth + 1; i <= this.week2NextMonth; i++) {
           array.push(i);
       }

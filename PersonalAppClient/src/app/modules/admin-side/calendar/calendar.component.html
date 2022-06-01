@@ -46,6 +46,9 @@
     </thead>
     <tbody>
       <tr>
+        <td colspan="1" class="calendar-day" *ngFor="let item of counter(week1, 'week1InPreviousMonth')">
+            {{item}}
+          </td>
         <td colspan="1" class="calendar-day" *ngFor="let item of counter(week1, 'week1')">
         <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
           {{item}}
@@ -82,6 +85,10 @@
           {{item}}
         </div>
         </td>
+        <td colspan="1" class="calendar-day"
+        *ngFor="let item of counter(week1NextMonth, 'week1NextMonth')">
+          {{item}}
+        </td>
       </tr>
       <tr>
         <td colspan="1" class="calendar-day"
@@ -89,6 +96,10 @@
         <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
           {{item}}
         </div>
+        </td>
+        <td colspan="1" class="calendar-day"
+        *ngFor="let item of counter(week2NextMonth, 'week2NextMonth')">
+          {{item}}
         </td>
       </tr>
     </tbody>
