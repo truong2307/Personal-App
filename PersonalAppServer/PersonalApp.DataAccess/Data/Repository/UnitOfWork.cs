@@ -19,9 +19,10 @@ namespace PersonalApp.DataAccess.Data.Repository
             _context.Dispose();
         }
 
-        public async Task SaveChangeAsync()
+        public async Task<bool> SaveChangeAsync()
         {
             await _context.SaveChangesAsync();
+            return true;
         }
     }
 }

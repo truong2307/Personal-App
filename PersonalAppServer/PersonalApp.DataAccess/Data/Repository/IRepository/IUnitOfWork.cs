@@ -5,6 +5,6 @@ namespace PersonalApp.DataAccess.Data.Repository.IRepository
     public interface IUnitOfWork : IDisposable
     {
         IGenericRepository<Event> Events { get; }
-        Task SaveChangeAsync();
+        Task<bool> SaveChangeAsync();
     }
 }

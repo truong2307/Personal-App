@@ -10,6 +10,7 @@ namespace PersonalApp.DataAccess.Data.Repository
         public GenericRepository(ApplicationDbContext context)
         {
             _context = context;
+            this.dbSet = _context.Set<T>();
         }
 
         public async Task Add(T entity)

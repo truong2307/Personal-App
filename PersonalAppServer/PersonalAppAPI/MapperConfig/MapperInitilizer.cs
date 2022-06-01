@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using PersonalApp.Models.Dto;
+using PersonalApp.Models.Entities;
 using PersonalApp.Models.Identity;
 
 namespace PersonalAppAPI.MapperConfig
@@ -9,6 +10,7 @@ namespace PersonalAppAPI.MapperConfig
         public MapperInitilizer()
         {
             CreateMap<ApiUser, UserDto>().ReverseMap();
+            CreateMap<Event, EventDto>().ReverseMap();
         }
     }
 }
