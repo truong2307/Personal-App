@@ -66,7 +66,7 @@ namespace PersonalApp.DataAccess.AuthenticationService
 
         private SigningCredentials GetSigningCredentials()
         {
-            var key = Environment.GetEnvironmentVariable("KEY");
+            var key = _configuration.GetSection("Secret").GetSection("Key").Value;
             var secret = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
             var signingCredentials = new SigningCredentials(secret, SecurityAlgorithms.HmacSha512Signature);
 

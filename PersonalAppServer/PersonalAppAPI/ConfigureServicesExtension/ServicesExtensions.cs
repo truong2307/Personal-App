@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using PersonalApp.DataAccess.AuthenticationService;
 using PersonalApp.DataAccess.Data;
 using PersonalApp.DataAccess.Data.Repository;
 using PersonalApp.DataAccess.Data.Repository.IRepository;
 using PersonalApp.DataAccess.Initializer;
 using PersonalApp.Models.Identity;
+using Swashbuckle.AspNetCore.Filters;
 using System.Reflection;
 using System.Text;
 
@@ -27,8 +29,22 @@ namespace PersonalAppAPI.ConfigureServicesExtension
 
         public static void ConfigureJWT(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "PersonalApp", Version = "v1" });
+                c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Description = "Standard Authorization header using the Bearer scheme. Example: \"Bearer {token}\"",
+                    In = ParameterLocation.Header,
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey
+                });
+                c.OperationFilter<SecurityRequirementsOperationFilter>();
+            });
+
+
             var jwtSettings = configuration.GetSection("Jwt");
-            var key = configuration.GetSection("Secret").ToString();
+            var key = configuration.GetSection("Secret").GetSection("key").Value;
 
             services.AddAuthentication(options =>
             {
@@ -47,6 +63,7 @@ namespace PersonalAppAPI.ConfigureServicesExtension
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
                 };
             });
+
         }
 
         public static void ConfigureAutoMapper(this IServiceCollection services)

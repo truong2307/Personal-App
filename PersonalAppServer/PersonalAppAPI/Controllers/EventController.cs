@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PersonalApp.DataAccess.Data.Repository.IRepository;
 using PersonalApp.Models.Dto;
@@ -8,6 +9,7 @@ namespace PersonalAppAPI.Controllers
 {
     [Route("api/events")]
     [ApiController]
+    [Authorize(Roles ="Admin")]
     public class EventController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;

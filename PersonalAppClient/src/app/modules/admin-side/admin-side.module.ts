@@ -9,6 +9,7 @@ import { AddEventComponent } from './calendar/add-event/add-event.component';
 
 //Material module
 import { MaterialExampleModule } from 'src/shared/material/material.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import { MaterialExampleModule } from 'src/shared/material/material.module';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     AdminSideRoutingModule,
+    FormsModule,
     MaterialExampleModule,
   ],
   providers: [GuardAdminSide],

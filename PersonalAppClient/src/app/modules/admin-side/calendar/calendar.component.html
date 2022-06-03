@@ -40,24 +40,27 @@
     </thead>
     <tbody>
       <tr>
-        <td colspan="1" class="calendar-day" *ngFor="let item of counter(week1, 'week1InPreviousMonth')">
+        <td colspan="1" class="calendar-day" (click)="createEvent()"
+        *ngFor="let item of counter(week1, 'week1InPreviousMonth')">
             {{item}}
           </td>
-        <td colspan="1" class="calendar-day" *ngFor="let item of counter(week1, 'week1')">
+        <td colspan="1" class="calendar-day" (click)="createEvent()"
+        *ngFor="let item of counter(week1, 'week1')">
         <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
           {{item}}
         </div>
         </td>
       </tr>
       <tr>
-        <td colspan="1" class="calendar-day" *ngFor="let item of counter(week2, 'week2')">
+        <td colspan="1" class="calendar-day" (click)="createEvent()"
+        *ngFor="let item of counter(week2, 'week2')">
           <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
             {{item}}
           </div>
         </td>
       </tr>
       <tr>
-        <td colspan="1" class="calendar-day"
+        <td colspan="1" class="calendar-day" (click)="createEvent()"
         *ngFor="let item of counter(week3, 'week3')">
         <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
           {{item}}
@@ -65,7 +68,7 @@
         </td>
       </tr>
       <tr>
-        <td colspan="1" class="calendar-day"
+        <td colspan="1" class="calendar-day" (click)="createEvent()"
         *ngFor="let item of counter(week4, 'week4')">
         <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
           {{item}}
@@ -73,25 +76,25 @@
         </td>
       </tr>
       <tr>
-        <td colspan="1" class="calendar-day"
+        <td colspan="1" class="calendar-day" (click)="createEvent()"
         *ngFor="let item of counter(week5, 'week5')">
         <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
           {{item}}
         </div>
         </td>
-        <td colspan="1" class="calendar-day"
+        <td colspan="1" class="calendar-day" (click)="createEvent()"
         *ngFor="let item of counter(week1NextMonth, 'week1NextMonth')">
           {{item}}
         </td>
       </tr>
       <tr>
-        <td colspan="1" class="calendar-day"
+        <td colspan="1" class="calendar-day" (click)="createEvent()"
         *ngFor="let item of counter(week6, 'week6')">
         <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
           {{item}}
         </div>
         </td>
-        <td colspan="1" class="calendar-day"
+        <td colspan="1" class="calendar-day" (click)="createEvent()"
         *ngFor="let item of counter(week2NextMonth, 'week2NextMonth')">
           {{item}}
         </td>

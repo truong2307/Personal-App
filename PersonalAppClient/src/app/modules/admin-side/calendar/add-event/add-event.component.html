@@ -3,34 +3,41 @@
     <h5 class="modal-title">Add an event</h5>
   </div>
   <div class="modal-body">
-    <form class="example-form">
+    <form class="example-form" [formGroup]="addEventForm">
       <mat-form-field class="add-event-full-width" appearance="outline">
         <mat-label>Summary</mat-label>
-        <input matInput placeholder="Summary">
+        <input matInput placeholder="Summary" formControlName="summary">
+        <mat-error *ngIf="summary?.errors">
+          Summary is <strong>required</strong>
+        </mat-error>
       </mat-form-field>
 
       <mat-form-field class="add-event-full-width" appearance="outline">
         <mat-label>Description</mat-label>
-        <textarea matInput placeholder="Description"></textarea>
+        <textarea matInput placeholder="Description" formControlName="description"></textarea>
+        <mat-error *ngIf="description?.errors">
+          Description is <strong>required</strong>
+        </mat-error>
       </mat-form-field>
 
       <div class="add-event-date-picker">
         <mat-checkbox style="margin-bottom:10px ;" color="primary">All day event</mat-checkbox>
         <div>
           <mat-form-field class="add-event-full-width" appearance="outline">
-            <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="picker">
+            <mat-label>Start date</mat-label>
+            <input matInput [matDatepicker]="startDate" formControlName="startDate">
+
             <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+            <mat-datepicker #startDate></mat-datepicker>
           </mat-form-field>
 
           <mat-form-field class="add-event-full-width" appearance="outline">
-            <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="picker2">
+            <mat-label>End date</mat-label>
+            <input matInput [matDatepicker]="endDate" formControlName="endDate">
             <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-            <mat-datepicker #picker2></mat-datepicker>
+            <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+            <mat-datepicker #endDate></mat-datepicker>
           </mat-form-field>
         </div>
       </div>
@@ -38,8 +45,11 @@
   </div>
 
   <div class="modal-footer">
-    <button mat-raised-button color="primary" style="margin-right: 12px; min-width: 70px;">Add</button>
+    <button mat-raised-button color="primary" [disabled]="addEventForm.invalid"
+    style="margin-right: 12px; min-width: 70px;">
+      Add</button>
     <button type="button" mat-raised-button color="warn"
+    (click)="closeModal()"
     >Cancel</button>
   </div>
 </div>
