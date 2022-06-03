@@ -15,22 +15,16 @@
             {{currentMonthSelectName}} {{currentYearIsSelecting}}
         </div>
       </div>
-
       <div class="calendar-header-group">
-        <!-- <div class="calendar-header-item calendar-header-item-select-option">
-          <span class="calendar-header-item-option">Month</span>
-          <div class="calendar-header-item-option-icon">
-            <i class="fa-solid fa-sort-down "></i>
-          </div>
-        </div> -->
         <div class="calendar-header-item">
-          <button type="button" class="btn btn-primary">
+          <button mat-raised-button color="primary" (click)="createEvent()">
             Add event
           </button>
         </div>
     </div>
-
   </div>
+
+  <app-add-event style="display:none;" #modalEvent></app-add-event>
 
   <table class="table table-borderless calendar-body">
     <thead>

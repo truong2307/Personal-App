@@ -1,0 +1,70 @@
+.modal-content{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    outline: 0;
+
+    .modal-header {
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+      border-bottom: 1px solid #e0e0e0;
+      border-top-left-radius: calc(0.5rem - 1px);
+      border-top-right-radius: calc(0.5rem - 1px);
+
+      .modal-title {
+        font-size: 22px;
+        font-weight: 500;
+        margin-bottom: 0;
+        line-height: 1.6;
+    }
+  }
+
+  .modal-body {
+    position: relative;
+    flex: 1 1 auto;
+    padding: 1rem;
+
+    .form-outline {
+      position: relative;
+  }
+
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+
+  .add-event-full-width {
+    width: 100%;
+  }
+
+
+  .add-event-date-picker{
+    display: flex;
+    flex-direction: column;
+  }
+  }
+
+  .modal-footer{
+    display: flex;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0.75rem;
+    border-top: 1px solid #e0e0e0;
+    border-bottom-right-radius: calc(0.5rem - 1px);
+    border-bottom-left-radius: calc(0.5rem - 1px);
+  }
+}
+
+::ng-deep .cdk-overlay-container {
+  z-index: 1200 !important;
+}

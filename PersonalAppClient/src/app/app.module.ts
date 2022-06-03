@@ -16,6 +16,7 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { SharedModule } from 'src/shared/shared.module';
 import { AuthModule } from 'src/stores/auth/auth.module';
 import { NgxUiLoaderModule, NgxUiLoaderRouterModule } from 'ngx-ui-loader';
+import { MaterialExampleModule } from 'src/shared/material/material.module';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -49,6 +50,7 @@ export function tokenGetter() {
     ),
     NgxUiLoaderModule,
     NgxUiLoaderRouterModule.forRoot({ showForeground: false }),
+    MaterialExampleModule,
   ],
   providers: [GuardAdminSide],
   bootstrap: [AppComponent]
