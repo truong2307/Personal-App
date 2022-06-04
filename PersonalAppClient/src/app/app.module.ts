@@ -17,6 +17,7 @@ import { SharedModule } from 'src/shared/shared.module';
 import { AuthModule } from 'src/stores/auth/auth.module';
 import { NgxUiLoaderModule, NgxUiLoaderRouterModule } from 'ngx-ui-loader';
 import { MaterialExampleModule } from 'src/shared/material/material.module';
+import { environment } from 'src/environments/environment';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -30,7 +31,6 @@ export function tokenGetter() {
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    HttpClientModule,
     SharedModule,
     AppRoutingModule,
     NgbModule,
@@ -40,10 +40,12 @@ export function tokenGetter() {
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
     AuthModule,
+    HttpClientModule,
     JwtModule.forRoot(
       {
         config: {
           tokenGetter : tokenGetter,
+          allowedDomains: [environment.allowDomain]
         }
       }
     ),

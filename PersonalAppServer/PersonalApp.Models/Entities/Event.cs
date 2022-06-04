@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PersonalApp.Models.Identity;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PersonalApp.Models.Entities
 {
@@ -16,5 +18,8 @@ namespace PersonalApp.Models.Entities
         public string CreatedBy { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public string? UpdatedBy { get; set; }
+        public string? UserId { get; set; }
+        [ForeignKey("UserId")]
+        public virtual ApiUser ApiUser { get; set; }
     }
 }

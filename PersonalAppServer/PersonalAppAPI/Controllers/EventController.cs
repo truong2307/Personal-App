@@ -1,32 +1,25 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PersonalApp.DataAccess.Data.Repository.IRepository;
+using PersonalApp.DataAccess.Services.EventServices;
 using PersonalApp.Models.Dto;
-using PersonalApp.Models.Entities;
 
 namespace PersonalAppAPI.Controllers
 {
     [Route("api/events")]
     [ApiController]
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     public class EventController : ControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
-        public EventController(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly IEventServices _eventServices;
+        public EventController(IEventServices eventServices)
         {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            _eventServices = eventServices;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post ([FromBody] EventDto eventRequest)
+        public async Task<IActionResult> Post([FromBody] EventDto eventRequest)
         {
-            var eventToDb = _mapper.Map<Event>(eventRequest);
-
-            await _unitOfWork.Events.Add(eventToDb);
-            var result = await _unitOfWork.SaveChangeAsync();
+            var result = await _eventServices.CreateEvent(eventRequest);
             return Ok(result);
         }
     }

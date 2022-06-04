@@ -6,8 +6,8 @@
     <form class="example-form" [formGroup]="addEventForm">
       <mat-form-field class="add-event-full-width" appearance="outline">
         <mat-label>Summary</mat-label>
-        <input matInput placeholder="Summary" formControlName="summary">
-        <mat-error *ngIf="summary?.errors">
+        <input matInput placeholder="Summary" formControlName="title">
+        <mat-error *ngIf="title?.errors">
           Summary is <strong>required</strong>
         </mat-error>
       </mat-form-field>
@@ -46,6 +46,7 @@
 
   <div class="modal-footer">
     <button mat-raised-button color="primary" [disabled]="addEventForm.invalid"
+    (click)="addEvent()"
     style="margin-right: 12px; min-width: 70px;">
       Add</button>
     <button type="button" mat-raised-button color="warn"
