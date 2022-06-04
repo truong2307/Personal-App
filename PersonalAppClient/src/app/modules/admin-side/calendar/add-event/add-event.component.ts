@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { EventsService } from 'src/services/events.service';
 
 @Component({
@@ -11,6 +11,7 @@ import { EventsService } from 'src/services/events.service';
 export class AddEventComponent implements OnInit {
 
   addEventForm!: FormGroup;
+  initialDate: string = '';
 
   constructor(
      private activeModalService: NgbActiveModal,
@@ -24,8 +25,8 @@ export class AddEventComponent implements OnInit {
     this.addEventForm = new FormGroup({
       title : new FormControl('', [Validators.required,]),
       description : new FormControl('', [Validators.required,]),
-      startDate : new FormControl('', [Validators.required,]),
-      endDate : new FormControl('', [Validators.required,]),
+      startDate : new FormControl(new Date(this.initialDate), [Validators.required,]),
+      endDate : new FormControl(new Date(this.initialDate), [Validators.required,]),
     })
   }
 
@@ -51,15 +52,15 @@ export class AddEventComponent implements OnInit {
 
   addEvent(){
     const data = this.addEventForm.value;
-    this.eventServices.addEvent(data).subscribe(
-      (result) => {
-        console.log(result);
-      },
-      (error) => {
-        console.log(error);
+    // this.eventServices.addEvent(data).subscribe(
+    //   (result) => {
+    //     console.log(result);
+    //   },
+    //   (error) => {
+    //     console.log(error);
 
-      }
-    )
+    //   }
+    // )
   }
 
 }

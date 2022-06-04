@@ -23,7 +23,8 @@ namespace PersonalAppAPI.Controllers
             return Ok(result);
         }
 
-        [HttpGet(Name = "GetEvents")]
+        [Route("get-events")]
+        [HttpGet]
         public async Task<IActionResult> GetEvents()
         {
             var result = await _eventServices.GetEvents();

@@ -371,8 +371,18 @@ export class CalendarComponent implements OnInit {
     this.renderCalendar(this.currentYearIsSelecting, this.currentMonthIsSelecting);
   }
 
-  createEvent(){
-    this.modalService.open(AddEventComponent, {size: 'md'})
+  createEvent(day?: any, month?: any, year?: any){
+    if(month === 13){
+      month = 1;
+      year += 1;
+    } else if(month === 0){
+      month = 12;
+      year -= 1;
+    }
+
+    const modalRef = this.modalService.open(AddEventComponent, {size: 'md'});
+    var buildDate = year+'-'+month+'-'+day;
+    modalRef.componentInstance.initialDate = buildDate;
   }
 
 }

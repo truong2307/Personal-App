@@ -4,6 +4,7 @@
   </div>
   <div class="modal-body">
     <form class="example-form" [formGroup]="addEventForm">
+
       <mat-form-field class="add-event-full-width" appearance="outline">
         <mat-label>Summary</mat-label>
         <input matInput placeholder="Summary" formControlName="title">
@@ -23,10 +24,10 @@
       <div class="add-event-date-picker">
         <mat-checkbox style="margin-bottom:10px ;" color="primary">All day event</mat-checkbox>
         <div>
+
           <mat-form-field class="add-event-full-width" appearance="outline">
             <mat-label>Start date</mat-label>
             <input matInput [matDatepicker]="startDate" formControlName="startDate">
-
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
             <mat-datepicker #startDate></mat-datepicker>
