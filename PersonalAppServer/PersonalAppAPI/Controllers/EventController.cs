@@ -22,5 +22,12 @@ namespace PersonalAppAPI.Controllers
             var result = await _eventServices.CreateEvent(eventRequest);
             return Ok(result);
         }
+
+        [HttpGet(Name = "GetEvents")]
+        public async Task<IActionResult> GetEvents()
+        {
+            var result = await _eventServices.GetEvents();
+            return Ok(result);
+        }
     }
 }

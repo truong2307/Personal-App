@@ -1,8 +1,12 @@
 ﻿using AutoMapper;
+using Dapper;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using PersonalApp.DataAccess.Data.Repository.IRepository;
 using PersonalApp.DataAccess.Services.ClaimUserServices;
 using PersonalApp.Models.Dto;
 using PersonalApp.Models.Entities;
+using System.Text;
 
 namespace PersonalApp.DataAccess.Services.EventServices
 {
@@ -12,12 +16,19 @@ namespace PersonalApp.DataAccess.Services.EventServices
         private readonly IClaimUserServices _claimUserServices;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ResponseDto _responseDto;
-        public EventServices(IMapper mapper, IClaimUserServices claimUserServices, IUnitOfWork unitOfWork)
+        private readonly IConfiguration _config;
+        private readonly string _connectionString;
+        public EventServices(IMapper mapper
+            , IClaimUserServices claimUserServices
+            , IUnitOfWork unitOfWork
+            , IConfiguration config)
         {
             _mapper = mapper;
             _claimUserServices = claimUserServices;
             _unitOfWork = unitOfWork;
             _responseDto = new ResponseDto();
+            _config = config;
+            _connectionString = _config.GetConnectionString("DefaultConnection");
         }
         public async Task<ResponseDto> CreateEvent(EventDto model)
         {
@@ -47,9 +58,34 @@ namespace PersonalApp.DataAccess.Services.EventServices
             return _responseDto;
         }
 
-        public Task<ResponseDto> GetEvents(string userId)
+        public async Task<ResponseDto> GetEvents()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var currentUserId = _claimUserServices.GetCurrentUserId();
+
+                using (var db = new SqlConnection(_connectionString))
+                {
+                    db.Open();
+
+                    var sql = new StringBuilder();
+
+                    sql.AppendLine("SELECT e.Id, e.Title, e.StartDate, e.EndDate, e.UserId, e.Description FROM Events e");
+                    sql.AppendLine("WHERE e.UserId = @currentUserId ");
+
+                    var result = await db.QueryAsync<Event>(sql.ToString(), param: new { currentUserId = currentUserId });
+
+                    _responseDto.Result = _mapper.Map<IEnumerable<EventDto>>(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                _responseDto.ErrorMessages=ex.ToString();
+                _responseDto.IsSuccess = false;
+            }
+
+            return _responseDto;
         }
+
     }
 }
