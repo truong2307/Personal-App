@@ -1,6 +1,6 @@
-﻿namespace PersonalApp.DataAccess.Services.IdentityServices
+﻿namespace PersonalApp.DataAccess.Services.ClaimUserServices
 {
-    public interface IIdentityServices
+    public interface IClaimUserServices
     {
         string GetCurrentUserId();
         string GetCurrentUserRole();

@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using PersonalApp.DataAccess.Utility.BaseURI;
 using PersonalApp.Models.Dto;
 using PersonalApp.Models.Identity;
-using PersonalApp.Utility.BaseURI;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;

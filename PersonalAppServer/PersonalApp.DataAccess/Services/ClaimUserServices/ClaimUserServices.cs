@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
-using PersonalApp.Utility.BaseURI;
+using PersonalApp.DataAccess.Utility.BaseURI;
 using System.Security.Claims;
 
-namespace PersonalApp.DataAccess.Services.IdentityServices
+namespace PersonalApp.DataAccess.Services.ClaimUserServices
 {
-    public class IdentityServices : IIdentityServices
+    public class ClaimUserServices : IClaimUserServices
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public IdentityServices(IHttpContextAccessor httpContextAccessor)
+        public ClaimUserServices(IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
         }

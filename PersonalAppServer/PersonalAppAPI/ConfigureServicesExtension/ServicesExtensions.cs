@@ -4,7 +4,6 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PersonalApp.DataAccess.Data;
 using PersonalApp.Models.Identity;
-using PersonalApp.Utility.BaseURI;
 using Swashbuckle.AspNetCore.Filters;
 using System.Reflection;
 using System.Text;

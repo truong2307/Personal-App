@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using PersonalApp.DataAccess.Data;
+using PersonalApp.DataAccess.Utility.BaseURI;
 using PersonalApp.Models.Identity;
-using PersonalApp.Utility.BaseURI;
 
 namespace PersonalApp.DataAccess.Initializer
 {

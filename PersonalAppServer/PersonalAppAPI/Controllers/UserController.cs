@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PersonalApp.DataAccess.AuthenticationService;
+using PersonalApp.DataAccess.Utility.BaseURI;
 using PersonalApp.Models.Dto;
 using PersonalApp.Models.Identity;
-using PersonalApp.Utility.BaseURI;
 
 namespace PersonalAppAPI.Controllers
 {

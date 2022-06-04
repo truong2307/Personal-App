@@ -1,8 +1,8 @@
 ﻿using PersonalApp.DataAccess.AuthenticationService;
-using PersonalApp.DataAccess.Data.Repository.IRepository;
 using PersonalApp.DataAccess.Data.Repository;
+using PersonalApp.DataAccess.Data.Repository.IRepository;
 using PersonalApp.DataAccess.Initializer;
-using PersonalApp.DataAccess.Services.IdentityServices;
+using PersonalApp.DataAccess.Services.ClaimUserServices;
 using PersonalApp.DataAccess.Services.EventServices;
 
 namespace PersonalAppAPI.ConfigureServicesExtension
@@ -15,7 +15,7 @@ namespace PersonalAppAPI.ConfigureServicesExtension
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IndentityUserSeeding>();
             services.AddScoped<IAuthManager, AuthManager>();
-            services.AddScoped<IIdentityServices, IdentityServices>();
+            services.AddScoped<IClaimUserServices, ClaimUserServices>();
             services.AddScoped<IEventServices, EventServices>();
         }
     }
