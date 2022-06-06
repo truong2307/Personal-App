@@ -12,12 +12,18 @@ export class AddEventComponent implements OnInit {
 
   addEventForm!: FormGroup;
   initialDate: string = '';
+  reBuildTime!: Date;
 
   constructor(
      private activeModalService: NgbActiveModal,
      private eventServices: EventsService) { }
 
   ngOnInit(): void {
+    var currDate = (new Date())
+    this.reBuildTime = new Date(this.initialDate);
+    this.reBuildTime.setHours(currDate.getHours());
+    this.reBuildTime.setMinutes(currDate.getMinutes());
+    this.reBuildTime.setSeconds(currDate.getSeconds());
     this.initialForm();
   }
 
@@ -25,8 +31,8 @@ export class AddEventComponent implements OnInit {
     this.addEventForm = new FormGroup({
       title : new FormControl('', [Validators.required,]),
       description : new FormControl('', [Validators.required,]),
-      startDate : new FormControl(new Date(this.initialDate), [Validators.required,]),
-      endDate : new FormControl(new Date(this.initialDate), [Validators.required,]),
+      startDate : new FormControl(this.reBuildTime, [Validators.required,]),
+      endDate : new FormControl(this.reBuildTime, [Validators.required,]),
     })
   }
 

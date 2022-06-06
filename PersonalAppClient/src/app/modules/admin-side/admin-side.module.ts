@@ -10,6 +10,7 @@ import { AddEventComponent } from './calendar/add-event/add-event.component';
 //Material module
 import { MaterialExampleModule } from 'src/shared/material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AdminSideRoutingModule,
     FormsModule,
     MaterialExampleModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule
   ],
   providers: [GuardAdminSide],
 })

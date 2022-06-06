@@ -16,7 +16,7 @@ export class GuardAdminSide implements CanLoad, CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     const user = this.userService.getUserInfo();
     if(!user){
-      this.router.navigate(['/login'])
+      this.router.navigate(['/login']);
       this.toast.error('Vui lòng đăng nhập');
       return false;
     }
@@ -29,7 +29,7 @@ export class GuardAdminSide implements CanLoad, CanActivate {
   canLoad(route: Route, segments: UrlSegment[]): Observable<boolean>|Promise<boolean>|boolean {
     const user = this.userService.getUserInfo();
     if(!user){
-      this.router.navigate(['/login'])
+      this.router.navigate(['/login']);
       this.toast.error('Vui lòng đăng nhập');
       return false;
     }
@@ -38,6 +38,7 @@ export class GuardAdminSide implements CanLoad, CanActivate {
     }
     else {
       this.toast.error('Hệ hống đang giành cho admin, vui lòng quay lại sau');
+      this.router.navigate(['/login']);
     }
     return false;
   }

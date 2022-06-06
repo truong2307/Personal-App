@@ -20,27 +20,21 @@
           Description is <strong>required</strong>
         </mat-error>
       </mat-form-field>
-
       <div class="add-event-date-picker">
-        <mat-checkbox style="margin-bottom:10px ;" color="primary">All day event</mat-checkbox>
-        <div>
-
-          <mat-form-field class="add-event-full-width" appearance="outline">
-            <mat-label>Start date</mat-label>
-            <input matInput [matDatepicker]="startDate" formControlName="startDate">
-            <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
-            <mat-datepicker #startDate></mat-datepicker>
-          </mat-form-field>
-
-          <mat-form-field class="add-event-full-width" appearance="outline">
-            <mat-label>End date</mat-label>
-            <input matInput [matDatepicker]="endDate" formControlName="endDate">
-            <mat-hint>MM/DD/YYYY</mat-hint>
-            <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
-            <mat-datepicker #endDate></mat-datepicker>
-          </mat-form-field>
-        </div>
+          <mat-form-field class="add-event-full-width">
+            <input matInput [ngxMatDatetimePicker]="startDate" placeholder="Choose start datetime"
+       formControlName="startDate">
+            <mat-datepicker-toggle matSuffix [for]="$any(startDate)"></mat-datepicker-toggle>
+            <ngx-mat-datetime-picker #startDate [showSpinners]="true">
+            </ngx-mat-datetime-picker>
+         </mat-form-field>
+          <mat-form-field class="add-event-full-width" >
+            <input matInput [ngxMatDatetimePicker]="endDate" placeholder="Choose end datetime"
+       formControlName="endDate">
+            <mat-datepicker-toggle matSuffix [for]="$any(endDate)"></mat-datepicker-toggle>
+            <ngx-mat-datetime-picker #endDate>
+            </ngx-mat-datetime-picker>
+         </mat-form-field>
       </div>
     </form>
   </div>
