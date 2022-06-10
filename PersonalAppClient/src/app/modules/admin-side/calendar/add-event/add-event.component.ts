@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { EventsService } from 'src/services/events.service';
@@ -10,6 +10,8 @@ import { EventsService } from 'src/services/events.service';
 })
 export class AddEventComponent implements OnInit {
 
+  colorInit : string[] = [];
+  currentColor: string = '';
   addEventForm!: FormGroup;
   initialDate: string = '';
   reBuildTime!: Date;
@@ -25,6 +27,8 @@ export class AddEventComponent implements OnInit {
     this.reBuildTime.setMinutes(currDate.getMinutes());
     this.reBuildTime.setSeconds(currDate.getSeconds());
     this.initialForm();
+
+    this.colorInit = ['#fa9891','#face91','#c4fa91', '#aee8f2'];
   }
 
   initialForm (){
@@ -33,6 +37,7 @@ export class AddEventComponent implements OnInit {
       description : new FormControl('', [Validators.required,]),
       startDate : new FormControl(this.reBuildTime, [Validators.required,]),
       endDate : new FormControl(this.reBuildTime, [Validators.required,]),
+      color: new FormControl('', [Validators.required,])
     })
   }
 
@@ -52,6 +57,10 @@ export class AddEventComponent implements OnInit {
     return this.addEventForm.get('endDate');
   }
 
+  get color(){
+    return this.addEventForm.get('color');
+  }
+
   closeModal() {
     this.activeModalService.close();
   }
@@ -67,6 +76,10 @@ export class AddEventComponent implements OnInit {
 
     //   }
     // )
+  }
+
+  changeColor(color: any){
+    this.currentColor = color;
   }
 
 }

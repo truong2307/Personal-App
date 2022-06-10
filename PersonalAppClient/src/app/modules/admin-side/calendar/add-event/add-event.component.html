@@ -20,6 +20,21 @@
           Description is <strong>required</strong>
         </mat-error>
       </mat-form-field>
+      <mat-form-field appearance="outline" style="width:130px">
+        <mat-label>Pick Colors</mat-label>
+        <mat-select formControlName="color">
+          <mat-select-trigger >
+            <mat-icon [style.color]="currentColor">brightness_1</mat-icon>
+          </mat-select-trigger>
+          <mat-option
+          (click)="changeColor(item)"
+          [value]="item"
+          *ngFor="let item of colorInit" >
+            <mat-icon [style.color]="item">brightness_1</mat-icon>
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="description?.errors">Please choose color</mat-error>
+      </mat-form-field>
       <div class="add-event-date-picker">
           <mat-form-field class="add-event-full-width">
             <input matInput [ngxMatDatetimePicker]="startDate" placeholder="Choose start datetime"

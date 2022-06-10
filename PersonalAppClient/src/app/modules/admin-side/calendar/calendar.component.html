@@ -23,7 +23,6 @@
         </div>
     </div>
   </div>
-
   <app-add-event style="display:none;" #modalEvent></app-add-event>
 
   <table class="table table-borderless calendar-body">
@@ -45,6 +44,13 @@
         (click)="createEvent(item, anotherMonth - 1, anotherYear)"
         >
             {{item}}
+            <div class="event-day" matTooltip="Info about the action"
+             [ngStyle]="{ 'background-color': '#fa9891' }"
+            [matTooltipPosition]="'above'"
+            >
+              <!-- <i class="fa-solid fa-circle icon-event"></i> -->
+              <span>Event test</span>
+            </div>
           </td>
         <td colspan="1" class="calendar-day" (click)="createEvent(item, anotherMonth, anotherYear)"
         *ngFor="let item of counter(week1, 'week1')">
