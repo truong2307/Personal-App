@@ -11,7 +11,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AdminSideComponent } from './modules/admin-side/admin-side.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { GuardAdminSide } from './guard/guard.admin';
+import { GuardAdminSide } from '../guard/guard.admin';
 import { JwtModule } from "@auth0/angular-jwt";
 import { SharedModule } from 'src/shared/shared.module';
 import { AuthModule } from 'src/stores/auth/auth.module';

@@ -28,7 +28,12 @@ namespace PersonalAppAPI.Controllers
         public async Task<IActionResult> GetEvents()
         {
             var result = await _eventServices.GetEvents();
-            return Ok(result);
+            if (result.IsSuccess)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result.ErrorMessages);
         }
     }
 }

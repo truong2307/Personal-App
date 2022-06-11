@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ErrorComponent } from 'src/shared/components/error/error.component';
 import { LoginComponent } from 'src/shared/components/login/login.component';
 import { RegisterComponent } from 'src/shared/components/register/register.component';
-import { GuardAdminSide } from './guard/guard.admin';
+import { GuardAdminSide } from '../guard/guard.admin';
 
 const routes: Routes = [
   {

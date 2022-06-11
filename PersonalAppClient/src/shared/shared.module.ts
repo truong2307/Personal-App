@@ -4,7 +4,6 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { LoginComponent } from './components/login/login.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { RegisterComponent } from './components/register/register.component';
 import { ErrorComponent } from './components/error/error.component';
 

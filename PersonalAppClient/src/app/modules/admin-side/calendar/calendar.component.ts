@@ -1,7 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import dateOfWeek from 'src/shared/const/dateOfWeek';
 import { AddEventComponent } from './add-event/add-event.component';
-import {ModalDismissReasons, NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Store } from '@ngrx/store';
+import { GetEventsAction } from 'src/stores/events/events.action';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-calendar',
@@ -42,12 +45,17 @@ export class CalendarComponent implements OnInit {
 
   constructor(
     private modalService: NgbModal,
+    private store: Store,
+    private loader: NgxUiLoaderService,
   ) {
     this.days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     this.month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    this.store.dispatch(new GetEventsAction());
   }
 
   ngOnInit(): void {
+    this.loader.start();
+    this.store.dispatch(new GetEventsAction());
     this.currentMonthSelectName = this.month[this.currentMonthIsSelecting];
     this.renderCalendar(this.currentYearIsSelecting, this.currentMonthIsSelecting);
   }
