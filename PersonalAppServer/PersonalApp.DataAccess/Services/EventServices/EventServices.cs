@@ -117,7 +117,7 @@ namespace PersonalApp.DataAccess.Services.EventServices
 
                     var sql = new StringBuilder();
 
-                    sql.AppendLine("SELECT e.Id, e.Title, e.StartDate, e.EndDate, e.UserId, e.Description FROM Events e");
+                    sql.AppendLine("SELECT e.Id, e.Title, e.StartDate, e.EndDate, e.UserId, e.Color , e.Description FROM Events e");
                     sql.AppendLine("WHERE e.UserId = @currentUserId ");
 
                     var result = await db.QueryAsync<Event>(sql.ToString(), param: new { currentUserId = currentUserId });

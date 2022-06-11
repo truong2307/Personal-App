@@ -44,17 +44,30 @@
         (click)="createEvent(item, anotherMonth - 1, anotherYear)"
         >
             {{item}}
-            <div class="event-day" matTooltip="Info about the action"
-             [ngStyle]="{ 'background-color': '#fa9891' }"
-            [matTooltipPosition]="'above'"
-            >
-              <span>Event test</span>
+            <div *ngFor="let event of events">
+              <div *ngIf="checkEvent(event, anotherYear, anotherMonth - 1, item)"
+              class="event-day" matTooltip="{{event.title}}-{{event.description}}"
+              [ngStyle]="{ 'background-color': event.color }"
+             [matTooltipPosition]="'above'"
+             >
+               <span>{{event.title}}</span>
+             </div>
             </div>
+
           </td>
         <td colspan="1" class="calendar-day" (click)="createEvent(item, anotherMonth, anotherYear)"
         *ngFor="let item of counter(week1, 'week1')">
         <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
           {{item}}
+          <div *ngFor="let event of events">
+            <div *ngIf="checkEvent(event, anotherYear, anotherMonth, item)"
+            class="event-day" matTooltip="{{event.title}}-{{event.description}}"
+            [ngStyle]="{ 'background-color': event.color }"
+           [matTooltipPosition]="'above'"
+           >
+             <span>{{event.title}}</span>
+           </div>
+          </div>
         </div>
         </td>
       </tr>
@@ -63,6 +76,15 @@
         *ngFor="let item of counter(week2, 'week2')">
           <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
             {{item}}
+            <div *ngFor="let event of events">
+              <div *ngIf="checkEvent(event, anotherYear, anotherMonth, item)"
+              class="event-day" matTooltip="{{event.title}}-{{event.description}}"
+              [ngStyle]="{ 'background-color': event.color }"
+             [matTooltipPosition]="'above'"
+             >
+               <span>{{event.title}}</span>
+             </div>
+            </div>
           </div>
         </td>
       </tr>
@@ -71,6 +93,15 @@
         *ngFor="let item of counter(week3, 'week3')">
         <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
           {{item}}
+          <div *ngFor="let event of events">
+            <div *ngIf="checkEvent(event, anotherYear, anotherMonth, item)"
+            class="event-day" matTooltip="{{event.title}}-{{event.description}}"
+            [ngStyle]="{ 'background-color': event.color }"
+           [matTooltipPosition]="'above'"
+           >
+             <span>{{event.title}}</span>
+           </div>
+          </div>
         </div>
         </td>
       </tr>
@@ -79,6 +110,15 @@
         *ngFor="let item of counter(week4, 'week4')">
         <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
           {{item}}
+          <div *ngFor="let event of events">
+            <div *ngIf="checkEvent(event, anotherYear, anotherMonth, item)"
+            class="event-day" matTooltip="{{event.title}}-{{event.description}}"
+            [ngStyle]="{ 'background-color': event.color }"
+           [matTooltipPosition]="'above'"
+           >
+             <span>{{event.title}}</span>
+           </div>
+          </div>
         </div>
         </td>
       </tr>
@@ -87,11 +127,29 @@
         *ngFor="let item of counter(week5, 'week5')">
         <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
           {{item}}
+          <div *ngFor="let event of events">
+            <div *ngIf="checkEvent(event, anotherYear, anotherMonth, item)"
+            class="event-day" matTooltip="{{event.title}}-{{event.description}}"
+            [ngStyle]="{ 'background-color': event.color }"
+           [matTooltipPosition]="'above'"
+           >
+             <span>{{event.title}}</span>
+           </div>
+          </div>
         </div>
         </td>
         <td colspan="1" class="calendar-day" (click)="createEvent(item, anotherMonth + 1, anotherYear)"
         *ngFor="let item of counter(week1NextMonth, 'week1NextMonth')">
           {{item}}
+          <div *ngFor="let event of events">
+            <div *ngIf="checkEvent(event, anotherYear, anotherMonth, item)"
+            class="event-day" matTooltip="{{event.title}}-{{event.description}}"
+            [ngStyle]="{ 'background-color': event.color }"
+           [matTooltipPosition]="'above'"
+           >
+             <span>{{event.title}}</span>
+           </div>
+          </div>
         </td>
       </tr>
       <tr>
@@ -99,11 +157,29 @@
         *ngFor="let item of counter(week6, 'week6')">
         <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
           {{item}}
+          <div *ngFor="let event of events">
+            <div *ngIf="checkEvent(event, anotherYear, anotherMonth, item)"
+            class="event-day" matTooltip="{{event.title}}-{{event.description}}"
+            [ngStyle]="{ 'background-color': event.color }"
+           [matTooltipPosition]="'above'"
+           >
+             <span>{{event.title}}</span>
+           </div>
+          </div>
         </div>
         </td>
         <td colspan="1" class="calendar-day" (click)="createEvent(item, anotherMonth + 1, anotherYear)"
         *ngFor="let item of counter(week2NextMonth, 'week2NextMonth')">
           {{item}}
+          <div *ngFor="let event of events">
+            <div *ngIf="checkEvent(event, anotherYear, anotherMonth - 1, item)"
+            class="event-day" matTooltip="{{event.title}}-{{event.description}}"
+            [ngStyle]="{ 'background-color': event.color }"
+           [matTooltipPosition]="'above'"
+           >
+             <span>{{event.title}}</span>
+           </div>
+          </div>
         </td>
       </tr>
     </tbody>

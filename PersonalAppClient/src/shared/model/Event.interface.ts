@@ -2,6 +2,6 @@ export interface EventCalendar {
   title: string;
   color: string;
   description?: string;
-  startDate?: Date;
-  endDate?: Date;
+  startDate: Date;
+  endDate: Date;
 }

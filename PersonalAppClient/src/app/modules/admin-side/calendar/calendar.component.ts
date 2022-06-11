@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import dateOfWeek from 'src/shared/const/dateOfWeek';
 import { AddEventComponent } from './add-event/add-event.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { GetEventsAction } from 'src/stores/events/events.action';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { eventSelector } from '../../../../stores/events/events.selector';
+import {EventCalendar} from '../../../../shared/model/Event.interface'
 
 @Component({
   selector: 'app-calendar',
@@ -13,6 +15,7 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 })
 export class CalendarComponent implements OnInit {
 
+  events: Array<EventCalendar> = [];
   private days : Array<string>;
   private month : Array<string>;
   week1: number = 0;
@@ -39,7 +42,6 @@ export class CalendarComponent implements OnInit {
 
   anotherMonth : number = 0;
   anotherYear : number = 0;
-
   closeResult = '';
 
 
@@ -50,12 +52,19 @@ export class CalendarComponent implements OnInit {
   ) {
     this.days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     this.month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-    this.store.dispatch(new GetEventsAction());
   }
 
   ngOnInit(): void {
     this.loader.start();
     this.store.dispatch(new GetEventsAction());
+    this.store.pipe(select(eventSelector)).subscribe(
+      result => {
+        this.events = result.items
+
+        console.log(this.events);
+
+      }
+    );
     this.currentMonthSelectName = this.month[this.currentMonthIsSelecting];
     this.renderCalendar(this.currentYearIsSelecting, this.currentMonthIsSelecting);
   }
@@ -64,7 +73,6 @@ export class CalendarComponent implements OnInit {
     this.totalDayOfCurrentMonth = new Date(year, month + 1, 0).getDate();
     this.totalDayOfPreviousMonth = new Date(year, month, 0).getDate();
     this.firstDayInCurrentMonth = this.days[new Date(year, month, 1).getDay()];
-
     this.anotherMonth = month + 1;
     this.anotherYear = year;
 
@@ -391,6 +399,29 @@ export class CalendarComponent implements OnInit {
     const modalRef = this.modalService.open(AddEventComponent, {size: 'md'});
     var buildDate = year+'-'+month+'-'+day;
     modalRef.componentInstance.initialDate = buildDate;
+  }
+
+  checkEvent(event: EventCalendar,year: number, month: number, day: any){
+    if(month === 13){
+      month = 1;
+      year += 1;
+    } else if(month === 0){
+      month = 12;
+      year -= 1;
+    }
+    var buildCurrentDay = `${year}-${month}-${day}`;
+    var startDate = new Date(event.startDate).setHours(0,0,0,0);
+    var endDate = new Date(event.endDate).setHours(0,0,0,0);
+    var currDate = new Date(buildCurrentDay).setHours(0,0,0,0);
+
+    if(startDate === endDate){
+      if(currDate === startDate) return true
+    }
+    else if(currDate >= startDate || currDate<= endDate){
+      return true
+    }
+
+    return false
   }
 
 }
