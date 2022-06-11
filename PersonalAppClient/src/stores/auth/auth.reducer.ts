@@ -1,4 +1,4 @@
-import { UserLogin, UserRegister } from "src/app/model/User.interface";
+import { UserLogin, UserRegister } from "src/shared/model/User.interface";
 import { AuthState } from "./auth.state";
 
 import * as AuthAction from "./auth.actions"

@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { UserLogin, UserRegister } from "src/app/model/User.interface";
+import { UserLogin, UserRegister } from "src/shared/model/User.interface";
 
 export const ADMIN_LOGIN = 'ADMIN_LOGIN';
 export const ADMIN_LOGIN_SUCCESS = 'ADMIN_LOGIN_SUCCESS';

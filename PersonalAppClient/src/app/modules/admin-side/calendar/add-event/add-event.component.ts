@@ -27,7 +27,6 @@ export class AddEventComponent implements OnInit {
     this.reBuildTime.setMinutes(currDate.getMinutes());
     this.reBuildTime.setSeconds(currDate.getSeconds());
     this.initialForm();
-
     this.colorInit = ['#fa9891','#face91','#c4fa91', '#aee8f2'];
   }
 
@@ -67,6 +66,8 @@ export class AddEventComponent implements OnInit {
 
   addEvent(){
     const data = this.addEventForm.value;
+    console.log(data);
+    this.activeModalService.close();
     // this.eventServices.addEvent(data).subscribe(
     //   (result) => {
     //     console.log(result);

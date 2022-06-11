@@ -21,5 +21,7 @@ namespace PersonalApp.Models.Entities
         public string? UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual ApiUser ApiUser { get; set; }
+        [Required]
+        public string Color { get; set; }
     }
 }

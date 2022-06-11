@@ -19,6 +19,7 @@ import { NgxUiLoaderModule, NgxUiLoaderRouterModule } from 'ngx-ui-loader';
 import { MaterialExampleModule } from 'src/shared/material/material.module';
 import { environment } from 'src/environments/environment';
 import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
+import { EventsModule } from 'src/stores/events/events.module';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -41,6 +42,7 @@ export function tokenGetter() {
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
     AuthModule,
+    EventsModule,
     HttpClientModule,
     JwtModule.forRoot(
       {

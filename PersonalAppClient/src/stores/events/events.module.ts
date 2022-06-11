@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { EventEffects } from './events.effects';
+import { eventReducer } from './events.reducer';
 
 
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+    StoreModule.forFeature('event_feature', eventReducer),
+    EffectsModule.forFeature([EventEffects]),
   ]
 })
 export class EventsModule { }
