@@ -66,6 +66,7 @@ namespace PersonalApp.DataAccess.Services.EventServices
                 {
                     _responseDto.IsSuccess = false;
                     _responseDto.ErrorMessages = "Event not exist in system";
+                    return _responseDto;
                 }
 
                 await _unitOfWork.Events.Delete(idEvent);
@@ -90,6 +91,7 @@ namespace PersonalApp.DataAccess.Services.EventServices
                 {
                     _responseDto.IsSuccess = false;
                     _responseDto.ErrorMessages = "Event not exist in system";
+                    return _responseDto;
                 }
 
                 _responseDto.Result = _mapper.Map<EventDto>(eventToDb);
@@ -132,16 +134,26 @@ namespace PersonalApp.DataAccess.Services.EventServices
             return _responseDto;
         }
 
-        public async Task<ResponseDto> UpdateEvent(EventDto model)
+        public async Task<ResponseDto> UpdateEvent(EventUpdateDto model)
         {
             try
             {
+                var eventInDb = await _unitOfWork.Events.Get(c => c.Id == model.Id);
+                if (eventInDb == null)
+                {
+                    _responseDto.IsSuccess = false;
+                    _responseDto.ErrorMessages = "Event not exist in system";
+                    return _responseDto;
+                }
                 var currentUserId = _claimUserServices.GetCurrentUserId();
                 var eventToDb = _mapper.Map<Event>(model);
 
+
                 eventToDb.UpdatedBy = currentUserId;
+                eventToDb.CreatedBy = eventInDb.CreatedBy;
+                eventToDb.CreatedAt = eventInDb.CreatedAt;
                 eventToDb.UpdatedAt = DateTime.Now;
-                eventToDb.UserId = currentUserId;
+                eventToDb.UserId = eventInDb.UserId;
 
                 await _unitOfWork.Events.Update(eventToDb);
                 await _unitOfWork.SaveChangeAsync();

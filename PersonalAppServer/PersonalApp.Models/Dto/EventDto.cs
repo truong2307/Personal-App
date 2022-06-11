@@ -13,4 +13,9 @@ namespace PersonalApp.Models.Dto
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
     }
+
+    public class EventUpdateDto : EventDto
+    {
+        public int Id { get; set; }
+    }
 }

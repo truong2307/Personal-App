@@ -29,7 +29,7 @@ namespace PersonalAppAPI.Controllers
         }
 
         [HttpPut("update-event")]
-        public async Task<IActionResult> UpdateEvent([FromBody] EventDto eventRequest)
+        public async Task<IActionResult> UpdateEvent([FromBody] EventUpdateDto eventRequest)
         {
             var result = await _eventServices.UpdateEvent(eventRequest);
             if (result.IsSuccess)

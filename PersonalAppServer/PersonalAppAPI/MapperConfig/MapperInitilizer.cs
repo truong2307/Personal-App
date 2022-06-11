@@ -9,8 +9,9 @@ namespace PersonalAppAPI.MapperConfig
     {
         public MapperInitilizer()
         {
-            CreateMap<ApiUser, UserDto>().ReverseMap();
+            CreateMap<ApiUser, UserDto>().ReverseMap(); 
             CreateMap<Event, EventDto>().ReverseMap();
+            CreateMap<Event, EventUpdateDto>().ReverseMap();
         }
     }
 }
