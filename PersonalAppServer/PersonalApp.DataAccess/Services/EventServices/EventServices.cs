@@ -57,6 +57,51 @@ namespace PersonalApp.DataAccess.Services.EventServices
 
             return _responseDto;
         }
+        public async Task<ResponseDto> DeleteEvent(int idEvent)
+        {
+            try
+            {
+                var eventToDb = await _unitOfWork.Events.Get(c => c.Id == idEvent);
+                if (eventToDb == null)
+                {
+                    _responseDto.IsSuccess = false;
+                    _responseDto.ErrorMessages = "Event not exist in system";
+                }
+
+                await _unitOfWork.Events.Delete(idEvent);
+                await _unitOfWork.SaveChangeAsync();
+            }
+            catch (Exception ex)
+            {
+
+                _responseDto.IsSuccess = false;
+                _responseDto.ErrorMessages = ex.ToString();
+            }
+
+            return _responseDto;
+        }
+
+        public async Task<ResponseDto> GetEventById(int idEvent)
+        {
+            try
+            {
+                var eventToDb = await _unitOfWork.Events.Get(c => c.Id == idEvent);
+                if (eventToDb == null)
+                {
+                    _responseDto.IsSuccess = false;
+                    _responseDto.ErrorMessages = "Event not exist in system";
+                }
+
+                _responseDto.Result = _mapper.Map<EventDto>(eventToDb);
+            }
+            catch (Exception ex)
+            {
+                _responseDto.IsSuccess = false;
+                _responseDto.ErrorMessages = ex.ToString();
+            }
+
+            return _responseDto;
+        }
 
         public async Task<ResponseDto> GetEvents()
         {
@@ -87,5 +132,29 @@ namespace PersonalApp.DataAccess.Services.EventServices
             return _responseDto;
         }
 
+        public async Task<ResponseDto> UpdateEvent(EventDto model)
+        {
+            try
+            {
+                var currentUserId = _claimUserServices.GetCurrentUserId();
+                var eventToDb = _mapper.Map<Event>(model);
+
+                eventToDb.UpdatedBy = currentUserId;
+                eventToDb.UpdatedAt = DateTime.Now;
+                eventToDb.UserId = currentUserId;
+
+                await _unitOfWork.Events.Update(eventToDb);
+                await _unitOfWork.SaveChangeAsync();
+
+                _responseDto.Result = model;
+            }
+            catch (Exception ex)
+            {
+                _responseDto.IsSuccess = false;
+                _responseDto.ErrorMessages = ex.ToString();
+            }
+
+            return _responseDto;
+        }
     }
 }

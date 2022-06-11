@@ -20,14 +20,54 @@ namespace PersonalAppAPI.Controllers
         public async Task<IActionResult> Post([FromBody] EventDto eventRequest)
         {
             var result = await _eventServices.CreateEvent(eventRequest);
-            return Ok(result);
+            if (result.IsSuccess)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result.ErrorMessages);
         }
 
-        [Route("get-events")]
-        [HttpGet]
+        [HttpPut("update-event")]
+        public async Task<IActionResult> UpdateEvent([FromBody] EventDto eventRequest)
+        {
+            var result = await _eventServices.UpdateEvent(eventRequest);
+            if (result.IsSuccess)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result.ErrorMessages);
+        }
+
+        [HttpDelete("delete-event/{idEvent:int}")]
+        public async Task<IActionResult> DeleteEvent(int idEvent)
+        {
+            var result = await _eventServices.DeleteEvent(idEvent);
+            if (result.IsSuccess)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result.ErrorMessages);
+        }
+
+        [HttpGet("get-events")]
         public async Task<IActionResult> GetEvents()
         {
             var result = await _eventServices.GetEvents();
+            if (result.IsSuccess)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result.ErrorMessages);
+        }
+
+        [HttpGet("get-event/{idEvent:int}")]
+        public async Task<IActionResult> GetEvent(int idEvent)
+        {
+            var result = await _eventServices.GetEventById(idEvent);
             if (result.IsSuccess)
             {
                 return Ok(result);
