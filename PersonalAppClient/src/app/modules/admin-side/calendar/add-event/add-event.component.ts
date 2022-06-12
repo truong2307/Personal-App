@@ -1,7 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { EventsService } from 'src/services/events.service';
+import { Store } from '@ngrx/store';
+
+import { CreateEventAction } from 'src/stores/events/events.action';
 
 @Component({
   selector: 'app-add-event',
@@ -18,7 +20,8 @@ export class AddEventComponent implements OnInit {
 
   constructor(
      private activeModalService: NgbActiveModal,
-     private eventServices: EventsService) { }
+     private store: Store,
+     ) { }
 
   ngOnInit(): void {
     var currDate = (new Date())
@@ -66,17 +69,8 @@ export class AddEventComponent implements OnInit {
 
   addEvent(){
     const data = this.addEventForm.value;
-    console.log(data);
+    this.store.dispatch(new CreateEventAction(data));
     this.activeModalService.close();
-    // this.eventServices.addEvent(data).subscribe(
-    //   (result) => {
-    //     console.log(result);
-    //   },
-    //   (error) => {
-    //     console.log(error);
-
-    //   }
-    // )
   }
 
   changeColor(color: any){

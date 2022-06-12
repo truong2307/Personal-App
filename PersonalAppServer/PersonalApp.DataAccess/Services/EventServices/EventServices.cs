@@ -30,7 +30,7 @@ namespace PersonalApp.DataAccess.Services.EventServices
             _config = config;
             _connectionString = _config.GetConnectionString("DefaultConnection");
         }
-        public async Task<ResponseDto> CreateEvent(EventDto model)
+        public async Task<ResponseDto> CreateEvent(EventCreateDto model)
         {
             try
             {
@@ -134,7 +134,7 @@ namespace PersonalApp.DataAccess.Services.EventServices
             return _responseDto;
         }
 
-        public async Task<ResponseDto> UpdateEvent(EventUpdateDto model)
+        public async Task<ResponseDto> UpdateEvent(EventDto model)
         {
             try
             {

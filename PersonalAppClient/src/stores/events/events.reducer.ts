@@ -20,7 +20,7 @@ export function eventReducer(
     case EventAction.GET_EVENTS_SUCCESS:
       return {...state, items: action.events};
     case EventAction.CREATE_EVENT:
-      return {...state, item: action.event};
+      return {...state};
     case EventAction.GET_EVENT:
       return {...state, idEvent: action.id};
     case EventAction.GET_EVENT_SUCCESS:

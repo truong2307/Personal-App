@@ -8,17 +8,21 @@ import { ResponseService } from "src/shared/model/response.interface";
 
 import * as eventAction from "./events.action"
 import { NgxUiLoaderService } from "ngx-ui-loader";
+import { EventCalendar } from "src/shared/model/Event.interface";
+import { Router } from "@angular/router";
 
 @Injectable()
 export class EventEffects {
+
+  events: EventCalendar[] = [];
 
   constructor(
     private action$: Actions,
     private service: EventsService,
     private toastr: ToastrService,
     private loader: NgxUiLoaderService,
+    private router: Router,
     ){
-
   }
 
   getEvents$ = createEffect(() => this.action$.pipe(
@@ -35,6 +39,25 @@ export class EventEffects {
     )
   ));
 
+  createEventAction$ = createEffect(() => this.action$.pipe(
+    ofType(eventAction.CREATE_EVENT),
+    switchMap((event) =>
+      this.service.addEvent(event['event']).pipe(
+        tap((result) => {
+          this.toastr.success(
+            'Add event success'
+          )
+          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+          this.router.onSameUrlNavigation = 'reload';
+          this.router.navigate(['/admin/calendar'])
+        }),
+        catchError(error =>
+          of(new eventAction.CrudEventFailedAction(error)))
+      )
+    )
+  ),
+  { dispatch: false })
+
   getEventsSuccessAction$ = createEffect(() =>
   this.action$.pipe(
     ofType(eventAction.GET_EVENTS_SUCCESS),
@@ -45,7 +68,7 @@ export class EventEffects {
   { dispatch: false }
   )
 
-  CrudEventFailedAction$ = createEffect(() => this.action$.pipe(
+  crudEventFailedAction$ = createEffect(() => this.action$.pipe(
     ofType(eventAction.CRUD_EVENT_FAILED),
     tap((error) => {
       this.loader.stop();
@@ -57,7 +80,7 @@ export class EventEffects {
     { dispatch: false }
   );
 
-  CrudEventSuccessAction$ = createEffect(() => this.action$.pipe(
+  crudEventSuccessAction$ = createEffect(() => this.action$.pipe(
     ofType(eventAction.CRUD_EVENT_SUCCESS),
     tap((error) => {
       this.loader.stop();

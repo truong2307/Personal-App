@@ -11,7 +11,7 @@ export class EventsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  addEvent(event: any) : Observable<any>{
+  addEvent(event: any) : Observable<ResponseService>{
     return this.httpClient.post(environment.baseUri + 'events', event);
   }
 

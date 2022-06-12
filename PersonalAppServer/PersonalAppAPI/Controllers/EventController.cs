@@ -17,7 +17,7 @@ namespace PersonalAppAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] EventDto eventRequest)
+        public async Task<IActionResult> Post([FromBody] EventCreateDto eventRequest)
         {
             var result = await _eventServices.CreateEvent(eventRequest);
             if (result.IsSuccess)
@@ -29,7 +29,7 @@ namespace PersonalAppAPI.Controllers
         }
 
         [HttpPut("update-event")]
-        public async Task<IActionResult> UpdateEvent([FromBody] EventUpdateDto eventRequest)
+        public async Task<IActionResult> UpdateEvent([FromBody] EventDto eventRequest)
         {
             var result = await _eventServices.UpdateEvent(eventRequest);
             if (result.IsSuccess)

@@ -17,8 +17,6 @@ export class AuthServices {
   }
 
   registerUser(user?: UserRegister) : Observable<any>{
-    console.log(user);
-
     return this.httpClient.post<any>(environment.baseUri + 'user/register', user);
   }
 

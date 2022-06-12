@@ -1,7 +1,8 @@
 export interface EventCalendar {
+  id?: number;
   title: string;
   color: string;
   description?: string;
-  startDate: Date;
-  endDate: Date;
+  startDate: string;
+  endDate: string;
 }

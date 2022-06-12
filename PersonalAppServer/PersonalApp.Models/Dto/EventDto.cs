@@ -2,7 +2,7 @@
 
 namespace PersonalApp.Models.Dto
 {
-    public class EventDto
+    public class EventCreateDto
     {
         [Required]
         [MaxLength(100)]
@@ -14,7 +14,7 @@ namespace PersonalApp.Models.Dto
         public DateTime? EndDate { get; set; }
     }
 
-    public class EventUpdateDto : EventDto
+    public class EventDto : EventCreateDto
     {
         public int Id { get; set; }
     }

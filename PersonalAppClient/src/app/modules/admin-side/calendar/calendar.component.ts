@@ -52,19 +52,16 @@ export class CalendarComponent implements OnInit {
   ) {
     this.days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     this.month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  }
-
-  ngOnInit(): void {
-    this.loader.start();
     this.store.dispatch(new GetEventsAction());
     this.store.pipe(select(eventSelector)).subscribe(
       result => {
         this.events = result.items
-
-        console.log(this.events);
-
       }
     );
+  }
+
+  ngOnInit(): void {
+    this.loader.start();
     this.currentMonthSelectName = this.month[this.currentMonthIsSelecting];
     this.renderCalendar(this.currentYearIsSelecting, this.currentMonthIsSelecting);
   }
@@ -417,7 +414,7 @@ export class CalendarComponent implements OnInit {
     if(startDate === endDate){
       if(currDate === startDate) return true
     }
-    else if(currDate >= startDate || currDate<= endDate){
+    else if(currDate >= startDate && currDate<= endDate){
       return true
     }
 
