@@ -52,16 +52,18 @@ export class CalendarComponent implements OnInit {
   ) {
     this.days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     this.month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+  }
+
+   ngOnInit() {
     this.store.dispatch(new GetEventsAction());
+    this.loader.start();
     this.store.pipe(select(eventSelector)).subscribe(
       result => {
         this.events = result.items
+        this.loader.stop();
       }
     );
-  }
-
-  ngOnInit(): void {
-    this.loader.start();
     this.currentMonthSelectName = this.month[this.currentMonthIsSelecting];
     this.renderCalendar(this.currentYearIsSelecting, this.currentMonthIsSelecting);
   }
@@ -398,7 +400,7 @@ export class CalendarComponent implements OnInit {
     modalRef.componentInstance.initialDate = buildDate;
   }
 
-  checkEvent(event: EventCalendar,year: number, month: number, day: any){
+  eventToRender(year: number, month: number, day: any) {
     if(month === 13){
       month = 1;
       year += 1;
@@ -406,19 +408,26 @@ export class CalendarComponent implements OnInit {
       month = 12;
       year -= 1;
     }
+
     var buildCurrentDay = `${year}-${month}-${day}`;
-    var startDate = new Date(event.startDate).setHours(0,0,0,0);
-    var endDate = new Date(event.endDate).setHours(0,0,0,0);
+    var listEvent : EventCalendar[] = [];
     var currDate = new Date(buildCurrentDay).setHours(0,0,0,0);
+    var currDate = new Date(buildCurrentDay).setHours(0,0,0,0);
+    this.events.forEach((item) => {
+      var startDate = new Date(item.startDate).setHours(0,0,0,0);
+      var endDate = new Date(item.endDate).setHours(0,0,0,0);
 
-    if(startDate === endDate){
-      if(currDate === startDate) return true
-    }
-    else if(currDate >= startDate && currDate<= endDate){
-      return true
-    }
+      if(startDate === endDate){
+        if(currDate === startDate){
+          listEvent.push(item)
+        }
+      }
+      else if(currDate >= startDate && currDate<= endDate){
+        listEvent.push(item)
+      }
+    })
 
-    return false
+    return listEvent;
   }
 
 }

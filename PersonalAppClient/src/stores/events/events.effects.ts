@@ -7,7 +7,6 @@ import { tap } from 'rxjs/operators';
 import { ResponseService } from "src/shared/model/response.interface";
 
 import * as eventAction from "./events.action"
-import { NgxUiLoaderService } from "ngx-ui-loader";
 import { EventCalendar } from "src/shared/model/Event.interface";
 import { Router } from "@angular/router";
 
@@ -20,7 +19,6 @@ export class EventEffects {
     private action$: Actions,
     private service: EventsService,
     private toastr: ToastrService,
-    private loader: NgxUiLoaderService,
     private router: Router,
     ){
   }
@@ -56,22 +54,12 @@ export class EventEffects {
       )
     )
   ),
-  { dispatch: false })
-
-  getEventsSuccessAction$ = createEffect(() =>
-  this.action$.pipe(
-    ofType(eventAction.GET_EVENTS_SUCCESS),
-    tap(() => {
-      this.loader.stop();
-    })
-  ),
   { dispatch: false }
   )
 
   crudEventFailedAction$ = createEffect(() => this.action$.pipe(
     ofType(eventAction.CRUD_EVENT_FAILED),
     tap((error) => {
-      this.loader.stop();
       this.toastr.error(
         'error'
       )
@@ -83,7 +71,6 @@ export class EventEffects {
   crudEventSuccessAction$ = createEffect(() => this.action$.pipe(
     ofType(eventAction.CRUD_EVENT_SUCCESS),
     tap((error) => {
-      this.loader.stop();
       this.toastr.success(
         'Success'
       )
