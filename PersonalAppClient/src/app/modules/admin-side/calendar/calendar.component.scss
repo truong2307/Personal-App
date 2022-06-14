@@ -145,9 +145,15 @@
     border-radius: 4px;
     background-color: beige;
     margin-top: 5px;
+    transition: .3s;
 
     .icon-event{
       margin-right: 3px;
+    }
+
+    &:hover{
+      opacity: .8;
+      transform: translateY(-3px);
     }
   }
 

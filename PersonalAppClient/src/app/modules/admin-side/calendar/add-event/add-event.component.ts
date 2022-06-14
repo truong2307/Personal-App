@@ -2,8 +2,9 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
+import { EventCalendar } from 'src/shared/model/Event.interface';
 
-import { CreateEventAction } from 'src/stores/events/events.action';
+import { CreateEventAction, DeleteEventAction, UpdateEventAction } from 'src/stores/events/events.action';
 
 @Component({
   selector: 'app-add-event',
@@ -17,6 +18,8 @@ export class AddEventComponent implements OnInit {
   addEventForm!: FormGroup;
   initialDate: string = '';
   reBuildTime!: Date;
+  isEdit: boolean = false;
+  initialEvent!: EventCalendar;
 
   constructor(
      private activeModalService: NgbActiveModal,
@@ -31,6 +34,14 @@ export class AddEventComponent implements OnInit {
     this.reBuildTime.setSeconds(currDate.getSeconds());
     this.initialForm();
     this.colorInit = ['#fa9891','#face91','#c4fa91', '#aee8f2'];
+
+    if(this.isEdit){
+      this.title?.setValue(this.initialEvent.title);
+      this.description?.setValue(this.initialEvent.description);
+      this.startDate?.setValue(this.initialEvent.startDate);
+      this.endDate?.setValue(this.initialEvent.endDate);
+      this.color?.setValue(this.initialEvent.color);
+    }
   }
 
   initialForm (){
@@ -75,6 +86,18 @@ export class AddEventComponent implements OnInit {
 
   changeColor(color: any){
     this.currentColor = color;
+  }
+
+  editEvent(){
+    const data = this.addEventForm.value;
+    data.id = this.initialEvent.id;
+    this.store.dispatch(new UpdateEventAction(data))
+    this.activeModalService.close();
+  }
+
+  removeEvent(id: any){
+    this.store.dispatch(new DeleteEventAction(id));
+    this.activeModalService.close();
   }
 
 }

@@ -57,11 +57,53 @@ export class EventEffects {
   { dispatch: false }
   )
 
+  deleteEvent$ = createEffect(() => this.action$.pipe(
+    ofType(eventAction.DELETE_EVENT),
+    switchMap((event) =>
+      this.service.deleteEvents(event['id']).pipe(
+        tap((result) => {
+          if(result.isSuccess){
+            this.toastr.success(
+              'Delete event success'
+            )
+            this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+            this.router.onSameUrlNavigation = 'reload';
+            this.router.navigate(['/admin/calendar'])
+          }
+        }),
+        catchError(error =>
+          of(new eventAction.CrudEventFailedAction(error)))
+      )
+    )
+  ),
+  { dispatch: false }
+  )
+
+  updateEvent$ = createEffect(() => this.action$.pipe(
+    ofType(eventAction.UPDATE_EVENT),
+    switchMap((event) => this.service.updateEvents(event['event']).pipe(
+      tap(result => {
+        if(result.isSuccess){
+          this.toastr.success(
+            'Delete event success'
+          )
+          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+          this.router.onSameUrlNavigation = 'reload';
+          this.router.navigate(['/admin/calendar'])
+        }
+      })
+    )),
+    catchError(error =>
+      of(new eventAction.CrudEventFailedAction(error)))
+  ),
+  { dispatch: false }
+  )
+
   crudEventFailedAction$ = createEffect(() => this.action$.pipe(
     ofType(eventAction.CRUD_EVENT_FAILED),
     tap((error) => {
       this.toastr.error(
-        'error'
+        error
       )
     })
   ),

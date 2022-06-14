@@ -1,5 +1,5 @@
 export interface ResponseService {
-  IsSuccess?: boolean,
+  isSuccess?: boolean,
   result?: any,
   errorMessages?: string
 }

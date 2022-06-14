@@ -16,8 +16,8 @@ import {EventCalendar} from '../../../../shared/model/Event.interface'
 export class CalendarComponent implements OnInit {
 
   events: Array<EventCalendar> = [];
-  private days : Array<string>;
-  private month : Array<string>;
+  days : Array<string> = [];
+  month : Array<string>;
   week1: number = 0;
   week2: number = 0;
   week3: number = 0;
@@ -52,7 +52,6 @@ export class CalendarComponent implements OnInit {
   ) {
     this.days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     this.month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-
   }
 
    ngOnInit() {
@@ -386,7 +385,8 @@ export class CalendarComponent implements OnInit {
     this.renderCalendar(this.currentYearIsSelecting, this.currentMonthIsSelecting);
   }
 
-  createEvent(day?: any, month?: any, year?: any){
+  createEvent(day?: any, month?: any, year?: any, eventEle?: any){
+    if (eventEle.target !== eventEle.currentTarget) return;
     if(month === 13){
       month = 1;
       year += 1;
@@ -428,6 +428,12 @@ export class CalendarComponent implements OnInit {
     })
 
     return listEvent;
+  }
+
+  editEvent(data: EventCalendar){
+    const modalRef = this.modalService.open(AddEventComponent, {size: 'md'});
+    modalRef.componentInstance.isEdit = true;
+    modalRef.componentInstance.initialEvent = data;
   }
 
 }
