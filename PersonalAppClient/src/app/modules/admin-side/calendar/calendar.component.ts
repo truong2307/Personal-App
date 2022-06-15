@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import dateOfWeek from 'src/shared/const/dateOfWeek';
 import { AddEventComponent } from './add-event/add-event.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -43,7 +43,6 @@ export class CalendarComponent implements OnInit {
   anotherMonth : number = 0;
   anotherYear : number = 0;
   closeResult = '';
-
 
   constructor(
     private modalService: NgbModal,
@@ -398,6 +397,11 @@ export class CalendarComponent implements OnInit {
     const modalRef = this.modalService.open(AddEventComponent, {size: 'md'});
     var buildDate = year+'-'+month+'-'+day;
     modalRef.componentInstance.initialDate = buildDate;
+
+    modalRef.componentInstance.eventUpdate.subscribe((result : any) => {
+      this.events = result;
+    })
+
   }
 
   eventToRender(year: number, month: number, day: any) {

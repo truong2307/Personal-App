@@ -9,6 +9,9 @@ import { ResponseService } from "src/shared/model/response.interface";
 import * as eventAction from "./events.action"
 import { EventCalendar } from "src/shared/model/Event.interface";
 import { Router } from "@angular/router";
+import { select, Store } from "@ngrx/store";
+import { eventSelector } from './events.selector';
+
 
 @Injectable()
 export class EventEffects {
@@ -20,7 +23,13 @@ export class EventEffects {
     private service: EventsService,
     private toastr: ToastrService,
     private router: Router,
+    private store: Store,
     ){
+      this.store.pipe(select(eventSelector)).subscribe(
+        result => {
+          this.events = result.items
+        }
+      );
   }
 
   getEvents$ = createEffect(() => this.action$.pipe(
@@ -45,9 +54,6 @@ export class EventEffects {
           this.toastr.success(
             'Add event success'
           )
-          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-          this.router.onSameUrlNavigation = 'reload';
-          this.router.navigate(['/admin/calendar'])
         }),
         catchError(error =>
           of(new eventAction.CrudEventFailedAction(error)))
@@ -66,9 +72,6 @@ export class EventEffects {
             this.toastr.success(
               'Delete event success'
             )
-            this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-            this.router.onSameUrlNavigation = 'reload';
-            this.router.navigate(['/admin/calendar'])
           }
         }),
         catchError(error =>
@@ -85,11 +88,8 @@ export class EventEffects {
       tap(result => {
         if(result.isSuccess){
           this.toastr.success(
-            'Delete event success'
+            'Update event success'
           )
-          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-          this.router.onSameUrlNavigation = 'reload';
-          this.router.navigate(['/admin/calendar'])
         }
       })
     )),

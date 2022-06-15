@@ -1,10 +1,11 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { EventCalendar } from 'src/shared/model/Event.interface';
+import { eventSelector } from '../../../../../stores/events/events.selector';
 
-import { CreateEventAction, DeleteEventAction, UpdateEventAction } from 'src/stores/events/events.action';
+import { CreateEventAction, DeleteEventAction, GetEventsAction, UpdateEventAction } from 'src/stores/events/events.action';
 
 @Component({
   selector: 'app-add-event',
@@ -20,6 +21,7 @@ export class AddEventComponent implements OnInit {
   reBuildTime!: Date;
   isEdit: boolean = false;
   initialEvent!: EventCalendar;
+  @Output() eventUpdate = new EventEmitter();
 
   constructor(
      private activeModalService: NgbActiveModal,
@@ -41,6 +43,7 @@ export class AddEventComponent implements OnInit {
       this.startDate?.setValue(this.initialEvent.startDate);
       this.endDate?.setValue(this.initialEvent.endDate);
       this.color?.setValue(this.initialEvent.color);
+      this.currentColor = this.initialEvent.color;
     }
   }
 
@@ -78,10 +81,15 @@ export class AddEventComponent implements OnInit {
     this.activeModalService.close();
   }
 
+  load(){
+    return this.store.dispatch(new GetEventsAction())
+  }
+
   addEvent(){
     const data = this.addEventForm.value;
     this.store.dispatch(new CreateEventAction(data));
     this.activeModalService.close();
+    setTimeout(() => this.load(), 200);
   }
 
   changeColor(color: any){
@@ -93,11 +101,13 @@ export class AddEventComponent implements OnInit {
     data.id = this.initialEvent.id;
     this.store.dispatch(new UpdateEventAction(data))
     this.activeModalService.close();
+    setTimeout(() => this.load(), 200);
   }
 
   removeEvent(id: any){
     this.store.dispatch(new DeleteEventAction(id));
     this.activeModalService.close();
+    setTimeout(() => this.load(), 200);
   }
 
 }
