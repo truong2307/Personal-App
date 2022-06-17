@@ -1,9 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { EventCalendar } from 'src/shared/model/Event.interface';
-import { eventSelector } from '../../../../../stores/events/events.selector';
 
 import { CreateEventAction, DeleteEventAction, GetEventsAction, UpdateEventAction } from 'src/stores/events/events.action';
 

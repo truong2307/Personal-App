@@ -352,7 +352,6 @@ export class CalendarComponent implements OnInit {
   previousMonth(){
     this.currentMonthIsSelecting -= 1;
 
-
     if(this.currentMonthIsSelecting === -1){
       this.currentMonthIsSelecting = 11;
       this.currentYearIsSelecting -= 1;
@@ -385,7 +384,7 @@ export class CalendarComponent implements OnInit {
   }
 
   createEvent(day?: any, month?: any, year?: any, eventEle?: any){
-    if (eventEle.target !== eventEle.currentTarget) return;
+    if (eventEle?.target !== eventEle?.currentTarget) return;
     if(month === 13){
       month = 1;
       year += 1;
