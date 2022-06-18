@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +8,10 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 })
 export class AppComponent {
   title = 'PersonalAppClient';
-  constructor(){
+  constructor(
+    private translate: TranslateService
+  ){
+    translate.addLangs(['en', 'vi']);
+    translate.use('en');
   }
 }

@@ -25,7 +25,8 @@ export class AddEventComponent implements OnInit {
   constructor(
      private activeModalService: NgbActiveModal,
      private store: Store,
-     ) { }
+     ) {
+     }
 
   ngOnInit(): void {
     var currDate = (new Date())

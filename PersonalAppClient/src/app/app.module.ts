@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { AdminSideComponent } from './modules/admin-side/admin-side.component';
@@ -20,6 +20,8 @@ import { MaterialExampleModule } from 'src/shared/material/material.module';
 import { environment } from 'src/environments/environment';
 import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { EventsModule } from 'src/stores/events/events.module';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpLoaderFactory } from 'src/services/translate-service.service';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -52,6 +54,13 @@ export function tokenGetter() {
         }
       }
     ),
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+  }),
     NgxUiLoaderModule,
     NgxUiLoaderRouterModule.forRoot({ showForeground: false }),
     MaterialExampleModule,

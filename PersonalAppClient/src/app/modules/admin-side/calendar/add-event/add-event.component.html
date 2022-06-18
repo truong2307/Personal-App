@@ -7,7 +7,7 @@
     <form class="example-form" [formGroup]="addEventForm">
 
       <mat-form-field class="add-event-full-width" appearance="outline">
-        <mat-label>Summary</mat-label>
+        <mat-label>{{ 'calendar.Summary' | translate }}</mat-label>
         <input matInput placeholder="Summary" formControlName="title">
         <mat-error *ngIf="title?.errors">
           Summary is <strong>required</strong>
@@ -15,14 +15,14 @@
       </mat-form-field>
 
       <mat-form-field class="add-event-full-width" appearance="outline">
-        <mat-label>Description</mat-label>
+        <mat-label>{{ 'calendar.Description' | translate }}</mat-label>
         <textarea matInput placeholder="Description" formControlName="description"></textarea>
         <mat-error *ngIf="description?.errors">
           Description is <strong>required</strong>
         </mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" style="width:130px">
-        <mat-label>Pick Colors</mat-label>
+        <mat-label>{{ 'calendar.Color' | translate }}</mat-label>
         <mat-select formControlName="color">
           <mat-select-trigger >
             <mat-icon [style.color]="currentColor">brightness_1</mat-icon>
@@ -38,14 +38,14 @@
       </mat-form-field>
       <div class="add-event-date-picker">
           <mat-form-field class="add-event-full-width">
-            <input matInput [ngxMatDatetimePicker]="startDate" placeholder="Choose start datetime"
+            <input matInput [ngxMatDatetimePicker]="startDate" placeholder="{{ 'calendar.StartDate' | translate }}"
        formControlName="startDate">
             <mat-datepicker-toggle matSuffix [for]="$any(startDate)"></mat-datepicker-toggle>
             <ngx-mat-datetime-picker #startDate [showSpinners]="true">
             </ngx-mat-datetime-picker>
          </mat-form-field>
           <mat-form-field class="add-event-full-width" >
-            <input matInput [ngxMatDatetimePicker]="endDate" placeholder="Choose end datetime"
+            <input matInput [ngxMatDatetimePicker]="endDate" placeholder="{{ 'calendar.EndDate' | translate }}"
        formControlName="endDate">
             <mat-datepicker-toggle matSuffix [for]="$any(endDate)"></mat-datepicker-toggle>
             <ngx-mat-datetime-picker #endDate>

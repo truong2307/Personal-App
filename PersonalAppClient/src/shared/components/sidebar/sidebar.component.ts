@@ -11,6 +11,7 @@ export class SidebarComponent implements OnInit {
   optionIsSelecting: string = optionSidebar.HOME;
   optionConst = optionSidebar;
   closeSidebar : boolean = false;
+  languages : string[] = ['Tiếng Việt', 'English']
 
   constructor() { }
 

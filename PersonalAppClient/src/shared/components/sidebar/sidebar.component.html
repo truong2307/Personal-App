@@ -4,6 +4,7 @@
         <span class="fs-4" [style.display]="closeSidebar ? 'none' : 'block' ">App Personal</span>
         <i class="fa-solid fa-bars sidebar-header-menu" (click)="toggleSideBar()"></i>
       </div>
+
     </div>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
@@ -41,19 +42,18 @@
     </ul>
 
     <hr>
-    <!-- <div class="dropdown">
+    <div class="dropdown">
       <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-        <strong>mdo</strong>
+        <i class="fa-solid fa-earth-americas" ></i>
+        <strong style="margin-left:6px;">{{closeSidebar ? '' : 'Lang'}}</strong>
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-        <li><a class="dropdown-item" href="#">New project...</a></li>
-        <li><a class="dropdown-item" href="#">Settings</a></li>
-        <li><a class="dropdown-item" href="#">Profile</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#">Sign out</a></li>
+        <li *ngFor="let item of languages"><div class="dropdown-item">
+          {{item}}
+        </div>
+      </li>
       </ul>
-    </div> -->
+    </div>
   </div>
 
 
