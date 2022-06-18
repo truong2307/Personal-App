@@ -3,5 +3,14 @@
   "Description": "Description",
   "StartDate": "Choose start Date",
   "EndDate": "Choose end Date",
-  "Color": "Pick Colors"
+  "Color": "Pick Colors",
+  "AddEvent": "Add",
+  "UpdateEvent": "Update",
+  "RemoveEvent": "Remove",
+  "Cancel": "Cancel",
+  "AddEventBtn": "Add Event",
+  "Today": "Today",
+  "SummaryValidate": "Summary is <strong>required</strong>",
+  "DescriptionValidate": "Description is <strong>required</strong>",
+  "ColorValidate": "Please choose color"
 }

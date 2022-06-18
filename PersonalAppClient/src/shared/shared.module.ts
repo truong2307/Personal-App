@@ -6,6 +6,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
 import { ErrorComponent } from './components/error/error.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -21,6 +22,7 @@ import { ErrorComponent } from './components/error/error.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    TranslateModule,
   ],
   exports: [
     SidebarComponent,

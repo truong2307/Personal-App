@@ -3,7 +3,7 @@
       <div class="calendar-header">
         <div class="calendar-header-group">
             <div class="calendar-header-item calendar-header-item-back-today" (click)="backToCurrentDay()">
-              Today
+              {{ 'calendar.Today' | translate }}
             </div>
             <div class="calendar-header-item calendar-header-item-icon-lr" (click)="previousMonth()">
               <i class="fa-solid fa-angle-left "></i>
@@ -18,7 +18,7 @@
         <div class="calendar-header-group">
           <div class="calendar-header-item">
             <button mat-raised-button color="primary" (click)="createEvent()">
-              Add event
+              {{ 'calendar.AddEventBtn' | translate }}
             </button>
           </div>
       </div>

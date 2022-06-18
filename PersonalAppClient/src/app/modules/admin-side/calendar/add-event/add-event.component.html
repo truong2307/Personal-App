@@ -9,16 +9,14 @@
       <mat-form-field class="add-event-full-width" appearance="outline">
         <mat-label>{{ 'calendar.Summary' | translate }}</mat-label>
         <input matInput placeholder="Summary" formControlName="title">
-        <mat-error *ngIf="title?.errors">
-          Summary is <strong>required</strong>
+        <mat-error *ngIf="title?.errors" [innerHtml]="'calendar.SummaryValidate' | translate">
         </mat-error>
       </mat-form-field>
 
       <mat-form-field class="add-event-full-width" appearance="outline">
         <mat-label>{{ 'calendar.Description' | translate }}</mat-label>
         <textarea matInput placeholder="Description" formControlName="description"></textarea>
-        <mat-error *ngIf="description?.errors">
-          Description is <strong>required</strong>
+        <mat-error *ngIf="description?.errors" [innerHtml]="'calendar.DescriptionValidate' | translate">
         </mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" style="width:130px">
@@ -34,7 +32,7 @@
             <mat-icon [style.color]="item">brightness_1</mat-icon>
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="description?.errors">Please choose color</mat-error>
+        <mat-error *ngIf="color?.errors">{{ 'calendar.ColorValidate' | translate }}</mat-error>
       </mat-form-field>
       <div class="add-event-date-picker">
           <mat-form-field class="add-event-full-width">
@@ -59,21 +57,21 @@
     <button *ngIf="isEdit; else addTemplate" mat-raised-button color="primary" [disabled]="addEventForm.invalid"
     (click)="editEvent()"
     style="margin-right: 12px; min-width: 70px;">
-      Update</button>
+    {{ 'calendar.UpdateEvent' | translate }}</button>
     <ng-template #addTemplate>
       <button mat-raised-button color="primary" [disabled]="addEventForm.invalid"
     (click)="addEvent()"
     style="margin-right: 12px; min-width: 70px;">
-      Add</button>
+    {{ 'calendar.AddEvent' | translate }}</button>
     </ng-template>
     <button *ngIf="isEdit; else cancelTemplate" mat-raised-button color="warn" [disabled]="addEventForm.invalid"
     (click)="removeEvent(initialEvent.id)"
     style="margin-right: 12px; min-width: 70px;">
-      Remove</button>
+    {{ 'calendar.RemoveEvent' | translate }}</button>
     <ng-template #cancelTemplate>
       <button type="button" mat-raised-button color="warn"
       (click)="closeModal()"
-      >Cancel</button>
+      >{{ 'calendar.Cancel' | translate }}</button>
     </ng-template>
   </div>
 </div>

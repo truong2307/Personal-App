@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import optionSidebar from 'src/shared/const/optionSidebar';
 
 @Component({
@@ -11,9 +12,11 @@ export class SidebarComponent implements OnInit {
   optionIsSelecting: string = optionSidebar.HOME;
   optionConst = optionSidebar;
   closeSidebar : boolean = false;
-  languages : string[] = ['Tiếng Việt', 'English']
+  languages : string[] = ['Tiếng Việt', 'English'];
 
-  constructor() { }
+  constructor(
+    private translate: TranslateService
+  ) { }
 
 
   ngOnInit(): void {
@@ -26,6 +29,16 @@ export class SidebarComponent implements OnInit {
 
   toggleSideBar(): void{
     this.closeSidebar = !this.closeSidebar;
+  }
+
+  changeLang(lang: string){
+    if(lang === this.languages[1]){
+    this.translate.use('en');
+    localStorage.setItem("currLanguage","en");
+    return;
+    }
+    this.translate.use('vi');
+    localStorage.setItem("currLanguage","vi");
   }
 
 }

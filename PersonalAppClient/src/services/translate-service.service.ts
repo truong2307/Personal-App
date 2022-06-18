@@ -10,9 +10,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       console.log('Oeps! an error occurred: ', { error, path });
     },
     modules: [
-      // final url: ./assets/i18n/feature1/en.json
       { baseTranslateUrl, moduleName: 'Calendar' },
-      // final url: ./assets/i18n/feature2/en.json
       { baseTranslateUrl, moduleName: 'Home' },
     ],
     lowercaseNamespace: true,

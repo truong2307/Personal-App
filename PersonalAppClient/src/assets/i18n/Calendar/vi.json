@@ -3,5 +3,14 @@
   "Description": "Mô tả",
   "StartDate": "Chọn ngày bắt đầu",
   "EndDate": "Chọn ngày kết thúc",
-  "Color": "Chọn Màu sắc"
+  "Color": "Chọn màu",
+  "AddEvent": "Thêm",
+  "UpdateEvent": "Sửa",
+  "RemoveEvent": "Xóa",
+  "Cancel": "Hủy",
+  "AddEventBtn": "Thêm sự kiện",
+  "Today": "Hôm nay",
+  "SummaryValidate": "Vui lòng nhập <strong>tiêu đề</strong>",
+  "DescriptionValidate": "Vui lòng nhập <strong>mô tả</strong>",
+  "ColorValidate": "Vui lòng chọn màu"
 }
