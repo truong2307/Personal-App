@@ -51,29 +51,15 @@ export class CalendarComponent implements OnInit {
     private loader: NgxUiLoaderService,
     private translate: TranslateService
   ) {
-    this.checkCurrLang();
-    this.translate.onLangChange.subscribe(value => {
-      if(value.lang === 'en'){
-        this.days = daysOfWeek;
-        this.month = month;
-      }else {
-        this.days = daysOfWeekVi;
-      this.month = monthVi;
-      }
+      this.days = this.translate.currentLang === 'en' ? daysOfWeek : daysOfWeekVi;
+      this.month = this.translate.currentLang === 'en' ? month : monthVi;
       this.currentMonthSelectName = this.month[this.currentMonthIsSelecting];
+
+      this.translate.onLangChange.subscribe(value => {
+        this.days = value.lang === 'en' ? daysOfWeek : daysOfWeekVi;
+        this.month = value.lang === 'en' ? month : monthVi;
+        this.currentMonthSelectName = this.month[this.currentMonthIsSelecting];
     })
-  }
-
-  checkCurrLang(){
-    if(this.translate.currentLang === 'en'){
-      this.days = daysOfWeek;
-      this.month = month;
-
-    }else {
-      this.days = daysOfWeekVi;
-      this.month = monthVi;
-    }
-    this.currentMonthSelectName = this.month[this.currentMonthIsSelecting];
   }
 
    ngOnInit() {
