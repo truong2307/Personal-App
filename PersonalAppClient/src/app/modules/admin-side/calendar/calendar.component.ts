@@ -1,5 +1,5 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import dateOfWeek from 'src/shared/const/dateOfWeek';
+import dateOfWeek, { daysOfWeek, daysOfWeekVi, month, monthVi } from 'src/shared/const/dateOfWeek';
 import { AddEventComponent } from './add-event/add-event.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
@@ -7,6 +7,7 @@ import { GetEventsAction } from 'src/stores/events/events.action';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { eventSelector } from '../../../../stores/events/events.selector';
 import {EventCalendar} from '../../../../shared/model/Event.interface'
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-calendar',
@@ -17,7 +18,7 @@ export class CalendarComponent implements OnInit {
 
   events: Array<EventCalendar> = [];
   days : Array<string> = [];
-  month : Array<string>;
+  month : Array<string> = [];
   week1: number = 0;
   week2: number = 0;
   week3: number = 0;
@@ -48,9 +49,31 @@ export class CalendarComponent implements OnInit {
     private modalService: NgbModal,
     private store: Store,
     private loader: NgxUiLoaderService,
+    private translate: TranslateService
   ) {
-    this.days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-    this.month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    this.checkCurrLang();
+    this.translate.onLangChange.subscribe(value => {
+      if(value.lang === 'en'){
+        this.days = daysOfWeek;
+        this.month = month;
+      }else {
+        this.days = daysOfWeekVi;
+      this.month = monthVi;
+      }
+      this.currentMonthSelectName = this.month[this.currentMonthIsSelecting];
+    })
+  }
+
+  checkCurrLang(){
+    if(this.translate.currentLang === 'en'){
+      this.days = daysOfWeek;
+      this.month = month;
+
+    }else {
+      this.days = daysOfWeekVi;
+      this.month = monthVi;
+    }
+    this.currentMonthSelectName = this.month[this.currentMonthIsSelecting];
   }
 
    ngOnInit() {
