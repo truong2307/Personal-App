@@ -1,0 +1,5 @@
+{
+  "RequiredLogin": "Please log in",
+  "RequiredAdmin" : "The system is currently for admin, please come back later",
+  "RegisterSuccess" : "Register success"
+}

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { of } from 'rxjs';
 import { map, catchError, tap, switchMap } from 'rxjs/operators';
@@ -16,6 +17,7 @@ export class AuthEffects {
     private AuthService: AuthServices,
     private toastr: ToastrService,
     private router: Router,
+    private translate: TranslateService,
   ) {}
 
   adminLogin$ = createEffect(() => this.actions$.pipe(
@@ -52,7 +54,7 @@ export class AuthEffects {
         ofType(authAction.REGISTER_SUCCESS),
         tap(() => {
           this.toastr.success(
-            'Đăng ký thành công'
+            this.translate.instant('authentication.RegisterSuccess')
           )
           this.router.navigate(['/login']);
         })

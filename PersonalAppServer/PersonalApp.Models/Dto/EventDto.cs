@@ -10,8 +10,10 @@ namespace PersonalApp.Models.Dto
         [Required]
         public string Color { get; set; }
         public string? Description { get; set; }
-        public DateTime? StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
+        [Required]
+        public DateTime StartDate { get; set; }
+        [Required]
+        public DateTime EndDate { get; set; }
     }
 
     public class EventDto : EventCreateDto

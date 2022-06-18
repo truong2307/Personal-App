@@ -1,4 +1,5 @@
 {
+  "Title": "Thêm sự kiện",
   "Summary": "Tiêu đề",
   "Description": "Mô tả",
   "StartDate": "Chọn ngày bắt đầu",
@@ -12,5 +13,8 @@
   "Today": "Hôm nay",
   "SummaryValidate": "Vui lòng nhập <strong>tiêu đề</strong>",
   "DescriptionValidate": "Vui lòng nhập <strong>mô tả</strong>",
-  "ColorValidate": "Vui lòng chọn màu"
+  "ColorValidate": "Vui lòng chọn màu",
+  "AddEventSuccess": "Thêm sự kiện thành công",
+  "UpdateEventSuccess": "Cập nhật sự kiện thành công",
+  "RemoveEventSuccess": "Xóa sự kiện thành công"
 }

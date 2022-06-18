@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
+import { colors } from 'src/shared/const/dateOfWeek';
 import { EventCalendar } from 'src/shared/model/Event.interface';
 
 import { CreateEventAction, DeleteEventAction, GetEventsAction, UpdateEventAction } from 'src/stores/events/events.action';
@@ -35,7 +36,7 @@ export class AddEventComponent implements OnInit {
     this.reBuildTime.setMinutes(currDate.getMinutes());
     this.reBuildTime.setSeconds(currDate.getSeconds());
     this.initialForm();
-    this.colorInit = ['#fa9891','#face91','#c4fa91', '#aee8f2'];
+    this.colorInit = colors;
 
     if(this.isEdit){
       this.title?.setValue(this.initialEvent.title);

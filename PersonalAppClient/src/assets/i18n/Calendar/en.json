@@ -1,4 +1,5 @@
 {
+  "Title": "Add an event",
   "Summary": "Summary",
   "Description": "Description",
   "StartDate": "Choose start Date",
@@ -12,5 +13,8 @@
   "Today": "Today",
   "SummaryValidate": "Summary is <strong>required</strong>",
   "DescriptionValidate": "Description is <strong>required</strong>",
-  "ColorValidate": "Please choose color"
+  "ColorValidate": "Please choose color",
+  "AddEventSuccess": "Add event success",
+  "UpdateEventSuccess": "Update event success",
+  "RemoveEventSuccess": "Remove event success"
 }

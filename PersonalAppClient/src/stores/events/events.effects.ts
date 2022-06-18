@@ -8,9 +8,9 @@ import { ResponseService } from "src/shared/model/response.interface";
 
 import * as eventAction from "./events.action"
 import { EventCalendar } from "src/shared/model/Event.interface";
-import { Router } from "@angular/router";
 import { select, Store } from "@ngrx/store";
 import { eventSelector } from './events.selector';
+import { TranslateService } from "@ngx-translate/core";
 
 
 @Injectable()
@@ -22,7 +22,7 @@ export class EventEffects {
     private action$: Actions,
     private service: EventsService,
     private toastr: ToastrService,
-    private router: Router,
+    private translate: TranslateService,
     private store: Store,
     ){
       this.store.pipe(select(eventSelector)).subscribe(
@@ -52,7 +52,7 @@ export class EventEffects {
       this.service.addEvent(event['event']).pipe(
         tap((result) => {
           this.toastr.success(
-            'Add event success'
+            this.translate.instant('calendar.AddEventSuccess')
           )
         }),
         catchError(error =>
@@ -70,7 +70,7 @@ export class EventEffects {
         tap((result) => {
           if(result.isSuccess){
             this.toastr.success(
-              'Delete event success'
+              this.translate.instant('calendar.RemoveEventSuccess')
             )
           }
         }),
@@ -88,7 +88,7 @@ export class EventEffects {
       tap(result => {
         if(result.isSuccess){
           this.toastr.success(
-            'Update event success'
+            this.translate.instant('calendar.UpdateEventSuccess')
           )
         }
       })
@@ -103,7 +103,7 @@ export class EventEffects {
     ofType(eventAction.CRUD_EVENT_FAILED),
     tap((error) => {
       this.toastr.error(
-        error
+        this.translate.instant('common.Error')
       )
     })
   ),
@@ -114,7 +114,7 @@ export class EventEffects {
     ofType(eventAction.CRUD_EVENT_SUCCESS),
     tap((error) => {
       this.toastr.success(
-        'Success'
+        this.translate.instant('common.Success')
       )
     })
   ),

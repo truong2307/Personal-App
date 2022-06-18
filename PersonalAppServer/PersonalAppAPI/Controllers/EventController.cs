@@ -19,6 +19,7 @@ namespace PersonalAppAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] EventCreateDto eventRequest)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState.Values.ToString());
             var result = await _eventServices.CreateEvent(eventRequest);
             if (result.IsSuccess)
             {
@@ -31,6 +32,7 @@ namespace PersonalAppAPI.Controllers
         [HttpPut("update-event")]
         public async Task<IActionResult> UpdateEvent([FromBody] EventDto eventRequest)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState.Values.ToString());
             var result = await _eventServices.UpdateEvent(eventRequest);
             if (result.IsSuccess)
             {

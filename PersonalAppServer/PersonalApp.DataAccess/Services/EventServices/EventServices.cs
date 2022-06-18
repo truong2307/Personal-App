@@ -26,6 +26,8 @@ namespace PersonalApp.DataAccess.Services.EventServices
         {
             try
             {
+                model.StartDate = model.StartDate.ToLocalTime();
+                model.EndDate = model.EndDate.ToLocalTime();
                 var currentUserId = _claimUserServices.GetCurrentUserId();
                 var eventToDb = _mapper.Map<Event>(model);
 
@@ -44,7 +46,6 @@ namespace PersonalApp.DataAccess.Services.EventServices
             {
                 _responseDto.IsSuccess = false;
                 _responseDto.ErrorMessages = ex.ToString();
-
             }
 
             return _responseDto;

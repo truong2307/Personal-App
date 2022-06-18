@@ -12,6 +12,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     modules: [
       { baseTranslateUrl, moduleName: 'Calendar' },
       { baseTranslateUrl, moduleName: 'Home' },
+      { baseTranslateUrl, moduleName: 'Common' },
+      { baseTranslateUrl, moduleName: 'Authentication' },
     ],
     lowercaseNamespace: true,
   };
