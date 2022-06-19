@@ -53,25 +53,42 @@
     </form>
   </div>
 
-  <div class="modal-footer">
+  <div class="modal-footer" *ngIf="!isOldDay; else footerOldDay">
     <button *ngIf="isEdit; else addTemplate" mat-raised-button color="primary" [disabled]="addEventForm.invalid"
     (click)="editEvent()"
     style="margin-right: 12px; min-width: 70px;">
-    {{ 'calendar.UpdateEvent' | translate }}</button>
+    {{ 'calendar.UpdateEvent' | translate }}
+  </button>
     <ng-template #addTemplate>
       <button mat-raised-button color="primary" [disabled]="addEventForm.invalid"
     (click)="addEvent()"
     style="margin-right: 12px; min-width: 70px;">
-    {{ 'calendar.AddEvent' | translate }}</button>
+    {{ 'calendar.AddEvent' | translate }}
+  </button>
     </ng-template>
-    <button *ngIf="isEdit; else cancelTemplate" mat-raised-button color="warn" [disabled]="addEventForm.invalid"
+    <button *ngIf="isEdit; else cancelTemplate" mat-raised-button color="warn"
     (click)="removeEvent(initialEvent.id)"
     style="margin-right: 12px; min-width: 70px;">
-    {{ 'calendar.RemoveEvent' | translate }}</button>
+    {{ 'calendar.RemoveEvent' | translate }}
+  </button>
     <ng-template #cancelTemplate>
       <button type="button" mat-raised-button color="warn"
       (click)="closeModal()"
-      >{{ 'calendar.Cancel' | translate }}</button>
+      >{{ 'calendar.Cancel' | translate }}
+    </button>
     </ng-template>
   </div>
+  <ng-template #footerOldDay>
+    <div class="modal-footer">
+      <button mat-raised-button color="warn"
+    (click)="removeEvent(initialEvent.id)"
+    style="margin-right: 12px; min-width: 70px;">
+    {{ 'calendar.RemoveEvent' | translate }}
+    </button>
+      <button type="button" mat-raised-button color="primary"
+      (click)="closeModal()"
+      >{{ 'calendar.Cancel' | translate }}
+    </button>
+    </div>
+  </ng-template>
 </div>

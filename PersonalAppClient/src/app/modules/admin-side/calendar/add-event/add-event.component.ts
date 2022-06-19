@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
@@ -21,7 +21,7 @@ export class AddEventComponent implements OnInit {
   reBuildTime!: Date;
   isEdit: boolean = false;
   initialEvent!: EventCalendar;
-  @Output() eventUpdate = new EventEmitter();
+  isOldDay : boolean = false;
 
   constructor(
      private activeModalService: NgbActiveModal,
@@ -50,11 +50,11 @@ export class AddEventComponent implements OnInit {
 
   initialForm (){
     this.addEventForm = new FormGroup({
-      title : new FormControl('', [Validators.required,]),
-      description : new FormControl('', [Validators.required,]),
-      startDate : new FormControl(this.reBuildTime, [Validators.required,]),
-      endDate : new FormControl(this.reBuildTime, [Validators.required,]),
-      color: new FormControl('', [Validators.required,])
+      title : new FormControl({value: '', disabled: this.isOldDay}, [Validators.required,]),
+      description : new FormControl({value: '', disabled: this.isOldDay}, [Validators.required,]),
+      startDate : new FormControl({value: this.reBuildTime, disabled: this.isOldDay}, [Validators.required,]),
+      endDate : new FormControl({value: this.reBuildTime, disabled: this.isOldDay}, [Validators.required,]),
+      color: new FormControl({value: '', disabled: this.isOldDay}, [Validators.required,])
     })
   }
 

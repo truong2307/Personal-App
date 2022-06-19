@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import dateOfWeek, { daysOfWeek, daysOfWeekVi, month, monthVi } from 'src/shared/const/dateOfWeek';
 import { AddEventComponent } from './add-event/add-event.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -35,7 +35,7 @@ export class CalendarComponent implements OnInit {
   currentMonthIsSelecting: number = this.dateCurrent.getMonth();
   currentYearIsSelecting: number = this.dateCurrent.getFullYear();
   currentMonthSelectName: string = '';
-
+  oldDay: boolean = false;
 
   today : number = this.dateCurrent.getDate();
   currentMonth : number = this.dateCurrent.getMonth() + 1;
@@ -393,7 +393,9 @@ export class CalendarComponent implements OnInit {
   }
 
   createEvent(day?: any, month?: any, year?: any, eventEle?: any){
-    if (eventEle?.target !== eventEle?.currentTarget) return;
+    this.oldDay = eventEle.currentTarget.classList.contains('disable-event-day');
+
+    if (eventEle?.target !== eventEle?.currentTarget || this.oldDay) return;
     if(month === 13){
       month = 1;
       year += 1;
@@ -405,11 +407,25 @@ export class CalendarComponent implements OnInit {
     const modalRef = this.modalService.open(AddEventComponent, {size: 'md'});
     var buildDate = year+'-'+month+'-'+day;
     modalRef.componentInstance.initialDate = buildDate;
+  }
 
-    modalRef.componentInstance.eventUpdate.subscribe((result : any) => {
-      this.events = result;
-    })
+  checkOldDay(day?: any, month?: any, year?: any) : boolean{
+    if(month === 13){
+      month = 1;
+      year += 1;
+    } else if(month === 0){
+      month = 12;
+      year -= 1;
+    }
 
+    const currentDate = (new Date()).setHours(0,0,0,0);
+    var buildDate = year+'-'+month+'-'+day;
+    const dayCheck = (new Date(buildDate)).setHours(0,0,0,0);
+    if(dayCheck < currentDate){
+      return true;
+    }
+
+    return false;
   }
 
   eventToRender(year: number, month: number, day: any) {
@@ -442,10 +458,13 @@ export class CalendarComponent implements OnInit {
     return listEvent;
   }
 
-  editEvent(data: EventCalendar){
+  editEvent(data: EventCalendar, eventEle?: any){
+    this.oldDay = eventEle.currentTarget.offsetParent.className.includes('disable-event-day');
+
     const modalRef = this.modalService.open(AddEventComponent, {size: 'md'});
     modalRef.componentInstance.isEdit = true;
     modalRef.componentInstance.initialEvent = data;
+    modalRef.componentInstance.isOldDay = this.oldDay;
   }
 
 }

@@ -114,7 +114,6 @@
       border: 1px solid #dddddd;
       cursor: pointer;
       transition: .3s;
-
     }
 
     .calendar-title{
@@ -157,4 +156,12 @@
     }
   }
 
+  .disable-event-day{
+    background-color: #914ee11c;
+    height: 100%;
+    cursor: context-menu !important;
+    &:hover{
+      background-color: #914ee11c;
+    }
+  }
 }
