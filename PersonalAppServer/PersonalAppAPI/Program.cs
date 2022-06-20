@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using PersonalApp.DataAccess.Data;
 using PersonalApp.DataAccess.Initializer;
 using PersonalAppAPI.ConfigureServicesExtension;
+using PersonalAppAPI.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -28,6 +29,7 @@ builder.Services.AddCors(o =>
     .AllowAnyHeader());
 });
 
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -55,5 +57,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<UserHub>("/hubs/userCount");
 
 app.Run();

@@ -123,7 +123,7 @@
   }
 
   td:hover{
-    background-color: #dfd9d9;
+    background-color: #dfd9d96e;
   }
 
   .calendar-header{
@@ -157,11 +157,18 @@
   }
 
   .disable-event-day{
-    background-color: #914ee11c;
+    background-color: #c4b7d340;
     height: 100%;
-    cursor: context-menu !important;
+    cursor: not-allowed !important;
+
     &:hover{
-      background-color: #914ee11c;
+      background-color: #c4b7d340;
     }
+
+    .event-day:hover{
+      cursor: pointer !important;
+    }
+
+
   }
 }
