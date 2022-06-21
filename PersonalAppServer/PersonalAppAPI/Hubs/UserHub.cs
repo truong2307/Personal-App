@@ -23,7 +23,6 @@ namespace PersonalAppAPI.Hubs
             return base.OnDisconnectedAsync(exception);
         }
 
-
         public async Task<string> NewWindowLoaded(string name)
         {
             TotalVisited++;

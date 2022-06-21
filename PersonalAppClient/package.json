@@ -24,6 +24,7 @@
     "@angular/router": "~13.3.0",
     "@auth0/angular-jwt": "^5.0.2",
     "@larscom/ngx-translate-module-loader": "^3.0.6",
+    "@microsoft/signalr": "^6.0.6",
     "@ng-bootstrap/ng-bootstrap": "^12.1.2",
     "@ngrx/effects": "^13.2.0",
     "@ngrx/store": "^13.2.0",

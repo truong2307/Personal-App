@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Serialization;
 using PersonalApp.DataAccess.Data;
 using PersonalApp.DataAccess.Initializer;
 using PersonalAppAPI.ConfigureServicesExtension;
