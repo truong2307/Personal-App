@@ -1,5 +1,5 @@
 .calendar{
-    min-width: calc(300px + 60px);
+    min-width: calc(270px + 60px);
     border: 1px solid #dddddd;
     padding: 20px 30px;
     margin-bottom: 20px;
@@ -179,6 +179,10 @@
   .event-day{
   width: 23px !important;
   }
+
+  .calendar{
+    padding: 12px 6px !important;
+  }
 }
 
 // Small devices (landscape phones, 576px and up)
@@ -189,6 +193,10 @@
 
   .calendar-day{
     width: 23px !important;
+  }
+
+  .calendar{
+    padding: 20px 30px !important;
   }
 }
 
@@ -201,6 +209,10 @@
     .calendar-day{
       width: 70px !important;
     }
+
+    .calendar{
+      padding: 20px 30px !important;
+    }
  }
 
  @media (min-width: 1200px) {
@@ -210,5 +222,9 @@
 
     .calendar-day{
       width: 130px !important;
+    }
+
+    .calendar{
+      padding: 20px 30px !important;
     }
   }
