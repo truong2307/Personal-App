@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import dateOfWeek,
   { daysOfWeek
-  , daysOfWeekVi
-  , month
+  , daysOfWeekRender, daysOfWeekViRender, month
   , monthVi } from 'src/shared/const/dateOfWeek';
 import { AddEventComponent } from './add-event/add-event.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -22,6 +21,7 @@ export class CalendarComponent implements OnInit {
 
   events: Array<EventCalendar> = [];
   days : Array<string> = [];
+  daysRender : Array<string> = [];
   month : Array<string> = [];
   week1: number = 0;
   week2: number = 0;
@@ -55,12 +55,13 @@ export class CalendarComponent implements OnInit {
     private loader: NgxUiLoaderService,
     private translate: TranslateService
   ) {
-      this.days = this.translate.currentLang === 'en' ? daysOfWeek : daysOfWeekVi;
+      this.days = daysOfWeek;
+      this.daysRender = this.translate.currentLang === 'en' ? daysOfWeekRender : daysOfWeekViRender;
       this.month = this.translate.currentLang === 'en' ? month : monthVi;
       this.currentMonthSelectName = this.month[this.currentMonthIsSelecting];
 
       this.translate.onLangChange.subscribe(value => {
-        this.days = value.lang === 'en' ? daysOfWeek : daysOfWeekVi;
+        this.daysRender = value.lang === 'en' ? daysOfWeekRender : daysOfWeekViRender;
         this.month = value.lang === 'en' ? month : monthVi;
         this.currentMonthSelectName = this.month[this.currentMonthIsSelecting];
     })

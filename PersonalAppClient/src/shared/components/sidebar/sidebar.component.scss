@@ -59,7 +59,9 @@
 }
 
 .active{
-  background-color: #673ab7 !important;
+  background: #2b5876;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #4e4376, #2b5876);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #4e4376, #2b5876); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 // .flex-shrink-0{
@@ -79,4 +81,20 @@
 .footer-sidebar{
   display: flex;
   justify-content: space-between;
+}
+
+.bg{
+  background: #16222A;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #2b3a41, #16222A);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #2b3a41, #16222A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.side-bar-dp{
+  height:100%;
+}
+
+@media (max-width: 1370px){
+  .side-bar-dp{
+    display: none !important;
+  }
 }

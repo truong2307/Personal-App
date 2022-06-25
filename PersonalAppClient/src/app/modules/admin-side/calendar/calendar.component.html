@@ -23,165 +23,165 @@
           </div>
       </div>
     </div>
-    <table class="table table-borderless calendar-body">
-      <thead>
-        <tr>
-          <th colspan="1" *ngFor="let item of days" class="calendar-title">{{item}}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td colspan="1" class="calendar-day"
-          (click)="createEvent(item, anotherMonth - 1, anotherYear, $event)"
-          [ngClass]="checkOldDay(item, anotherMonth - 1, anotherYear) ? 'disable-event-day': '' "
-          *ngFor="let item of counter(week1, 'week1InPreviousMonth')"
-          >
-            {{item}}
-            <div *ngFor="let event of eventToRender(anotherYear, anotherMonth - 1, item)"
-            (click)="editEvent(event, $event)"
-            class="event-day" matTooltip="{{event.title}}-{{event.description}}"
-            [ngStyle]="{ 'background-color': event.color }"
-          [matTooltipPosition]="'above'"
-          >
-            <span>{{event.title}}</span>
-          </div>
+      <table class="table table-borderless calendar-body">
+        <thead>
+          <tr>
+            <th colspan="1" *ngFor="let day of daysRender" class="calendar-title">{{day}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="1" class="calendar-day"
+            (click)="createEvent(item, anotherMonth - 1, anotherYear, $event)"
+            [ngClass]="checkOldDay(item, anotherMonth - 1, anotherYear) ? 'disable-event-day': '' "
+            *ngFor="let item of counter(week1, 'week1InPreviousMonth')"
+            >
+              {{item}}
+              <div *ngFor="let event of eventToRender(anotherYear, anotherMonth - 1, item)"
+              (click)="editEvent(event, $event)"
+              class="event-day" matTooltip="{{event.title}}-{{event.description}}"
+              [ngStyle]="{ 'background-color': event.color }"
+            [matTooltipPosition]="'above'"
+            >
+            <div class="event-title">{{event.title}}</div>
+            </div>
+              </td>
+            <td colspan="1"
+            [ngClass]="checkOldDay(item, anotherMonth, anotherYear) ? 'disable-event-day': '' "
+            class="calendar-day" (click)="createEvent(item, anotherMonth, anotherYear, $event)"
+            *ngFor="let item of counter(week1, 'week1')">
+            <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
+              {{item}}
+            </div>
+              <div *ngFor="let event of eventToRender(anotherYear, anotherMonth, item)"
+              (click)="editEvent(event, $event)"
+              class="event-day" matTooltip="{{event.title}}-{{event.description}}"
+              [ngStyle]="{ 'background-color': event.color }"
+            [matTooltipPosition]="'above'"
+            >
+              <div class="event-title">{{event.title}}</div>
+            </div>
             </td>
-          <td colspan="1"
-          [ngClass]="checkOldDay(item, anotherMonth, anotherYear) ? 'disable-event-day': '' "
-          class="calendar-day" (click)="createEvent(item, anotherMonth, anotherYear, $event)"
-          *ngFor="let item of counter(week1, 'week1')">
-          <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
-            {{item}}
-          </div>
+          </tr>
+          <tr>
+            <td colspan="1" class="calendar-day"
+            [ngClass]="checkOldDay(item, anotherMonth, anotherYear) ? 'disable-event-day': '' "
+            (click)="createEvent(item, anotherMonth, anotherYear, $event)"
+            *ngFor="let item of counter(week2, 'week2')">
+              <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
+                {{item}}
+              </div>
+              <div *ngFor="let event of eventToRender(anotherYear, anotherMonth, item)"
+              (click)="editEvent(event, $event)"
+              class="event-day" matTooltip="{{event.title}}-{{event.description}}"
+              [ngStyle]="{ 'background-color': event.color }"
+            [matTooltipPosition]="'above'"
+            >
+            <div class="event-title">{{event.title}}</div>
+            </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="1" class="calendar-day"
+            [ngClass]="checkOldDay(item, anotherMonth, anotherYear) ? 'disable-event-day': '' "
+            (click)="createEvent(item, anotherMonth, anotherYear, $event)"
+            *ngFor="let item of counter(week3, 'week3')">
+            <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
+              {{item}}
+            </div>
+              <div *ngFor="let event of eventToRender(anotherYear, anotherMonth, item)"
+              (click)="editEvent(event, $event)"
+              class="event-day" matTooltip="{{event.title}}-{{event.description}}"
+              [ngStyle]="{ 'background-color': event.color }"
+            [matTooltipPosition]="'above'"
+            >
+            <div class="event-title">{{event.title}}</div>
+            </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="1" class="calendar-day"
+            [ngClass]="checkOldDay(item, anotherMonth, anotherYear) ? 'disable-event-day': '' "
+            (click)="createEvent(item, anotherMonth, anotherYear, $event)"
+            *ngFor="let item of counter(week4, 'week4')">
+              <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
+                {{item}}
+              </div>
             <div *ngFor="let event of eventToRender(anotherYear, anotherMonth, item)"
             (click)="editEvent(event, $event)"
-            class="event-day" matTooltip="{{event.title}}-{{event.description}}"
-            [ngStyle]="{ 'background-color': event.color }"
-          [matTooltipPosition]="'above'"
-          >
-            <span>{{event.title}}</span>
-          </div>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="1" class="calendar-day"
-          [ngClass]="checkOldDay(item, anotherMonth, anotherYear) ? 'disable-event-day': '' "
-          (click)="createEvent(item, anotherMonth, anotherYear, $event)"
-          *ngFor="let item of counter(week2, 'week2')">
+              class="event-day" matTooltip="{{event.title}}-{{event.description}}"
+              [ngStyle]="{ 'background-color': event.color }"
+            [matTooltipPosition]="'above'"
+            >
+            <div class="event-title">{{event.title}}</div>
+            </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="1" class="calendar-day"
+            [ngClass]="checkOldDay(item, anotherMonth, anotherYear) ? 'disable-event-day': '' "
+            (click)="createEvent(item, anotherMonth, anotherYear, $event)"
+            *ngFor="let item of counter(week5, 'week5')">
             <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
               {{item}}
             </div>
             <div *ngFor="let event of eventToRender(anotherYear, anotherMonth, item)"
             (click)="editEvent(event, $event)"
-            class="event-day" matTooltip="{{event.title}}-{{event.description}}"
-            [ngStyle]="{ 'background-color': event.color }"
-          [matTooltipPosition]="'above'"
-          >
-            <span>{{event.title}}</span>
-          </div>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="1" class="calendar-day"
-          [ngClass]="checkOldDay(item, anotherMonth, anotherYear) ? 'disable-event-day': '' "
-          (click)="createEvent(item, anotherMonth, anotherYear, $event)"
-          *ngFor="let item of counter(week3, 'week3')">
-          <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
-            {{item}}
-          </div>
-            <div *ngFor="let event of eventToRender(anotherYear, anotherMonth, item)"
-            (click)="editEvent(event, $event)"
-            class="event-day" matTooltip="{{event.title}}-{{event.description}}"
-            [ngStyle]="{ 'background-color': event.color }"
-          [matTooltipPosition]="'above'"
-          >
-            <span>{{event.title}}</span>
-          </div>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="1" class="calendar-day"
-          [ngClass]="checkOldDay(item, anotherMonth, anotherYear) ? 'disable-event-day': '' "
-          (click)="createEvent(item, anotherMonth, anotherYear, $event)"
-          *ngFor="let item of counter(week4, 'week4')">
+              class="event-day" matTooltip="{{event.title}}-{{event.description}}"
+              [ngStyle]="{ 'background-color': event.color }"
+            [matTooltipPosition]="'above'"
+            >
+            <div class="event-title">{{event.title}}</div>
+            </div>
+            </td>
+            <td colspan="1" class="calendar-day"
+            [ngClass]="checkOldDay(item, anotherMonth + 1, anotherYear) ? 'disable-event-day': '' "
+            (click)="createEvent(item, anotherMonth + 1, anotherYear, $event)"
+            *ngFor="let item of counter(week1NextMonth, 'week1NextMonth')">
+              {{item}}
+              <div *ngFor="let event of eventToRender(anotherYear, anotherMonth + 1, item)"
+              (click)="editEvent(event, $event)"
+              class="event-day" matTooltip="{{event.title}}-{{event.description}}"
+              [ngStyle]="{ 'background-color': event.color }"
+            [matTooltipPosition]="'above'"
+            >
+            <div class="event-title">{{event.title}}</div>
+            </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="1" class="calendar-day"
+            [ngClass]="checkOldDay(item, anotherMonth, anotherYear) ? 'disable-event-day': '' "
+            (click)="createEvent(item, anotherMonth, anotherYear, $event)"
+            *ngFor="let item of counter(week6, 'week6')">
             <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
               {{item}}
             </div>
-          <div *ngFor="let event of eventToRender(anotherYear, anotherMonth, item)"
-          (click)="editEvent(event, $event)"
-            class="event-day" matTooltip="{{event.title}}-{{event.description}}"
-            [ngStyle]="{ 'background-color': event.color }"
-          [matTooltipPosition]="'above'"
-          >
-            <span>{{event.title}}</span>
-          </div>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="1" class="calendar-day"
-          [ngClass]="checkOldDay(item, anotherMonth, anotherYear) ? 'disable-event-day': '' "
-          (click)="createEvent(item, anotherMonth, anotherYear, $event)"
-          *ngFor="let item of counter(week5, 'week5')">
-          <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
-            {{item}}
-          </div>
-          <div *ngFor="let event of eventToRender(anotherYear, anotherMonth, item)"
-          (click)="editEvent(event, $event)"
-            class="event-day" matTooltip="{{event.title}}-{{event.description}}"
-            [ngStyle]="{ 'background-color': event.color }"
-          [matTooltipPosition]="'above'"
-          >
-            <span>{{event.title}}</span>
-          </div>
-          </td>
-          <td colspan="1" class="calendar-day"
-          [ngClass]="checkOldDay(item, anotherMonth + 1, anotherYear) ? 'disable-event-day': '' "
-          (click)="createEvent(item, anotherMonth + 1, anotherYear, $event)"
-          *ngFor="let item of counter(week1NextMonth, 'week1NextMonth')">
-            {{item}}
-            <div *ngFor="let event of eventToRender(anotherYear, anotherMonth + 1, item)"
+            <div *ngFor="let event of eventToRender(anotherYear, anotherMonth, item)"
             (click)="editEvent(event, $event)"
-            class="event-day" matTooltip="{{event.title}}-{{event.description}}"
-            [ngStyle]="{ 'background-color': event.color }"
-          [matTooltipPosition]="'above'"
-          >
-            <span>{{event.title}}</span>
-          </div>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="1" class="calendar-day"
-          [ngClass]="checkOldDay(item, anotherMonth, anotherYear) ? 'disable-event-day': '' "
-          (click)="createEvent(item, anotherMonth, anotherYear, $event)"
-          *ngFor="let item of counter(week6, 'week6')">
-          <div [ngClass]="(item === today && currentMonth === anotherMonth && currentYear === anotherYear) ? 'day-current' : '' ">
-            {{item}}
-          </div>
-          <div *ngFor="let event of eventToRender(anotherYear, anotherMonth, item)"
-          (click)="editEvent(event, $event)"
-            class="event-day" matTooltip="{{event.title}}-{{event.description}}"
-            [ngStyle]="{ 'background-color': event.color }"
-          [matTooltipPosition]="'above'"
-          >
-            <span>{{event.title}}</span>
-          </div>
-          </td>
-          <td colspan="1" class="calendar-day"
-          [ngClass]="checkOldDay(item, anotherMonth + 1, anotherYear) ? 'disable-event-day': '' "
-          (click)="createEvent(item, anotherMonth + 1, anotherYear, $event)"
-          *ngFor="let item of counter(week2NextMonth, 'week2NextMonth')">
-            {{item}}
-            <div *ngFor="let event of eventToRender(anotherYear, anotherMonth + 1, item)"
-            (click)="editEvent(event, $event)"
-            class="event-day" matTooltip="{{event.title}}-{{event.description}}"
-            [ngStyle]="{ 'background-color': event.color }"
-          [matTooltipPosition]="'above'"
-          >
-            <span>{{event.title}}</span>
-          </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+              class="event-day" matTooltip="{{event.title}}-{{event.description}}"
+              [ngStyle]="{ 'background-color': event.color }"
+            [matTooltipPosition]="'above'"
+            >
+            <div class="event-title">{{event.title}}</div>
+            </div>
+            </td>
+            <td colspan="1" class="calendar-day"
+            [ngClass]="checkOldDay(item, anotherMonth + 1, anotherYear) ? 'disable-event-day': '' "
+            (click)="createEvent(item, anotherMonth + 1, anotherYear, $event)"
+            *ngFor="let item of counter(week2NextMonth, 'week2NextMonth')">
+              {{item}}
+              <div *ngFor="let event of eventToRender(anotherYear, anotherMonth + 1, item)"
+              (click)="editEvent(event, $event)"
+              class="event-day" matTooltip="{{event.title}}-{{event.description}}"
+              [ngStyle]="{ 'background-color': event.color }"
+            [matTooltipPosition]="'above'"
+            >
+            <div class="event-title">{{event.title}}</div>
+            </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>

@@ -1,0 +1,28 @@
+//overwrite css mat-form field
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: #e0e0e0;
+}
+
+
+.sidebar-header-menu{
+  font-size: 25px;
+  cursor: pointer;
+  align-self: center;
+  display: none;
+  margin: 0 18px;
+}
+
+.header-search{
+  margin: 12px 12px;
+}
+
+@media (max-width: 1370px){
+  .sidebar-header-menu{
+    display: block !important;
+  }
+
+  .header-search{
+    margin: 0;
+  }
+}

@@ -7,6 +7,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
 import { ErrorComponent } from './components/error/error.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { HeaderComponent } from './components/header/header.component';
+import { MaterialExampleModule } from './material/material.module';
 
 
 
@@ -16,6 +18,7 @@ import { TranslateModule } from '@ngx-translate/core';
     LoginComponent,
     RegisterComponent,
     ErrorComponent,
+    HeaderComponent,
   ],
   imports: [
     CommonModule,
@@ -23,11 +26,13 @@ import { TranslateModule } from '@ngx-translate/core';
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,
+    MaterialExampleModule,
   ],
   exports: [
     SidebarComponent,
     LoginComponent,
     RegisterComponent,
+    HeaderComponent,
   ]
 })
 export class SharedModule { }

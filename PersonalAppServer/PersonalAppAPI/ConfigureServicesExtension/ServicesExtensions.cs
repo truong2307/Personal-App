@@ -59,6 +59,7 @@ namespace PersonalAppAPI.ConfigureServicesExtension
                     ValidIssuer = jwtSettings.GetSection("Issuer").Value,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
                 };
+                //pass token jwt from client
                 options.Events = new JwtBearerEvents
                 {
                     OnMessageReceived = context =>
