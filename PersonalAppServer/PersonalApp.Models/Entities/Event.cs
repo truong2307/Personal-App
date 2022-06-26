@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PersonalApp.Models.Entities
 {
-    public class Event : BaseEntity, IBaseEntity
+    public class Event : BaseEntity, IInfoCreateUpdate
     {
         [Required]
         [MaxLength(100)]

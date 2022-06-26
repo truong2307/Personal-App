@@ -97,7 +97,7 @@
 
   .notification-body-item-time{
     font-size: 10px;
-    color: #b7b9cc;
+    color: var(--gray-500);
   }
 
   .notification-body-item-content{
@@ -130,15 +130,29 @@
 }
 
 .header-profile{
-  cursor: pointer;
-  margin-left: 40px;
-  margin-right: 21px;
-  font-size: 12px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  margin-left: 20px;
+  border-left: 1px solid #e3e6f0;
+  padding: 0 12px;
+
+  .header-name-profile{
+    margin-right: 9px;
+    font-size: 12px;
+    color: var(--gray-500);
+  }
+
+  .header-profile-image{
+    cursor: pointer;
+    font-size: 12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
 }
+
+
 
 .dropdown-item{
   cursor: pointer;
 }
+
+

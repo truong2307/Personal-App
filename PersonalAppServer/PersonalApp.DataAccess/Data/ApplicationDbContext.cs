@@ -12,5 +12,6 @@ namespace PersonalApp.DataAccess.Data
         }
 
         public DbSet<Event> Events { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
     }
 }
