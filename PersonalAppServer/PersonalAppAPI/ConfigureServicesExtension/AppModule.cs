@@ -4,6 +4,7 @@ using PersonalApp.DataAccess.Data.Repository.IRepository;
 using PersonalApp.DataAccess.Initializer;
 using PersonalApp.DataAccess.Services.ClaimUserServices;
 using PersonalApp.DataAccess.Services.EventServices;
+using PersonalApp.DataAccess.Services.NotificationServices;
 
 namespace PersonalAppAPI.ConfigureServicesExtension
 {
@@ -17,6 +18,7 @@ namespace PersonalAppAPI.ConfigureServicesExtension
             services.AddScoped<IAuthManager, AuthManager>();
             services.AddScoped<IClaimUserServices, ClaimUserServices>();
             services.AddScoped<IEventServices, EventServices>();
+            services.AddScoped<INotificationServices, NotificationServices>();
         }
     }
 }

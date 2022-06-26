@@ -12,6 +12,8 @@ namespace PersonalAppAPI.MapperConfig
             CreateMap<ApiUser, UserDto>().ReverseMap(); 
             CreateMap<Event, EventDto>().ReverseMap(); 
             CreateMap<Event, EventCreateDto>().ReverseMap();
+            CreateMap<Notification, NotificationCreateDto>().ReverseMap();
+            CreateMap<Notification, NotificationDto>().ReverseMap();
         }
     }
 }
