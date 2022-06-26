@@ -1,6 +1,4 @@
-﻿using PersonalApp.Models.Identity;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace PersonalApp.Models.Dto
 {
@@ -11,10 +9,15 @@ namespace PersonalApp.Models.Dto
         public string Content { get; set; }
     }
 
-    public class NotificationDto : NotificationCreateDto
+    public class NotificationUpdateDto : NotificationCreateDto
     {
         public int Id { get; set; }
         [Required]
         public bool Seen { get; set; }
+    }
+
+    public class NotificationDto : NotificationUpdateDto
+    {
+        public DateTime? CreatedAt { get; set; }
     }
 }
