@@ -1,10 +1,66 @@
+<div class="header-search">
+  <!-- notification -->
+  <div class="dropdown">
+    <div class="bell-notification position-relative"
+    id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"
+    >
+      <i class="fa-solid fa-bell"></i>
+      <span class="position-absolute translate-middle badge bg-danger">
+        2
+        <span class="visually-hidden">unread messages</span>
+      </span>
+    </div>
 
-      <div class="header-search">
-        <mat-form-field appearance="outline">
-          <mat-label>Search</mat-label>
-          <input matInput placeholder="Search">
-          <mat-icon matSuffix>search</mat-icon>
-        </mat-form-field>
+    <div class="notification dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <div class="notification-header">
+          Alert Center
       </div>
+
+      <div class="notification-body">
+          <ul class="notification-body-list">
+              <li class="notification-body-item seen">
+                  <div class="notification-body-item-time">
+                      December 12,2022
+                  </div>
+                  <div class="notification-body-item-content">
+                      A new monthly report is ready to download A new monthly reeport is ready to downeport is ready to downeport is ready to downport is ready to download
+                  </div>
+              </li>
+
+              <li class="notification-body-item">
+                  <div class="notification-body-item-time">
+                      December 12,2022
+                  </div>
+                  <div class="notification-body-item-content">
+                      A new monthly report is ready to download
+                  </div>
+              </li>
+          </ul>
+      </div>
+
+      <div class="notification-footer">
+          Show all alerts
+      </div>
+  </div>
+  </div>
+
+  <!-- profile -->
+    <div class="dropdown">
+      <div class="d-flex align-items-center text-decoration-none" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+        <img class="header-profile " src="../../../assets//image/errorAvatar.png" alt="error avatar">
+      </div>
+      <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+        <li><div class="dropdown-item">
+          Profile
+        </div>
+      </li>
+      <li><div class="dropdown-item" (click)="logOut()">
+        Log out
+      </div>
+    </li>
+      </ul>
+    </div>
+
+</div>
 
 

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { ToastrService } from 'ngx-toastr';
 import { SignalRService } from 'src/services/signalr-services.service';
 import optionSidebar from 'src/shared/const/optionSidebar';
 
@@ -20,8 +18,6 @@ export class SidebarComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
-    private router : Router,
-    private toastr: ToastrService,
     private signalRservice : SignalRService,
   ) {
   }
@@ -52,13 +48,4 @@ export class SidebarComponent implements OnInit {
     this.translate.use('vi');
     localStorage.setItem("currLanguage","vi");
   }
-
-  logOut(){
-    localStorage.removeItem('token');
-    this.toastr.success(
-      'Log out success'
-    )
-    this.router.navigate(['/login']);
-  }
-
 }

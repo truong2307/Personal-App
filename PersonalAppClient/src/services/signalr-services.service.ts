@@ -40,4 +40,8 @@ export class SignalRService {
     })
   }
 
+  public disconnectHub(){
+    this.connection.stop();
+  }
+
 }

@@ -14,7 +14,34 @@
 }
 
 .header-search{
-  margin: 12px 12px;
+  padding: 12px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  .bell-notification{
+    color: #d1d3e2;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 1.5;
+    text-decoration: none;
+    padding: 6px;
+    font-size: 20px;
+
+    .badge{
+      font-size: 8px !important;
+      top: 30%;
+      left: 93%;
+    }
+
+    &:hover{
+      color: #b7b9cc;
+    }
+  }
+
+
+
+
 }
 
 @media (max-width: 1370px){
@@ -27,14 +54,91 @@
   }
 }
 
-.active{
-  background: #2b5876;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #4e4376, #2b5876);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #4e4376, #2b5876); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+.notification{
+  width: 310px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 3px;
+
+  .notification-header{
+    border-radius: 3px;
+    padding-left: 23px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 14px;
+    height: 40px;
+    background-color: var(--primary);
+  }
+
+  .notification-body-list{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .notification-body-item{
+    cursor: pointer;
+    height: 88px;
+    padding: 12px 20px 10px 20px;
+    border-bottom: 1px solid #e3e6f0;
+    transition: .2s;
+    font-weight: 400;
+
+    &:hover{
+      background-color: #eaecf4;
+    }
+
+    &.seen{
+      font-weight: 900 !important;
+    }
+  }
+
+  .notification-body-item-time{
+    font-size: 10px;
+    color: #b7b9cc;
+  }
+
+  .notification-body-item-content{
+
+    width: 280px;
+    font-size: 13px;
+    margin-top: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .notification-footer{
+    cursor: pointer;
+    text-align: center;
+    padding: 12px 12px;
+    font-size: 13px;
+    color: #b7b9cc;
+
+    &:hover{
+      background-color: #eaecf4;
+    }
+  }
 }
 
+.dropdown-menu {
+  padding: 0;
+}
 
+.header-profile{
+  cursor: pointer;
+  margin-left: 40px;
+  margin-right: 21px;
+  font-size: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
 
-.nav-item{
-  margin: 8px 0;
+.dropdown-item{
+  cursor: pointer;
 }
