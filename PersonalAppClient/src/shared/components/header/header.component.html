@@ -5,50 +5,34 @@
     id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"
     >
       <i class="fa-solid fa-bell"></i>
-      <span class="position-absolute translate-middle badge bg-danger">
-        2
+      <span *ngIf="totalNewNotify > 0" class="position-absolute translate-middle badge bg-danger">
+        {{totalNewNotify}}
         <span class="visually-hidden">unread messages</span>
       </span>
     </div>
 
     <div class="notification dropdown-menu" aria-labelledby="dropdownMenuButton1">
       <div class="notification-header">
-          Alert Center
+        {{ 'header.AlertTitle' | translate }}
       </div>
 
       <div class="notification-body">
           <ul class="notification-body-list">
-              <li class="notification-body-item seen">
+              <li [ngClass]="!notify.seen ? 'seen' : ''" class="notification-body-item"
+              *ngFor="let notify of notifications"
+              (click)="seenNotify(notify)">
                   <div class="notification-body-item-time">
-                      December 12,2022
+                      {{notify.createdAt | date}}
                   </div>
                   <div class="notification-body-item-content">
-                      A new monthly report is ready to download A new monthly reeport is ready to downeport is ready to downeport is ready to downport is ready to download
+                      {{notify.content}}
                   </div>
               </li>
-
-              <li class="notification-body-item">
-                  <div class="notification-body-item-time">
-                      December 12,2022
-                  </div>
-                  <div class="notification-body-item-content">
-                      A new monthly report is ready to download
-                  </div>
-              </li>
-
-              <li class="notification-body-item seen">
-                <div class="notification-body-item-time">
-                    December 12,2022
-                </div>
-                <div class="notification-body-item-content">
-                    A new monthly report is ready to download A new monthly reeport is ready to downeport is ready to downeport is ready to downport is ready to download
-                </div>
-            </li>
           </ul>
       </div>
 
       <div class="notification-footer">
-          Show all alerts
+        {{ 'header.ShowAllAlert' | translate }}
       </div>
   </div>
   </div>
@@ -61,11 +45,11 @@
       </div>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
         <li><div class="dropdown-item">
-          Profile
+          {{ 'header.Profile' | translate }}
         </div>
       </li>
       <li><div class="dropdown-item" (click)="logOut()">
-        Log out
+        {{ 'header.LogOut' | translate }}
       </div>
     </li>
       </ul>

@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { ToastrService } from "ngx-toastr/toastr/toastr.service";
 import { catchError, map, of, switchMap } from "rxjs";
 import { NotificationsService } from "src/services/notifications.service";
 import { ResponseDatas } from "src/shared/model/ResponseData.interface";
@@ -8,6 +7,7 @@ import { tap } from 'rxjs/operators';
 
 import * as notificationAction from "./notification.action"
 import { TranslateService } from "@ngx-translate/core";
+import { ToastrService } from "ngx-toastr";
 @Injectable()
 export class NotificationEffects {
  constructor(
@@ -28,6 +28,16 @@ export class NotificationEffects {
         of(new notificationAction.FetchNotificationError(error)))
     ))
   ));
+
+  seenNotificationAction$ = createEffect(() => this.action$.pipe(
+    ofType(notificationAction.SEEN_NOTIFICATION),
+    switchMap((data : any) =>
+    this.service.updateNofitication(data.item).pipe(
+      tap((result) => {
+      })
+    ))
+  ),
+  { dispatch: false })
 
   fetchNotificationError$ = createEffect(() => this.action$.pipe(
     ofType(notificationAction.FETCH_NOTIFICATION_ERROR),

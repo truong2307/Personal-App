@@ -19,6 +19,6 @@ export class NotificationsService {
   }
 
   updateNofitication(notificationRq: any){
-    return this.httpClient.post(environment.baseUri + `notifications/update-notification`, notificationRq);
+    return this.httpClient.put(environment.baseUri + `notifications/update-notification`, notificationRq);
   }
 }

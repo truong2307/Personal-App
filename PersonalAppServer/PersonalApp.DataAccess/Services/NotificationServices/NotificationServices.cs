@@ -106,7 +106,7 @@ namespace PersonalApp.DataAccess.Services.NotificationServices
                 }
 
                 var currentUserId = _claimUserServices.GetCurrentUserId();
-                notification.Seen = model.Seen;
+                notification.Seen = true;
                 notification.UpdatedBy = currentUserId;
                 notification.UpdatedAt = DateTime.Now;
 

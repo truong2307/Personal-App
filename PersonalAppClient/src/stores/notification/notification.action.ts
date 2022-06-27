@@ -17,7 +17,7 @@ export class GetNotificationsSuccessAction implements Action {
 
 export class SeenNotificationAction implements Action {
   readonly type = SEEN_NOTIFICATION;
-  constructor(public id: number){}
+  constructor(public item: NotificationModel){}
 }
 
 export class FetchNotificationError implements Action {
