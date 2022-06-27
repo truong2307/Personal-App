@@ -4,13 +4,11 @@ import { ToastrService } from "ngx-toastr";
 import { catchError, map, of, switchMap } from "rxjs";
 import { EventsService } from "src/services/events.service";
 import { tap } from 'rxjs/operators';
-import { ResponseService } from "src/shared/model/response.interface";
 
 import * as eventAction from "./events.action"
 import { EventCalendar } from "src/shared/model/Event.interface";
-import { select, Store } from "@ngrx/store";
-import { eventSelector } from './events.selector';
 import { TranslateService } from "@ngx-translate/core";
+import { ResponseData } from "src/shared/model/ResponseData.interface";
 
 
 @Injectable()
@@ -23,20 +21,14 @@ export class EventEffects {
     private service: EventsService,
     private toastr: ToastrService,
     private translate: TranslateService,
-    private store: Store,
     ){
-      this.store.pipe(select(eventSelector)).subscribe(
-        result => {
-          this.events = result.items
-        }
-      );
   }
 
   getEvents$ = createEffect(() => this.action$.pipe(
     ofType(eventAction.GET_EVENTS),
     switchMap(() =>
       this.service.getEvents().pipe(
-        map((results : ResponseService) => {
+        map((results : ResponseData) => {
           return new eventAction.GetEventsSuccessAction(results.result);
         }),
         catchError(error =>

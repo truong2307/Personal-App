@@ -4,8 +4,6 @@ import { StoreModule } from '@ngrx/store';
 import { EventEffects } from './events.effects';
 import { eventReducer } from './events.reducer';
 
-
-
 @NgModule({
   declarations: [],
   imports: [

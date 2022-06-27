@@ -22,6 +22,7 @@ import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerMod
 import { EventsModule } from 'src/stores/events/events.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/services/translate-service.service';
+import { NotificationsModule } from 'src/stores/notification/notification.module';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -45,6 +46,7 @@ export function tokenGetter() {
     EffectsModule.forRoot([]),
     AuthModule,
     EventsModule,
+    NotificationsModule,
     HttpClientModule,
     JwtModule.forRoot(
       {
