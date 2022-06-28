@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using PersonalApp.DataAccess.Data.Repository.IRepository;
 using PersonalApp.DataAccess.Services.ClaimUserServices;
+using PersonalApp.DataAccess.Services.NotificationServices;
 using PersonalApp.Models.Dto;
 using PersonalApp.Models.Entities;
 
@@ -12,14 +13,17 @@ namespace PersonalApp.DataAccess.Services.EventServices
         private readonly IClaimUserServices _claimUserServices;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ResponseDto _responseDto;
+        private readonly INotificationServices _notificationServices;
         public EventServices(IMapper mapper
             , IClaimUserServices claimUserServices
             , IUnitOfWork unitOfWork
+            , INotificationServices notificationServices
             )
         {
             _mapper = mapper;
             _claimUserServices = claimUserServices;
             _unitOfWork = unitOfWork;
+            _notificationServices = notificationServices;
             _responseDto = new ResponseDto();
         }
         public async Task<ResponseDto> CreateEvent(EventCreateDto model)
@@ -39,6 +43,13 @@ namespace PersonalApp.DataAccess.Services.EventServices
 
                 await _unitOfWork.Events.Add(eventToDb);
                 await _unitOfWork.SaveChangeAsync();
+
+                var notificationNew = new NotificationCreateDto()
+                {
+                    Content = $"Bạn vừa tạo event {eventToDb.Title} !"
+                };
+
+                await _notificationServices.CreateNotification(notificationNew);
 
                 _responseDto.Result = model;
             }

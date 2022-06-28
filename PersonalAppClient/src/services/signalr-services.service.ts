@@ -1,8 +1,10 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
+import { Store } from '@ngrx/store';
 import { tokenGetter } from 'src/app/app.module';
 import { environment } from 'src/environments/environment';
+import { NotificationsNewestAction } from 'src/stores/notification/notification.action';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +15,7 @@ export class SignalRService {
   token: any;
 
   constructor(
+    private store: Store
   ) {
    }
 
@@ -32,11 +35,18 @@ export class SignalRService {
     .catch(err => console.log('error white starting connection: '+ err))
 
     this.countTotalUserOnline();
+    this.getNewNotification();
   }
 
    countTotalUserOnline(){
     this.connection.on('updateTotalUsers', (data) => {
       this.totalUserOnline.emit(data);
+    })
+  }
+
+    getNewNotification(){
+    this.connection.on('newNotification', (data) => {
+      this.store.dispatch(new NotificationsNewestAction(data));
     })
   }
 

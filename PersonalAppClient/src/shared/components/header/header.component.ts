@@ -28,7 +28,6 @@ export class HeaderComponent implements OnInit {
     this.store.dispatch(new GetNotificationsAction())
     this.store.pipe(select(notificationSelector)).subscribe(
       (result) => {
-        console.log(result);
         this.notifications = result.items
         this.totalNewNotify = result.items.filter(c => !c.seen).length;
       }

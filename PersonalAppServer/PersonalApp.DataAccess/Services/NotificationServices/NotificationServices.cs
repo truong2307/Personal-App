@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.SignalR;
 using PersonalApp.DataAccess.Data.Repository.IRepository;
+using PersonalApp.DataAccess.Hubs;
 using PersonalApp.DataAccess.Services.ClaimUserServices;
 using PersonalApp.Models.Dto;
 using PersonalApp.Models.Entities;
@@ -12,15 +14,18 @@ namespace PersonalApp.DataAccess.Services.NotificationServices
         private readonly IUnitOfWork _unitOfWork;
         private readonly IClaimUserServices _claimUserServices;
         private readonly ResponseDto _responseDto;
+        private IHubContext<UserHub> _hubContext;
         public NotificationServices(
             IMapper mapper
             , IUnitOfWork unitOfWork
             , IClaimUserServices claimUserServices
+            , IHubContext<UserHub> hubContext
             )
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork; 
             _claimUserServices = claimUserServices;
+            _hubContext = hubContext;
             _responseDto = new ResponseDto();
         }
         public async Task<ResponseDto> CreateNotification(NotificationCreateDto model)
@@ -39,6 +44,8 @@ namespace PersonalApp.DataAccess.Services.NotificationServices
                 await _unitOfWork.SaveChangeAsync();
 
                 _responseDto.Result = model;
+                var notifyToSend = _mapper.Map<NotificationDto>(notificationToDb);
+                await _hubContext.Clients.Groups(_claimUserServices.GetCurrentUserName()).SendAsync("newNotification", notifyToSend);
             }
             catch (Exception ex)
             {
