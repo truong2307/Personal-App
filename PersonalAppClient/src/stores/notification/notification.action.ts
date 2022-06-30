@@ -4,6 +4,7 @@ import { NotificationModel } from "src/shared/model/Notification.interface";
 export const GET_NOTIFICATIONS = 'GET_NOTIFICATIONS';
 export const GET_NOTIFICATIONS_SUCCESS = 'GET_NOTIFICATIONS_SUCCESS';
 export const SEEN_NOTIFICATION = 'SEEN_NOTIFICATION';
+export const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION';
 export const NOTIFICATION_NEWEST = 'NOTIFICATION_NEWEST';
 export const FETCH_NOTIFICATION_ERROR = 'FETCH_NOTIFICATION_ERROR';
 
@@ -21,6 +22,11 @@ export class NotificationsNewestAction implements Action {
   constructor(public item: NotificationModel){}
 }
 
+export class RemoveNotificationAction implements Action {
+  readonly type = REMOVE_NOTIFICATION;
+  constructor(public item: number){}
+}
+
 export class SeenNotificationAction implements Action {
   readonly type = SEEN_NOTIFICATION;
   constructor(public item: NotificationModel){}
@@ -36,4 +42,5 @@ export type NotificationAction =
 | SeenNotificationAction
 | NotificationsNewestAction
 | FetchNotificationError
+| RemoveNotificationAction
 | GetNotificationsSuccessAction

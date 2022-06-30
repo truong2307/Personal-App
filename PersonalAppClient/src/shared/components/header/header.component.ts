@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
+import { JwtHelpService } from 'src/services/jwt-help.service';
 import { SignalRService } from 'src/services/signalr-services.service';
 import { NotificationModel } from 'src/shared/model/Notification.interface';
-import { GetNotificationsAction, SeenNotificationAction } from 'src/stores/notification/notification.action';
+import { GetNotificationsAction, RemoveNotificationAction, SeenNotificationAction } from 'src/stores/notification/notification.action';
 import { notificationSelector } from '../../../stores/notification/notification.selector';
 
 @Component({
@@ -16,12 +17,14 @@ export class HeaderComponent implements OnInit {
 
   notifications: Array<NotificationModel> = [];
   totalNewNotify!: number;
+  userName!: string;
 
   constructor(
     private toastr: ToastrService,
     private router : Router,
     private signalRservice : SignalRService,
     private store: Store,
+    private jwtHelpService : JwtHelpService,
   ) { }
 
   ngOnInit(): void {
@@ -32,6 +35,8 @@ export class HeaderComponent implements OnInit {
         this.totalNewNotify = result.items.filter(c => !c.seen).length;
       }
     )
+
+    this.userName = (this.jwtHelpService.getUserInfo()).userName;
   }
 
   load(){
@@ -49,6 +54,11 @@ export class HeaderComponent implements OnInit {
 
   seenNotify(data: any){
     this.store.dispatch(new SeenNotificationAction(data));
+    setTimeout(() => this.load(), 200);
+  }
+
+  removeNotify(id: any){
+    this.store.dispatch(new RemoveNotificationAction(id));
     setTimeout(() => this.load(), 200);
   }
 }

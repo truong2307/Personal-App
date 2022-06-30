@@ -39,6 +39,16 @@ export class NotificationEffects {
   ),
   { dispatch: false })
 
+  removeNotificationAction$ = createEffect(() => this.action$.pipe(
+    ofType(notificationAction.REMOVE_NOTIFICATION),
+    switchMap((data : any) =>
+    this.service.deleteNofitication(data.item).pipe(
+      tap((result) => {
+      })
+    ))
+  ),
+  { dispatch: false })
+
   fetchNotificationError$ = createEffect(() => this.action$.pipe(
     ofType(notificationAction.FETCH_NOTIFICATION_ERROR),
     tap((error) => {

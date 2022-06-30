@@ -86,8 +86,11 @@ namespace PersonalApp.DataAccess.Services.NotificationServices
             try
             {
                 var currentUserId = _claimUserServices.GetCurrentUserId();
-                var notificationsByUserId = (await _unitOfWork.Notifications
-                    .GetAll(c => c.UserId == currentUserId)).OrderBy(c => c.CreatedAt);
+                var notificationsByUserId = await _unitOfWork.Notifications
+                    .GetAll(c => c.UserId == currentUserId
+                    , c => c.OrderByDescending(c => c.Id)
+                    , c => c.Take(10)
+                    );
                 response.Datas = _mapper.Map<List<NotificationDto>>(notificationsByUserId);
 
             }

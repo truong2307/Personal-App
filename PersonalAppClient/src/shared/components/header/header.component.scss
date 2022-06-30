@@ -17,7 +17,7 @@
   padding: 12px 12px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: start;
 
   .bell-notification{
     color: #d1d3e2;
@@ -29,7 +29,7 @@
     font-size: 20px;
 
     .badge{
-      font-size: 8px !important;
+      font-size: 9px !important;
       top: 30%;
       left: 93%;
     }
@@ -56,7 +56,7 @@
 
 
 .notification{
-  width: 312px;
+  width: 330px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 3px;
 
@@ -81,10 +81,12 @@
   .notification-body-item{
     cursor: pointer;
     height: 88px;
-    padding: 12px 20px 10px 20px;
     border-bottom: 1px solid #e3e6f0;
     transition: .2s;
     font-weight: 400;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
 
     &:hover{
       background-color: #eaecf4;
@@ -95,9 +97,12 @@
     }
   }
 
+  .delete-notification:hover{
+    opacity: .7;
+  }
+
   .notification-body{
     max-height: 300px;
-    width: 310px;
     overflow: auto;
   }
 

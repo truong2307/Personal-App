@@ -16,7 +16,7 @@ export function notificationReducer(
       case NotificationAction.GET_NOTIFICATIONS_SUCCESS:
       return {...state, items: action.items}
       case NotificationAction.NOTIFICATION_NEWEST:
-      return {...state, items: [...state.items, action.item]}
+      return {...state, items: [action.item, ...state.items]}
       default:
         return state;
     }

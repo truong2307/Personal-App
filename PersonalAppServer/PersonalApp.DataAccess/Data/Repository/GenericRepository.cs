@@ -51,6 +51,7 @@ namespace PersonalApp.DataAccess.Data.Repository
 
         public async Task<IList<T>> GetAll(Expression<Func<T, bool>> filter = null
             , Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null
+            , Func<IQueryable<T>, IQueryable<T>> queryEntity = null
             , Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
         {
             IQueryable<T> query = dbSet;
@@ -62,6 +63,11 @@ namespace PersonalApp.DataAccess.Data.Repository
             if (include != null)
             {
                 query = include(query);
+            }
+
+            if (queryEntity != null)
+            {
+                query = queryEntity(query);
             }
 
             if (orderBy != null)

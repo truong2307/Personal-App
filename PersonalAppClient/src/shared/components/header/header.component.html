@@ -11,7 +11,10 @@
       </span>
     </div>
 
-    <div class="notification dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <div class="notification dropdown-menu"
+    aria-labelledby="dropdownMenuButton1"
+    (click)="$event.stopPropagation()"
+    >
       <div class="notification-header">
         {{ 'header.AlertTitle' | translate }}
       </div>
@@ -20,14 +23,20 @@
           <ul class="notification-body-list">
               <li [ngClass]="!notify.seen ? 'seen' : ''" class="notification-body-item"
               *ngFor="let notify of notifications"
-              (click)="seenNotify(notify)">
-                  <div class="notification-body-item-time">
-                      {{notify.createdAt | date}}
-                  </div>
-                  <div class="notification-body-item-content">
-                      {{notify.content}}
-                  </div>
+              >
+              <div class="notification-body-item-body" (click)="seenNotify(notify)">
+                <div class="notification-body-item-time">
+                  {{notify.createdAt | date}}
+              </div>
+              <div class="notification-body-item-content">
+                  {{notify.content}}
+              </div>
+              </div>
+                <div (click)="removeNotify(notify.id)">
+                  <mat-icon class="delete-notification">close</mat-icon>
+                </div>
               </li>
+
           </ul>
       </div>
 
@@ -40,7 +49,7 @@
   <!-- profile -->
     <div class="dropdown header-profile">
       <div class="d-flex align-items-center text-decoration-none" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-        <span class="header-name-profile">Truong 10 ngon</span>
+        <span class="header-name-profile">{{userName}}</span>
         <img class="header-profile-image " src="../../../assets//image/errorAvatar.png" alt="error avatar">
       </div>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
