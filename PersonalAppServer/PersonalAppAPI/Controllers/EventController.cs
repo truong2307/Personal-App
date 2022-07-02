@@ -21,12 +21,7 @@ namespace PersonalAppAPI.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState.Values.ToString());
             var result = await _eventServices.CreateEvent(eventRequest);
-            if (result.IsSuccess)
-            {
-                return Ok(result);
-            }
-
-            return BadRequest(result.ErrorMessages);
+            return result.IsSuccess ? Ok(result) : BadRequest(result.ErrorMessages);
         }
 
         [HttpPut("update-event")]
@@ -34,36 +29,21 @@ namespace PersonalAppAPI.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState.Values.ToString());
             var result = await _eventServices.UpdateEvent(eventRequest);
-            if (result.IsSuccess)
-            {
-                return Ok(result);
-            }
-
-            return BadRequest(result.ErrorMessages);
+            return result.IsSuccess ? Ok(result) : BadRequest(result.ErrorMessages);
         }
 
         [HttpDelete("delete-event/{idEvent:int}")]
         public async Task<IActionResult> DeleteEvent(int idEvent)
         {
             var result = await _eventServices.DeleteEvent(idEvent);
-            if (result.IsSuccess)
-            {
-                return Ok(result);
-            }
-
-            return BadRequest(result.ErrorMessages);
+            return result.IsSuccess ? Ok(result) : BadRequest(result.ErrorMessages);
         }
 
         [HttpGet("get-events")]
         public async Task<IActionResult> GetEvents()
         {
             var result = await _eventServices.GetEvents();
-            if (result.IsSuccess)
-            {
-                return Ok(result);
-            }
-
-            return BadRequest(result.ErrorMessages);
+            return result.IsSuccess ? Ok(result) : BadRequest(result.ErrorMessages);
         }
     }
 }

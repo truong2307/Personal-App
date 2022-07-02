@@ -26,12 +26,7 @@ namespace PersonalAppAPI.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState.Values.ToString());
             var result = await _notificationServices.CreateNotification(model);
-            if (result.IsSuccess)
-            {
-                return Ok(result);
-            }
-
-            return BadRequest(result.ErrorMessages);
+            return result.IsSuccess ? Ok(result) : BadRequest(result.ErrorMessages);
         }
 
         [HttpPut("update-notification")]
@@ -39,36 +34,21 @@ namespace PersonalAppAPI.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState.Values.ToString());
             var result = await _notificationServices.UpdateNotification(model);
-            if (result.IsSuccess)
-            {
-                return Ok(result);
-            }
-
-            return BadRequest(result.ErrorMessages);
+            return result.IsSuccess ? Ok(result) : BadRequest(result.ErrorMessages);
         }
 
         [HttpDelete("delete-notification/{id:int}")]
         public async Task<IActionResult> DeleteEvent(int id)
         {
             var result = await _notificationServices.DeleteNotification(id);
-            if (result.IsSuccess)
-            {
-                return Ok(result);
-            }
-
-            return BadRequest(result.ErrorMessages);
+            return result.IsSuccess ? Ok(result) : BadRequest(result.ErrorMessages);
         }
 
         [HttpGet("get-notifications")]
         public async Task<IActionResult> GetEvents()
         {
             var result = await _notificationServices.GetNotifications();
-            if (result.IsSuccess)
-            {
-                return Ok(result);
-            }
-
-            return BadRequest(result.ErrorMessages);
+            return result.IsSuccess ? Ok(result) : BadRequest(result.ErrorMessages);
         }
     }
 }

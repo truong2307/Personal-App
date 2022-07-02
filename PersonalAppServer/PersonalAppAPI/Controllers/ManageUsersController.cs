@@ -19,12 +19,7 @@ namespace PersonalAppAPI.Controllers
         public async Task<IActionResult> GetEvents()
         {
             var result = await _manageUserServices.GetAllUser();
-            if (result.IsSuccess)
-            {
-                return Ok(result);
-            }
-
-            return BadRequest(result.ErrorMessages);
+            return result.IsSuccess ? Ok(result) : BadRequest(result.ErrorMessages);
         }
     }
 }
