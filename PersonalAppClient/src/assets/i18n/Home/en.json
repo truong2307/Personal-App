@@ -2,5 +2,6 @@
   "Home": "Home",
   "Calendar": "Calendar",
   "Lang": "Language",
-  "UserOnline": "Total User Online: "
+  "UserOnline": "Total User Online: ",
+  "ManageUser": "Manage User "
 }

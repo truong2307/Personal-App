@@ -4,18 +4,22 @@ import { GuardAdminSide } from 'src/guard/guard.admin';
 import { AdminSideComponent } from './admin-side.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { HomeComponent } from './home/home.component';
+import { ManageUserComponent } from './manage-user/manage-user.component';
 
 const routes: Routes = [
   {
     path: '', component:AdminSideComponent,
+    canActivate : [GuardAdminSide],
 
     children:[
       {
         path: '', component: HomeComponent,
-        canActivate : [GuardAdminSide],
       },
       {
-        path: 'calendar', component: CalendarComponent
+        path: 'calendar', component: CalendarComponent,
+      },
+      {
+        path: 'manageUser', component: ManageUserComponent,
       }
     ]
   }

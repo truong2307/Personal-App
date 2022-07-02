@@ -12,12 +12,14 @@ import { MaterialExampleModule } from 'src/shared/material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { TranslateModule } from '@ngx-translate/core';
+import { ManageUserComponent } from './manage-user/manage-user.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     CalendarComponent,
-    AddEventComponent
+    AddEventComponent,
+    ManageUserComponent
   ],
   imports: [
     CommonModule,
