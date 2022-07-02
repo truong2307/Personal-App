@@ -86,29 +86,6 @@ namespace PersonalApp.DataAccess.Services.EventServices
             return _responseDto;
         }
 
-        public async Task<ResponseDto> GetEventById(int idEvent)
-        {
-            try
-            {
-                var eventToDb = await _unitOfWork.Events.Get(c => c.Id == idEvent);
-                if (eventToDb == null)
-                {
-                    _responseDto.IsSuccess = false;
-                    _responseDto.ErrorMessages = "Event not exist in system";
-                    return _responseDto;
-                }
-
-                _responseDto.Result = _mapper.Map<EventDto>(eventToDb);
-            }
-            catch (Exception ex)
-            {
-                _responseDto.IsSuccess = false;
-                _responseDto.ErrorMessages = ex.ToString();
-            }
-
-            return _responseDto;
-        }
-
         public async Task<ResponseDto> GetEvents()
         {
             try

@@ -2,5 +2,6 @@
   "AlertTitle": "Thông báo",
   "ShowAllAlert": "Xem tất cả thông báo",
   "Profile": "Hồ sơ",
-  "LogOut": "Đăng xuất"
+  "LogOut": "Đăng xuất",
+  "NonData": "Không có thông báo mới."
 }

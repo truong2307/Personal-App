@@ -7,7 +7,6 @@ namespace PersonalApp.DataAccess.Services.EventServices
         Task<ResponseDto> CreateEvent(EventCreateDto model);
         Task<ResponseDto> UpdateEvent(EventDto model);
         Task<ResponseDto> GetEvents();
-        Task<ResponseDto> GetEventById(int idEvent);
         Task<ResponseDto> DeleteEvent(int idEvent);
     }
 }

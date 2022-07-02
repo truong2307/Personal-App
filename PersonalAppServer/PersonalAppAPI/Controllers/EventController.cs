@@ -65,17 +65,5 @@ namespace PersonalAppAPI.Controllers
 
             return BadRequest(result.ErrorMessages);
         }
-
-        [HttpGet("get-event/{idEvent:int}")]
-        public async Task<IActionResult> GetEvent(int idEvent)
-        {
-            var result = await _eventServices.GetEventById(idEvent);
-            if (result.IsSuccess)
-            {
-                return Ok(result);
-            }
-
-            return BadRequest(result.ErrorMessages);
-        }
     }
 }

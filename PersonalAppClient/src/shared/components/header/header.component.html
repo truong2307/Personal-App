@@ -20,7 +20,7 @@
       </div>
 
       <div class="notification-body">
-          <ul class="notification-body-list">
+          <ul class="notification-body-list" *ngIf="notifications.length > 0; else nonData">
               <li [ngClass]="!notify.seen ? 'seen' : ''" class="notification-body-item"
               *ngFor="let notify of notifications"
               >
@@ -38,6 +38,11 @@
               </li>
 
           </ul>
+          <ng-template  #nonData>
+            <div class="notification-nondata">
+              {{ 'header.NonData' | translate }}
+            </div>
+          </ng-template>
       </div>
 
       <div class="notification-footer">

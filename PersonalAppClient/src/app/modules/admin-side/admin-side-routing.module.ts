@@ -9,17 +9,18 @@ import { ManageUserComponent } from './manage-user/manage-user.component';
 const routes: Routes = [
   {
     path: '', component:AdminSideComponent,
-    canActivate : [GuardAdminSide],
-
     children:[
       {
         path: '', component: HomeComponent,
+        canActivate : [GuardAdminSide],
       },
       {
         path: 'calendar', component: CalendarComponent,
+        canActivate : [GuardAdminSide],
       },
       {
         path: 'manageUser', component: ManageUserComponent,
+        canActivate : [GuardAdminSide],
       }
     ]
   }

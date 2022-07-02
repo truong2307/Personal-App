@@ -10,6 +10,7 @@ namespace PersonalAppAPI.MapperConfig
         public MapperInitilizer()
         {
             CreateMap<ApiUser, UserDto>().ReverseMap(); 
+            CreateMap<ApiUser, UserForAdminManagerDto>().ReverseMap();
             CreateMap<Event, EventDto>().ReverseMap(); 
             CreateMap<Event, EventCreateDto>().ReverseMap();
             CreateMap<Notification, NotificationCreateDto>().ReverseMap();

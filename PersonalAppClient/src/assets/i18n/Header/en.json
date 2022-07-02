@@ -2,5 +2,7 @@
   "AlertTitle": "Alert Center",
   "ShowAllAlert": "Show all alerts",
   "Profile": "Profile",
-  "LogOut": "Log out"
+  "LogOut": "Log out",
+  "NonData": "No new notifications."
+
 }

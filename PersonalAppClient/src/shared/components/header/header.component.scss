@@ -78,6 +78,15 @@
     margin: 0;
   }
 
+  .notification-nondata{
+    min-height: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    color: #b7b9cc;
+  }
+
   .notification-body-item{
     cursor: pointer;
     height: 88px;
