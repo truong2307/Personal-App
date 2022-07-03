@@ -10,7 +10,7 @@ import { RegisterAction } from 'src/stores/auth/auth.actions';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['../login/login.component.scss']
 })
 export class RegisterComponent implements OnInit {
 

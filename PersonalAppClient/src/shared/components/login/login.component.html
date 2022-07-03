@@ -1,43 +1,59 @@
-<div class="limiter">
-  <div class="container-login100" style="background-image: url('../../../assets/image/backgroundLogin.png');">
-    <div class="wrap-login100">
-      <form class="login100-form validate-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <span class="login100-form-title p-b-34 p-t-27">
-          {{title}}
-        </span>
-        <div class="wrap-input100 validate-input"
-        [ngClass]="emailLogin?.errors && emailLogin?.touched ? 'alert-validate' : '' "
-        [attr.data-validate]="emailLogin?.errors?.['email'] ? 'Error format email' : 'Enter username' ">
-          <input  formControlName="emailLogin"
-           class="input100" type="text" placeholder="Email" >
-          <span class="focus-input100" data-placeholder="&#xf007;"></span>
+<div class="bg-gradient-primary">
+  <div class="container">
+
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                        <div class="col-lg-6">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                </div>
+                                <form class="user" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                                    <mat-form-field class="example-full-width" appearance="legacy">
+                                      <mat-label>Email</mat-label>
+                                      <input type="email" matInput formControlName="emailLogin"
+                                             placeholder="Enter your mail">
+                                      <mat-error *ngIf="emailLogin?.errors?.['email']; else formatWrong">
+                                        Error format <strong>email</strong>
+                                      </mat-error>
+                                      <ng-template #formatWrong>
+                                        <mat-error *ngIf="emailLogin?.errors && emailLogin?.touched">
+                                          Email is <strong>required</strong>
+                                        </mat-error>
+                                      </ng-template>
+                                    </mat-form-field>
+
+                                    <mat-form-field class="example-full-width" appearance="legacy">
+                                      <mat-label>Password</mat-label>
+                                      <input type="password" matInput formControlName="password"
+                                             placeholder="Enter Your Password">
+                                      <mat-error *ngIf="password?.errors && password?.touched">
+                                        Password requires special characters, uppercase letters and numbers
+                                      </mat-error>
+                                    </mat-form-field>
+                                      <div class="example-button-row">
+                                        <button mat-raised-button color="primary" [disabled]="loginForm.invalid">Login</button>
+                                      </div>
+                                </form>
+                                <hr>
+                                <div class="text-center">
+                                    <a class="small" routerLink="/register">Create an Account!</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="wrap-input100 validate-input "
-        [ngClass]="password?.errors && password?.touched ? 'alert-validate' : '' "
-        data-validate="Password requires special characters, uppercase letters and numbers">
-          <input formControlName="password"
-          class="input100" type="password" placeholder="Password">
-          <span class="focus-input100" data-placeholder="&#xf2b9;"></span>
-        </div>
-        <div class="checkbox-form-login">
-          <label class="toggle">
-            <input class="toggle__input" type="checkbox">
-            <span class="toggle__label">
-              <span class="toggle__text">Remember Me!</span>
-            </span>
-          </label>
-        </div>
-        <div class="container-login100-form-btn">
-          <button class="login100-form-btn" [disabled]="loginForm.invalid">
-            Login
-          </button>
-        </div>
-        <div class="text-center p-t-90">
-          <a class="txt1" routerLink="/register">
-            Register
-          </a>
-        </div>
-      </form>
     </div>
   </div>
 </div>
+
