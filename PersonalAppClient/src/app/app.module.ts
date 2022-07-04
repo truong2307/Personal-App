@@ -23,6 +23,7 @@ import { EventsModule } from 'src/stores/events/events.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/services/translate-service.service';
 import { NotificationsModule } from 'src/stores/notification/notification.module';
+import { ManageUserModule } from 'src/stores/manage-user/manage-user.module';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -47,6 +48,7 @@ export function tokenGetter() {
     AuthModule,
     EventsModule,
     NotificationsModule,
+    ManageUserModule,
     HttpClientModule,
     JwtModule.forRoot(
       {

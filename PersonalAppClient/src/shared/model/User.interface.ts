@@ -11,3 +11,9 @@ export interface UserRegister {
   phoneNumber: string,
 }
 
+export interface UserForAdminManagerDto {
+  fullName: string,
+  userName: string,
+  role: string,
+  email: string,
+}
