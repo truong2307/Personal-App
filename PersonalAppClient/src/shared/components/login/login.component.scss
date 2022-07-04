@@ -1,7 +1,7 @@
 .bg-gradient-primary {
   background: #5C258D;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #4389A2, #5C258D);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #4389A2, #5C258D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: -webkit-linear-gradient(to right, #4389A2, #5C258D);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #4389A2, #5C258D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background-size: cover;
   height: 100%;
 
@@ -30,9 +30,13 @@ background: linear-gradient(to right, #4389A2, #5C258D); /* W3C, IE 10+/ Edge, F
   }
   }
   .bg-login-image{
-    background:url(https://source.unsplash.com/K4mSJ7kc0As/600x800);
+    background:url(../../../assets/image/loginbg.png);
     background-position: center;
     background-size: contain;
+  }
+
+  .small{
+    font-size: 15px !important;
   }
 }
 
@@ -41,3 +45,8 @@ background: linear-gradient(to right, #4389A2, #5C258D); /* W3C, IE 10+/ Edge, F
   background-color: rgba(0,0,0,.04);
 }
 
+.change-lang-login{
+  padding: 20px 0;
+  justify-content: end;
+  display: flex;
+}

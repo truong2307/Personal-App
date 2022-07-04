@@ -1,5 +1,7 @@
 export const environment = {
-  production: true,
-  baseUri: 'https://localhost:44376/api/'
+  production: false,
+  baseUri: 'https://localhost:44376/api/',
+  allowDomain: 'localhost:44376',
+  signalRUri: 'https://localhost:44376/',
 };
 

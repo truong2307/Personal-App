@@ -1,0 +1,20 @@
+{
+  "Title": "Welcome Back!",
+  "TitleRegister": "Join with us!",
+  "EmailErrorFormat": "Error Format <strong>Email</strong>",
+  "EmailErrorRequire": "Email Is <strong>Required</strong>",
+  "PasswordError": "Password requires special characters, uppercase letters and numbers",
+  "CreateAccount": "Create an Account!",
+  "Password": "Password",
+  "EnterPassword": "Enter Your Password",
+  "EnterEmail": "Enter Your Email",
+  "Login": "Login",
+  "FullName": "Full Name",
+  "EnterFullName": "Enter Your Full Name",
+  "FullNameError": "Your <strong>name</strong> have min 4 characters",
+  "PhoneNumber": "Phone Number",
+  "EnterPhoneNumber": "Enter Your Full Name Phone Number",
+  "Register": "Register",
+  "BackLogin": "Back to login!"
+
+}

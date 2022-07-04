@@ -1,6 +1,9 @@
 <div class="bg-gradient-primary">
   <div class="container">
     <div class="row justify-content-center">
+      <div class="change-lang-login">
+        <app-select-language></app-select-language>
+      </div>
         <div class="col-xl-10 col-lg-12 col-md-9">
             <div class="card o-hidden border-0 shadow-lg my-5">
                 <div class="card-body p-0">
@@ -9,45 +12,47 @@
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                    <h1 class="h4 text-gray-900 mb-4">{{ 'login.TitleRegister' | translate }}</h1>
                                 </div>
                                 <form class="user" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
                                     <mat-form-field class="example-full-width" appearance="legacy">
-                                      <mat-label>FullName</mat-label>
+                                      <mat-label>{{ 'login.FullName' | translate }}</mat-label>
                                       <input type="text" matInput formControlName="fullName"
-                                             placeholder="Enter your fullName">
-                                      <mat-error *ngIf="fullName?.errors && fullName?.touched">
-                                        Your <strong>name</strong> have min 4 characters
+                                             placeholder="{{ 'login.EnterFullName' | translate }}">
+                                      <mat-error *ngIf="fullName?.errors && fullName?.touched"
+                                      [innerHtml]="'login.FullNameError' | translate"
+                                      >
                                       </mat-error>
                                     </mat-form-field>
                                     <mat-form-field class="example-full-width" appearance="legacy">
                                       <mat-label>Email</mat-label>
                                       <input type="email" matInput formControlName="emailLogin"
                                              placeholder="Enter your mail">
-                                      <mat-error *ngIf="emailLogin?.errors && emailLogin?.touched">
-                                        Error format <strong>email</strong>
+                                      <mat-error *ngIf="emailLogin?.errors && emailLogin?.touched"
+                                      [innerHtml]="'login.EmailErrorRequire' | translate"
+                                      >
                                       </mat-error>
                                     </mat-form-field>
                                     <mat-form-field class="example-full-width" appearance="legacy">
-                                      <mat-label>Password</mat-label>
+                                      <mat-label>{{ 'login.Password' | translate }}</mat-label>
                                       <input type="password" matInput formControlName="password"
                                              placeholder="Enter Your Password">
                                       <mat-error *ngIf="password?.errors && password?.touched">
-                                        Password requires special characters, uppercase letters and numbers
+                                        {{ 'login.PasswordError' | translate }}
                                       </mat-error>
                                     </mat-form-field>
                                     <mat-form-field class="example-full-width" appearance="legacy">
-                                      <mat-label>Phone Number</mat-label>
+                                      <mat-label>{{ 'login.PhoneNumber' | translate }}</mat-label>
                                       <input type="tel" matInput formControlName="phoneNumber"
-                                             placeholder="Enter Your Password">
+                                             placeholder="{{ 'login.EnterPhoneNumber' | translate }}">
                                     </mat-form-field>
                                       <div class="example-button-row">
-                                        <button mat-raised-button color="primary" [disabled]="registerForm.invalid">Register</button>
+                                        <button mat-raised-button color="primary" [disabled]="registerForm.invalid">{{ 'login.Register' | translate }}</button>
                                       </div>
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" routerLink="/login">Login</a>
+                                    <a class="small" routerLink="/login">{{ 'login.BackLogin' | translate }}</a>
                                 </div>
                             </div>
                         </div>

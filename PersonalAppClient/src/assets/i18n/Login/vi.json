@@ -1,0 +1,19 @@
+{
+  "Title": "Chào mừng quay trở lại!",
+  "TitleRegister": "Tham gia cùng chúng tôi!",
+  "EmailErrorFormat": "Sai định dạng <strong>Email</strong>",
+  "EmailErrorRequire": "Vui lòng nhập <strong>Email</strong>",
+  "PasswordError": "Mật khẩu yêu cầu các ký tự đặc biệt, chữ hoa và số",
+  "CreateAccount": "Tạo tài khoản mới!",
+  "Password": "Mật khẩu",
+  "EnterPassword": "Nhập mật khẩu của bạn",
+  "EnterEmail": "Nhập email của bạn",
+  "Login": "Đăng nhập",
+  "FullName": "Họ và tên",
+  "EnterFullName": "Nhập họ và tên",
+  "FullNameError": "<strong>Tên</strong> phải có ít nhất 4 kí tự",
+  "PhoneNumber": "Số điện thoại",
+  "EnterPhoneNumber": "Nhập số điện thoại",
+  "Register": "Đăng ký",
+  "BackLogin": "Trở lại đăng nhập!"
+}

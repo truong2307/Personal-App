@@ -9,6 +9,7 @@ import { ErrorComponent } from './components/error/error.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { HeaderComponent } from './components/header/header.component';
 import { MaterialExampleModule } from './material/material.module';
+import { SelectLanguageComponent } from './components/select-language/select-language.component';
 
 
 
@@ -19,6 +20,7 @@ import { MaterialExampleModule } from './material/material.module';
     RegisterComponent,
     ErrorComponent,
     HeaderComponent,
+    SelectLanguageComponent,
   ],
   imports: [
     CommonModule,
@@ -33,6 +35,7 @@ import { MaterialExampleModule } from './material/material.module';
     LoginComponent,
     RegisterComponent,
     HeaderComponent,
+    SelectLanguageComponent,
   ]
 })
 export class SharedModule { }

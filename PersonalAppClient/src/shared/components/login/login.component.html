@@ -1,51 +1,51 @@
 <div class="bg-gradient-primary">
   <div class="container">
-
-    <!-- Outer Row -->
     <div class="row justify-content-center">
-
+      <div class="change-lang-login">
+        <app-select-language></app-select-language>
+      </div>
         <div class="col-xl-10 col-lg-12 col-md-9">
-
             <div class="card o-hidden border-0 shadow-lg my-5">
                 <div class="card-body p-0">
-                    <!-- Nested Row within Card Body -->
                     <div class="row">
                         <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                    <h1 class="h4 text-gray-900 mb-4">{{ 'login.Title' | translate }}</h1>
                                 </div>
                                 <form class="user" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                                     <mat-form-field class="example-full-width" appearance="legacy">
                                       <mat-label>Email</mat-label>
                                       <input type="email" matInput formControlName="emailLogin"
-                                             placeholder="Enter your mail">
-                                      <mat-error *ngIf="emailLogin?.errors?.['email']; else formatWrong">
-                                        Error format <strong>email</strong>
+                                             placeholder="{{ 'login.EnterEmail' | translate }}">
+                                      <mat-error *ngIf="emailLogin?.errors?.['email']; else formatWrong"
+                                    [innerHtml]="'login.EmailErrorFormat' | translate"
+                                      >
                                       </mat-error>
                                       <ng-template #formatWrong>
-                                        <mat-error *ngIf="emailLogin?.errors && emailLogin?.touched">
-                                          Email is <strong>required</strong>
+                                        <mat-error *ngIf="emailLogin?.errors && emailLogin?.touched"
+                                        [innerHtml]="'login.EmailErrorRequire' | translate"
+                                        >
                                         </mat-error>
                                       </ng-template>
                                     </mat-form-field>
 
                                     <mat-form-field class="example-full-width" appearance="legacy">
-                                      <mat-label>Password</mat-label>
+                                      <mat-label>{{ 'login.Password' | translate }}</mat-label>
                                       <input type="password" matInput formControlName="password"
-                                             placeholder="Enter Your Password">
+                                             placeholder="{{ 'login.EnterPassword' | translate }}">
                                       <mat-error *ngIf="password?.errors && password?.touched">
-                                        Password requires special characters, uppercase letters and numbers
+                                        {{ 'login.PasswordError' | translate }}
                                       </mat-error>
                                     </mat-form-field>
                                       <div class="example-button-row">
-                                        <button mat-raised-button color="primary" [disabled]="loginForm.invalid">Login</button>
+                                        <button mat-raised-button color="primary" [disabled]="loginForm.invalid">{{ 'login.Login' | translate }}</button>
                                       </div>
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" routerLink="/register">Create an Account!</a>
+                                    <a class="small" routerLink="/register">{{ 'login.CreateAccount' | translate }}</a>
                                 </div>
                             </div>
                         </div>
