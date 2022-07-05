@@ -1,31 +1,35 @@
-<div class="manager-user">
-  <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="users">
-
-      <ng-container matColumnDef="Full Name">
-        <th mat-header-cell *matHeaderCellDef> Full Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.fullName}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="User Name">
-        <th mat-header-cell *matHeaderCellDef> User Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="Role">
-        <th mat-header-cell *matHeaderCellDef> Role </th>
-        <td mat-cell *matCellDef="let element"> {{element.role}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="Email">
-        <th mat-header-cell *matHeaderCellDef> Email </th>
-        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-
+<div class="card shadow m-3">
+  <div class="card-header py-3">
+      <div class="m-0 fs-5 fw-normal text text-dark">{{'manageuser.Title' | translate}}</div>
+  </div>
+  <div class="card-body">
+      <div class="table-responsive">
+          <table class="table table-hover" width="100%">
+              <thead>
+                  <tr>
+                      <th>NO</th>
+                      <th>{{'manageuser.FullName' | translate}}</th>
+                      <th>{{'manageuser.UserName' | translate}}</th>
+                      <th>{{'manageuser.Role' | translate}}</th>
+                      <th>{{'manageuser.Email' | translate}}</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr style="line-height: 40px;" *ngFor="let item of users; let i = index" role="button">
+                    <td>{{i + 1}}</td>
+                      <td>
+                      <img class="manager-avatar me-1" src="../../../../assets/image/errorAvatar.png" alt="">
+                        {{item.fullName}}
+                      </td>
+                      <td>{{item.userName}}</td>
+                      <td>
+                        <span class="badge rounded-pill bg-success">{{item.role}}</span>
+                      </td>
+                      <td>{{item.email}}</td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
   </div>
 </div>
 

@@ -11,8 +11,8 @@ import { manageUserSelector } from '../../../../stores/manage-user/manage-user.s
   styleUrls: ['./manage-user.component.scss']
 })
 export class ManageUserComponent implements OnInit {
-  displayedColumns: string[] = ['Full Name', 'User Name', 'Role', 'Email'];
   users : UserForAdminManagerDto[] = [];
+  no : number[] = [];
 
   constructor(
     private store: Store,
@@ -29,6 +29,4 @@ export class ManageUserComponent implements OnInit {
       }
     );
   }
-
-
 }

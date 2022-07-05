@@ -16,6 +16,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       { baseTranslateUrl, moduleName: 'Authentication' },
       { baseTranslateUrl, moduleName: 'Header' },
       { baseTranslateUrl, moduleName: 'Login' },
+      { baseTranslateUrl, moduleName: 'ManageUser' },
     ],
     lowercaseNamespace: true,
   };
