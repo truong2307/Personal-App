@@ -18,18 +18,29 @@
                                     <mat-form-field class="example-full-width" appearance="legacy">
                                       <mat-label>{{ 'login.FullName' | translate }}</mat-label>
                                       <input type="text" matInput formControlName="fullName"
-                                             placeholder="{{ 'login.EnterFullName' | translate }}">
+                                             placeholder="{{ 'login.EnterUserName' | translate }}">
                                       <mat-error *ngIf="fullName?.errors && fullName?.touched"
                                       [innerHtml]="'login.FullNameError' | translate"
                                       >
                                       </mat-error>
                                     </mat-form-field>
+
+                                    <mat-form-field class="example-full-width" appearance="legacy">
+                                      <mat-label>{{ 'login.UserName' | translate }}</mat-label>
+                                      <input type="text" matInput formControlName="userName"
+                                             placeholder="{{ 'login.EnterFullName' | translate }}">
+                                      <mat-error *ngIf="userName?.errors && userName?.touched"
+                                      [innerHtml]="'login.UserNameError' | translate"
+                                      >
+                                      </mat-error>
+                                    </mat-form-field>
+
                                     <mat-form-field class="example-full-width" appearance="legacy">
                                       <mat-label>Email</mat-label>
                                       <input type="email" matInput formControlName="emailLogin"
                                              placeholder="Enter your mail">
                                       <mat-error *ngIf="emailLogin?.errors && emailLogin?.touched"
-                                      [innerHtml]="'login.EmailErrorRequire' | translate"
+                                      [innerHtml]="'login.EmailErrorFormat' | translate"
                                       >
                                       </mat-error>
                                     </mat-form-field>

@@ -16,19 +16,13 @@
                                 </div>
                                 <form class="user" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                                     <mat-form-field class="example-full-width" appearance="legacy">
-                                      <mat-label>Email</mat-label>
+                                      <mat-label>{{ 'login.EmailUserName' | translate }}</mat-label>
                                       <input type="email" matInput formControlName="emailLogin"
                                              placeholder="{{ 'login.EnterEmail' | translate }}">
-                                      <mat-error *ngIf="emailLogin?.errors?.['email']; else formatWrong"
-                                    [innerHtml]="'login.EmailErrorFormat' | translate"
-                                      >
-                                      </mat-error>
-                                      <ng-template #formatWrong>
                                         <mat-error *ngIf="emailLogin?.errors && emailLogin?.touched"
-                                        [innerHtml]="'login.EmailErrorRequire' | translate"
+                                        [innerHtml]="'login.EmailUserNameErrorRequire' | translate"
                                         >
                                         </mat-error>
-                                      </ng-template>
                                     </mat-form-field>
 
                                     <mat-form-field class="example-full-width" appearance="legacy">

@@ -1,5 +1,5 @@
 export interface UserLogin {
-  email: string;
+  EmailOrUserName: string;
   password: string;
   token?: string;
 }
@@ -8,6 +8,7 @@ export interface UserRegister {
   email: string;
   password: string,
   fullName: string,
+  userName: string,
   phoneNumber: string,
 }
 

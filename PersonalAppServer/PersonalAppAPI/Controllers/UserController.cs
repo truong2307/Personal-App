@@ -34,7 +34,6 @@ namespace PersonalAppAPI.Controllers
             try
             {
                 var userToDb = _mapper.Map<ApiUser>(userRequest);
-                userToDb.UserName = userRequest.Email;
                 var userResponse = await _userManager.CreateAsync(userToDb, userRequest.Password);
 
                 if (!userResponse.Succeeded)

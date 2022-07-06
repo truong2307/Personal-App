@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
 
   initialForm (){
     this.loginForm = new FormGroup({
-      emailLogin : new FormControl('', [Validators.required, Validators.email]),
+      emailLogin : new FormControl('', [Validators.required, Validators.minLength(5)]),
       password : new FormControl('', [Validators.required, Validators.pattern(this.patternValidatePassword)]),
     })
   }
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
     this.loader.start();
     const {emailLogin, ...data} = this.loginForm.value;
     this.userLogin = data;
-    this.userLogin.email = emailLogin;
+    this.userLogin.EmailOrUserName = emailLogin;
     this.store.dispatch(new AdminloginAction(this.userLogin));
     this.loader.stop();
   }

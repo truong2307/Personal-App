@@ -76,7 +76,12 @@ namespace PersonalApp.DataAccess.AuthenticationService
 
         public async Task<bool> ValidateUser(LoginUserDto userRequest)
         {
-            _user = await _userManager.FindByEmailAsync(userRequest.Email);
+            _user = await _userManager.FindByEmailAsync(userRequest.EmailOrUserName);
+            if (_user == null)
+            {
+                _user = await _userManager.FindByNameAsync(userRequest.EmailOrUserName);
+            }
+
             bool checkUserSuccess = await _userManager.CheckPasswordAsync(_user, userRequest.Password);
 
             if (_user != null && checkUserSuccess)
