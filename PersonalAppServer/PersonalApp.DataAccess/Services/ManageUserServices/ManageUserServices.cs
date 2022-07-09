@@ -35,8 +35,8 @@ namespace PersonalApp.DataAccess.Services.ManageUserServices
                 var currentUserId = _claimUserServices.GetCurrentUserId();
                 response.Datas = _userManager.Users
                     .Where(c => c.Id != currentUserId)
-                    .Skip(pageSize * pageIndex).Take(pageSize)
                     .OrderBy(c => c.UserName)
+                    .Skip(pageSize * pageIndex).Take(pageSize)
                     .Select(c => new UserForAdminManagerDto()
                     {
                         UserId = c.Id,

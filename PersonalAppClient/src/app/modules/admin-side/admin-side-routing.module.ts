@@ -10,12 +10,12 @@ const routes: Routes = [
   {
     path: '', component:AdminSideComponent,
     children:[
+      // {
+      //   path: '', component: HomeComponent,
+      //   canActivate : [GuardAdminSide],
+      // },
       {
-        path: '', component: HomeComponent,
-        canActivate : [GuardAdminSide],
-      },
-      {
-        path: 'calendar', component: CalendarComponent,
+        path: '', component: CalendarComponent,
         canActivate : [GuardAdminSide],
       },
       {

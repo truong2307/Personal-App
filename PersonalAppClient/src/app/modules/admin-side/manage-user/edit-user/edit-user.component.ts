@@ -53,7 +53,7 @@ export class EditUserComponent implements OnInit {
   }
 
   closeModal() {
-    this.activeModalService.close();
+    this.activeModalService.dismiss();
   }
 
   updateUser(){

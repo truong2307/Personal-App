@@ -19,6 +19,8 @@ export class ManageUserComponent implements OnInit {
   totalItem = 0;
   pageSize = 10;
   pageIndex = 0;
+  pageTotalOption = [10, 20, 30];
+  no = 0;
 
 
   constructor(
@@ -46,10 +48,11 @@ export class ManageUserComponent implements OnInit {
     var modalRef = this.modalService.open(EditUserComponent, {size: 'md'});
     modalRef.componentInstance.userInfo = data;
 
-    modalRef.result.then(() => {
+    modalRef.result.then((data) => {
       this.store.dispatch(new GetUsersAction(
         {pageIndex :this.pageIndex, pageSize: this.pageSize}
       ))
+    }, (reason) => {
     })
   }
 
@@ -60,5 +63,9 @@ export class ManageUserComponent implements OnInit {
     this.store.dispatch(new GetUsersAction(
       {pageIndex :this.pageIndex, pageSize: this.pageSize}
     ))
+  }
+
+  test(){
+    return this.no++;
   }
 }
