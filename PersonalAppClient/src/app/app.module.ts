@@ -72,7 +72,7 @@ export function tokenGetter() {
     NgxMatTimepickerModule,
     NgxMatNativeDateModule
   ],
-  providers: [GuardAdminSide,NgbActiveModal,],
+  providers: [GuardAdminSide,NgbActiveModal],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

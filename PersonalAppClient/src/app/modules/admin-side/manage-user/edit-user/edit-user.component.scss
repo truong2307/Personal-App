@@ -1,0 +1,10 @@
+.manager-avatar {
+  font-size: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+::ng-deep .cdk-overlay-container {
+  z-index: 1200 !important;
+}

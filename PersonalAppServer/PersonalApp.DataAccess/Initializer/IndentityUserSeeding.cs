@@ -9,8 +9,8 @@ namespace PersonalApp.DataAccess.Initializer
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApiUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        public IndentityUserSeeding(ApplicationDbContext context ,UserManager<ApiUser> userManager, RoleManager<IdentityRole> roleManager)
+        private readonly RoleManager<ApplicationRole> _roleManager;
+        public IndentityUserSeeding(ApplicationDbContext context ,UserManager<ApiUser> userManager, RoleManager<ApplicationRole> roleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -18,7 +18,7 @@ namespace PersonalApp.DataAccess.Initializer
         }
         public async Task Initialize()
         {
-            string[] roles = new string[] { Role.ADMIN_ROLE, Role.USER_ROLE };
+            string[] roles = new string[] { Role.ADMIN_ROLE, Role.USER_ROLE, Role.MANAGER_ROLE };
 
             foreach (string role in roles)
             {
@@ -26,7 +26,11 @@ namespace PersonalApp.DataAccess.Initializer
 
                 if (roleInDb == null)
                 {
-                    await _roleManager.CreateAsync(new IdentityRole(role));
+                    await _roleManager.CreateAsync(new ApplicationRole()
+                    {
+                        Name = role,
+                        Id = Guid.NewGuid().ToString(),
+                    });
                 }
             }
 

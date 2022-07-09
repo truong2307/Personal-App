@@ -1,0 +1,43 @@
+<div class="card">
+  <h5 class="card-header d-flex align-items-center justify-content-between">
+    {{'manageuser.UserInfo' | translate}}
+    <button
+    (click)="closeModal()"
+    mat-mini-fab color=""
+    aria-label="Example icon button with a menu icon">
+    <mat-icon>close</mat-icon>
+    </button>
+
+  </h5>
+
+  <div class="card-body" [formGroup]="updateUserForm">
+    <div class="d-flex align-items-center justify-content-start">
+      <img class="manager-avatar me-1" src="../../../../assets/image/errorAvatar.png" alt="">
+      <h5 class="ms-2 card-title">{{userInfo.fullName}}</h5>
+    </div>
+    <div class="mt-2">
+      <p class="d-flex align-items-center">
+        <span class="badge bg-danger"><i class="fa-solid fa-envelope"></i></span>
+        <span class="ms-2 fs-6 fw-bold">{{userInfo.email}}</span>
+    </p>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Roles</mat-label>
+        <mat-select formControlName="role">
+          <mat-option
+          *ngFor="let item of roles"
+          [value]="item.name">
+            {{item.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </p>
+      <button mat-raised-button color="primary"
+      style="min-width: 90px;"
+      (click)="updateUser()"
+      >
+      {{'common.Save' | translate}}
+    </button>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 ﻿using PersonalApp.Models.Entities;
+using PersonalApp.Models.Identity;
 
 namespace PersonalApp.DataAccess.Data.Repository.IRepository
 {
@@ -6,6 +7,7 @@ namespace PersonalApp.DataAccess.Data.Repository.IRepository
     {
         IGenericRepository<Event> Events { get; }
         IGenericRepository<Notification> Notifications { get; }
+        IGenericRepository<ApplicationRole> ApplicationRoles { get; }
         Task<bool> SaveChangeAsync();
     }
 }

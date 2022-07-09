@@ -6,6 +6,7 @@ using PersonalApp.DataAccess.Initializer;
 using PersonalApp.DataAccess.Services.ClaimUserServices;
 using PersonalApp.DataAccess.Services.EventServices;
 using PersonalApp.DataAccess.Services.ManageUserServices;
+using PersonalApp.DataAccess.Services.MasterDataServices;
 using PersonalApp.DataAccess.Services.NotificationServices;
 
 namespace PersonalAppAPI.ConfigureServicesExtension
@@ -24,6 +25,7 @@ namespace PersonalAppAPI.ConfigureServicesExtension
                 ServiceDescriptor.Scoped<INotificationServices, NotificationServices>(),
                 ServiceDescriptor.Scoped<IClaimUserServices, ClaimUserServices>(),
                 ServiceDescriptor.Scoped<IManageUserServices, ManageUserServices>(),
+                ServiceDescriptor.Scoped<IMasterDataServices, MasterDataServices>(),
             });
         }
     }

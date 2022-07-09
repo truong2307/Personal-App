@@ -1,4 +1,5 @@
 {
   "Error": "Load data from server fail",
-  "Success": "Success"
+  "Success": "Success",
+  "Save": "Save"
 }

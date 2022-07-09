@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { UserForAdminManagerDto } from "src/shared/model/User.interface";
+import { UpdateUser, UserForAdminManagerDto } from "src/shared/model/User.interface";
 
 export const GET_USERS = 'GET_USERS';
 export const UPDATE_USER = 'UPDATE_USER';
@@ -18,11 +18,12 @@ export class GetUsersSuccessAction implements Action{
 
 export class UpdateUsersAction implements Action{
   readonly type = UPDATE_USER;
+  constructor(public user: UpdateUser){};
 }
 
 export class UpdateUsersSuccessAction implements Action{
   readonly type = UPDATE_USER_SUCCESS;
-  constructor(public user: UserForAdminManagerDto){}
+  constructor(){}
 }
 
 export class FetchDataErrorAction implements Action{

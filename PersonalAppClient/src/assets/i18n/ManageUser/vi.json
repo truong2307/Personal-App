@@ -3,5 +3,6 @@
   "FullName": "Họ và tên",
   "UserName" : "Tên",
   "Role" : "Vai trò",
-  "Email" : "Email"
+  "Email" : "Email",
+  "UserInfo" : "Thông tin người dùng"
 }

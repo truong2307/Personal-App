@@ -13,8 +13,14 @@ export interface UserRegister {
 }
 
 export interface UserForAdminManagerDto {
+  userId: string,
   fullName: string,
   userName: string,
   role: string,
   email: string,
+}
+
+export interface UpdateUser {
+  userId: string,
+  role: string,
 }

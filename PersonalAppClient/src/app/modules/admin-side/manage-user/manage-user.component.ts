@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { UserForAdminManagerDto } from 'src/shared/model/User.interface';
 import { GetUsersAction } from 'src/stores/manage-user/manage-user.action';
 import { manageUserSelector } from '../../../../stores/manage-user/manage-user.selector';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 @Component({
   selector: 'app-manage-user',
@@ -12,11 +14,11 @@ import { manageUserSelector } from '../../../../stores/manage-user/manage-user.s
 })
 export class ManageUserComponent implements OnInit {
   users : UserForAdminManagerDto[] = [];
-  no : number[] = [];
 
   constructor(
     private store: Store,
     private loader: NgxUiLoaderService,
+    private modalService: NgbModal,
   ) { }
 
   ngOnInit(): void {
@@ -28,5 +30,10 @@ export class ManageUserComponent implements OnInit {
         this.loader.stop();
       }
     );
+  }
+
+  editUser(data: UserForAdminManagerDto){
+    var modalRef = this.modalService.open(EditUserComponent, {size: 'md'});
+    modalRef.componentInstance.userInfo = data;
   }
 }

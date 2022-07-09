@@ -1,4 +1,5 @@
 {
   "error": "Không load được data từ server",
-  "Success": "Thành công"
+  "Success": "Thành công",
+  "Save": "Lưu"
 }

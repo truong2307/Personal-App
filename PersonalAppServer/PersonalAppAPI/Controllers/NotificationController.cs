@@ -16,19 +16,6 @@ namespace PersonalAppAPI.Controllers
             _notificationServices = notificationServices;
         }
 
-        /// <summary>
-        /// test
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] NotificationCreateDto model)
-        {
-            if (!ModelState.IsValid) return BadRequest(ModelState.Values.ToString());
-            var result = await _notificationServices.CreateNotification(model);
-            return result.IsSuccess ? Ok(result) : BadRequest(result.ErrorMessages);
-        }
-
         [HttpPut("update-notification")]
         public async Task<IActionResult> UpdateNotification([FromBody] NotificationUpdateDto model)
         {

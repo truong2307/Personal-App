@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using PersonalApp.Models.Dto;
 using PersonalApp.Models.Entities;
 using PersonalApp.Models.Identity;
@@ -16,6 +17,7 @@ namespace PersonalAppAPI.MapperConfig
             CreateMap<Notification, NotificationCreateDto>().ReverseMap();
             CreateMap<Notification, NotificationUpdateDto>().ReverseMap();
             CreateMap<Notification, NotificationDto>().ReverseMap(); 
+            CreateMap<ApplicationRole, RoleDto>().ReverseMap();
         }
     }
 }

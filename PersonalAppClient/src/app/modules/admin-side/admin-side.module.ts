@@ -13,19 +13,23 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { TranslateModule } from '@ngx-translate/core';
 import { ManageUserComponent } from './manage-user/manage-user.component';
+import { EditUserComponent } from './manage-user/edit-user/edit-user.component';
+import { SharedModule } from 'src/shared/shared.module';
 
 @NgModule({
   declarations: [
     HomeComponent,
     CalendarComponent,
     AddEventComponent,
-    ManageUserComponent
+    ManageUserComponent,
+    EditUserComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     AdminSideRoutingModule,
     FormsModule,
+    SharedModule,
     MaterialExampleModule,
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,

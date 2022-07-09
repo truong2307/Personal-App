@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Primitives;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PersonalApp.DataAccess.Data;
@@ -20,7 +19,7 @@ namespace PersonalAppAPI.ConfigureServicesExtension
                 options.User.RequireUniqueEmail = true;
             });
 
-            services.AddIdentity<ApiUser, IdentityRole>().AddDefaultTokenProviders()
+            services.AddIdentity<ApiUser, ApplicationRole>().AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
         }
 

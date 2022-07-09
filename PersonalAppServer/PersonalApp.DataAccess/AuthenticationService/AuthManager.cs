@@ -38,11 +38,11 @@ namespace PersonalApp.DataAccess.AuthenticationService
 
 
             var token = new JwtSecurityToken(
-                issuer: jwtSettings.GetSection("Issuer").Value,
-                claims: claims,
-                expires: expiration,
-                signingCredentials: signingCredentials
-                );
+                        issuer: jwtSettings.GetSection("Issuer").Value,
+                        claims: claims,
+                        expires: expiration,
+                        signingCredentials: signingCredentials
+                        );
 
             return token;
         }
@@ -84,10 +84,7 @@ namespace PersonalApp.DataAccess.AuthenticationService
 
             bool checkUserSuccess = await _userManager.CheckPasswordAsync(_user, userRequest.Password);
 
-            if (_user != null && checkUserSuccess)
-            {
-                return true;
-            }
+            if (_user != null && checkUserSuccess) return true;
             return false;
         }
     }

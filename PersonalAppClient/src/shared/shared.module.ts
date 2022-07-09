@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { LoginComponent } from './components/login/login.component';
-import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
 import { ErrorComponent } from './components/error/error.component';
@@ -10,6 +9,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { HeaderComponent } from './components/header/header.component';
 import { MaterialExampleModule } from './material/material.module';
 import { SelectLanguageComponent } from './components/select-language/select-language.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -21,11 +22,12 @@ import { SelectLanguageComponent } from './components/select-language/select-lan
     ErrorComponent,
     HeaderComponent,
     SelectLanguageComponent,
+    PaginationComponent,
   ],
   imports: [
     CommonModule,
-    AppRoutingModule,
     FormsModule,
+    RouterModule,
     ReactiveFormsModule,
     TranslateModule,
     MaterialExampleModule,
@@ -36,6 +38,7 @@ import { SelectLanguageComponent } from './components/select-language/select-lan
     RegisterComponent,
     HeaderComponent,
     SelectLanguageComponent,
+    PaginationComponent,
   ]
 })
 export class SharedModule { }

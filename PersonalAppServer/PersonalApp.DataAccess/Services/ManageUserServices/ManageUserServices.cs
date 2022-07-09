@@ -10,17 +10,16 @@ namespace PersonalApp.DataAccess.Services.ManageUserServices
     {
         private readonly UserManager<ApiUser> _userManager;
         private readonly IClaimUserServices _claimUserServices;
-        private readonly IMapper _mapper;
+        private readonly ResponseDto _responseDto;
 
         public ManageUserServices(
             UserManager<ApiUser> userManager
             , IClaimUserServices claimUserServices
-            , IMapper mapper
             )
         {
-            _mapper = mapper;
             _claimUserServices = claimUserServices;
             _userManager = userManager;
+            _responseDto = new ResponseDto();
         }
 
         public Task<ResponseDto> BlockUser(string userId)
@@ -38,6 +37,7 @@ namespace PersonalApp.DataAccess.Services.ManageUserServices
                     .Where(c => c.Id != currentUserId)
                     .Select(c => new UserForAdminManagerDto()
                     {
+                        UserId = c.Id,
                         UserName = c.UserName,
                         FullName = c.FullName,
                         Email = c.Email,
@@ -54,9 +54,29 @@ namespace PersonalApp.DataAccess.Services.ManageUserServices
             return response;
         }
 
-        public Task<ResponseDto> UpdateUser(UserForAdminManagerDto model)
+        public async Task<ResponseDto> UpdateUser(UpdateUserDto model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var userInDb = await _userManager.FindByIdAsync(model.UserId);
+                if (userInDb == null)
+                {
+                    _responseDto.IsSuccess = false;
+                    _responseDto.ErrorMessages = "User not exist in system";
+                    return _responseDto;
+                }
+                await _userManager.RemoveFromRolesAsync(userInDb
+                    , await _userManager.GetRolesAsync(userInDb));
+
+                await _userManager.AddToRoleAsync(userInDb, model.Role);
+            }
+            catch (Exception ex)
+            {
+                _responseDto.IsSuccess = false;
+                _responseDto.ErrorMessages = ex.ToString();
+            }
+
+            return _responseDto;
         }
     }
 }

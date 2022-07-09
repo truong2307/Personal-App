@@ -5,7 +5,7 @@ using PersonalApp.Models.Identity;
 
 namespace PersonalApp.DataAccess.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApiUser>
+    public class ApplicationDbContext : IdentityDbContext<ApiUser, ApplicationRole, string>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
