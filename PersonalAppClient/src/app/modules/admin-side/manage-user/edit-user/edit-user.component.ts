@@ -52,10 +52,6 @@ export class EditUserComponent implements OnInit {
     return this.updateUserForm.get('role');
   }
 
-  load(){
-    return this.store.dispatch(new GetUsersAction())
-  }
-
   closeModal() {
     this.activeModalService.close();
   }
@@ -64,8 +60,6 @@ export class EditUserComponent implements OnInit {
     const data = this.updateUserForm.value
     this.store.dispatch(new UpdateUsersAction(data))
 
-    this.activeModalService.close();
-    setTimeout(() => this.load(), 200);
+    setTimeout(() => this.activeModalService.close(), 80);
   }
-
 }

@@ -12,8 +12,8 @@ export class ManageUserService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getUsers() : Observable<ResponseDatas>{
-    return this.httpClient.get(environment.baseUri + 'manage-user/get-users');
+  getUsers(pageIndex: number, pageSize: number) : Observable<ResponseDatas>{
+    return this.httpClient.get(environment.baseUri + `manage-user/get-users/${pageIndex}/${pageSize}`);
   }
 
   updateUser(data: UpdateUser) : Observable<ResponseDatas>{

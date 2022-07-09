@@ -9,7 +9,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { HeaderComponent } from './components/header/header.component';
 import { MaterialExampleModule } from './material/material.module';
 import { SelectLanguageComponent } from './components/select-language/select-language.component';
-import { PaginationComponent } from './components/pagination/pagination.component';
 import { RouterModule } from '@angular/router';
 
 
@@ -22,7 +21,6 @@ import { RouterModule } from '@angular/router';
     ErrorComponent,
     HeaderComponent,
     SelectLanguageComponent,
-    PaginationComponent,
   ],
   imports: [
     CommonModule,
@@ -38,7 +36,6 @@ import { RouterModule } from '@angular/router';
     RegisterComponent,
     HeaderComponent,
     SelectLanguageComponent,
-    PaginationComponent,
   ]
 })
 export class SharedModule { }

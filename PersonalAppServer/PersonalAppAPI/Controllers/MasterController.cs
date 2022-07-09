@@ -17,7 +17,7 @@ namespace PersonalAppAPI.Controllers
         }
 
         [HttpGet("get-roles")]
-        public async Task<IActionResult> GetEvents()
+        public async Task<IActionResult> GetRoles()
         {
             var result = await _masterDataServices.GetRoles();
             return result.IsSuccess ? Ok(result) : BadRequest(result.ErrorMessages);

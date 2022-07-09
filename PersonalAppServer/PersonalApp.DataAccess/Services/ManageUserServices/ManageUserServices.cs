@@ -27,7 +27,7 @@ namespace PersonalApp.DataAccess.Services.ManageUserServices
             throw new NotImplementedException();
         }
 
-        public async Task<ResponseDatas<UserForAdminManagerDto>> GetAllUser()
+        public async Task<ResponseDatas<UserForAdminManagerDto>> GetAllUser(int pageIndex, int pageSize)
         {
             var response = new ResponseDatas<UserForAdminManagerDto>();
             try
@@ -35,6 +35,8 @@ namespace PersonalApp.DataAccess.Services.ManageUserServices
                 var currentUserId = _claimUserServices.GetCurrentUserId();
                 response.Datas = _userManager.Users
                     .Where(c => c.Id != currentUserId)
+                    .Skip(pageSize * pageIndex).Take(pageSize)
+                    .OrderBy(c => c.UserName)
                     .Select(c => new UserForAdminManagerDto()
                     {
                         UserId = c.Id,
@@ -43,6 +45,8 @@ namespace PersonalApp.DataAccess.Services.ManageUserServices
                         Email = c.Email,
                         Role = string.Join(",", _userManager.GetRolesAsync(c).Result.ToArray())
                     }).ToList();
+
+                response.TotalItem = _userManager.Users.Where(c => c.Id != currentUserId).Count();
             }
             catch (Exception ex)
             {

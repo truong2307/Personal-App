@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PersonalApp.DataAccess.Services.NotificationServices;
+using PersonalApp.DataAccess.Utility.BaseURI;
 using PersonalApp.Models.Dto;
 
 namespace PersonalAppAPI.Controllers
 {
     [Route("api/notifications")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = Role.ADMIN_ROLE)]
     public class NotificationController : ControllerBase
     {
         private readonly INotificationServices _notificationServices;

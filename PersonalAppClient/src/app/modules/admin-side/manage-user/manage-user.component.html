@@ -3,6 +3,7 @@
       <div class="m-0 fs-5 fw-normal text text-dark">{{'manageuser.Title' | translate}}</div>
   </div>
   <div class="card-body">
+    <!-- <div>None data</div> -->
       <div class="table-responsive">
           <table class="table table-hover" width="100%">
               <thead>
@@ -32,9 +33,15 @@
                   </tr>
               </tbody>
           </table>
+          <mat-paginator
+          [length]="totalItem"
+          [pageSizeOptions]="[10, 20, 30]"
+          (page)="changePageEvent($event)"
+          aria-label="Select page">
+          </mat-paginator>
       </div>
   </div>
-  <app-pagination></app-pagination>
+
 </div>
 
 

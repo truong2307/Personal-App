@@ -12,6 +12,7 @@
         public bool IsSuccess { get; set; } = true;
         public List<T> Datas { get; set; }
         public string ErrorMessages { get; set; } = "";
+        public int? TotalItem { get; set; }
     }
 
 }

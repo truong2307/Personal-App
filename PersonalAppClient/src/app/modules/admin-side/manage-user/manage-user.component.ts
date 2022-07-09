@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { PageEvent } from '@angular/material/paginator';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { UserForAdminManagerDto } from 'src/shared/model/User.interface';
@@ -13,7 +14,12 @@ import { EditUserComponent } from './edit-user/edit-user.component';
   styleUrls: ['./manage-user.component.scss']
 })
 export class ManageUserComponent implements OnInit {
+
   users : UserForAdminManagerDto[] = [];
+  totalItem = 0;
+  pageSize = 10;
+  pageIndex = 0;
+
 
   constructor(
     private store: Store,
@@ -22,18 +28,37 @@ export class ManageUserComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.store.dispatch(new GetUsersAction());
+    this.store.dispatch(new GetUsersAction(
+      {pageIndex :this.pageIndex, pageSize: this.pageSize}
+      ));
     this.loader.start();
     this.store.pipe(select(manageUserSelector)).subscribe(
       result => {
         this.users = result.items;
+        this.totalItem = result.totalItem
         this.loader.stop();
       }
     );
   }
 
+
   editUser(data: UserForAdminManagerDto){
     var modalRef = this.modalService.open(EditUserComponent, {size: 'md'});
     modalRef.componentInstance.userInfo = data;
+
+    modalRef.result.then(() => {
+      this.store.dispatch(new GetUsersAction(
+        {pageIndex :this.pageIndex, pageSize: this.pageSize}
+      ))
+    })
+  }
+
+  changePageEvent(event: PageEvent){
+    this.pageSize = event.pageSize;
+    this.pageIndex = event.pageIndex
+
+    this.store.dispatch(new GetUsersAction(
+      {pageIndex :this.pageIndex, pageSize: this.pageSize}
+    ))
   }
 }

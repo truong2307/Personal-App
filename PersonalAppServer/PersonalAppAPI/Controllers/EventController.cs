@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PersonalApp.DataAccess.Services.EventServices;
+using PersonalApp.DataAccess.Utility.BaseURI;
 using PersonalApp.Models.Dto;
 
 namespace PersonalAppAPI.Controllers
 {
     [Route("api/events")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = Role.ADMIN_ROLE)]
     public class EventController : ControllerBase
     {
         private readonly IEventServices _eventServices;

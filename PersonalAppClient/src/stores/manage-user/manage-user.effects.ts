@@ -19,10 +19,10 @@ export class ManageUserEffects {
 
   getUsers$ = createEffect(() => this.action$.pipe(
     ofType(ManageUserAction.GET_USERS),
-    switchMap(() =>
-      this.service.getUsers().pipe(
+    switchMap((data : any) =>
+      this.service.getUsers(data.payload.pageIndex, data.payload.pageSize).pipe(
         map((results : ResponseDatas) => {
-          return new ManageUserAction.GetUsersSuccessAction(results.datas);
+          return new ManageUserAction.GetUsersSuccessAction(results.datas, results.totalItem);
         }),
         catchError(error =>
           of(new ManageUserAction.FetchDataErrorAction(error))

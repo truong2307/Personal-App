@@ -7,5 +7,6 @@ export interface ResponseData {
 export interface ResponseDatas {
   isSuccess?: boolean,
   datas?: any,
-  errorMessages?: string
+  errorMessages?: string,
+  totalItem?: number,
 }

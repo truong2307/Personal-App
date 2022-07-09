@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PersonalApp.DataAccess.Services.ManageUserServices;
-using PersonalApp.DataAccess.Services.MasterDataServices;
+using PersonalApp.DataAccess.Utility.BaseURI;
 using PersonalApp.Models.Dto;
 
 namespace PersonalAppAPI.Controllers
 {
     [Route("api/manage-user")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = Role.ADMIN_ROLE)]
     public class ManageUsersController : ControllerBase
     {
         private readonly IManageUserServices _manageUserServices;
@@ -19,10 +19,10 @@ namespace PersonalAppAPI.Controllers
             _manageUserServices = manageUserServices;
         }
 
-        [HttpGet("get-users")]
-        public async Task<IActionResult> GetUsers()
+        [HttpGet("get-users/{pageIndex:int}/{pageSize:int}")]
+        public async Task<IActionResult> GetUsers(int pageIndex, int pageSize)
         {
-            var result = await _manageUserServices.GetAllUser();
+            var result = await _manageUserServices.GetAllUser(pageIndex, pageSize);
             return result.IsSuccess ? Ok(result) : BadRequest(result.ErrorMessages);
         }
 

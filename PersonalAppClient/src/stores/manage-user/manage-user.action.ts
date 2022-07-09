@@ -9,11 +9,12 @@ export const FETCH_DATA_ERROR = 'FETCH_DATA_ERROR';
 
 export class GetUsersAction implements Action{
   readonly type = GET_USERS;
+  constructor(public payload: any){}
 }
 
 export class GetUsersSuccessAction implements Action{
   readonly type = GET_USERS_SUCCESS;
-  constructor(public users: UserForAdminManagerDto[]){}
+  constructor(public users: UserForAdminManagerDto[], public totalItem: any){}
 }
 
 export class UpdateUsersAction implements Action{
