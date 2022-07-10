@@ -8,7 +8,7 @@ using Swashbuckle.AspNetCore.Filters;
 using System.Reflection;
 using System.Text;
 
-namespace PersonalAppAPI.ConfigureServicesExtension
+namespace PersonalApp.ConfigureServicesExtension
 {
     public static class ServicesExtensions
     {

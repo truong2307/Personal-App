@@ -6,7 +6,7 @@ using PersonalApp.DataAccess.Utility.BaseURI;
 using PersonalApp.Models.Dto;
 using PersonalApp.Models.Identity;
 
-namespace PersonalAppAPI.Controllers
+namespace PersonalApp.Controllers
 {
     [Route("api/user")]
     [ApiController]

@@ -4,7 +4,7 @@ using PersonalApp.Models.Dto;
 using PersonalApp.Models.Entities;
 using PersonalApp.Models.Identity;
 
-namespace PersonalAppAPI.MapperConfig
+namespace PersonalApp.MapperConfig
 {
     public class MapperInitilizer : Profile
     {

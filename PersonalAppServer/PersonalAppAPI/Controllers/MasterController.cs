@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PersonalApp.DataAccess.Services.MasterDataServices;
 
-namespace PersonalAppAPI.Controllers
+namespace PersonalApp.Controllers
 {
     [Route("api/master-data")]
     [ApiController]

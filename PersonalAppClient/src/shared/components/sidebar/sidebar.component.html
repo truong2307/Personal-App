@@ -65,15 +65,17 @@
       <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg"  style="height:100%;">
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
-          <li class="nav-item" >
+          <!-- <li class="nav-item" >
             <a routerLink="/admin" class="nav-link text-white"  aria-current="page" routerLinkActive="active"
             [routerLinkActiveOptions]="{exact: true}">
               <i class="fa-solid fa-house icon"></i>
               <span *ngIf="!closeSidebar">{{ 'home.Home' | translate }}</span>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item" >
-            <a routerLink="/admin/calendar" class="nav-link text-white" routerLinkActive="active">
+            <a routerLink="/admin" class="nav-link text-white" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}"
+            >
               <i class="fa-solid fa-calendar icon"></i>
               <span *ngIf="!closeSidebar">{{ 'home.Calendar' | translate }}</span>
             </a>

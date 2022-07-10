@@ -9,7 +9,7 @@ using PersonalApp.DataAccess.Services.ManageUserServices;
 using PersonalApp.DataAccess.Services.MasterDataServices;
 using PersonalApp.DataAccess.Services.NotificationServices;
 
-namespace PersonalAppAPI.ConfigureServicesExtension
+namespace PersonalApp.ConfigureServicesExtension
 {
     public static class AppModule
     {

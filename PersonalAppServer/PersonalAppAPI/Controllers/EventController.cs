@@ -4,7 +4,7 @@ using PersonalApp.DataAccess.Services.EventServices;
 using PersonalApp.DataAccess.Utility.BaseURI;
 using PersonalApp.Models.Dto;
 
-namespace PersonalAppAPI.Controllers
+namespace PersonalApp.Controllers
 {
     [Route("api/events")]
     [ApiController]
