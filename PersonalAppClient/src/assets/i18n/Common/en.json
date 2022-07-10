@@ -1,5 +1,8 @@
 {
   "Error": "Load data from server fail",
   "Success": "Success",
-  "Save": "Save"
+  "Save": "Save",
+  "LabelPagination": "Items/page",
+  "NextPage": "Next page",
+  "PreviousPage": "Previous Page"
 }

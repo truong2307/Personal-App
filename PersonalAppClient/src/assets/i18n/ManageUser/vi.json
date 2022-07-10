@@ -4,5 +4,6 @@
   "UserName" : "Tên",
   "Role" : "Vai trò",
   "Email" : "Email",
-  "UserInfo" : "Thông tin người dùng"
+  "UserInfo" : "Thông tin người dùng",
+  "NO":"STT"
 }

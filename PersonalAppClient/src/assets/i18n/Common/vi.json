@@ -1,5 +1,8 @@
 {
   "error": "Không load được data từ server",
   "Success": "Thành công",
-  "Save": "Lưu"
+  "Save": "Lưu",
+  "LabelPagination": "Items/Trang",
+  "NextPage": "Trang tiếp theo",
+  "PreviousPage": "Trang trước"
 }

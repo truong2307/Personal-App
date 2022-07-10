@@ -4,5 +4,6 @@
   "UserName" : "User Name",
   "Role" : "Role",
   "Email" : "Email",
-  "UserInfo" : "User Info"
+  "UserInfo" : "User Info",
+  "NO":"NO."
 }

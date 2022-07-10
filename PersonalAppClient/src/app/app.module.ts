@@ -20,10 +20,12 @@ import { MaterialExampleModule } from 'src/shared/material/material.module';
 import { environment } from 'src/environments/environment';
 import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { EventsModule } from 'src/stores/events/events.module';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/services/translate-service.service';
 import { NotificationsModule } from 'src/stores/notification/notification.module';
 import { ManageUserModule } from 'src/stores/manage-user/manage-user.module';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { CustomMatPaginationService } from 'src/services/custom-mat-pagination.service';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -72,7 +74,10 @@ export function tokenGetter() {
     NgxMatTimepickerModule,
     NgxMatNativeDateModule
   ],
-  providers: [GuardAdminSide,NgbActiveModal],
+  providers: [GuardAdminSide,NgbActiveModal,{
+    provide: MatPaginatorIntl,
+    useClass: CustomMatPaginationService
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
