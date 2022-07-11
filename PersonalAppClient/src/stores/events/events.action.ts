@@ -9,7 +9,6 @@ export const GET_EVENT = 'GET_EVENT';
 export const GET_EVENT_SUCCESS = 'GET_EVENT_SUCCESS';
 export const UPDATE_EVENT = 'UPDATE_EVENT';
 export const DELETE_EVENT = 'DELETE_EVENT';
-export const CRUD_EVENT_SUCCESS = 'CRUD_EVENT_SUCCESS';
 export const CRUD_EVENT_FAILED = 'CRUD_EVENT_FAILED';
 
 export class GetEventsAction implements Action{
@@ -51,10 +50,6 @@ export class DeleteEventAction implements Action{
   constructor(public id: number){}
 }
 
-export class CrudEventSuccessAction implements Action{
-  readonly type = CRUD_EVENT_SUCCESS;
-}
-
 export class CrudEventFailedAction implements Action{
   readonly type = CRUD_EVENT_FAILED;
   constructor(public error: string){}
@@ -69,5 +64,4 @@ export type EventAction =
 | UpdateEventAction
 | DeleteEventAction
 | CrudEventFailedAction
-| CrudEventSuccessAction
 | CreateEventSuccessAction

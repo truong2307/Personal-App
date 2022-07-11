@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { colors } from 'src/shared/const/dateOfWeek';
 import { EventCalendar } from 'src/shared/model/Event.interface';
 
-import { CreateEventAction, DeleteEventAction, GetEventsAction, UpdateEventAction } from 'src/stores/events/events.action';
+import { CreateEventAction, DeleteEventAction, UpdateEventAction } from 'src/stores/events/events.action';
 
 @Component({
   selector: 'app-add-event',
@@ -82,15 +82,10 @@ export class AddEventComponent implements OnInit {
     this.activeModalService.close();
   }
 
-  load(){
-    return this.store.dispatch(new GetEventsAction())
-  }
-
   addEvent(){
     const data = this.addEventForm.value;
     this.store.dispatch(new CreateEventAction(data));
     this.activeModalService.close();
-    setTimeout(() => this.load(), 200);
   }
 
   changeColor(color: any){
@@ -102,13 +97,11 @@ export class AddEventComponent implements OnInit {
     data.id = this.initialEvent.id;
     this.store.dispatch(new UpdateEventAction(data))
     this.activeModalService.close();
-    setTimeout(() => this.load(), 200);
   }
 
   removeEvent(id: any){
     this.store.dispatch(new DeleteEventAction(id));
     this.activeModalService.close();
-    setTimeout(() => this.load(), 200);
   }
 
 }

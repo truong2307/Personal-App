@@ -42,53 +42,55 @@ export class EventEffects {
     ofType(eventAction.CREATE_EVENT),
     switchMap((event) =>
       this.service.addEvent(event['event']).pipe(
-        tap((result) => {
+        map(result => {
           this.toastr.success(
             this.translate.instant('calendar.AddEventSuccess')
           )
+          return new eventAction.GetEventsAction();
         }),
         catchError(error =>
           of(new eventAction.CrudEventFailedAction(error)))
       )
     )
   ),
-  { dispatch: false }
   )
 
   deleteEvent$ = createEffect(() => this.action$.pipe(
     ofType(eventAction.DELETE_EVENT),
     switchMap((event) =>
       this.service.deleteEvents(event['id']).pipe(
-        tap((result) => {
+        map(result => {
           if(result.isSuccess){
             this.toastr.success(
               this.translate.instant('calendar.RemoveEventSuccess')
             )
           }
+          return new eventAction.GetEventsAction();
         }),
         catchError(error =>
           of(new eventAction.CrudEventFailedAction(error)))
       )
     )
   ),
-  { dispatch: false }
   )
 
   updateEvent$ = createEffect(() => this.action$.pipe(
     ofType(eventAction.UPDATE_EVENT),
     switchMap((event) => this.service.updateEvents(event['event']).pipe(
-      tap(result => {
+      map(result => {
         if(result.isSuccess){
           this.toastr.success(
             this.translate.instant('calendar.UpdateEventSuccess')
           )
         }
-      })
+        return new eventAction.GetEventsAction();
+      }),
+      catchError(error =>
+        of(new eventAction.CrudEventFailedAction(error)
+        )
+        )
     )),
-    catchError(error =>
-      of(new eventAction.CrudEventFailedAction(error)))
   ),
-  { dispatch: false }
   )
 
   crudEventFailedAction$ = createEffect(() => this.action$.pipe(
@@ -101,16 +103,4 @@ export class EventEffects {
   ),
     { dispatch: false }
   );
-
-  crudEventSuccessAction$ = createEffect(() => this.action$.pipe(
-    ofType(eventAction.CRUD_EVENT_SUCCESS),
-    tap((error) => {
-      this.toastr.success(
-        this.translate.instant('common.Success')
-      )
-    })
-  ),
-    { dispatch: false }
-  );
-
 }

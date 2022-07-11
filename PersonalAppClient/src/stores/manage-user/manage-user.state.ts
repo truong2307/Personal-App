@@ -4,4 +4,6 @@ export interface ManageUserState {
   items: UserForAdminManagerDto[];
   totalItem: number;
   error?: string;
+  pageIndex :number;
+  pageSize :number;
 }

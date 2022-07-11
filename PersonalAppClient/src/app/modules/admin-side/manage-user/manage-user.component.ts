@@ -4,7 +4,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { UserForAdminManagerDto } from 'src/shared/model/User.interface';
-import { GetUsersAction } from 'src/stores/manage-user/manage-user.action';
+import { GetUsersAction, UpdateUsersAction } from 'src/stores/manage-user/manage-user.action';
 import { manageUserSelector } from '../../../../stores/manage-user/manage-user.selector';
 import { EditUserComponent } from './edit-user/edit-user.component';
 
@@ -48,11 +48,9 @@ export class ManageUserComponent implements OnInit {
     var modalRef = this.modalService.open(EditUserComponent, {size: 'md'});
     modalRef.componentInstance.userInfo = data;
 
-    modalRef.result.then((data) => {
-      this.store.dispatch(new GetUsersAction(
-        {pageIndex :this.pageIndex, pageSize: this.pageSize}
-      ))
-    }, (reason) => {
+    modalRef.componentInstance.dataUser.subscribe((data : any) => {
+      manageUserSelector.release();
+      this.store.dispatch(new UpdateUsersAction(data));
     })
   }
 

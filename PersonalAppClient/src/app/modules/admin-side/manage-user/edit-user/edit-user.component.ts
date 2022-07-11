@@ -1,14 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { MasterDataService } from 'src/services/master-data.service';
 import { ResponseDatas } from 'src/shared/model/ResponseData.interface';
 import { Role } from 'src/shared/model/Role.interface';
 import { UserForAdminManagerDto } from 'src/shared/model/User.interface';
-import { GetUsersAction, UpdateUsersAction } from 'src/stores/manage-user/manage-user.action';
 
 @Component({
   selector: 'app-edit-user',
@@ -20,13 +18,13 @@ export class EditUserComponent implements OnInit {
   roles: Role[] = [];
   userInfo!: UserForAdminManagerDto;
   updateUserForm!: FormGroup;
+  @Output() dataUser = new EventEmitter();
 
   constructor(
     private activeModalService: NgbActiveModal,
     private services : MasterDataService,
     private toastr: ToastrService,
     private translate: TranslateService,
-    private store: Store,
   ) { }
 
   ngOnInit(): void {
@@ -58,8 +56,7 @@ export class EditUserComponent implements OnInit {
 
   updateUser(){
     const data = this.updateUserForm.value
-    this.store.dispatch(new UpdateUsersAction(data))
-
-    setTimeout(() => this.activeModalService.close(), 80);
+    this.dataUser.emit(data);
+    this.activeModalService.close();
   }
 }

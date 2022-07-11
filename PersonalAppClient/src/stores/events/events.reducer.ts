@@ -29,8 +29,6 @@ export function eventReducer(
       return {...state, item: action.event};
     case EventAction.DELETE_EVENT:
       return {...state, idEvent: action.id};
-    case EventAction.CRUD_EVENT_SUCCESS:
-      return {...state};
     case EventAction.CRUD_EVENT_FAILED:
       return {...state, error : action.error};
     case EventAction.CREATE_EVENT_SUCCESS:
