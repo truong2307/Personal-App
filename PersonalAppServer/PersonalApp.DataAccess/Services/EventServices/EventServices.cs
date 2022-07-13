@@ -51,7 +51,7 @@ namespace PersonalApp.DataAccess.Services.EventServices
 
                 await _notificationServices.CreateNotification(notificationNew);
 
-                _responseDto.Result = model;
+                _responseDto.Result = _mapper.Map<EventDto>(eventToDb);
             }
             catch (Exception ex)
             {

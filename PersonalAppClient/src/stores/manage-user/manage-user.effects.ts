@@ -7,12 +7,12 @@ import { catchError, map, of, switchMap } from "rxjs";
 import * as ManageUserAction from "./manage-user.action"
 import { select, Store } from "@ngrx/store";
 import { manageUserSelector } from './manage-user.selector';
+import { UserForAdminManagerDto } from "src/shared/model/User.interface";
 
 @Injectable()
 export class ManageUserEffects {
 
-  pageSize = 10;
-  pageIndex = 0;
+  userData: Array<UserForAdminManagerDto> = [];
 
   constructor(
     private action$: Actions,
@@ -21,8 +21,7 @@ export class ManageUserEffects {
     ){
       this.store.pipe(select(manageUserSelector)).subscribe(
         result => {
-          this.pageIndex = result.pageIndex;
-          this.pageSize = result.pageSize;
+          this.userData = result.items.map((c: any) => ({...c}))
         }
       );
   }
@@ -46,7 +45,9 @@ export class ManageUserEffects {
     switchMap((data: any) =>
       this.service.updateUser(data.user).pipe(
         map((results : ResponseDatas) => {
-          return new ManageUserAction.GetUsersAction({pageIndex :this.pageIndex, pageSize: this.pageSize});
+          var index = this.userData.findIndex(c => c.userId === data.user.userId);
+          this.userData[index].role = data.user.role;
+          return new ManageUserAction.UpdateUsersSuccessAction(this.userData);
         }),
         catchError(error =>
           of(new ManageUserAction.FetchDataErrorAction(error))

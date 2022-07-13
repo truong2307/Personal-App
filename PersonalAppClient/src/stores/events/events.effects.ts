@@ -9,19 +9,27 @@ import * as eventAction from "./events.action"
 import { EventCalendar } from "src/shared/model/Event.interface";
 import { TranslateService } from "@ngx-translate/core";
 import { ResponseData } from "src/shared/model/ResponseData.interface";
+import { select, Store } from "@ngrx/store";
+import { eventSelector } from "./events.selector";
 
 
 @Injectable()
 export class EventEffects {
 
-  events: EventCalendar[] = [];
+  events: Array<EventCalendar> = [];
 
   constructor(
     private action$: Actions,
     private service: EventsService,
     private toastr: ToastrService,
     private translate: TranslateService,
+    private store: Store,
     ){
+      this.store.pipe(select(eventSelector)).subscribe(
+        result => {
+        this.events = result.items.map((c : any) => ({...c}));
+      })
+
   }
 
   getEvents$ = createEffect(() => this.action$.pipe(
@@ -46,7 +54,10 @@ export class EventEffects {
           this.toastr.success(
             this.translate.instant('calendar.AddEventSuccess')
           )
-          return new eventAction.GetEventsAction();
+
+          this.events.push(result.result);
+
+          return new eventAction.CrudEventSuccessAction(this.events);
         }),
         catchError(error =>
           of(new eventAction.CrudEventFailedAction(error)))
@@ -57,15 +68,18 @@ export class EventEffects {
 
   deleteEvent$ = createEffect(() => this.action$.pipe(
     ofType(eventAction.DELETE_EVENT),
-    switchMap((event) =>
-      this.service.deleteEvents(event['id']).pipe(
+    switchMap((event : any) =>
+      this.service.deleteEvents(event.id).pipe(
         map(result => {
           if(result.isSuccess){
             this.toastr.success(
               this.translate.instant('calendar.RemoveEventSuccess')
             )
           }
-          return new eventAction.GetEventsAction();
+
+          const index = this.events.findIndex(c => c.id === event.id);
+          this.events.splice(index, 1);
+          return new eventAction.CrudEventSuccessAction(this.events);
         }),
         catchError(error =>
           of(new eventAction.CrudEventFailedAction(error)))
@@ -76,14 +90,17 @@ export class EventEffects {
 
   updateEvent$ = createEffect(() => this.action$.pipe(
     ofType(eventAction.UPDATE_EVENT),
-    switchMap((event) => this.service.updateEvents(event['event']).pipe(
+    switchMap((event : any) => this.service.updateEvents(event.event).pipe(
       map(result => {
         if(result.isSuccess){
           this.toastr.success(
             this.translate.instant('calendar.UpdateEventSuccess')
           )
         }
-        return new eventAction.GetEventsAction();
+        const index = this.events.findIndex(c => c.id === event.event.id);
+        this.events[index] = event.event;
+
+        return new eventAction.CrudEventSuccessAction(this.events);
       }),
       catchError(error =>
         of(new eventAction.CrudEventFailedAction(error)

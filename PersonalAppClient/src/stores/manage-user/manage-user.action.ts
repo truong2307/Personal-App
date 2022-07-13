@@ -24,7 +24,7 @@ export class UpdateUsersAction implements Action{
 
 export class UpdateUsersSuccessAction implements Action{
   readonly type = UPDATE_USER_SUCCESS;
-  constructor(){}
+  constructor(public users: UserForAdminManagerDto[]){}
 }
 
 export class FetchDataErrorAction implements Action{
