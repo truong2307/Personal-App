@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PersonalApp.Models.Entities
+namespace PersonalApp.Models.Dto
 {
-    public class QuizzMultiplechoiceQuestion : BaseEntity, IInfoCreateUpdate
+    public class QuizzMultiplechoiceQuestionCreateDto
     {
         [Required]
         public string QuestionText { get; set; }
@@ -30,18 +29,10 @@ namespace PersonalApp.Models.Entities
 
         [Required]
         public int QuizzId { get; set; }
+    }
 
-        [ForeignKey("QuizzId")]
-        public QuizzTest QuizzTest { get; set; }
-
-        [Required]
-        public DateTime CreatedAt { get; set; }
-
-        [Required]
-        public string CreatedBy { get; set; }
-
-        public DateTime? UpdatedAt { get; set; }
-
-        public string? UpdatedBy { get; set; }
+    public class QuizzMultiplechoiceQuestionDto : QuizzMultiplechoiceQuestionCreateDto
+    {
+        public int Id { get; set; }
     }
 }

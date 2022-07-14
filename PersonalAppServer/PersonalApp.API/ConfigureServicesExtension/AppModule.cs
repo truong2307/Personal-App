@@ -8,6 +8,7 @@ using PersonalApp.DataAccess.Services.EventServices;
 using PersonalApp.DataAccess.Services.ManageUserServices;
 using PersonalApp.DataAccess.Services.MasterDataServices;
 using PersonalApp.DataAccess.Services.NotificationServices;
+using PersonalApp.DataAccess.Services.QuizzAdminServices;
 
 namespace PersonalApp.ConfigureServicesExtension
 {
@@ -26,6 +27,7 @@ namespace PersonalApp.ConfigureServicesExtension
                 ServiceDescriptor.Scoped<IClaimUserServices, ClaimUserServices>(),
                 ServiceDescriptor.Scoped<IManageUserServices, ManageUserServices>(),
                 ServiceDescriptor.Scoped<IMasterDataServices, MasterDataServices>(),
+                ServiceDescriptor.Scoped<IQuizzAdminServices, QuizzAdminServices>(),
             });
         }
     }
