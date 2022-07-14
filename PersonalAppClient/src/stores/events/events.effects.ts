@@ -48,13 +48,12 @@ export class EventEffects {
 
   createEventAction$ = createEffect(() => this.action$.pipe(
     ofType(eventAction.CREATE_EVENT),
-    switchMap((event) =>
-      this.service.addEvent(event['event']).pipe(
+    switchMap((event : any) =>
+      this.service.addEvent(event.event).pipe(
         map(result => {
           this.toastr.success(
             this.translate.instant('calendar.AddEventSuccess')
           )
-
           this.events.push(result.result);
 
           return new eventAction.CrudEventSuccessAction(this.events);

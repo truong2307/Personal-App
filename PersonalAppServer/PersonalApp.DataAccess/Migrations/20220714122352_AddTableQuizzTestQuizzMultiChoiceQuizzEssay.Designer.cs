@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PersonalApp.DataAccess.Data;
 
@@ -11,9 +12,10 @@ using PersonalApp.DataAccess.Data;
 namespace PersonalApp.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220714122352_AddTableQuizzTestQuizzMultiChoiceQuizzEssay")]
+    partial class AddTableQuizzTestQuizzMultiChoiceQuizzEssay
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -380,125 +382,6 @@ namespace PersonalApp.DataAccess.Migrations
                     b.ToTable("QuizzTopics");
                 });
 
-            modelBuilder.Entity("PersonalApp.Models.Entities.QuizzUser", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("QuizzId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("QuizzId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("QuizzUsers");
-                });
-
-            modelBuilder.Entity("PersonalApp.Models.Entities.QuizzUserAnswer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EssayAnswer")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MultiplechoiceSelected")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuestionEssayId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuestionMultiplechoiceId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuizzId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("QuizzId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("QuizzUserAnswers");
-                });
-
-            modelBuilder.Entity("PersonalApp.Models.Entities.QuizzUserMark", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CompletedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsLockPoint")
-                        .HasColumnType("bit");
-
-                    b.Property<decimal>("Mark")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("QuizzId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("QuizzId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("QuizzUserMarks");
-                });
-
             modelBuilder.Entity("PersonalApp.Models.Identity.ApiUser", b =>
                 {
                     b.Property<string>("Id")
@@ -696,63 +579,6 @@ namespace PersonalApp.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("QuizzTopic");
-                });
-
-            modelBuilder.Entity("PersonalApp.Models.Entities.QuizzUser", b =>
-                {
-                    b.HasOne("PersonalApp.Models.Entities.QuizzTest", "QuizzTest")
-                        .WithMany()
-                        .HasForeignKey("QuizzId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PersonalApp.Models.Identity.ApiUser", "ApiUser")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ApiUser");
-
-                    b.Navigation("QuizzTest");
-                });
-
-            modelBuilder.Entity("PersonalApp.Models.Entities.QuizzUserAnswer", b =>
-                {
-                    b.HasOne("PersonalApp.Models.Entities.QuizzTest", "QuizzTest")
-                        .WithMany()
-                        .HasForeignKey("QuizzId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PersonalApp.Models.Identity.ApiUser", "ApiUser")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ApiUser");
-
-                    b.Navigation("QuizzTest");
-                });
-
-            modelBuilder.Entity("PersonalApp.Models.Entities.QuizzUserMark", b =>
-                {
-                    b.HasOne("PersonalApp.Models.Entities.QuizzTest", "QuizzTest")
-                        .WithMany()
-                        .HasForeignKey("QuizzId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PersonalApp.Models.Identity.ApiUser", "ApiUser")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ApiUser");
-
-                    b.Navigation("QuizzTest");
                 });
 
             modelBuilder.Entity("PersonalApp.Models.Entities.QuizzTest", b =>
