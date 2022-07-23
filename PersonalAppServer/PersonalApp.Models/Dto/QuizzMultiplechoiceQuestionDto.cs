@@ -26,9 +26,6 @@ namespace PersonalApp.Models.Dto
 
         [Required]
         public decimal Mark { get; set; }
-
-        [Required]
-        public int QuizzId { get; set; }
     }
 
     public class QuizzMultiplechoiceQuestionDto : QuizzMultiplechoiceQuestionCreateDto

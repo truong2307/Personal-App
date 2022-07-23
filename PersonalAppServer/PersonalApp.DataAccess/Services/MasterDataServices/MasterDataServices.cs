@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using PersonalApp.DataAccess.Data.Repository.IRepository;
 using PersonalApp.Models.Dto;
+using PersonalApp.Models.Entities;
 
 namespace PersonalApp.DataAccess.Services.MasterDataServices
 {
@@ -8,6 +9,8 @@ namespace PersonalApp.DataAccess.Services.MasterDataServices
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly ResponseDto _responseDto;
+
         public MasterDataServices(
             IUnitOfWork unitOfWork
             , IMapper mapper
@@ -15,6 +18,43 @@ namespace PersonalApp.DataAccess.Services.MasterDataServices
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _responseDto = new ResponseDto();
+        }
+
+        public async Task<ResponseDto> CreateQuizzTopic(QuizzTopicCreateDto model)
+        {
+            try
+            {
+                var dataMap = _mapper.Map<QuizzTopic>(model);
+
+                await _unitOfWork.QuizzTopic.Add(dataMap);
+                await _unitOfWork.SaveChangeAsync();
+
+                _responseDto.Result = _mapper.Map<QuizzTopicDto>(dataMap);
+            }
+            catch (Exception ex)
+            {
+                _responseDto.IsSuccess = false;
+                _responseDto.ErrorMessages = ex.ToString();
+            }
+            
+            return _responseDto;
+        }
+
+        public async Task<ResponseDatas<QuizzTopicDto>> GetQuizzTopic()
+        {
+            var response = new ResponseDatas<QuizzTopicDto>();
+            try
+            {
+                response.Datas = _mapper.Map<List<QuizzTopicDto>>(await _unitOfWork.QuizzTopic.GetAll());
+            }
+            catch (Exception ex)
+            {
+                response.IsSuccess = false;
+                response.ErrorMessages = ex.ToString();
+            }
+
+            return response;
         }
 
         public async Task<ResponseDatas<RoleDto>> GetRoles()

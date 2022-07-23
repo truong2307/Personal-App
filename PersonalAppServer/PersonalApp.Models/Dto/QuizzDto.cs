@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PersonalApp.Models.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace PersonalApp.Models.Dto
 {
@@ -16,15 +17,14 @@ namespace PersonalApp.Models.Dto
         [Required]
         public int Level { get; set; }
 
-        [Required]
-        public int TopicId { get; set; }
+        public QuizzTopic QuizzTopic { get; set; }
 
         [Required]
         public bool IsPublic { get; set; }
 
-        public List<QuizzMultiplechoiceQuestionDto> MultiplechoiceQuestion { get; set; }
+        public List<QuizzMultiplechoiceQuestionDto> MultiplechoiceQuestions { get; set; }
 
-        public List<QuizzEssayQuestionDto> EssayQuestion { get; set; }
+        public List<QuizzEssayQuestionDto> EssayQuestions { get; set; }
     }
 
     public class QuizzCreateDto
@@ -45,8 +45,8 @@ namespace PersonalApp.Models.Dto
         [Required]
         public bool IsPublic { get; set; }
 
-        public List<QuizzMultiplechoiceQuestionCreateDto> QuestionCreate { get; set; }
+        public List<QuizzMultiplechoiceQuestionCreateDto> MultiplechoiceQuestions { get; set; }
 
-        public List<QuizzEssayQuestionCreateDto> EssayQuestion { get; set; }
+        public List<QuizzEssayQuestionCreateDto> EssayQuestions { get; set; }
     }
 }

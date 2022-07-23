@@ -25,6 +25,8 @@ namespace PersonalApp.MapperConfig
             CreateMap<QuizzMultiplechoiceQuestion, QuizzMultiplechoiceQuestionDto>().ReverseMap();
             CreateMap<QuizzEssayQuestion, QuizzEssayQuestionCreateDto>().ReverseMap();
             CreateMap<QuizzEssayQuestion, QuizzEssayQuestionDto>().ReverseMap();
+            CreateMap<QuizzTopic, QuizzTopicCreateDto>().ReverseMap();
+            CreateMap<QuizzTopic, QuizzTopicDto>().ReverseMap();
         }
     }
 }
