@@ -1,6 +1,4 @@
-﻿using PersonalApp.Models.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace PersonalApp.Models.Dto
 {
@@ -20,9 +18,6 @@ namespace PersonalApp.Models.Dto
 
         [Required]
         public int TopicId { get; set; }
-
-        [ForeignKey("TopicId")]
-        public virtual QuizzTopic QuizzTopic { get; set; }
 
         [Required]
         public bool IsPublic { get; set; }
@@ -46,9 +41,6 @@ namespace PersonalApp.Models.Dto
 
         [Required]
         public int TopicId { get; set; }
-
-        [ForeignKey("TopicId")]
-        public virtual QuizzTopic QuizzTopic { get; set; }
 
         [Required]
         public bool IsPublic { get; set; }
