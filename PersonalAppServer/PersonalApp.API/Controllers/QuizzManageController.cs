@@ -28,8 +28,22 @@ namespace PersonalApp.API.Controllers
         [HttpGet("get-all-quizz/{pageIndex:int}/{pageSize:int}")]
         public async Task<IActionResult> GetAllQuizz(int pageIndex, int pageSize)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState.Values.ToString());
             var result = await _quizzAdminServices.GetQuizzs(pageIndex, pageSize);
+            return result.IsSuccess ? Ok(result) : BadRequest(result.ErrorMessages);
+        }
+
+        [HttpPut("update-quizz/")]
+        public async Task<IActionResult> UpdateQuizz([FromBody] QuizzDto model)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState.Values.ToString());
+            var result = await _quizzAdminServices.UpdateQuizz(model);
+            return result.IsSuccess ? Ok(result) : BadRequest(result.ErrorMessages);
+        }
+
+        [HttpDelete("delete-quizz/{quizzId:int}")]
+        public async Task<IActionResult> DeleteQuizz(int quizzId)
+        {
+            var result = await _quizzAdminServices.DeleteQuizz(quizzId);
             return result.IsSuccess ? Ok(result) : BadRequest(result.ErrorMessages);
         }
     }

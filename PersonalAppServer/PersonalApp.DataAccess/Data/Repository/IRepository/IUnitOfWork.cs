@@ -10,6 +10,8 @@ namespace PersonalApp.DataAccess.Data.Repository.IRepository
         IGenericRepository<ApplicationRole> ApplicationRoles { get; }
         IGenericRepository<QuizzTest> QuizzTest { get; }
         IGenericRepository<QuizzTopic> QuizzTopic { get; }
+        IGenericRepository<QuizzMultiplechoiceQuestion> QuizzMultiplechoiceQuestion { get; }
+        IGenericRepository<QuizzEssayQuestion> QuizzEssayQuestion { get; }
         Task<bool> SaveChangeAsync();
     }
 }

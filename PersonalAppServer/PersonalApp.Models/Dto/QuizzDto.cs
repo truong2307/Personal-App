@@ -17,6 +17,9 @@ namespace PersonalApp.Models.Dto
         [Required]
         public int Level { get; set; }
 
+        [Required]
+        public int TopicId { get; set; }
+
         public QuizzTopic QuizzTopic { get; set; }
 
         [Required]
