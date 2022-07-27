@@ -41,6 +41,29 @@ namespace PersonalApp.DataAccess.Services.MasterDataServices
             return _responseDto;
         }
 
+        public async Task<ResponseDto> DeleteQuizzTopic(int id)
+        {
+            try
+            {
+                var quizzTopic = _unitOfWork.QuizzTopic.Get(c => c.Id == id);
+                if (quizzTopic == null)
+                {
+                    _responseDto.IsSuccess = false;
+                    _responseDto.ErrorMessages = "Event not exist in system";
+                    return _responseDto;
+                }
+
+                await _unitOfWork.QuizzTopic.Delete(id);
+            }
+            catch (Exception ex)
+            {
+                _responseDto.IsSuccess = false;
+                _responseDto.ErrorMessages = ex.ToString();
+            }
+
+            return _responseDto;
+        }
+
         public async Task<ResponseDatas<QuizzTopicDto>> GetQuizzTopic()
         {
             var response = new ResponseDatas<QuizzTopicDto>();

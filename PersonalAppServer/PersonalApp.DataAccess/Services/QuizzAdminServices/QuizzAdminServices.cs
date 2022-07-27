@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using PersonalApp.DataAccess.Comparer;
-using PersonalApp.DataAccess.Data;
 using PersonalApp.DataAccess.Data.Repository.IRepository;
 using PersonalApp.DataAccess.Services.ClaimUserServices;
 using PersonalApp.Models.Dto;
 using PersonalApp.Models.Entities;
-using System.Linq;
 
 namespace PersonalApp.DataAccess.Services.QuizzAdminServices
 {
@@ -82,8 +80,8 @@ namespace PersonalApp.DataAccess.Services.QuizzAdminServices
                     return _responseDto;
                 }
 
-               await _unitOfWork.QuizzTest.Delete(quizzId);
-               await _unitOfWork.SaveChangeAsync();
+                await _unitOfWork.QuizzTest.Delete(quizzId);
+                await _unitOfWork.SaveChangeAsync();
 
             }
             catch (Exception ex)

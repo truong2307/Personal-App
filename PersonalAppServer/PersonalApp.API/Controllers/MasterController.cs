@@ -39,5 +39,13 @@ namespace PersonalApp.Controllers
             var result = await _masterDataServices.CreateQuizzTopic(model);
             return result.IsSuccess ? Ok(result) : BadRequest(result.ErrorMessages);
         }
+
+        [HttpDelete("delete-quizz-topics/{id:int}")]
+        public async Task<IActionResult> DeleteQuizzTopics(int id)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState.Values.ToString());
+            var result = await _masterDataServices.DeleteQuizzTopic(id);
+            return result.IsSuccess ? Ok(result) : BadRequest(result.ErrorMessages);
+        }
     }
 }
