@@ -11,6 +11,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { ResponseData } from "src/shared/model/ResponseData.interface";
 import { select, Store } from "@ngrx/store";
 import { eventSelector } from "./events.selector";
+import { NgxUiLoaderService } from "ngx-ui-loader";
 
 
 @Injectable()
@@ -23,6 +24,7 @@ export class EventEffects {
     private service: EventsService,
     private toastr: ToastrService,
     private translate: TranslateService,
+    private loader: NgxUiLoaderService,
     private store: Store,
     ){
       this.store.pipe(select(eventSelector)).subscribe(
@@ -37,6 +39,7 @@ export class EventEffects {
     switchMap(() =>
       this.service.getEvents().pipe(
         map((results : ResponseData) => {
+
           return new eventAction.GetEventsSuccessAction(results.result);
         }),
         catchError(error =>
@@ -55,7 +58,6 @@ export class EventEffects {
             this.translate.instant('calendar.AddEventSuccess')
           )
           this.events.push(result.result);
-
           return new eventAction.CrudEventSuccessAction(this.events);
         }),
         catchError(error =>
@@ -71,7 +73,7 @@ export class EventEffects {
       this.service.deleteEvents(event.id).pipe(
         map(result => {
           if(result.isSuccess){
-            this.toastr.success(
+            this.toastr.error(
               this.translate.instant('calendar.RemoveEventSuccess')
             )
           }
@@ -112,9 +114,19 @@ export class EventEffects {
   crudEventFailedAction$ = createEffect(() => this.action$.pipe(
     ofType(eventAction.CRUD_EVENT_FAILED),
     tap((error) => {
+      this.loader.stop();
       this.toastr.error(
         this.translate.instant('common.Error')
-      )
+      );
+    })
+  ),
+    { dispatch: false }
+  );
+
+  getEventSuccessAction$ = createEffect(() => this.action$.pipe(
+    ofType(eventAction.GET_EVENTS_SUCCESS),
+    tap(() => {
+      this.loader.stop();
     })
   ),
     { dispatch: false }

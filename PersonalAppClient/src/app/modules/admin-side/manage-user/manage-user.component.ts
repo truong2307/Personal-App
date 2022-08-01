@@ -38,7 +38,6 @@ export class ManageUserComponent implements OnInit {
       result => {
         this.users = result.items;
         this.totalItem = result.totalItem
-        this.loader.stop();
       }
     );
   }

@@ -11,8 +11,6 @@ export class AdminSideComponent implements OnInit {
   constructor(private loader: NgxUiLoaderService) { }
 
   ngOnInit(): void {
-    this.loader.start();
-    this.loader.stop();
   }
 
 }

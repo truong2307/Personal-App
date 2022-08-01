@@ -44,7 +44,11 @@ export function tokenGetter() {
     NgbModule,
     BrowserAnimationsModule,
     FormsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 3500,
+      positionClass: 'toast-top-left',
+      preventDuplicates: true,
+}),
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
     AuthModule,

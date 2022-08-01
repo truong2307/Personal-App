@@ -8,3 +8,20 @@
   background: -webkit-linear-gradient(to right, #734b6d, #42275a);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #734b6d, #42275a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+
+.collapse-item{
+  font-size: 13px !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  transition: .3s;
+  &:hover{
+    cursor: pointer;
+    color: #fff !important;
+    background-color: transparent !important;
+  }
+}
+
+.collapse-header{
+  font-weight: 700 !important;
+  font-size: 11px !important;
+}
+

@@ -1,5 +1,5 @@
 {
-  "error": "Không load được data từ server",
+  "Error": "Không load được data từ server",
   "Success": "Thành công",
   "Save": "Lưu",
   "LabelPagination": "Items/Trang",

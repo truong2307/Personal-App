@@ -73,7 +73,6 @@ export class CalendarComponent implements OnInit {
     this.store.pipe(select(eventSelector)).subscribe(
       result => {
         this.events = result.items
-        this.loader.stop();
       }
     );
     this.currentMonthSelectName = this.month[this.currentMonthIsSelecting];
