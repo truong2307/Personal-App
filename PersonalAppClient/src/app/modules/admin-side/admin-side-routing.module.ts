@@ -11,7 +11,7 @@ const routes: Routes = [
     path: '', component:AdminSideComponent,
     children:[
       // {
-      //   path: '', component: HomeComponent,
+      //   path: 'home', component: HomeComponent,
       //   canActivate : [GuardAdminSide],
       // },
       {

@@ -1,100 +1,58 @@
-<!-- sidebar for pc -->
-<div class="side-bar-dp">
-  <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg" [style.width]="closeSidebar ? '100px' : '280px'" style="height:100%;">
-    <div href="#" class="d-flex align-items-center mb-3 mb-md-0 text-white text-decoration-none">
-      <div class="sidebar-header">
-        <span class="fs-6" [style.display]="closeSidebar ? 'none' : 'block' ">Manage Personal</span>
-        <div class="sidebar-item" [ngStyle]="{'margin-left':closeSidebar ? '2px' : '60px'}">
-          <app-select-language></app-select-language>
-          <i class="fa-solid fa-bars sidebar-header-menu" (click)="toggleSideBar()"></i>
-        </div>
+<ul class="navbar-nav bg-gradient-primary justify-content-between sidebar sidebar-dark accordion" id="accordionSidebar">
+  <div class="d-flex flex-column ">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" routerLink="/admin">
+      <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fas fa-laugh-wink"></i>
+      </div>
+      <div class="sidebar-brand-text mx-3">Admin Side <sup>@</sup></div>
+    </a>
+    <hr class="sidebar-divider my-0">
+    <li class="nav-item" routerLink="/admin"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{exact: true}">
+    <a  class="nav-link">
+      <i class="fa-solid fa-calendar icon"></i>
+      <span>{{ 'home.Calendar' | translate }}</span>
+    </a>
+    </li>
+    <li class="nav-item" routerLink="/admin/manageUser"
+    routerLinkActive="active">
+    <a  class="nav-link">
+      <i class="fa-solid fa-users icon"></i>
+      <span *ngIf="!closeSidebar">{{ 'home.ManageUser' | translate }}</span>
+    </a>
+    </li>
+    <hr class="sidebar-divider">
+    <div class="sidebar-heading">
+      Interface
+    </div>
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#collapseUtilities" data-bs-toggle="collapse" data-target="#collapseUtilities"
+          aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fas fa-fw fa-wrench"></i>
+          <span>Utilities</span>
+      </a>
+      <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+          data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+              <h6 class="collapse-header">Custom Utilities:</h6>
+              <a class="collapse-item" routerLink="/admin"
+              [routerLinkActiveOptions]="{exact: true}"
+              routerLinkActive="active">Colors</a>
+              <a class="collapse-item" routerLink="/admin/manageUser" routerLinkActive="active">Borders</a>
+          </div>
+      </div>
+    </li>
+    <hr class="sidebar-divider d-none d-md-block">
+    <div class="text-center d-none d-md-inline">
+      <button class="rounded-circle border-0" id="sidebarToggle"
+      (click)="toggleSidebar()"></button>
       </div>
     </div>
-    <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
-      <!-- <li class="nav-item" >
-        <a routerLink="/admin" class="nav-link text-white"  aria-current="page" routerLinkActive="active"
-        >
-          <i class="fa-solid fa-house icon"></i>
-          <span *ngIf="!closeSidebar">{{ 'home.Home' | translate }}</span>
-        </a>
-      </li> -->
-      <li class="nav-item" >
-        <a routerLink="/admin" class="nav-link text-white"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{exact: true}"
-        >
-          <i class="fa-solid fa-calendar icon"></i>
-          <span *ngIf="!closeSidebar">{{ 'home.Calendar' | translate }}</span>
-        </a>
-      </li>
 
-      <li class="nav-item" >
-        <a routerLink="/admin/manageUser" class="nav-link text-white" routerLinkActive="active">
-          <i class="fa-solid fa-users icon"></i>
-          <span *ngIf="!closeSidebar">{{ 'home.ManageUser' | translate }}</span>
-        </a>
-      </li>
-    </ul>
-    <hr>
-    <div class="footer-sidebar">
-      <div><i class="fa-solid fa-user" style="margin-right: 5px;"></i>
-        <span *ngIf="!closeSidebar">{{ 'home.UserOnline' | translate }}</span>
-        {{totalOnlineUser}}</div>
-    </div>
-
-  </div>
-</div>
-
-<!-- sidebar for tablet -->
-<div class="sidebar-tablet">
-  <div class="sidebar-tablet-header-menu" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
-    <mat-icon>subject</mat-icon>
-  </div>
-  <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-    <div class="offcanvas-header">
-      <div class="sidebar-header text-white">
-        <span class="fs-6">Manage Personal</span>
-        <app-select-language></app-select-language>
-      </div>
-      <div data-bs-dismiss="offcanvas" class="text-white" aria-label="Close">
-        <mat-icon>close</mat-icon>
-      </div>
-    </div>
-    <div class="offcanvas-body">
-      <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg"  style="height:100%;">
-        <hr>
-        <ul class="nav nav-pills flex-column mb-auto">
-          <!-- <li class="nav-item" >
-            <a routerLink="/admin" class="nav-link text-white"  aria-current="page" routerLinkActive="active"
-            [routerLinkActiveOptions]="{exact: true}">
-              <i class="fa-solid fa-house icon"></i>
-              <span *ngIf="!closeSidebar">{{ 'home.Home' | translate }}</span>
-            </a>
-          </li> -->
-          <li class="nav-item" >
-            <a routerLink="/admin" class="nav-link text-white" routerLinkActive="active"
-            [routerLinkActiveOptions]="{exact: true}"
-            >
-              <i class="fa-solid fa-calendar icon"></i>
-              <span *ngIf="!closeSidebar">{{ 'home.Calendar' | translate }}</span>
-            </a>
-          </li>
-          <li class="nav-item" >
-            <a routerLink="/admin/manageUser" class="nav-link text-white" routerLinkActive="active">
-              <i class="fa-solid fa-users icon"></i>
-              <span *ngIf="!closeSidebar">{{ 'home.ManageUser' | translate }}</span>
-            </a>
-          </li>
-        </ul>
-        <hr>
-        <div class="footer-sidebar">
-          <div><i class="fa-solid fa-user" style="margin-right: 5px;"></i>
-            <span>{{ 'home.UserOnline' | translate }}</span>
-            {{totalOnlineUser}}</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+  <div class="online-user">
+    <i class="fa-solid fa-user"></i>
+    <span style="margin-left: 5px;">{{ 'home.UserOnline' | translate }}</span>
+    {{totalOnlineUser}}</div>
+</ul>
 

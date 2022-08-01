@@ -1,7 +1,12 @@
-<main class="d-flex flex-nowrap">
-    <app-sidebar></app-sidebar>
-  <div style="width:100%; min-height: 100vh;">
-    <app-header></app-header>
-    <router-outlet></router-outlet>
-  </div>
-</main>
+<div id="wrapper">
+  <app-sidebar></app-sidebar>
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+      <app-header></app-header>
+        <div class="container-fluid">
+          <router-outlet></router-outlet>
+        </div>
+    </div>
+   <app-footer></app-footer>
+</div>
+</div>

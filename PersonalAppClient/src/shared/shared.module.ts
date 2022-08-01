@@ -10,6 +10,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { MaterialExampleModule } from './material/material.module';
 import { SelectLanguageComponent } from './components/select-language/select-language.component';
 import { RouterModule } from '@angular/router';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 
@@ -21,6 +22,7 @@ import { RouterModule } from '@angular/router';
     ErrorComponent,
     HeaderComponent,
     SelectLanguageComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,
@@ -36,6 +38,7 @@ import { RouterModule } from '@angular/router';
     RegisterComponent,
     HeaderComponent,
     SelectLanguageComponent,
+    FooterComponent,
   ]
 })
 export class SharedModule { }

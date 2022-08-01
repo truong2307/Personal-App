@@ -1,74 +1,62 @@
-<div class="header-search">
-  <!-- notification -->
-  <div class="dropdown">
-    <div class="bell-notification position-relative"
-    id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"
-    >
-      <i class="fa-solid fa-bell"></i>
-      <span *ngIf="totalNewNotify > 0" class="position-absolute translate-middle badge bg-danger">
-        {{totalNewNotify}}
-        <span class="visually-hidden">unread messages</span>
-      </span>
-    </div>
+<!-- Topbar -->
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-    <div class="notification dropdown-menu"
-    aria-labelledby="dropdownMenuButton1"
-    (click)="$event.stopPropagation()"
-    >
-      <div class="notification-header">
-        {{ 'header.AlertTitle' | translate }}
-      </div>
+  <!-- Sidebar Toggle (Topbar) -->
+  <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle me-3"
+  (click)="toggleSidebar()"
+  >
+      <i class="fa fa-bars"></i>
+  </button>
 
-      <div class="notification-body">
-          <ul class="notification-body-list" *ngIf="notifications.length > 0; else nonData">
-              <li [ngClass]="!notify.seen ? 'seen' : ''" class="notification-body-item"
-              *ngFor="let notify of notifications"
-              >
-              <div class="notification-body-item-body" (click)="seenNotify(notify)">
-                <div class="notification-body-item-time">
-                  {{notify.createdAt | date}}
-              </div>
-              <div class="notification-body-item-content">
-                  {{notify.content}}
-              </div>
-              </div>
-                <div (click)="removeNotify(notify.id)">
-                  <mat-icon class="delete-notification">close</mat-icon>
-                </div>
-              </li>
-
-          </ul>
-          <ng-template  #nonData>
-            <div class="notification-nondata">
-              {{ 'header.NonData' | translate }}
-            </div>
-          </ng-template>
-      </div>
-
-      <div class="notification-footer">
-        {{ 'header.ShowAllAlert' | translate }}
-      </div>
-  </div>
-  </div>
-
-  <!-- profile -->
-    <div class="dropdown header-profile">
-      <div class="d-flex align-items-center text-decoration-none" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-        <span class="header-name-profile">{{userName}}</span>
-        <img class="header-profile-image " src="../../../assets//image/errorAvatar.png" alt="error avatar">
-      </div>
-      <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-        <li><div class="dropdown-item">
-          {{ 'header.Profile' | translate }}
+  <!-- Topbar Search -->
+  <ul class="navbar-nav ms-auto">
+      <li class="nav-item dropdown no-arrow mx-1">
+          <a class="nav-link icon-header dropdown-toggle" id="alertsDropdown" role="button"
+              data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-bell fa-fw"></i>
+              <span *ngIf="totalNewNotify > 0" class="badge bg-danger badge-counter">{{totalNewNotify}}</span>
+          </a>
+          <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in notifications-modify"
+          (click)="$event.stopPropagation()"
+              aria-labelledby="alertsDropdown">
+              <h6 class="dropdown-header">
+                {{ 'header.AlertTitle' | translate }}
+              </h6>
+              <a class="dropdown-item d-flex align-items-center" *ngFor="let notify of notifications">
+                  <div (click)="seenNotify(notify)">
+                      <div class="small text-gray-500">{{notify.createdAt | date}}</div>
+                      <span [ngClass]="notify.seen ? '' : 'fw-bold'">{{notify.content}}</span>
+                  </div>
+              </a>
+              <a class="dropdown-item text-center small text-gray-500" href="#">{{ 'header.ShowAllAlert' | translate }}</a>
+          </div>
+      </li>
+      <li class="nav-item mx-1" >
+        <div class="nav-link">
+          <app-select-language></app-select-language>
         </div>
       </li>
-      <li><div class="dropdown-item" (click)="logOut()">
-        {{ 'header.LogOut' | translate }}
-      </div>
-    </li>
-      </ul>
-    </div>
+      <div class="topbar-divider d-none d-sm-block"></div>
 
-</div>
-
-
+      <li class="nav-item dropdown no-arrow">
+          <a class="nav-link dropdown-toggle" id="userDropdown" role="button"
+              data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="me-2 d-none d-lg-inline text-gray-600 small">{{userName}}</span>
+              <img class="img-profile rounded-circle"
+                  src="../../../assets//image/errorAvatar.png">
+          </a>
+          <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+              aria-labelledby="userDropdown">
+              <a class="dropdown-item" >
+                  <i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>
+                  {{ 'header.Profile' | translate }}
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" (click)="logOut()" data-bs-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>
+                  {{ 'header.LogOut' | translate }}
+              </a>
+          </div>
+      </li>
+  </ul>
+</nav>

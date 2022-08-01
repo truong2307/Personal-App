@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { SignalRService } from 'src/services/signalr-services.service';
 import optionSidebar from 'src/shared/const/optionSidebar';
 
@@ -16,6 +16,7 @@ export class SidebarComponent implements OnInit {
 
   constructor(
     private signalRservice : SignalRService,
+    private renderer: Renderer2
   ) {
   }
 
@@ -32,7 +33,16 @@ export class SidebarComponent implements OnInit {
     this.optionIsSelecting = option;
   }
 
-  toggleSideBar(): void{
-    this.closeSidebar = !this.closeSidebar;
+  toggleSidebar(): void{
+    var sidebarEle = document.getElementsByClassName("sidebar")[0];
+    if(document.body.classList.contains("sidebar-toggled")
+      && sidebarEle.classList.contains("toggled") ){
+      this.renderer.removeClass(document.body, 'sidebar-toggled');
+      sidebarEle.classList.remove("toggled");
+    }
+    else{
+      this.renderer.addClass(document.body, 'sidebar-toggled');
+      sidebarEle.classList.add("toggled");
+    }
   }
 }

@@ -1,10 +1,9 @@
-<div class="dropdown translate-tablet">
-  <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-    <i class="fa-solid fa-earth-americas" ></i>
-    <strong style="margin-left:6px;">
-    </strong>
+<div class="dropdown">
+  <a class="text-gray-500 text-decoration-none dropdown-toggle"
+  id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="fa-solid fa-earth-americas"></i>
   </a>
-  <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+  <ul class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="dropdownUser1">
     <li *ngFor="let item of languages"><div class="dropdown-item" (click)="changeLang(item)">
       {{item}}
     </div>

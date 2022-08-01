@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
@@ -25,6 +25,7 @@ export class HeaderComponent implements OnInit {
     private signalRservice : SignalRService,
     private store: Store,
     private jwtHelpService : JwtHelpService,
+    private renderer: Renderer2
   ) { }
 
   ngOnInit(): void {
@@ -60,5 +61,18 @@ export class HeaderComponent implements OnInit {
   removeNotify(id: any){
     this.store.dispatch(new RemoveNotificationAction(id));
     setTimeout(() => this.load(), 200);
+  }
+
+  toggleSidebar(): void{
+    var sidebarEle = document.getElementsByClassName("sidebar")[0];
+    if(document.body.classList.contains("sidebar-toggled")
+      && sidebarEle.classList.contains("toggled") ){
+      this.renderer.removeClass(document.body, 'sidebar-toggled');
+      sidebarEle.classList.remove("toggled");
+    }
+    else{
+      this.renderer.addClass(document.body, 'sidebar-toggled');
+      sidebarEle.classList.add("toggled");
+    }
   }
 }
