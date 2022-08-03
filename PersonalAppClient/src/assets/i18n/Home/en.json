@@ -3,5 +3,9 @@
   "Calendar": "Calendar",
   "Lang": "Language",
   "UserOnline": "Online: ",
-  "ManageUser": "Manage User "
+  "ManageUser": "Manage User ",
+  "QuizzManage": "Quizz Manage",
+  "Quizz": "Quizz",
+  "QuizzTopic": "Quizz topic",
+  "QuizzCreate": "Quizz create"
 }

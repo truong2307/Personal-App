@@ -10,3 +10,8 @@ body {
   font-family: Segoe UI, "Helvetica Neue", sans-serif;
   font-size: 14px;
 }
+
+//overwrite button material
+.mat-button-focus-overlay {
+  background-color: transparent !important;
+  }

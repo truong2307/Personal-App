@@ -15,6 +15,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ManageUserComponent } from './manage-user/manage-user.component';
 import { EditUserComponent } from './manage-user/edit-user/edit-user.component';
 import { SharedModule } from 'src/shared/shared.module';
+import { QuizzTopicComponent } from './quizz-topic/quizz-topic.component';
+import { QuizzManageComponent } from './quizz-manage/quizz-manage.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { SharedModule } from 'src/shared/shared.module';
     CalendarComponent,
     AddEventComponent,
     ManageUserComponent,
-    EditUserComponent
+    EditUserComponent,
+    QuizzTopicComponent,
+    QuizzManageComponent
   ],
   imports: [
     CommonModule,

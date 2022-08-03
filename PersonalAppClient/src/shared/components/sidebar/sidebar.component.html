@@ -23,21 +23,22 @@
     </a>
     </li>
     <hr class="sidebar-divider">
-    <div class="sidebar-heading">
-      Quizz
-    </div>
     <li class="nav-item">
       <a class="nav-link collapsed" href="#collapseUtilities" data-bs-toggle="collapse" data-target="#collapseUtilities"
           aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-wrench"></i>
-          <span>Quizz Manage</span>
+          <span>{{ 'home.QuizzManage' | translate }}</span>
       </a>
       <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
           data-parent="#accordionSidebar">
           <div class="bg-gradient-primary py-2 collapse-inner rounded">
-              <h6 class="collapse-header">Custom Quizz:</h6>
-              <a class="collapse-item">Topic quizz</a>
-              <a class="collapse-item">Create Quizz</a>
+            <h6 class="collapse-header">{{ 'home.Quizz' | translate }}</h6>
+              <a class="collapse-item"
+              routerLink="/admin/quizzTopic"
+              routerLinkActive="active">{{ 'home.QuizzTopic' | translate }}</a>
+              <a class="collapse-item"
+              routerLink="/admin/quizzManage"
+              routerLinkActive="active">{{ 'home.QuizzCreate' | translate }}</a>
           </div>
       </div>
     </li>

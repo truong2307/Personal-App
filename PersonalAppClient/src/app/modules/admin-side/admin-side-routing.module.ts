@@ -5,6 +5,8 @@ import { AdminSideComponent } from './admin-side.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { HomeComponent } from './home/home.component';
 import { ManageUserComponent } from './manage-user/manage-user.component';
+import { QuizzManageComponent } from './quizz-manage/quizz-manage.component';
+import { QuizzTopicComponent } from './quizz-topic/quizz-topic.component';
 
 const routes: Routes = [
   {
@@ -21,7 +23,15 @@ const routes: Routes = [
       {
         path: 'manageUser', component: ManageUserComponent,
         canActivate : [GuardAdminSide],
-      }
+      },
+      {
+        path: 'quizzTopic', component: QuizzTopicComponent,
+        canActivate : [GuardAdminSide],
+      },
+      {
+        path: 'quizzManage', component: QuizzManageComponent,
+        canActivate : [GuardAdminSide],
+      },
     ]
   }
 ];

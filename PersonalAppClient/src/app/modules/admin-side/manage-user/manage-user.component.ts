@@ -33,7 +33,7 @@ export class ManageUserComponent implements OnInit {
     this.store.dispatch(new GetUsersAction(
       {pageIndex :this.pageIndex, pageSize: this.pageSize}
       ));
-    this.loader.start();
+
     this.store.pipe(select(manageUserSelector)).subscribe(
       result => {
         this.users = result.items;

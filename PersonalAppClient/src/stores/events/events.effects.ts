@@ -36,16 +36,19 @@ export class EventEffects {
 
   getEvents$ = createEffect(() => this.action$.pipe(
     ofType(eventAction.GET_EVENTS),
-    switchMap(() =>
-      this.service.getEvents().pipe(
-        map((results : ResponseData) => {
+    switchMap(() => {
+        this.loader.start();
+        return this.service.getEvents().pipe(
+          map((results : ResponseData) => {
 
-          return new eventAction.GetEventsSuccessAction(results.result);
-        }),
-        catchError(error =>
-          of(new eventAction.CrudEventFailedAction(error))
+            return new eventAction.GetEventsSuccessAction(results.result);
+          }),
+          catchError(error =>
+            of(new eventAction.CrudEventFailedAction(error))
+          )
         )
-      )
+      }
+
     )
   ));
 

@@ -3,5 +3,9 @@
   "Calendar": "Lịch",
   "Lang": "Ngôn ngữ",
   "UserOnline": "Online: ",
-  "ManageUser": "Quản lý người dùng"
+  "ManageUser": "Quản lý người dùng",
+  "QuizzManage": "Quản lý Đề thi",
+  "Quizz": "Đề thi: ",
+  "QuizzTopic": "Quản lý topic",
+  "QuizzCreate": "Tạo đề thi"
 }

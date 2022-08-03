@@ -69,7 +69,6 @@ export class CalendarComponent implements OnInit {
 
    ngOnInit() {
     this.store.dispatch(new GetEventsAction());
-    this.loader.start();
     this.store.pipe(select(eventSelector)).subscribe(
       result => {
         this.events = result.items
