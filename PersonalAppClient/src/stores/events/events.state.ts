@@ -1,4 +1,4 @@
-import { EventCalendar } from "src/shared/model/Event.interface";
+import { EventCalendar } from "src/shared/model/event.interface";
 
 export interface EventState {
   idEvent: number;

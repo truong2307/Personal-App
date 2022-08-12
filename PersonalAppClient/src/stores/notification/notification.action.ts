@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { NotificationModel } from "src/shared/model/Notification.interface";
+import { NotificationModel } from "src/shared/model/notification.interface";
 
 export const GET_NOTIFICATIONS = 'GET_NOTIFICATIONS';
 export const GET_NOTIFICATIONS_SUCCESS = 'GET_NOTIFICATIONS_SUCCESS';

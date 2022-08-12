@@ -1,4 +1,4 @@
-import { UserLogin, UserRegister } from "src/shared/model/User.interface";
+import { UserLogin, UserRegister } from "src/shared/model/user.interface";
 
 export interface AuthState {
   item: UserLogin;

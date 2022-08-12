@@ -1,4 +1,4 @@
-import { UserForAdminManagerDto } from "src/shared/model/User.interface";
+import { UserForAdminManagerDto } from "src/shared/model/user.interface";
 
 export interface ManageUserState {
   items: UserForAdminManagerDto[];

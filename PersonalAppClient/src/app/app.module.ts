@@ -26,6 +26,7 @@ import { NotificationsModule } from 'src/stores/notification/notification.module
 import { ManageUserModule } from 'src/stores/manage-user/manage-user.module';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { CustomMatPaginationService } from 'src/services/custom-mat-pagination.service';
+import { QuizzTopicModule } from 'src/stores/quizz-topic/quizz-topic.module';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -55,6 +56,7 @@ export function tokenGetter() {
     EventsModule,
     NotificationsModule,
     ManageUserModule,
+    QuizzTopicModule,
     HttpClientModule,
     JwtModule.forRoot(
       {
@@ -71,8 +73,18 @@ export function tokenGetter() {
           deps: [HttpClient]
       }
   }),
-    NgxUiLoaderModule,
-    NgxUiLoaderRouterModule.forRoot({ showForeground: false }),
+    NgxUiLoaderModule.forRoot({
+      fgsColor: "rgba(174,142,204,0.74)",
+      fgsType: "square-jelly-box",
+      bgsType: "square-jelly-box",
+      bgsColor: "rgba(174,142,204,0.74)",
+      hasProgressBar: false,
+      fgsSize: 40,
+      bgsSize: 40,
+      blur: 10,
+    }),
+    NgxUiLoaderRouterModule.forRoot(
+      { showForeground: false }),
     MaterialExampleModule,
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,

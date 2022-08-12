@@ -4,9 +4,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { MasterDataService } from 'src/services/master-data.service';
-import { ResponseDatas } from 'src/shared/model/ResponseData.interface';
-import { Role } from 'src/shared/model/Role.interface';
-import { UserForAdminManagerDto } from 'src/shared/model/User.interface';
+import { ResponseDatas } from 'src/shared/model/response-data.interface';
+import { Role } from 'src/shared/model/role.interface';
+import { UserForAdminManagerDto } from 'src/shared/model/user.interface';
 
 @Component({
   selector: 'app-edit-user',

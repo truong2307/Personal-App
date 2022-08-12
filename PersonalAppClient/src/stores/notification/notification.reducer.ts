@@ -1,4 +1,4 @@
-import { NotificationModel } from "src/shared/model/Notification.interface";
+import { NotificationModel } from "src/shared/model/notification.interface";
 import { NotificationState } from "./notification.state";
 
 import * as NotificationAction from "./notification.action"

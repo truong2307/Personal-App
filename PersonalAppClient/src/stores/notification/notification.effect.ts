@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, of, switchMap } from "rxjs";
 import { NotificationsService } from "src/services/notifications.service";
-import { ResponseDatas } from "src/shared/model/ResponseData.interface";
+import { ResponseDatas } from "src/shared/model/response-data.interface";
 import { tap } from 'rxjs/operators';
 
 import * as notificationAction from "./notification.action"

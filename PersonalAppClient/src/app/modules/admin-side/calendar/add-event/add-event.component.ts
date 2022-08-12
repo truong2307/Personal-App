@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { colors } from 'src/shared/const/dateOfWeek';
-import { EventCalendar } from 'src/shared/model/Event.interface';
+import { EventCalendar } from 'src/shared/model/event.interface';
 
 import { CreateEventAction, DeleteEventAction, UpdateEventAction } from 'src/stores/events/events.action';
 

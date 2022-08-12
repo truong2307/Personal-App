@@ -2,6 +2,7 @@
   <a class="text-gray-500 text-decoration-none dropdown-toggle"
   id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
     <i class="fa-solid fa-earth-americas"></i>
+    {{curLang}}
   </a>
   <ul class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="dropdownUser1">
     <li *ngFor="let item of languages"><div class="dropdown-item" (click)="changeLang(item)">

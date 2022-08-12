@@ -8,7 +8,6 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent {
   title = 'PersonalAppClient';
-  defaultLang : string = 'en';
   constructor(
     private translate: TranslateService
   ){
@@ -16,9 +15,10 @@ export class AppComponent {
       translate.setDefaultLang(localStorage.getItem('currLanguage') as any);
       translate.use(localStorage.getItem('currLanguage') as any);
     }else {
-        translate.setDefaultLang('en');
-        translate.use('en');
-        localStorage.setItem("currLanguage","en");
+        var defaultLang = translate.getBrowserLang() as string;
+        translate.setDefaultLang(defaultLang);
+        translate.use(defaultLang);
+        localStorage.setItem("currLanguage", defaultLang);
     }
   }
 }

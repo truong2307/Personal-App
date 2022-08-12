@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { EventCalendar } from "src/shared/model/Event.interface";
+import { EventCalendar } from "src/shared/model/event.interface";
 
 export const GET_EVENTS = 'GET_EVENTS';
 export const GET_EVENTS_SUCCESS = 'GET_EVENTS_SUCCESS';

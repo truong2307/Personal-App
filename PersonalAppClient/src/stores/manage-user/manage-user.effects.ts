@@ -1,13 +1,13 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { ManageUserService } from "src/services/manage-user.service";
-import { ResponseDatas } from "src/shared/model/ResponseData.interface";
+import { ResponseDatas } from "src/shared/model/response-data.interface";
 import { catchError, map, of, switchMap, tap } from "rxjs";
 
 import * as ManageUserAction from "./manage-user.action"
 import { select, Store } from "@ngrx/store";
 import { manageUserSelector } from './manage-user.selector';
-import { UserForAdminManagerDto } from "src/shared/model/User.interface";
+import { UserForAdminManagerDto } from "src/shared/model/user.interface";
 import { NgxUiLoaderService } from "ngx-ui-loader";
 import { ToastrService } from "ngx-toastr";
 import { TranslateService } from "@ngx-translate/core";

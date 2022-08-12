@@ -119,7 +119,9 @@
         overflow: hidden;
 
         #sidebarToggle::after {
-            margin-left: 0.25rem;
+          content: '\f105';
+          font-family: 'Font Awesome 5 Free';
+          margin-left: 0.25rem;
         }
 
         .sidebar-card {

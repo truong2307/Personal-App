@@ -4,7 +4,7 @@ import { select, Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
 import { JwtHelpService } from 'src/services/jwt-help.service';
 import { SignalRService } from 'src/services/signalr-services.service';
-import { NotificationModel } from 'src/shared/model/Notification.interface';
+import { NotificationModel } from 'src/shared/model/notification.interface';
 import { GetNotificationsAction, RemoveNotificationAction, SeenNotificationAction } from 'src/stores/notification/notification.action';
 import { notificationSelector } from '../../../stores/notification/notification.selector';
 

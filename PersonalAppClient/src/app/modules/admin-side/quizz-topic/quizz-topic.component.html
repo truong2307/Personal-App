@@ -1,1 +1,37 @@
-<p>quizz-topic works!</p>
+<mat-card>
+  <mat-card-title>Quizz topic</mat-card-title>
+  <mat-divider inset></mat-divider>
+  <mat-card-actions>
+    <button mat-flat-button color="primary">Add Topic</button>
+  </mat-card-actions>
+  <mat-divider inset></mat-divider>
+  <mat-card-content>
+
+    <div class="table-responsive shadow p-3">
+      <table class="table table-hover" width="100%">
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>@fat</td>
+          </tr>
+        </tbody>
+      </table>
+      <mat-paginator [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              aria-label="Select page">
+      </mat-paginator>
+  </div>
+  </mat-card-content>
+
+</mat-card>

@@ -6,9 +6,9 @@ import { EventsService } from "src/services/events.service";
 import { tap } from 'rxjs/operators';
 
 import * as eventAction from "./events.action"
-import { EventCalendar } from "src/shared/model/Event.interface";
+import { EventCalendar } from "src/shared/model/event.interface";
 import { TranslateService } from "@ngx-translate/core";
-import { ResponseData } from "src/shared/model/ResponseData.interface";
+import { ResponseData } from "src/shared/model/response-data.interface";
 import { select, Store } from "@ngrx/store";
 import { eventSelector } from "./events.selector";
 import { NgxUiLoaderService } from "ngx-ui-loader";

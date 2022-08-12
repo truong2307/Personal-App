@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { UpdateUser, UserForAdminManagerDto } from "src/shared/model/User.interface";
+import { UpdateUser, UserForAdminManagerDto } from "src/shared/model/user.interface";
 
 export const GET_USERS = 'GET_USERS';
 export const UPDATE_USER = 'UPDATE_USER';
