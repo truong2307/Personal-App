@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { UserForAdminManagerDto } from 'src/shared/model/user.interface';
 import { GetUsersAction, UpdateUsersAction } from 'src/stores/manage-user/manage-user.action';
 import { manageUserSelector } from '../../../../stores/manage-user/manage-user.selector';
@@ -20,12 +19,9 @@ export class ManageUserComponent implements OnInit {
   pageSize = 10;
   pageIndex = 0;
   pageTotalOption = [10, 20, 30];
-  no = 0;
-
 
   constructor(
     private store: Store,
-    private loader: NgxUiLoaderService,
     private modalService: NgbModal,
   ) { }
 
@@ -62,7 +58,4 @@ export class ManageUserComponent implements OnInit {
     ))
   }
 
-  test(){
-    return this.no++;
-  }
 }

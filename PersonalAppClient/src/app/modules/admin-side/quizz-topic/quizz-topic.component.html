@@ -12,24 +12,21 @@
         <thead>
           <tr>
             <th scope="col">No</th>
-            <th scope="col">Name</th>
+            <th scope="col">Name topic</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>@fat</td>
+          <tr *ngFor="let item of quizzTopic; let i = index">
+            <td>{{pageSize * pageIndex + i + 1}}</td>
+            <td>{{item.name}}</td>
           </tr>
         </tbody>
       </table>
-      <mat-paginator [length]="100"
-              [pageSize]="10"
-              [pageSizeOptions]="[5, 10, 25, 100]"
-              aria-label="Select page">
+      <mat-paginator
+      [length]="totalItem"
+      [pageSizeOptions]="pageTotalOption"
+      (page)="changePageEvent($event)"
+      aria-label="Select page">
       </mat-paginator>
   </div>
   </mat-card-content>

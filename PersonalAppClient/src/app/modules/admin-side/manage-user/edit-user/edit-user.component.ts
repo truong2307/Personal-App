@@ -28,7 +28,7 @@ export class EditUserComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.services.getEvents().subscribe((response : ResponseDatas) =>{
+    this.services.getRoles().subscribe((response : ResponseDatas) =>{
       this.roles = response.datas;
     },
     (error) => {

@@ -30,7 +30,7 @@ export class DeleteQuizzTopicsAction implements Action {
 
 export class CrudQuizzTopicsSuccessAction implements Action {
   readonly type = CRUD_QUIZZ_TOPIC_SUCCESS;
-  constructor(public payLoad: QuizzTopic[]){};
+  constructor(public items: QuizzTopic[], public totalItem: number){};
 }
 
 export class CrudQuizzTopicsFailedAction implements Action {

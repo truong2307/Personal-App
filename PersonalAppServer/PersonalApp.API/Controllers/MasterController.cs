@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PersonalApp.DataAccess.Services.MasterDataServices;
 using PersonalApp.DataAccess.Utility.BaseURI;
 using PersonalApp.Models.Dto;
+using System.Drawing.Printing;
 
 namespace PersonalApp.Controllers
 {
@@ -25,10 +26,10 @@ namespace PersonalApp.Controllers
             return result.IsSuccess ? Ok(result) : BadRequest(result.ErrorMessages);
         }
 
-        [HttpGet("get-quizz-topics")]
-        public async Task<IActionResult> GetQuizzTopics()
-        {
-            var result = await _masterDataServices.GetQuizzTopic();
+        [HttpGet("get-quizz-topics/{pageIndex:int}/{pageSize:int}")]
+        public async Task<IActionResult> GetQuizzTopics(int pageIndex, int pageSize)
+{
+            var result = await _masterDataServices.GetQuizzTopic(pageIndex, pageSize);
             return result.IsSuccess ? Ok(result) : BadRequest(result.ErrorMessages);
         }
 

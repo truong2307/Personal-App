@@ -14,6 +14,10 @@ export function quizzTopicReducer(
   action: QuizzTopicAction.QuizzTopicAction
 ): QuizzTopicState {
   switch (action.type) {
+    case QuizzTopicAction.CRUD_QUIZZ_TOPIC_SUCCESS:
+      return {...state, items: action.items, totalItem: action.totalItem}
+      case QuizzTopicAction.CRUD_QUIZZ_TOPIC_FAILED:
+        return {...state, error: action.error}
     default:
       return state;
   }

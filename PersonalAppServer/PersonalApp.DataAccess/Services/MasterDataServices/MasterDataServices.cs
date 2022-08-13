@@ -64,12 +64,17 @@ namespace PersonalApp.DataAccess.Services.MasterDataServices
             return _responseDto;
         }
 
-        public async Task<ResponseDatas<QuizzTopicDto>> GetQuizzTopic()
+        public async Task<ResponseDatas<QuizzTopicDto>> GetQuizzTopic(int pageIndex, int pageSize)
         {
             var response = new ResponseDatas<QuizzTopicDto>();
             try
             {
-                response.Datas = _mapper.Map<List<QuizzTopicDto>>(await _unitOfWork.QuizzTopic.GetAll());
+                var quizzTopicsData = await _unitOfWork.QuizzTopic
+                                    .GetAll(queryEntity: c => c.Skip(pageSize * pageIndex).Take(pageSize)
+                                    , orderBy: c => c.OrderBy(c => c.Name));
+                response.Datas = _mapper.Map<List<QuizzTopicDto>>(quizzTopicsData);
+
+                response.TotalItem = (await _unitOfWork.QuizzTopic.GetAll()).Count;
             }
             catch (Exception ex)
             {
