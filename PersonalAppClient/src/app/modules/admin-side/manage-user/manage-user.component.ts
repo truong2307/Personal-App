@@ -38,13 +38,11 @@ export class ManageUserComponent implements OnInit {
     );
   }
 
-
   editUser(data: UserForAdminManagerDto){
     var modalRef = this.modalService.open(EditUserComponent, {size: 'md'});
     modalRef.componentInstance.userInfo = data;
 
     modalRef.componentInstance.dataUser.subscribe((data : any) => {
-      manageUserSelector.release();
       this.store.dispatch(new UpdateUsersAction(data));
     })
   }

@@ -11,6 +11,7 @@ import { MaterialExampleModule } from './material/material.module';
 import { SelectLanguageComponent } from './components/select-language/select-language.component';
 import { RouterModule } from '@angular/router';
 import { FooterComponent } from './components/footer/footer.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 
 
@@ -23,6 +24,7 @@ import { FooterComponent } from './components/footer/footer.component';
     HeaderComponent,
     SelectLanguageComponent,
     FooterComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     CommonModule,

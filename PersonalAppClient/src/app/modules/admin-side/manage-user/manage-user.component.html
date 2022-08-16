@@ -9,10 +9,10 @@
               <thead>
                   <tr>
                       <th>{{'manageuser.NO' | translate}}</th>
-                      <th>{{'manageuser.FullName' | translate}}</th>
+                      <th >{{'manageuser.FullName' | translate}}</th>
                       <th>{{'manageuser.UserName' | translate}}</th>
                       <th>{{'manageuser.Role' | translate}}</th>
-                      <th>{{'manageuser.Email' | translate}}</th>
+                      <th class="text-center">{{'manageuser.Email' | translate}}</th>
                   </tr>
               </thead>
               <tbody>
@@ -21,7 +21,7 @@
                   (click)="editUser(item)"
                   >
                     <td>{{pageSize * pageIndex + i + 1}}</td>
-                      <td>
+                      <td >
                       <img class="manager-avatar me-1" src="../../../../assets/image/errorAvatar.png" alt="">
                         {{item.fullName}}
                       </td>
@@ -29,7 +29,7 @@
                       <td>
                         <span class="badge rounded-pill bg-success">{{item.role}}</span>
                       </td>
-                      <td>{{item.email}}</td>
+                      <td class="text-center">{{item.email}}</td>
                   </tr>
               </tbody>
           </table>

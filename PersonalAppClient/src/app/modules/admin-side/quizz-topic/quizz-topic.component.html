@@ -1,24 +1,28 @@
 <mat-card>
-  <mat-card-title>Quizz topic</mat-card-title>
+  <mat-card-title>{{'quizz.QuizzTopicTitle' | translate}}</mat-card-title>
   <mat-divider inset></mat-divider>
   <mat-card-actions>
-    <button mat-flat-button color="primary">Add Topic</button>
+    <button mat-flat-button color="primary" (click)="addQuizzTopic()">{{'quizz.AddTopic' | translate}}</button>
   </mat-card-actions>
   <mat-divider inset></mat-divider>
   <mat-card-content>
 
     <div class="table-responsive shadow p-3">
-      <table class="table table-hover" width="100%">
+      <table class="table table-hover">
         <thead>
           <tr>
-            <th scope="col">No</th>
-            <th scope="col">Name topic</th>
+            <th scope="col">{{'quizz.NO' | translate}}</th>
+            <th class="text-center" scope="col">{{'quizz.NameTopic' | translate}}</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let item of quizzTopic; let i = index">
             <td>{{pageSize * pageIndex + i + 1}}</td>
-            <td>{{item.name}}</td>
+            <td class="text-center">{{item.name}}</td>
+            <td class="text-center">
+              <button (click)="openDialog()" mat-icon-button color="warn"><mat-icon>delete</mat-icon></button>
+            </td>
           </tr>
         </tbody>
       </table>

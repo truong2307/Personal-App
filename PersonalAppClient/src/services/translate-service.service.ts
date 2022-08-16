@@ -17,6 +17,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       { baseTranslateUrl, moduleName: 'Header' },
       { baseTranslateUrl, moduleName: 'Login' },
       { baseTranslateUrl, moduleName: 'ManageUser' },
+      { baseTranslateUrl, moduleName: 'Quizz' },
     ],
     lowercaseNamespace: true,
   };
