@@ -6,7 +6,7 @@ import { ToastrService } from "ngx-toastr";
 import { NgxUiLoaderService } from "ngx-ui-loader";
 import { catchError, map, of, switchMap, tap } from "rxjs";
 import { MasterDataService } from "src/services/master-data.service";
-import { ResponseDatas } from "src/shared/model/response-data.interface";
+import { ResponseData, ResponseDatas } from "src/shared/model/response-data.interface";
 import { quizzTopicSelector } from "./quizz-topic.selector";
 
 import * as QuizzTopicAction from "./quizz-topic.action"
@@ -16,6 +16,7 @@ import { QuizzTopic } from "src/shared/model/quizz-topic.interface";
 export class ManageUserEffects {
 
   quizzTopics: Array<QuizzTopic> = [];
+  totalItem: number = 0;
 
   constructor(
     private action$: Actions,
@@ -27,7 +28,8 @@ export class ManageUserEffects {
   ) {
     this.store.pipe(select(quizzTopicSelector)).subscribe(
       result => {
-        this.quizzTopics = result.items.map((c: any) => ({...c}))
+        this.quizzTopics = result.items.map((c: any) => ({...c}));
+        this.totalItem = result.totalItem;
       }
     );
   }
@@ -46,6 +48,68 @@ export class ManageUserEffects {
       )
     })
   ))
+
+  deleteQuizzTopic$ = createEffect(() => this.action$.pipe(
+    ofType(QuizzTopicAction.DELETE_QUIZZ_TOPIC),
+    switchMap((data : any) => {
+
+        return this.service.deleteQuizzTopics(data.payload).pipe(
+          map((result: ResponseData) => {
+            if(result.isSuccess){
+              this.toastr.error(
+                this.translate.instant('common.Success')
+              );
+              var curIndex = this.quizzTopics.findIndex(c => c.id == data.payload);
+              this.quizzTopics.splice(curIndex, 1);
+            }
+            return new QuizzTopicAction.CrudQuizzTopicsSuccessAction(this.quizzTopics, this.totalItem - 1);
+          }),
+          catchError(error =>
+            of(new QuizzTopicAction.CrudQuizzTopicsFailedAction(error))
+            )
+        )
+    })
+  ))
+
+  createQuizzTopic$ = createEffect(() => this.action$.pipe(
+    ofType(QuizzTopicAction.CREATE_QUIZZ_TOPIC),
+    switchMap((data : any) => {
+        return this.service.createQuizzTopics(data.payLoad).pipe(
+          map((result: ResponseData) => {
+            if(result.isSuccess){
+              this.toastr.success(
+                this.translate.instant('common.Success')
+              );
+              this.quizzTopics.push(result.result);
+            }
+            return new QuizzTopicAction.CrudQuizzTopicsSuccessAction(this.quizzTopics, this.totalItem - 1);
+          }),
+          catchError(error =>
+            of(new QuizzTopicAction.CrudQuizzTopicsFailedAction(error))
+            )
+        )
+    })
+  ))
+
+  // updateQuizzTopic$ = createEffect(() => this.action$.pipe(
+  //   ofType(QuizzTopicAction.UPDATE_QUIZZ_TOPIC),
+  //   switchMap((data : any) => {
+  //       return this.service.createQuizzTopics(data.payLoad).pipe(
+  //         map((result: ResponseData) => {
+  //           if(result.isSuccess){
+  //             this.toastr.success(
+  //               this.translate.instant('common.Success')
+  //             );
+  //             this.quizzTopics.push(result.result);
+  //           }
+  //           return new QuizzTopicAction.CrudQuizzTopicsSuccessAction(this.quizzTopics, this.totalItem - 1);
+  //         }),
+  //         catchError(error =>
+  //           of(new QuizzTopicAction.CrudQuizzTopicsFailedAction(error))
+  //           )
+  //       )
+  //   })
+  // ))
 
   crudQuizzTopicSuccess$ = createEffect(() => this.action$.pipe(
     ofType(QuizzTopicAction.CRUD_QUIZZ_TOPIC_SUCCESS),

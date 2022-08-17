@@ -397,7 +397,6 @@ export class CalendarComponent implements OnInit {
 
   createEvent(day?: any, month?: any, year?: any, eventEle?: any){
     const checkOldDay = eventEle?.currentTarget?.classList.contains('disable-event-day');
-
     if (eventEle?.target !== eventEle?.currentTarget || checkOldDay) return;
     if(month === 13){
       month = 1;

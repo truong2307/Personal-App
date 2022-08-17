@@ -1,13 +1,13 @@
 <div class="modal-header">
-  <h4 class="modal-title" id="modal-title">Delete warning</h4>
+  <h4 class="modal-title" id="modal-title">{{'common.DeleteDialogTitle' | translate}}</h4>
   <button (click)="closeModal()" mat-icon-button>
     <mat-icon>close</mat-icon>
   </button>
 </div>
 <div class="modal-body">
-  <p><strong>Are you sure you want to delete <span class="text-danger">"John Doe"</span></strong></p>
+  <p><strong>{{'common.DeleteDialogBody' | translate}}<span class="text-danger">{{item}}</span></strong></p>
 </div>
 <div class="modal-footer">
-  <button mat-raised-button color="basic" (click)="closeModal()">Cancel</button>
-  <button mat-raised-button class="ms-2" (click)="deleteItem()" color="warn">Ok</button>
+  <button mat-raised-button color="basic" (click)="closeModal()">{{'common.Cancel' | translate}}</button>
+  <button mat-raised-button class="ms-2" (click)="deleteItem()" color="warn">{{'common.Ok' | translate}}</button>
 </div>

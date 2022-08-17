@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -8,6 +8,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./confirm-dialog.component.scss']
 })
 export class ConfirmDialogComponent implements OnInit {
+
+  @Input() item : string = "";
 
   constructor(
     private activeModalService: NgbActiveModal,

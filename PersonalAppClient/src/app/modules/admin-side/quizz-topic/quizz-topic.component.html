@@ -17,11 +17,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of quizzTopic; let i = index">
+          <tr *ngFor="let item of quizzTopic; let i = index"
+          (click)="editQuizzTopic(item, $event)"
+          >
             <td>{{pageSize * pageIndex + i + 1}}</td>
             <td class="text-center">{{item.name}}</td>
             <td class="text-center">
-              <button (click)="openDialog()" mat-icon-button color="warn"><mat-icon>delete</mat-icon></button>
+              <button (click)="openDialog(item)" mat-icon-button color="warn"><mat-icon>delete</mat-icon></button>
             </td>
           </tr>
         </tbody>

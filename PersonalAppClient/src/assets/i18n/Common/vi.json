@@ -4,5 +4,9 @@
   "Save": "Lưu",
   "LabelPagination": "Items/Trang",
   "NextPage": "Trang tiếp theo",
-  "PreviousPage": "Trang trước"
+  "PreviousPage": "Trang trước",
+  "DeleteDialogTitle": "Bạn có chắc ?",
+  "DeleteDialogBody": "Bạn có chắc chắn muốn xóa ",
+  "Ok": "Ok",
+  "Cancel": "Hủy"
 }

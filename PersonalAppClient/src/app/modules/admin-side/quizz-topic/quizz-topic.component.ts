@@ -5,7 +5,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
 import { ConfirmDialogComponent } from 'src/shared/components/confirm-dialog/confirm-dialog.component';
 import { QuizzTopic } from 'src/shared/model/quizz-topic.interface';
-import { GetQuizzTopicsAction } from 'src/stores/quizz-topic/quizz-topic.action';
+import { DeleteEventAction } from 'src/stores/events/events.action';
+import { DeleteQuizzTopicsAction, GetQuizzTopicsAction } from 'src/stores/quizz-topic/quizz-topic.action';
 
 import { quizzTopicSelector } from "../../../../stores/quizz-topic/quizz-topic.selector";
 import { QuizzTopicDetailComponent } from './quizz-topic-detail/quizz-topic-detail.component';
@@ -51,13 +52,20 @@ export class QuizzTopicComponent implements OnInit {
     this.modalService.open(QuizzTopicDetailComponent, {size: 'md'})
   }
 
-  openDialog(){
-    var modalRef = this.modalService.open(ConfirmDialogComponent, {size: 'md'})
+  editQuizzTopic(data : QuizzTopic, eventEle?: any){
+    if (eventEle?.target.localName === 'mat-icon'
+    || eventEle?.target.localName === 'button') return;
+    var modalRef = this.modalService.open(QuizzTopicDetailComponent, {size: 'md'});
+    modalRef.componentInstance.isEdit = true;
+    modalRef.componentInstance.quizzTopic = data;
+  }
 
+  openDialog(item: QuizzTopic){
+    var modalRef = this.modalService.open(ConfirmDialogComponent, {size: 'md'})
+    modalRef.componentInstance.item = item.name;
     modalRef.result.then((result) => {
-      console.log("Close");
+      this.store.dispatch(new DeleteQuizzTopicsAction(item.id as number))
     }, (reason) => {
-      console.log("Dismiss");
     })
   }
 

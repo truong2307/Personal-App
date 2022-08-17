@@ -45,7 +45,7 @@ namespace PersonalApp.DataAccess.Services.MasterDataServices
         {
             try
             {
-                var quizzTopic = _unitOfWork.QuizzTopic.Get(c => c.Id == id);
+                var quizzTopic = await _unitOfWork.QuizzTopic.Get(c => c.Id == id);
                 if (quizzTopic == null)
                 {
                     _responseDto.IsSuccess = false;
@@ -54,6 +54,7 @@ namespace PersonalApp.DataAccess.Services.MasterDataServices
                 }
 
                 await _unitOfWork.QuizzTopic.Delete(id);
+                await _unitOfWork.SaveChangeAsync();
             }
             catch (Exception ex)
             {
