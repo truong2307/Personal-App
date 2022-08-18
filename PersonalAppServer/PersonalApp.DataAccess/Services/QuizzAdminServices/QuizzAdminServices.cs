@@ -68,7 +68,6 @@ namespace PersonalApp.DataAccess.Services.QuizzAdminServices
             var quizzData = await _unitOfWork.QuizzTest.GetAsync(c => c.Id == quizzId);
             if (quizzData == null)
             {
-                _responseDto.IsSuccess = false;
                 _responseDto.ErrorMessages = "Quizz not exist in system";
                 return _responseDto;
             }
@@ -106,7 +105,6 @@ namespace PersonalApp.DataAccess.Services.QuizzAdminServices
 
             if (quizzInDb == null)
             {
-                _responseDto.IsSuccess = false;
                 _responseDto.ErrorMessages = "Quizz not exist in system";
                 return _responseDto;
             }

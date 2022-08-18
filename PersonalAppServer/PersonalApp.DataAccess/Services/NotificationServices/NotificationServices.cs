@@ -54,7 +54,6 @@ namespace PersonalApp.DataAccess.Services.NotificationServices
             var notification = await _unitOfWork.Notifications.GetAsync(c => c.Id == idNotification);
             if (notification == null)
             {
-                _responseDto.IsSuccess = false;
                 _responseDto.ErrorMessages = "Notification not exist in system";
                 return _responseDto;
             }
@@ -87,7 +86,6 @@ namespace PersonalApp.DataAccess.Services.NotificationServices
             var notification = await _unitOfWork.Notifications.GetAsync(c => c.Id == model.Id);
             if (notification == null)
             {
-                _responseDto.IsSuccess = false;
                 _responseDto.ErrorMessages = "Notification not exist in system";
                 return _responseDto;
             }

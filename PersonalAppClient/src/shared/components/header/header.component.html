@@ -22,8 +22,8 @@
               </h6>
               <a class="dropdown-item d-flex align-items-center" *ngFor="let notify of notifications">
                   <div (click)="seenNotify(notify)">
-                      <div class="small text-gray-500">{{notify.createdAt | date}}</div>
-                      <span [ngClass]="notify.seen ? '' : 'fw-bold'">{{notify.content}}</span>
+                      <div class="small fs-12 text-gray-500">{{notify.createdAt | date}}</div>
+                      <span class="fs-12" [ngClass]="notify.seen ? '' : 'fw-bold'">{{notify.content}}</span>
                   </div>
               </a>
               <a class="dropdown-item text-center small text-gray-500" href="#">{{ 'header.ShowAllAlert' | translate }}</a>

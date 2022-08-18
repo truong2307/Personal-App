@@ -33,7 +33,7 @@ export class QuizzTopicDetailComponent implements OnInit {
 
   initialForm (){
     this.addQuizzTopicForm = new FormGroup({
-      name : new FormControl("",[Validators.required, Validators.minLength(3)]),
+      name : new FormControl("",[Validators.required]),
       id : new FormControl(""),
     })
   }
@@ -59,12 +59,12 @@ export class QuizzTopicDetailComponent implements OnInit {
   }
 
   editTopic(){
-    // const quizzTopic : QuizzTopic = {
-    //   name : this.addQuizzTopicForm.value.name,
-    //   id : this.addQuizzTopicForm.value.id
-    // };
-    // this.store.dispatch(new UpdateQuizzTopicsAction(quizzTopic));
-    // this.activeModalService.close();
+    const quizzTopic : QuizzTopic = {
+      name : this.addQuizzTopicForm.value.name,
+      id : this.addQuizzTopicForm.value.id
+    };
+    this.store.dispatch(new UpdateQuizzTopicsAction(quizzTopic));
+    this.activeModalService.close();
   }
 
 }

@@ -57,7 +57,6 @@ namespace PersonalApp.DataAccess.Services.ManageUserServices
             var userInDb = await _userManager.FindByIdAsync(model.UserId);
             if (userInDb == null)
             {
-                _responseDto.IsSuccess = false;
                 _responseDto.ErrorMessages = "User not exist in system";
                 return _responseDto;
             }

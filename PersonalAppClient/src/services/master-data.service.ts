@@ -24,6 +24,10 @@ export class MasterDataService {
     return this.httpClient.post(environment.baseUri + 'master-data/create-quizz-topics', quizzTopic);
   }
 
+  updateQuizzTopics(quizzTopic: QuizzTopic) : Observable<ResponseData> {
+    return this.httpClient.put(environment.baseUri + 'master-data/update-quizz-topics', quizzTopic);
+  }
+
   deleteQuizzTopics(id: number) : Observable<ResponseData> {
     return this.httpClient.delete(environment.baseUri + `master-data/delete-quizz-topics/${id}`);
   }

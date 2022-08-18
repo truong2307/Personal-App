@@ -7,6 +7,7 @@ namespace PersonalApp.DataAccess.Services.MasterDataServices
         Task<ResponseDatas<RoleDto>> GetRoles();
         Task<ResponseDatas<QuizzTopicDto>> GetQuizzTopic(int pageIndex, int pageSize);
         Task<ResponseDto> CreateQuizzTopic(QuizzTopicCreateDto model);
+        Task<ResponseDto> UpdateQuizzTopic(QuizzTopicDto model);
         Task<ResponseDto> DeleteQuizzTopic(int id);
     }
 }

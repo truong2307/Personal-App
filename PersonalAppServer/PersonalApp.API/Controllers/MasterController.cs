@@ -16,7 +16,7 @@ namespace PersonalApp.Controllers
 
         public MasterController(IMasterDataServices masterDataServices)
         {
-            _masterDataServices = masterDataServices;   
+            _masterDataServices = masterDataServices;
         }
 
         [HttpGet("get-roles")]
@@ -28,7 +28,7 @@ namespace PersonalApp.Controllers
 
         [HttpGet("get-quizz-topics/{pageIndex:int}/{pageSize:int}")]
         public async Task<IActionResult> GetQuizzTopics(int pageIndex, int pageSize)
-{
+        {
             var result = await _masterDataServices.GetQuizzTopic(pageIndex, pageSize);
             return result.IsSuccess ? Ok(result) : BadRequest(result.ErrorMessages);
         }
@@ -38,6 +38,14 @@ namespace PersonalApp.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState.Values.ToString());
             var result = await _masterDataServices.CreateQuizzTopic(model);
+            return result.IsSuccess ? Ok(result) : BadRequest(result.ErrorMessages);
+        }
+
+        [HttpPut("update-quizz-topics")]
+        public async Task<IActionResult> UpdateQuizzTopics(QuizzTopicDto model)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState.Values.ToString());
+            var result = await _masterDataServices.UpdateQuizzTopic(model);
             return result.IsSuccess ? Ok(result) : BadRequest(result.ErrorMessages);
         }
 

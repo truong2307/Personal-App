@@ -59,7 +59,6 @@ namespace PersonalApp.DataAccess.Services.EventServices
             var eventToDb = await _unitOfWork.Events.GetAsync(c => c.Id == idEvent);
             if (eventToDb == null)
             {
-                _responseDto.IsSuccess = false;
                 _responseDto.ErrorMessages = "Event not exist in system";
                 return _responseDto;
             }
@@ -87,7 +86,6 @@ namespace PersonalApp.DataAccess.Services.EventServices
             var eventInDb = await _unitOfWork.Events.GetAsync(c => c.Id == model.Id);
             if (eventInDb == null)
             {
-                _responseDto.IsSuccess = false;
                 _responseDto.ErrorMessages = "Event not exist in system";
                 return _responseDto;
             }

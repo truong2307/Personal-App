@@ -82,34 +82,35 @@ export class ManageUserEffects {
               );
               this.quizzTopics.push(result.result);
             }
-            return new QuizzTopicAction.CrudQuizzTopicsSuccessAction(this.quizzTopics, this.totalItem - 1);
+            return new QuizzTopicAction.CrudQuizzTopicsSuccessAction(this.quizzTopics, this.totalItem + 1);
           }),
           catchError(error =>
-            of(new QuizzTopicAction.CrudQuizzTopicsFailedAction(error))
+            of(new QuizzTopicAction.CrudQuizzTopicsFailedAction(error.error))
             )
         )
     })
   ))
 
-  // updateQuizzTopic$ = createEffect(() => this.action$.pipe(
-  //   ofType(QuizzTopicAction.UPDATE_QUIZZ_TOPIC),
-  //   switchMap((data : any) => {
-  //       return this.service.createQuizzTopics(data.payLoad).pipe(
-  //         map((result: ResponseData) => {
-  //           if(result.isSuccess){
-  //             this.toastr.success(
-  //               this.translate.instant('common.Success')
-  //             );
-  //             this.quizzTopics.push(result.result);
-  //           }
-  //           return new QuizzTopicAction.CrudQuizzTopicsSuccessAction(this.quizzTopics, this.totalItem - 1);
-  //         }),
-  //         catchError(error =>
-  //           of(new QuizzTopicAction.CrudQuizzTopicsFailedAction(error))
-  //           )
-  //       )
-  //   })
-  // ))
+  updateQuizzTopic$ = createEffect(() => this.action$.pipe(
+    ofType(QuizzTopicAction.UPDATE_QUIZZ_TOPIC),
+    switchMap((data : any) => {
+        return this.service.updateQuizzTopics(data.payLoad).pipe(
+          map((result: ResponseData) => {
+            if(result.isSuccess){
+              this.toastr.success(
+                this.translate.instant('common.Success')
+              );
+              var curIndex = this.quizzTopics.findIndex(c => c.id == data.payLoad.id);
+              this.quizzTopics[curIndex].name = data.payLoad.name;
+            }
+            return new QuizzTopicAction.CrudQuizzTopicsSuccessAction(this.quizzTopics, this.totalItem);
+          }),
+          catchError(error =>
+            of(new QuizzTopicAction.CrudQuizzTopicsFailedAction(error.error))
+            )
+        )
+    })
+  ))
 
   crudQuizzTopicSuccess$ = createEffect(() => this.action$.pipe(
     ofType(QuizzTopicAction.CRUD_QUIZZ_TOPIC_SUCCESS),
@@ -122,10 +123,10 @@ export class ManageUserEffects {
 
   crudQuizzTopicFailed$ = createEffect(() => this.action$.pipe(
     ofType(QuizzTopicAction.CRUD_QUIZZ_TOPIC_FAILED),
-    tap(() => {
+    tap((error : any) => {
       this.loader.stop();
       this.toastr.error(
-        this.translate.instant('common.Error')
+        error.error
       );
     })
   ),
