@@ -15,29 +15,29 @@ namespace PersonalApp.DataAccess.Data.Repository
             this.dbSet = _context.Set<T>();
         }
 
-        public async Task Add(T entity)
+        public async Task AddAsync(T entity)
         {
             await dbSet.AddAsync(entity);
         }
 
-        public async Task AddRange(IEnumerable<T> entities)
+        public async Task AddRangeAsync(IEnumerable<T> entities)
         {
             await dbSet.AddRangeAsync(entities);
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteAsync(int id)
         {
             var entity = await dbSet.FindAsync(id);
             dbSet.Remove(entity);
             await Task.CompletedTask;
         }
 
-        public async Task DeleteRange(IEnumerable<T> entities)
+        public async Task DeleteRangeAsync(IEnumerable<T> entities)
         {
             dbSet.RemoveRange(entities);
         }
 
-        public async Task<T> Get(Expression<Func<T, bool>> filter
+        public async Task<T> GetAsync(Expression<Func<T, bool>> filter
             , Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
         {
             IQueryable<T> query = dbSet;
@@ -49,7 +49,7 @@ namespace PersonalApp.DataAccess.Data.Repository
             return await query.AsNoTracking().FirstOrDefaultAsync(filter);
         }
 
-        public async Task<IList<T>> GetAll(Expression<Func<T, bool>> filter = null
+        public async Task<IList<T>> GetAllAsync(Expression<Func<T, bool>> filter = null
             , Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null
             , Func<IQueryable<T>, IQueryable<T>> queryEntity = null
             , Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
@@ -78,7 +78,7 @@ namespace PersonalApp.DataAccess.Data.Repository
             return await query.AsNoTracking().ToListAsync();
         }
 
-        public async Task Update(T entity)
+        public async Task UpdateAsync(T entity)
         {
             dbSet.Attach(entity);
             _context.Entry(entity).State = EntityState.Modified;

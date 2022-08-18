@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PersonalApp.DataAccess.Data;
+using PersonalApp.Models.ExceptionGlobal;
 using PersonalApp.Models.Identity;
 using Swashbuckle.AspNetCore.Filters;
 using System.Reflection;
@@ -80,6 +82,28 @@ namespace PersonalApp.ConfigureServicesExtension
         public static void ConfigureAutoMapper(this IServiceCollection services)
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        }
+
+        public static void ConfigureExceptionHandler(this IApplicationBuilder app)
+        {
+            app.UseExceptionHandler(error =>
+            {
+                error.Run(async context =>
+                {
+                    context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+                    context.Response.ContentType = "application/json";
+
+                    var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
+                    if (contextFeature != null)
+                    {
+                        await context.Response.WriteAsync(new Error
+                        {
+                            StatusCode = context.Response.StatusCode,
+                            Message = "Internal sever error. Please try again later."
+                        }.ToString());
+                    }
+                });
+            });
         }
     }
 }

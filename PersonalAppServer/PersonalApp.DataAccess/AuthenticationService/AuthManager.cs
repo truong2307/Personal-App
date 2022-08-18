@@ -31,6 +31,22 @@ namespace PersonalApp.DataAccess.AuthenticationService
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
+        public async Task<bool> ValidateUser(LoginUserDto userRequest)
+        {
+            _user = await _userManager.FindByEmailAsync(userRequest.EmailOrUserName);
+            if (_user == null)
+            {
+                _user = await _userManager.FindByNameAsync(userRequest.EmailOrUserName);
+            }
+
+            bool checkUserSuccess = await _userManager.CheckPasswordAsync(_user, userRequest.Password);
+
+            if (_user != null && checkUserSuccess) return true;
+            return false;
+        }
+
+        #region private method
+
         private JwtSecurityToken GenerateTokenOptions(List<Claim> claims, SigningCredentials signingCredentials)
         {
             var jwtSettings = _configuration.GetSection("Jwt");
@@ -74,18 +90,6 @@ namespace PersonalApp.DataAccess.AuthenticationService
             return signingCredentials;
         }
 
-        public async Task<bool> ValidateUser(LoginUserDto userRequest)
-        {
-            _user = await _userManager.FindByEmailAsync(userRequest.EmailOrUserName);
-            if (_user == null)
-            {
-                _user = await _userManager.FindByNameAsync(userRequest.EmailOrUserName);
-            }
-
-            bool checkUserSuccess = await _userManager.CheckPasswordAsync(_user, userRequest.Password);
-
-            if (_user != null && checkUserSuccess) return true;
-            return false;
-        }
+        #endregion
     }
 }

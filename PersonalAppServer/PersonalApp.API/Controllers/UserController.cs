@@ -28,56 +28,34 @@ namespace PersonalApp.Controllers
         public async Task<IActionResult> Register([FromBody] UserDto userRequest)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
-            try
-            {
-                var userToDb = _mapper.Map<ApiUser>(userRequest);
-                var userResponse = await _userManager.CreateAsync(userToDb, userRequest.Password);
+            var userToDb = _mapper.Map<ApiUser>(userRequest);
+            var userResponse = await _userManager.CreateAsync(userToDb, userRequest.Password);
 
-                if (!userResponse.Succeeded)
+            if (!userResponse.Succeeded)
+            {
+                foreach (var error in userResponse.Errors)
                 {
-                    foreach (var error in userResponse.Errors)
-                    {
-                        ModelState.AddModelError(error.Code, error.Description);
-                    }
-                    return BadRequest(ModelState);
+                    ModelState.AddModelError(error.Code, error.Description);
                 }
 
-                await _userManager.AddToRoleAsync(userToDb, Role.USER_ROLE);
-
-                return Accepted();
-
+                return BadRequest(ModelState);
             }
-            catch (Exception ex)
-            {
-                return Problem($"Somethong went wrong in the {nameof(Register)}", statusCode: 500);
-            }
+            await _userManager.AddToRoleAsync(userToDb, Role.USER_ROLE);
+
+            return Accepted();
         }
 
         [HttpPost("Login")]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         public async Task<IActionResult> Login([FromBody] LoginUserDto userRequest)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            try
-            {
-                bool loginUserSucceeded = await _authManager.ValidateUser(userRequest);
-                if (!loginUserSucceeded)
-                {
-                    return BadRequest("Sai mật khẩu");
-                }
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
-                return Accepted(new { token = await _authManager.CreateToken() });
-            }
-            catch (Exception ex)
-            {
-                return Problem($"Somethong went wrong in the {nameof(Register)}", statusCode: 500);
-            }
+            bool loginUserSucceeded = await _authManager.ValidateUser(userRequest);
+            if (!loginUserSucceeded) return BadRequest("Sai mật khẩu");
+
+            return Accepted(new { token = await _authManager.CreateToken() });
         }
     }
 }

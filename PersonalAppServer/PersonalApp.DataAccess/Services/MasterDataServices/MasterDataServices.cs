@@ -23,44 +23,29 @@ namespace PersonalApp.DataAccess.Services.MasterDataServices
 
         public async Task<ResponseDto> CreateQuizzTopic(QuizzTopicCreateDto model)
         {
-            try
-            {
-                var dataMap = _mapper.Map<QuizzTopic>(model);
+            var dataMap = _mapper.Map<QuizzTopic>(model);
 
-                await _unitOfWork.QuizzTopic.Add(dataMap);
-                await _unitOfWork.SaveChangeAsync();
+            await _unitOfWork.QuizzTopic.AddAsync(dataMap);
+            await _unitOfWork.SaveChangeAsync();
+            _responseDto.Result = _mapper.Map<QuizzTopicDto>(dataMap);
+            _responseDto.IsSuccess = true;
 
-                _responseDto.Result = _mapper.Map<QuizzTopicDto>(dataMap);
-            }
-            catch (Exception ex)
-            {
-                _responseDto.IsSuccess = false;
-                _responseDto.ErrorMessages = ex.ToString();
-            }
-            
             return _responseDto;
         }
 
         public async Task<ResponseDto> DeleteQuizzTopic(int id)
         {
-            try
-            {
-                var quizzTopic = await _unitOfWork.QuizzTopic.Get(c => c.Id == id);
-                if (quizzTopic == null)
-                {
-                    _responseDto.IsSuccess = false;
-                    _responseDto.ErrorMessages = "Event not exist in system";
-                    return _responseDto;
-                }
-
-                await _unitOfWork.QuizzTopic.Delete(id);
-                await _unitOfWork.SaveChangeAsync();
-            }
-            catch (Exception ex)
+            var quizzTopic = await _unitOfWork.QuizzTopic.GetAsync(c => c.Id == id);
+            if (quizzTopic == null)
             {
                 _responseDto.IsSuccess = false;
-                _responseDto.ErrorMessages = ex.ToString();
+                _responseDto.ErrorMessages = "Event not exist in system";
+                return _responseDto;
             }
+
+            await _unitOfWork.QuizzTopic.DeleteAsync(id);
+            await _unitOfWork.SaveChangeAsync();
+            _responseDto.IsSuccess = true;
 
             return _responseDto;
         }
@@ -68,20 +53,13 @@ namespace PersonalApp.DataAccess.Services.MasterDataServices
         public async Task<ResponseDatas<QuizzTopicDto>> GetQuizzTopic(int pageIndex, int pageSize)
         {
             var response = new ResponseDatas<QuizzTopicDto>();
-            try
-            {
-                var quizzTopicsData = await _unitOfWork.QuizzTopic
-                                    .GetAll(queryEntity: c => c.Skip(pageSize * pageIndex).Take(pageSize)
-                                    , orderBy: c => c.OrderBy(c => c.Name));
-                response.Datas = _mapper.Map<List<QuizzTopicDto>>(quizzTopicsData);
+            var quizzTopicsData = await _unitOfWork.QuizzTopic
+                                .GetAllAsync(queryEntity: c => c.Skip(pageSize * pageIndex).Take(pageSize)
+                                , orderBy: c => c.OrderBy(c => c.Name));
 
-                response.TotalItem = (await _unitOfWork.QuizzTopic.GetAll()).Count;
-            }
-            catch (Exception ex)
-            {
-                response.IsSuccess = false;
-                response.ErrorMessages = ex.ToString();
-            }
+            response.Datas = _mapper.Map<List<QuizzTopicDto>>(quizzTopicsData);
+            response.TotalItem = (await _unitOfWork.QuizzTopic.GetAllAsync()).Count;
+            response.IsSuccess = true;
 
             return response;
         }
@@ -89,16 +67,8 @@ namespace PersonalApp.DataAccess.Services.MasterDataServices
         public async Task<ResponseDatas<RoleDto>> GetRoles()
         {
             var response = new ResponseDatas<RoleDto>();
-
-            try
-            {
-                response.Datas = _mapper.Map<List<RoleDto>>(await _unitOfWork.ApplicationRoles.GetAll());
-            }
-            catch (Exception ex)
-            {
-                response.IsSuccess = false;
-                response.ErrorMessages = ex.ToString();
-            }
+            response.Datas = _mapper.Map<List<RoleDto>>(await _unitOfWork.ApplicationRoles.GetAllAsync());
+            response.IsSuccess = true;
 
             return response;
         }
