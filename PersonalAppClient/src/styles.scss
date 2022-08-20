@@ -13,5 +13,9 @@ body {
 
 //overwrite button material
 .mat-button-focus-overlay {
-  background-color: transparent !important;
-  }
+background-color: transparent !important;
+}
+
+.border-primary{
+  border-color:var(--bs-purple) !important;
+}

@@ -28,7 +28,7 @@ import { QuizzTopicDetailComponent } from './quizz-topic/quizz-topic-detail/quiz
     EditUserComponent,
     QuizzTopicComponent,
     QuizzManageComponent,
-    QuizzTopicDetailComponent
+    QuizzTopicDetailComponent,
   ],
   imports: [
     CommonModule,

@@ -35,7 +35,7 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    AdminSideComponent
+    AdminSideComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-header d-flex align-items-center justify-content-between">
-    <h5 class="text-center">Create topic</h5>
+    <h5 class="text-center">{{title}}</h5>
     <button (click)="closeModal()" mat-icon-button>
       <mat-icon>close</mat-icon>
     </button>
@@ -8,17 +8,17 @@
   <div class="card-body">
     <form [formGroup]="addQuizzTopicForm">
       <mat-form-field class="w-100" appearance="standard">
-        <mat-label>Topic Name</mat-label>
-        <input matInput placeholder="Please input quizz topic" formControlName="name">
+        <mat-label>{{ 'quizz.TopicName' | translate}}</mat-label>
+        <input matInput placeholder="{{ 'quizz.PlaceHoldName' | translate}}" formControlName="name">
         <mat-error *ngIf="name?.errors">
-          error
+          {{ 'quizz.ValidTopicName' | translate}}
         </mat-error>
       </mat-form-field>
     </form>
-      <button *ngIf="!isEdit; else editQuizzTopic" class="mt-2" mat-raised-button color="primary" [disabled]="addQuizzTopicForm.invalid" (click)="createTopic()">Save</button>
+      <button *ngIf="!isEdit; else editQuizzTopic" class="mt-2" mat-raised-button color="primary" [disabled]="addQuizzTopicForm.invalid" (click)="createTopic()">{{ 'common.Save' | translate}}</button>
       <ng-template #editQuizzTopic>
         <button class="mt-2" mat-raised-button color="primary" [disabled]="addQuizzTopicForm.invalid"
-        (click)="editTopic()">Edit</button>
+        (click)="editTopic()">{{ 'common.Edit' | translate}}</button>
       </ng-template>
   </div>
 </div>

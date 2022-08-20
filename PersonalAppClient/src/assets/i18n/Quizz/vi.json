@@ -1,6 +1,11 @@
 {
-  "QuizzTopicTitle": "Quản lý chủ đề quizz",
+  "TopicTitle": "Quản lý chủ đề",
   "AddTopic": "Thêm topic",
   "NameTopic": "Tên topic",
-  "NO": "STT"
+  "NO": "STT",
+  "CreateTopic": "Tạo chủ đề",
+  "EditTopic": "Sửa chủ đề",
+  "TopicName": "Tên",
+  "PlaceHoldName": "Vui lòng nhập",
+  "ValidTopicName": "Nhập ít nhất 1 kí tự"
 }

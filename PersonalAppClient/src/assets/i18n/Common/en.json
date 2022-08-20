@@ -8,5 +8,6 @@
   "DeleteDialogTitle": "Are you sure ?",
   "DeleteDialogBody": "Are you sure you want to delete ",
   "Ok": "Ok",
-  "Cancel": "Cancel"
+  "Cancel": "Cancel",
+  "Edit": "Edit"
 }

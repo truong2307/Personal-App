@@ -1,6 +1,11 @@
 {
-  "QuizzTopicTitle": "Manage quizz topic",
+  "TopicTitle": "Manage topic",
   "AddTopic": "Add topic",
   "NameTopic": "Name topic",
-  "NO": "No"
+  "NO": "No",
+  "CreateTopic": "Create Topic",
+  "EditTopic": "Edit Topic",
+  "TopicName": "Name",
+  "PlaceHoldName": "Please enter",
+  "ValidTopicName": "Enter at least 1 character"
 }

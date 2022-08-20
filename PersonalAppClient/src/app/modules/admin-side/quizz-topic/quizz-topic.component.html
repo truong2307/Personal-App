@@ -1,5 +1,5 @@
-<mat-card>
-  <mat-card-title>{{'quizz.QuizzTopicTitle' | translate}}</mat-card-title>
+<mat-card class="border-top border-4 border-primary">
+  <mat-card-title>{{'quizz.TopicTitle' | translate}}</mat-card-title>
   <mat-divider inset></mat-divider>
   <mat-card-actions>
     <button mat-flat-button color="primary" (click)="addQuizzTopic()">{{'quizz.AddTopic' | translate}}</button>
@@ -17,7 +17,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of quizzTopic; let i = index"
+          <tr *ngFor="let item of quizzTopic; let i = index" role="button"
           (click)="editQuizzTopic(item, $event)"
           >
             <td>{{pageSize * pageIndex + i + 1}}</td>

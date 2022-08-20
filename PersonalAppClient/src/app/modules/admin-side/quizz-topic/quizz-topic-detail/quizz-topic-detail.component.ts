@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { QuizzTopic } from 'src/shared/model/quizz-topic.interface';
 import { CreateQuizzTopicsAction, UpdateQuizzTopicsAction } from 'src/stores/quizz-topic/quizz-topic.action';
 
@@ -15,17 +16,21 @@ export class QuizzTopicDetailComponent implements OnInit {
   addQuizzTopicForm!: FormGroup;
   @Input() quizzTopic! : QuizzTopic;
   @Input() isEdit = false;
+  title : string = '';
 
 
   constructor(
     private activeModalService: NgbActiveModal,
     private store: Store,
+    private translate: TranslateService,
   ) { }
 
   ngOnInit(): void {
     this.initialForm();
+    this.title = this.translate.instant('quizz.CreateTopic');
 
     if(this.isEdit){
+      this.title = this.translate.instant('quizz.EditTopic');
       this.name?.setValue(this.quizzTopic.name);
       this.id?.setValue(this.quizzTopic.id);
     }
