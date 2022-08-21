@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import dateOfWeek,
   { daysOfWeek
   , daysOfWeekRender, daysOfWeekViRender, month
-  , monthVi } from 'src/shared/const/dateOfWeek';
+  , monthVi } from 'src/shared/constants/date-of-week';
 import { AddEventComponent } from './add-event/add-event.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';

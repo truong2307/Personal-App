@@ -1,6 +1,6 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { SignalRService } from 'src/services/signalr-services.service';
-import optionSidebar from 'src/shared/const/optionSidebar';
+import optionSidebar from 'src/shared/constants/option-sidebar';
 
 @Component({
   selector: 'app-sidebar',

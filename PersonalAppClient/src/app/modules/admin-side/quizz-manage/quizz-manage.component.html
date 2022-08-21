@@ -1,10 +1,8 @@
 <div class="container-sm">
   <mat-card class="border-top border-3 border-primary">
     <mat-card-title>Quizz Create</mat-card-title>
-
     <form [formGroup]="createQuizzForm">
     <mat-card-content>
-
         <!--Header create quizz -->
         <div class="row">
           <div class="col col-md-8">
@@ -30,20 +28,20 @@
             </mat-form-field>
           </div>
         </div>
-
         <!-- topic quizz -->
         <div class="row">
           <div class="col col-md-6">
             <mat-form-field class="w-100" appearance="standard">
               <mat-label>Select Topic</mat-label>
               <mat-select formControlName="topicId">
-                <mat-option *ngFor="let item of topicList" value="item.id">
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let item of topicList" [value]="item.id">
                   {{item.name}}
                 </mat-option>
               </mat-select>
+              <mat-error *ngIf="topicId?.errors">Please choose topic</mat-error>
             </mat-form-field>
           </div>
-
           <!-- quizz level -->
           <div class="col col-md-6">
             <mat-form-field class="w-100" appearance="standard">
@@ -54,100 +52,174 @@
                 <mat-option value="Hard">Hard</mat-option>
               </mat-select>
             </mat-form-field>
-
           </div>
         </div>
-        <mat-checkbox formControlName="isPublic" [color]="'primary'">Public</mat-checkbox>
-
-        <!-- add form multiple choice -->
-        <mat-card-actions>
+        <mat-checkbox class="mt-2" formControlName="isPublic" [color]="'primary'">Public</mat-checkbox>
+        <!-- add form multiple choice or essay question-->
+        <mat-card-actions class="mt-2">
           <button type="button"
-          (click)="addFormQuestion()"
-          mat-mini-fab color="primary" aria-label="Example icon button with a menu icon">
-            <mat-icon>add</mat-icon>
+          (click)="addFormQuestion(quizzTypeFormArr.MULTIPLE_CHOICE_QUESTIONS)"
+          mat-raised-button color="success">
+          <div class="d-flex align-items-center">
+            <mat-icon>add</mat-icon><span>Multiple choice</span>
+          </div>
           </button>
-
+          <button type="button"
+          (click)="addFormQuestion(quizzTypeFormArr.ESSAY_QUESTIONS)"
+          mat-raised-button color="secondary">
+          <div class="d-flex align-items-center">
+            <mat-icon>add</mat-icon><span>Essay</span>
+          </div>
+          </button>
         </mat-card-actions>
-
-        <div formArrayName="multiplechoiceQuestions" *ngIf="multiplechoiceQuestions.controls.length">
-        <mat-expansion-panel class="border-top border-3 border-danger mt-3" expanded="{{true}}"
-          *ngFor="let item of multiplechoiceQuestions.controls; let index = index">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Question {{index + 1}}
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-            <form [formGroupName]="index">
-              <mat-card-actions>
-                <button type="button"
-                (click)="removeMultipleQuestion(index)"
-                mat-mini-fab color="warn" aria-label="Example icon button with a menu icon">
-                  <mat-icon>delete</mat-icon>
+        <!-- close or open all question -->
+          <div *ngIf="multiplechoiceQuestions.controls.length || essayQuestions.controls.length">
+            <button mat-button type="button" (click)="accordion.openAll()">Expand All</button>
+            <button mat-button type="button" (click)="accordion.closeAll()">Collapse All</button>
+          </div>
+          <mat-accordion multi>
+            <!-- Start Essay question form -->
+            <div formArrayName="essayQuestions" *ngIf="essayQuestions.controls.length">
+              <mat-expansion-panel class="border-top border-4 border-secondary mt-3" expanded="{{false}}"
+              *ngFor="let item of essayQuestions.controls; let index = index">
+              <mat-expansion-panel-header>
+                <div class="d-flex justify-content-between">
+                  <mat-panel-description>
+                    <button type="button" color="warn"
+                    mat-icon-button (click)="removeMultipleQuestion(index, quizzTypeFormArr.ESSAY_QUESTIONS)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </mat-panel-description>
+                </div>
+                <mat-panel-title>
+                  <strong>Essay question {{index + 1}}</strong>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <form [formGroupName]="index">
+                <mat-card-actions>
+                </mat-card-actions>
+                <div class="row">
+                  <div class="col col-md-9">
+                    <mat-form-field class="w-100" appearance="standard">
+                      <mat-label>Title essay question</mat-label>
+                      <input matInput placeholder="Placeholder" formControlName="questionText">
+                      <mat-icon matSuffix>mood</mat-icon>
+                      <mat-error *ngIf="getFormControl(index, 'questionText', quizzTypeFormArr.ESSAY_QUESTIONS)?.errors">
+                        Title essay question is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col col-md-3">
+                    <mat-form-field class="w-100" appearance="standard" floatLabel="always">
+                      <mat-label>Mark</mat-label>
+                      <input matInput
+                      formControlName="mark"
+                      type="number" class="example-right-align" placeholder="0">
+                      <span matPrefix>&nbsp;</span>
+                      <span matSuffix>.00</span>
+                      <mat-error *ngIf="getFormControl(index, 'mark', quizzTypeFormArr.ESSAY_QUESTIONS)?.errors">
+                        Mark of question is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <!-- button upload image -->
+                <button class="mt-2" type="button" mat-raised-button (click)="fileInput.click()">Image
+                  <mat-icon matSuffix>file_upload</mat-icon>
                 </button>
-              </mat-card-actions>
-              <!-- header create question  -->
-              <div class="row">
-                <div class="col col-md-9">
-                  <mat-form-field class="w-100" appearance="standard">
-                    <mat-label>Title Question</mat-label>
-                    <input matInput placeholder="Placeholder" formControlName="questionText">
-                    <mat-icon matSuffix>mood</mat-icon>
-                    <mat-error *ngIf="getFormControlMultipleChoice(index, 'questionText')?.errors">
-                      Title question is <strong>required</strong>
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-
-                <div class="col col-md-3">
-                  <mat-form-field class="w-100" appearance="standard" floatLabel="always">
-                    <mat-label>Mark</mat-label>
-                    <input matInput
-                    formControlName="mark"
-                    type="number" class="example-right-align" placeholder="0">
-                    <span matPrefix>&nbsp;</span>
-                    <span matSuffix>.00</span>
-                    <mat-error *ngIf="getFormControlMultipleChoice(index, 'mark')?.errors">
-                      Mark of question is <strong>required</strong>
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-              </div>
-
-              <!-- button upload image -->
-              <button class="mt-2" type="button" mat-raised-button (click)="fileInput.click()">Image
-                <mat-icon matSuffix>file_upload</mat-icon>
-              </button>
-              <input hidden #fileInput type="file" id="file">
-
-              <!-- Text answer A, B, C, D -->
-              <div class="row mt-3" *ngFor="let item of multipleChoices">
-                <div class="col">
+                <input hidden #fileInput type="file" id="file">
+                <div class="row">
                   <mat-form-field appearance="standard">
-                    <mat-icon matSuffix>radio_button_unchecked</mat-icon>
-                    <mat-label>{{item.title}}</mat-label>
-                    <input matInput placeholder="Placeholder" formControlName="{{item.value}}">
-                    <mat-error *ngIf="getFormControlMultipleChoice(index, item.value)?.errors">
-                      {{item.title}} is <strong>required</strong>
+                    <mat-label>Correct essay question</mat-label>
+                    <textarea matInput formControlName="correctAnswer"></textarea>
+                    <mat-error *ngIf="getFormControl(index, 'correctAnswer', quizzTypeFormArr.ESSAY_QUESTIONS)?.errors">
+                      Correct Answer is <strong>required</strong>
                     </mat-error>
                   </mat-form-field>
                 </div>
+              </form>
+              </mat-expansion-panel>
+            </div>
+          <!-- End Essay question form -->
+
+        <!-- Start multiple choice question form -->
+        <div formArrayName="multiplechoiceQuestions" *ngIf="multiplechoiceQuestions.controls.length">
+            <mat-expansion-panel class="border-top border-4 border-success mt-3" expanded="{{false}}"
+            *ngFor="let item of multiplechoiceQuestions.controls; let index = index">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <strong>Multiple choice question {{index + 1}}</strong>
+              </mat-panel-title>
+              <div class="d-flex justify-content-between">
+                <mat-panel-description>
+                  <button type="button" color="warn"
+                  mat-icon-button (click)="removeMultipleQuestion(index, quizzTypeFormArr.MULTIPLE_CHOICE_QUESTIONS)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </mat-panel-description>
               </div>
-              <div class="row">
-                <div class="col">
-                  <mat-form-field appearance="standard">
-                    <mat-label>Select correct answer</mat-label>
-                    <mat-select formControlName="correctAnswer">
-                      <mat-option *ngFor="let item of multipleChoices"
-                      [value]="item.key">{{item.title}}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
+            </mat-expansion-panel-header>
+              <form [formGroupName]="index">
+                <!-- header create question  -->
+                <div class="row">
+                  <div class="col col-md-9">
+                    <mat-form-field class="w-100" appearance="standard">
+                      <mat-label>Title Question</mat-label>
+                      <input matInput placeholder="Placeholder" formControlName="questionText">
+                      <mat-icon matSuffix>mood</mat-icon>
+                      <mat-error *ngIf="getFormControl(index, 'questionText', quizzTypeFormArr.MULTIPLE_CHOICE_QUESTIONS)?.errors">
+                        Title question is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col col-md-3">
+                    <mat-form-field class="w-100" appearance="standard" floatLabel="always">
+                      <mat-label>Mark</mat-label>
+                      <input matInput
+                      formControlName="mark"
+                      type="number" class="example-right-align" placeholder="0">
+                      <span matPrefix>&nbsp;</span>
+                      <span matSuffix>.00</span>
+                      <mat-error *ngIf="getFormControl(index, 'mark', quizzTypeFormArr.MULTIPLE_CHOICE_QUESTIONS)?.errors">
+                        Mark of question is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
                 </div>
-              </div>
-            </form>
-        </mat-expansion-panel>
+                <!-- button upload image -->
+                <button class="mt-2" type="button" mat-raised-button (click)="fileInput.click()">Image
+                  <mat-icon matSuffix>file_upload</mat-icon>
+                </button>
+                <input hidden #fileInput type="file" id="file">
+                <!-- Text answer A, B, C, D -->
+                <div class="row mt-3" *ngFor="let item of multipleChoices">
+                  <div class="col">
+                    <mat-form-field appearance="standard">
+                      <mat-icon matSuffix>radio_button_unchecked</mat-icon>
+                      <mat-label>{{item.title}}</mat-label>
+                      <input matInput placeholder="Placeholder" formControlName="{{item.value}}">
+                      <mat-error *ngIf="getFormControl(index, item.value, quizzTypeFormArr.MULTIPLE_CHOICE_QUESTIONS)?.errors">
+                        {{item.title}} is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <mat-form-field appearance="standard">
+                      <mat-label>Select correct answer</mat-label>
+                      <mat-select formControlName="correctAnswer">
+                        <mat-option *ngFor="let item of multipleChoices"
+                        [value]="item.key">{{item.title}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </form>
+          </mat-expansion-panel>
       </div>
-
-
+      <!-- end multiple choice question form -->
+    </mat-accordion>
     </mat-card-content>
   </form>
   </mat-card>

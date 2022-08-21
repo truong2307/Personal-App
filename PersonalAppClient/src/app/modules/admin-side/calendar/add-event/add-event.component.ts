@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
-import { colors } from 'src/shared/const/dateOfWeek';
+import { colors } from 'src/shared/constants/date-of-week';
 import { EventCalendar } from 'src/shared/model/event.interface';
 
 import { CreateEventAction, DeleteEventAction, UpdateEventAction } from 'src/stores/events/events.action';

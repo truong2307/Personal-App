@@ -19,3 +19,14 @@ background-color: transparent !important;
 .border-primary{
   border-color:var(--bs-purple) !important;
 }
+
+//custom button color
+.mat-success {
+  background-color: var(--bs-green);
+  color: #fff;
+}
+
+.mat-secondary {
+  background-color: var(--bs-gray-600);
+  color: #fff;
+}
