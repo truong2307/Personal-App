@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-admin-side',
@@ -7,10 +6,30 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
   styleUrls: ['./admin-side.component.scss']
 })
 export class AdminSideComponent implements OnInit {
+  @ViewChild('elementContent') contentEl!: ElementRef;
 
-  constructor(private loader: NgxUiLoaderService) { }
+  isShow: boolean = false;
+  topPosToStartShowing = 100;
+  onScroll(event : any) {
+    const scrollPosition = this.contentEl.nativeElement.scrollTop || 0;
+    if (scrollPosition >= this.topPosToStartShowing) {
+      this.isShow = true;
+    } else {
+      this.isShow = false;
+    }
+  }
 
-  ngOnInit(): void {
+  // TODO: Cross browsing
+  gotoTop() {
+    this.contentEl.nativeElement.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  constructor() { }
+  ngOnInit() {
   }
 
 }

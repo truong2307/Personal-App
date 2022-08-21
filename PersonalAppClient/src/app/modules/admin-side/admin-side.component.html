@@ -1,6 +1,6 @@
 <div id="wrapper">
   <app-sidebar></app-sidebar>
-  <div id="content-wrapper" class="d-flex flex-column">
+  <div id="content-wrapper" #elementContent (scroll)="onScroll($event)" class="d-flex flex-column">
     <div id="content">
       <app-header></app-header>
         <div class="container-fluid">
@@ -9,4 +9,7 @@
     </div>
    <app-footer></app-footer>
 </div>
+<a *ngIf="isShow" class="scroll-to-top rounded" (click)="gotoTop()">
+  <i class="fas fa-angle-up"></i>
+</a>
 </div>
