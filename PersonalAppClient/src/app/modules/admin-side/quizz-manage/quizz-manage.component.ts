@@ -2,9 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatAccordion } from '@angular/material/expansion';
 import { select, Store } from '@ngrx/store';
+import { ToastrService } from 'ngx-toastr';
+import message from 'src/shared/constants/message';
 import { QuizzTypeArrayForm } from 'src/shared/constants/quizz-create';
 import { GetQuizzTopicsAction } from 'src/stores/quizz-topic/quizz-topic.action';
 import { quizzTopicSelector } from 'src/stores/quizz-topic/quizz-topic.selector';
+import  '../../../../shared/helpers/string-helper'
 
 @Component({
   selector: 'app-quizz-manage',
@@ -44,6 +47,7 @@ export class QuizzManageComponent implements OnInit {
   constructor(
     private formBuilder : FormBuilder,
     private store : Store,
+    private toastr: ToastrService,
   ) { }
 
   ngOnInit(): void {
@@ -54,6 +58,26 @@ export class QuizzManageComponent implements OnInit {
           this.topicList = result.items;
         }
       );
+  }
+
+  get title(){
+    return this.createQuizzForm.get('title');
+  }
+
+  get examTime(){
+    return this.createQuizzForm.get('examTime');
+  }
+
+  get topicId(){
+    return this.createQuizzForm.get('topicId');
+  }
+
+  get multiplechoiceQuestions(){
+    return this.createQuizzForm.get('multiplechoiceQuestions') as FormArray;
+  }
+
+  get essayQuestions(){
+    return this.createQuizzForm.get('essayQuestions') as FormArray;
   }
 
   initialForm(){
@@ -91,34 +115,15 @@ export class QuizzManageComponent implements OnInit {
     });
   }
 
-  get title(){
-    return this.createQuizzForm.get('title');
-  }
-
-  get examTime(){
-    return this.createQuizzForm.get('examTime');
-  }
-
-  get topicId(){
-    return this.createQuizzForm.get('topicId');
-  }
-
-  get multiplechoiceQuestions(){
-    return this.createQuizzForm.get('multiplechoiceQuestions') as FormArray;
-  }
-
-  get essayQuestions(){
-    return this.createQuizzForm.get('essayQuestions') as FormArray;
-  }
 
   getFormControl(curIndex : number, nameControl : string, mode : Number){
-    if(!Object.values(QuizzTypeArrayForm).includes(mode as any)) throw new Error('Mode '+ mode +' is not exists in enum QuizzTypeArrayForm');
+    if(!Object.values(QuizzTypeArrayForm).includes(mode as any)) throw new Error(message.ERROR_EXISTS_ENUM.stringFormat(mode as any));
     var formArr = mode === QuizzTypeArrayForm.MULTIPLE_CHOICE_QUESTIONS ? this.multiplechoiceQuestions : this.essayQuestions;
     return formArr.controls[curIndex].get(nameControl);
   }
 
   addFormQuestion(mode : Number){
-    if(!Object.values(QuizzTypeArrayForm).includes(mode as any)) throw new Error('Mode '+ mode +' is not exists in enum QuizzTypeArrayForm');
+    if(!Object.values(QuizzTypeArrayForm).includes(mode as any)) throw new Error(message.ERROR_EXISTS_ENUM.stringFormat(mode as any));
     if(mode === QuizzTypeArrayForm.MULTIPLE_CHOICE_QUESTIONS){
       this.multiplechoiceQuestions.push(this.createMultipleChoiceForm());
     }
@@ -128,14 +133,18 @@ export class QuizzManageComponent implements OnInit {
   }
 
   removeMultipleQuestion(index : number, mode : Number){
-    if(!Object.values(QuizzTypeArrayForm).includes(mode as any)) throw new Error('Mode '+ mode +' is not exists in enum QuizzTypeArrayForm');
+    if(!Object.values(QuizzTypeArrayForm).includes(mode as any)) throw new Error(message.ERROR_EXISTS_ENUM.stringFormat(mode as any));
 
     var formArr = mode === QuizzTypeArrayForm.MULTIPLE_CHOICE_QUESTIONS ? this.multiplechoiceQuestions : this.essayQuestions;
     formArr.removeAt(index);
   }
 
   submit(){
-    console.log(this.createQuizzForm);
+    if(this.createQuizzForm.invalid){
+      this.toastr.error('Input all field before submit');
+      return;
+    }
+    console.log(this.createQuizzForm.value);
   }
 
 }

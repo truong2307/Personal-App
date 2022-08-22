@@ -1,7 +1,19 @@
 <div class="container-sm">
+  <form [formGroup]="createQuizzForm">
   <mat-card class="border-top border-3 border-primary">
-    <mat-card-title>Quizz Create</mat-card-title>
-    <form [formGroup]="createQuizzForm">
+
+    <div class="row justify-content-between">
+      <div class="col col-md-9">
+        <mat-card-title>
+          <span>Quizz Create</span>
+        </mat-card-title>
+      </div>
+      <div class="col col-md-3">
+          <button mat-raised-button type="submit" color="primary" class="float-end"
+          (click)="submit()">Create quizz</button>
+      </div>
+    </div>
+
     <mat-card-content>
         <!--Header create quizz -->
         <div class="row">
@@ -221,6 +233,6 @@
       <!-- end multiple choice question form -->
     </mat-accordion>
     </mat-card-content>
-  </form>
   </mat-card>
+</form>
 </div>
