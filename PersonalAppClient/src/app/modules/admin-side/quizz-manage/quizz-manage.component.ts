@@ -20,22 +20,22 @@ export class QuizzManageComponent implements OnInit {
   multipleChoices : any = [
     {
       key : 1,
-     title : 'Answer A',
-     value : 'answerA'
+      title : 'A',
+      value : 'answerA'
     },
     {
       key : 2,
-      title : 'Answer B',
+      title : 'B',
       value : 'answerB'
     },
     {
-      key : 1,
-      title : 'Answer C',
+      key : 3,
+      title : 'C',
       value : 'answerC'
     },
     {
       key : 4,
-      title : 'Answer D',
+      title : 'D',
       value : 'answerD'
     }
   ];
