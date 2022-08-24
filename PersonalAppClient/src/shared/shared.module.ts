@@ -12,6 +12,7 @@ import { SelectLanguageComponent } from './components/select-language/select-lan
 import { RouterModule } from '@angular/router';
 import { FooterComponent } from './components/footer/footer.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { MenuBarComponent } from './components/menu-bar/menu-bar.component';
 
 
 
@@ -25,6 +26,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     SelectLanguageComponent,
     FooterComponent,
     ConfirmDialogComponent,
+    MenuBarComponent,
   ],
   imports: [
     CommonModule,
@@ -41,6 +43,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     HeaderComponent,
     SelectLanguageComponent,
     FooterComponent,
+    MenuBarComponent,
   ]
 })
 export class SharedModule { }

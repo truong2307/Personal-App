@@ -75,7 +75,7 @@ namespace PersonalApp.DataAccess.Services.MasterDataServices
             return _responseDto;
         }
 
-        public async Task<ResponseDatas<QuizzTopicDto>> GetQuizzTopic(int pageIndex, int pageSize)
+        public async Task<ResponseDatas<QuizzTopicDto>> GetQuizzTopics(int pageIndex, int pageSize)
         {
             var response = new ResponseDatas<QuizzTopicDto>();
             var quizzTopicsData = await _unitOfWork.QuizzTopic
@@ -95,6 +95,16 @@ namespace PersonalApp.DataAccess.Services.MasterDataServices
             response.Datas = _mapper.Map<List<RoleDto>>(await _unitOfWork.ApplicationRoles.GetAllAsync());
             response.IsSuccess = true;
 
+            return response;
+        }
+
+        public async Task<ResponseDatas<QuizzTopicDto>> GetQuizzTopics()
+        {
+            var response = new ResponseDatas<QuizzTopicDto>();
+            var quizzTopicsData = await _unitOfWork.QuizzTopic.GetAllAsync();
+            response.Datas = _mapper.Map<List<QuizzTopicDto>>(quizzTopicsData);
+            response.TotalItem = quizzTopicsData.Count;
+            response.IsSuccess = true;
             return response;
         }
     }

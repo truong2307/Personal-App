@@ -14,12 +14,12 @@ export class AdminloginAction implements Action{
   constructor(public userLogin: UserLogin){}
 }
 
-export class AdminloginSuccessAction implements Action{
+export class AdminLoginSuccessAction implements Action{
   readonly type = ADMIN_LOGIN_SUCCESS;
   constructor(public token: string){}
 }
 
-export class AdminloginErrorAction implements Action{
+export class AdminLoginErrorAction implements Action{
   readonly type = ADMIN_LOGIN_ERROR;
   constructor(public error: string){}
 }
@@ -43,8 +43,8 @@ export class AdminlogoutAction implements Action{
 
 export type AuthAction =
 |  AdminloginAction
-| AdminloginSuccessAction
-| AdminloginErrorAction
+| AdminLoginSuccessAction
+| AdminLoginErrorAction
 | AdminlogoutAction
 | RegisterAction
 | RegisterSuccessAction

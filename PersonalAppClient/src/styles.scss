@@ -20,7 +20,7 @@ background-color: transparent !important;
   border-color:var(--bs-purple) !important;
 }
 
-//custom button color
+//custom mat color
 .mat-success {
   background-color: var(--bs-green);
   color: #fff;
@@ -29,4 +29,21 @@ background-color: transparent !important;
 .mat-secondary {
   background-color: var(--bs-gray-600);
   color: #fff;
+}
+
+.mat-gray200 {
+  background-color: var(--bs-gray-200);
+}
+
+//font size custom
+.fs-11px{
+  font-size: 11px !important;
+}
+
+.fs-12px{
+  font-size: 12px !important;
+}
+
+.fs-14px{
+  font-size: 14px !important;
 }

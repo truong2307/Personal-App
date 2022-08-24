@@ -1,40 +1,43 @@
-<mat-card class="border-top border-4 border-primary">
-  <mat-card-title>{{'quizz.TopicTitle' | translate}}</mat-card-title>
-  <mat-divider inset></mat-divider>
-  <mat-card-actions>
-    <button mat-flat-button color="primary" (click)="addQuizzTopic()">{{'quizz.AddTopic' | translate}}</button>
-  </mat-card-actions>
-  <mat-divider inset></mat-divider>
-  <mat-card-content>
+<div class="container-fluid">
+  <mat-card class="border-top border-4 border-primary">
+    <mat-card-title>{{'quizz.TopicTitle' | translate}}</mat-card-title>
+    <mat-divider inset></mat-divider>
+    <mat-card-actions>
+      <button mat-flat-button color="primary" (click)="addQuizzTopic()">{{'quizz.AddTopic' | translate}}</button>
+    </mat-card-actions>
+    <mat-divider inset></mat-divider>
+    <mat-card-content>
 
-    <div class="table-responsive shadow p-3">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">{{'quizz.NO' | translate}}</th>
-            <th class="text-center" scope="col">{{'quizz.NameTopic' | translate}}</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of quizzTopic; let i = index" role="button"
-          (click)="editQuizzTopic(item, $event)"
-          >
-            <td>{{pageSize * pageIndex + i + 1}}</td>
-            <td class="text-center">{{item.name}}</td>
-            <td class="text-center">
-              <button (click)="openDialog(item)" mat-icon-button color="warn"><mat-icon>delete</mat-icon></button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <mat-paginator
-      [length]="totalItem"
-      [pageSizeOptions]="pageTotalOption"
-      (page)="changePageEvent($event)"
-      aria-label="Select page">
-      </mat-paginator>
-  </div>
-  </mat-card-content>
+      <div class="table-responsive shadow p-3">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">{{'quizz.NO' | translate}}</th>
+              <th class="text-center" scope="col">{{'quizz.NameTopic' | translate}}</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of quizzTopic; let i = index" role="button"
+            (click)="editQuizzTopic(item, $event)"
+            >
+              <td>{{pageSize * pageIndex + i + 1}}</td>
+              <td class="text-center">{{item.name}}</td>
+              <td class="text-center">
+                <button (click)="openDialog(item)" mat-icon-button color="warn"><mat-icon>delete</mat-icon></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <mat-paginator
+        [length]="totalItem"
+        [pageSizeOptions]="pageTotalOption"
+        (page)="changePageEvent($event)"
+        aria-label="Select page">
+        </mat-paginator>
+    </div>
+    </mat-card-content>
 
-</mat-card>
+  </mat-card>
+</div>
+

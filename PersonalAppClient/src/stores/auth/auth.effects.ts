@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { of } from 'rxjs';
 import { map, catchError, tap, switchMap } from 'rxjs/operators';
-import { AuthServices } from 'src/services/authServices.service';
+import { AuthServices } from 'src/services/auth-services.service';
 
 import * as authAction from "./auth.actions"
 
@@ -22,22 +22,21 @@ export class AuthEffects {
 
   adminLogin$ = createEffect(() => this.actions$.pipe(
     ofType(authAction.ADMIN_LOGIN),
-    switchMap(userLogin =>
-      this.AuthService.loginUser(userLogin['userLogin']).pipe(
-        map(token  =>
-          {
-            return new authAction.AdminloginSuccessAction(token.token as any)
+    switchMap((payLoad : any) =>
+      this.AuthService.loginUser(payLoad.userLogin).pipe(
+        map(token  =>{
+            return new authAction.AdminLoginSuccessAction(token.token as any)
           }),
-        catchError(error =>
-          of(new authAction.AdminloginErrorAction(error['error'])
+        catchError((error : any) =>
+          of(new authAction.AdminLoginErrorAction(error.error)
         ))
       ))
   ));
 
   register$ = createEffect(() => this.actions$.pipe(
     ofType(authAction.REGISTER),
-    switchMap(userRegister =>
-      this.AuthService.registerUser(userRegister['userRegister']).pipe(
+    switchMap((userRegister : any) =>
+      this.AuthService.registerUser(userRegister.userRegister).pipe(
         map(()  =>
           {
             return new authAction.RegisterSuccessAction();

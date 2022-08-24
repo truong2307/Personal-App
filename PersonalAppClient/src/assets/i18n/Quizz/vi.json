@@ -36,5 +36,6 @@
   "CorrectAnswer": "Câu trả lời đúng",
   "CorrectAnswerError": "Vui lòng nhập <strong>câu trả lời đúng</strong>",
   "Option": "Câu",
-  "OptionError": "Câu trả lời cần <strong>nhập</strong> vào"
+  "OptionError": "Câu trả lời cần <strong>nhập</strong> vào",
+  "HintPublicBtn": "<strong>Lưu ý:</strong> Khi ở chế độ công khai, mọi người sẽ thấy bài kiểm tra của bạn !"
 }

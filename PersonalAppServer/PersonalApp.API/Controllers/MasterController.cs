@@ -29,7 +29,14 @@ namespace PersonalApp.Controllers
         [HttpGet("get-quizz-topics/{pageIndex:int}/{pageSize:int}")]
         public async Task<IActionResult> GetQuizzTopics(int pageIndex, int pageSize)
         {
-            var result = await _masterDataServices.GetQuizzTopic(pageIndex, pageSize);
+            var result = await _masterDataServices.GetQuizzTopics(pageIndex, pageSize);
+            return result.IsSuccess ? Ok(result) : BadRequest(result.ErrorMessages);
+        }
+
+        [HttpGet("get-all-quizz-topics")]
+        public async Task<IActionResult> GetQuizzTopics()
+        {
+            var result = await _masterDataServices.GetQuizzTopics();
             return result.IsSuccess ? Ok(result) : BadRequest(result.ErrorMessages);
         }
 

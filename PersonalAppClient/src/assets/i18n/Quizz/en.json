@@ -36,5 +36,6 @@
   "CorrectAnswer": "Correct question",
   "CorrectAnswerError": "Correct Answer is <strong>required</strong>",
   "Option": "Option",
-  "OptionError": "This Field is <strong>required</strong>"
+  "OptionError": "This Field is <strong>required</strong>",
+  "HintPublicBtn": "<strong>Note:</strong> When it's public, everyone will see your quizz !"
 }

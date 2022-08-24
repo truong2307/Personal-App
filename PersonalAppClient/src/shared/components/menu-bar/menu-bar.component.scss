@@ -1,0 +1,10 @@
+.w-mat-form{
+  width: 50%;
+}
+
+@media (min-width: 768px) {
+  .w-mat-form{
+    width: 25% !important;
+  }
+}
+

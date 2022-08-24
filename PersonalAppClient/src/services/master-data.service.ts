@@ -20,6 +20,10 @@ export class MasterDataService {
     return this.httpClient.get(environment.baseUri + `master-data/get-quizz-topics/${pageIndex}/${pageSize}`);
   }
 
+  getAllQuizzTopics() : Observable<ResponseDatas> {
+    return this.httpClient.get(environment.baseUri + 'master-data/get-all-quizz-topics');
+  }
+
   createQuizzTopics(quizzTopic: QuizzTopic) : Observable<ResponseData> {
     return this.httpClient.post(environment.baseUri + 'master-data/create-quizz-topics', quizzTopic);
   }

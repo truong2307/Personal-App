@@ -18,6 +18,7 @@ import { SharedModule } from 'src/shared/shared.module';
 import { QuizzTopicComponent } from './quizz-topic/quizz-topic.component';
 import { QuizzManageComponent } from './quizz-manage/quizz-manage.component';
 import { QuizzTopicDetailComponent } from './quizz-topic/quizz-topic-detail/quizz-topic-detail.component';
+import { QuizzEditComponent } from './quizz-manage/quizz-edit/quizz-edit.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { QuizzTopicDetailComponent } from './quizz-topic/quizz-topic-detail/quiz
     QuizzTopicComponent,
     QuizzManageComponent,
     QuizzTopicDetailComponent,
+    QuizzEditComponent,
   ],
   imports: [
     CommonModule,
