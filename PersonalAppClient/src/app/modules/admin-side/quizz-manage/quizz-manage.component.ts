@@ -7,11 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuizzManageComponent implements OnInit {
 
+  openFormCreateQuizz: boolean = false;
   constructor(
   ) { }
 
   ngOnInit(): void {
   }
 
+  createQuizz(){
+    this.openFormCreateQuizz = true;
+  }
+
+  backFromCreateForm(event : any){
+    this.openFormCreateQuizz = event;
+  }
 
 }

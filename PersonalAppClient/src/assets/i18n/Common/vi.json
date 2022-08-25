@@ -9,5 +9,7 @@
   "DeleteDialogBody": "Bạn có chắc chắn muốn xóa ",
   "Ok": "Ok",
   "Cancel": "Hủy",
-  "Edit": "Sửa"
+  "Edit": "Sửa",
+  "SortBy": "Sắp xếp theo",
+  "Search" : "Tìm kiếm"
 }

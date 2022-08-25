@@ -9,5 +9,7 @@
   "DeleteDialogBody": "Are you sure you want to delete ",
   "Ok": "Ok",
   "Cancel": "Cancel",
-  "Edit": "Edit"
+  "Edit": "Edit",
+  "SortBy": "Sort by",
+  "Search" : "Search"
 }

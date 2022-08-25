@@ -1,68 +1,158 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="!openFormCreateQuizz">
   <app-menu-bar></app-menu-bar>
+  <div class="d-flex justify-content-end mb-4">
+    <button mat-raised-button color="success"
+    (click)="createQuizz()"
+    >Create Quizz</button>
+  </div>
     <div class="row g-2 g-lg-3">
       <div class="col-12 col-md-6 col-xl-3">
-        <mat-card class="example-card">
-          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-          <mat-card-title>Shiba Inu</mat-card-title>
-          <mat-card-content>
-            <p>This card has divider and indeterminate progress as footer</p>
-            <p>The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.</p>
-          </mat-card-content>
-          <mat-divider inset></mat-divider>
-          <mat-card-actions>
-            <button mat-button>LIKE</button>
-            <button mat-button>SHARE</button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
+        <mat-card class="cursor-pointer" role="button" matRipple>
+          <img src="https://drive.google.com/uc?export=view&id=1mE4T-E6gcI9Uaaao2-sm5mQisP0xTt4-" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Nhập môn lập trình C++</h5>
+            <mat-card-content>
+              <mat-card-subtitle>
+                <strong>Exam Time: </strong>
+                <small class="text-muted">3 mins</small>
+              </mat-card-subtitle>
 
-      <div class="col-12 col-md-6 col-xl-3">
-        <mat-card class="example-card">
-          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-          <mat-card-title>Shiba Inu</mat-card-title>
-          <mat-card-content>
-            <p>This card has divider and indeterminate progress as footer</p>
-            <p>The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.</p>
-          </mat-card-content>
-          <mat-divider inset></mat-divider>
-          <mat-card-actions>
-            <button mat-button>LIKE</button>
-            <button mat-button>SHARE</button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
+              <mat-card-subtitle>
+                <strong>Created by: </strong>
+                <small class="text-muted">Truong</small>
+              </mat-card-subtitle>
 
-      <div class="col-12 col-md-6 col-xl-3">
-        <mat-card class="example-card">
-          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-          <mat-card-title>Shiba Inu</mat-card-title>
-          <mat-card-content>
-            <p>This card has divider and indeterminate progress as footer</p>
-            <p>The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.</p>
-          </mat-card-content>
-          <mat-divider inset></mat-divider>
-          <mat-card-actions>
-            <button mat-button>LIKE</button>
-            <button mat-button>SHARE</button>
-          </mat-card-actions>
+              <mat-card-subtitle class="d-flex align-items-center">
+                <span>
+                  <strong>Public: </strong>
+                </span>
+                <span class="ms-1">
+                <i class="fs-20px text-success fa-solid fa-check"></i>
+                  <!-- <i class="fs-20px text-danger fa-solid fa-xmark"></i> -->
+                </span>
+              </mat-card-subtitle>
+            </mat-card-content>
+            <mat-chip-list aria-label="Dog selection">
+              <mat-chip color="primary" selected>
+                Programing
+              </mat-chip>
+            </mat-chip-list>
+          </div>
         </mat-card>
-      </div>
+        </div>
 
-      <div class="col-12 col-md-6 col-xl-3">
-        <mat-card class="example-card">
-          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-          <mat-card-title>Shiba Inu</mat-card-title>
-          <mat-card-content>
-            <p>This card has divider and indeterminate progress as footer</p>
-            <p>The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.</p>
-          </mat-card-content>
-          <mat-divider inset></mat-divider>
-          <mat-card-actions>
-            <button mat-button>LIKE</button>
-            <button mat-button>SHARE</button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
+        <div class="col-12 col-md-6 col-xl-3">
+          <mat-card class="cursor-pointer" role="button" matRipple>
+            <img src="https://files.fullstack.edu.vn/f8-prod/courses/7.png" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Nhập môn lập trình C++</h5>
+              <mat-card-content>
+                <mat-card-subtitle>
+                  <strong>Exam Time: </strong>
+                  <small class="text-muted">3 mins</small>
+                </mat-card-subtitle>
+
+                <mat-card-subtitle>
+                  <strong>Created by: </strong>
+                  <small class="text-muted">Truong</small>
+                </mat-card-subtitle>
+
+                <mat-card-subtitle class="d-flex align-items-center">
+                  <span>
+                    <strong>Public: </strong>
+                  </span>
+                  <span class="ms-1">
+                  <i class="fs-20px text-success fa-solid fa-check"></i>
+                    <!-- <i class="fs-20px text-danger fa-solid fa-xmark"></i> -->
+                  </span>
+                </mat-card-subtitle>
+              </mat-card-content>
+              <mat-chip-list aria-label="Dog selection">
+                <mat-chip color="primary" selected>
+                  Programing
+                </mat-chip>
+              </mat-chip-list>
+            </div>
+          </mat-card>
+          </div>
+
+          <div class="col-12 col-md-6 col-xl-3">
+            <mat-card class="cursor-pointer" role="button" matRipple>
+              <img src="https://files.fullstack.edu.vn/f8-prod/courses/7.png" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Nhập môn lập trình C++</h5>
+                <mat-card-content>
+                  <mat-card-subtitle>
+                    <strong>Exam Time: </strong>
+                    <small class="text-muted">3 mins</small>
+                  </mat-card-subtitle>
+
+                  <mat-card-subtitle>
+                    <strong>Created by: </strong>
+                    <small class="text-muted">Truong</small>
+                  </mat-card-subtitle>
+
+                  <mat-card-subtitle class="d-flex align-items-center">
+                    <span>
+                      <strong>Public: </strong>
+                    </span>
+                    <span class="ms-1">
+                    <i class="fs-20px text-success fa-solid fa-check"></i>
+                      <!-- <i class="fs-20px text-danger fa-solid fa-xmark"></i> -->
+                    </span>
+                  </mat-card-subtitle>
+                </mat-card-content>
+                <mat-chip-list aria-label="Dog selection">
+                  <mat-chip color="primary" selected>
+                    Programing
+                  </mat-chip>
+                </mat-chip-list>
+              </div>
+            </mat-card>
+            </div>
+
+            <div class="col-12 col-md-6 col-xl-3">
+              <mat-card class="cursor-pointer" role="button" matRipple>
+                <img src="https://files.fullstack.edu.vn/f8-prod/courses/7.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Nhập môn lập trình C++</h5>
+                  <mat-card-content>
+                    <mat-card-subtitle>
+                      <strong>Exam Time: </strong>
+                      <small class="text-muted">3 mins</small>
+                    </mat-card-subtitle>
+
+                    <mat-card-subtitle>
+                      <strong>Created by: </strong>
+                      <small class="text-muted">Truong</small>
+                    </mat-card-subtitle>
+
+                    <mat-card-subtitle class="d-flex align-items-center">
+                      <span>
+                        <strong>Public: </strong>
+                      </span>
+                      <span class="ms-1">
+                      <i class="fs-20px text-success fa-solid fa-check"></i>
+                        <!-- <i class="fs-20px text-danger fa-solid fa-xmark"></i> -->
+                      </span>
+                    </mat-card-subtitle>
+                  </mat-card-content>
+                  <mat-chip-list aria-label="Dog selection">
+                    <mat-chip color="primary" selected>
+                      Programing
+                    </mat-chip>
+                  </mat-chip-list>
+                </div>
+              </mat-card>
+              </div>
     </div>
+    <mat-paginator class="shadow-sm mt-4 bg-body rounded" [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              aria-label="Select page">
+  </mat-paginator>
 </div>
+
+<app-quizz-edit *ngIf="openFormCreateQuizz"
+(displayForm)="backFromCreateForm($event)"
+></app-quizz-edit>

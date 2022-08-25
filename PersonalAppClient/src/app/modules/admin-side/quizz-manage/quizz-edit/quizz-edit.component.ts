@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatAccordion } from '@angular/material/expansion';
 import { TranslateService } from '@ngx-translate/core';
@@ -15,6 +15,8 @@ import { ResponseDatas } from 'src/shared/model/response-data.interface';
 export class QuizzEditComponent implements OnInit {
 
   @ViewChild(MatAccordion) accordion!: MatAccordion;
+
+  @Output() displayForm = new EventEmitter();
   multipleChoices : any = [
     {
       key : 1,
@@ -149,5 +151,8 @@ export class QuizzEditComponent implements OnInit {
     console.log(this.createQuizzForm.value);
   }
 
+  backToList(){
+    this.displayForm.emit(false);
+  }
 
 }

@@ -1,26 +1,22 @@
 <mat-toolbar class="shadow-sm mb-4 bg-body rounded">
-  <span class="d-none d-sm-block fs-14px">Order by</span>
+  <span class="d-none d-sm-block fs-14px">{{'common.SortBy' | translate}}</span>
   <button mat-icon-button [matMenuTriggerFor]="menu">
     <mat-icon>filter_alt</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item>
-      <mat-icon>dialpad</mat-icon>
-      <span>Redial</span>
-    </button>
-    <button mat-menu-item disabled>
-      <mat-icon>voicemail</mat-icon>
-      <span>Check voice mail</span>
+      <mat-icon>comment_bank</mat-icon>
+      <span>Title</span>
     </button>
     <button mat-menu-item>
-      <mat-icon>notifications_off</mat-icon>
-      <span>Disable alerts</span>
+      <mat-icon>trending_up</mat-icon>
+      <span>Level</span>
     </button>
   </mat-menu>
   <div style="flex: 1 1 auto;">
   </div>
   <mat-form-field class="float-end w-mat-form fs-12px">
-    <input matInput placeholder="Search">
+    <input matInput placeholder="{{'common.Search' | translate}}">
   </mat-form-field>
   <button mat-icon-button>
     <mat-icon>search</mat-icon>

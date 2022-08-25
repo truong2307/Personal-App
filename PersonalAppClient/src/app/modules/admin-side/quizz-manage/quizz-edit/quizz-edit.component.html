@@ -1,7 +1,8 @@
 <div class="container-sm">
   <form [formGroup]="createQuizzForm">
   <mat-card class="border-top border-3 border-primary">
-
+    <button (click)="backToList()"
+    mat-raised-button type="button" style="min-width: 90px;" class="mb-2">Back</button>
     <div class="row justify-content-between">
       <div class="col col-md-9">
         <mat-card-title>
