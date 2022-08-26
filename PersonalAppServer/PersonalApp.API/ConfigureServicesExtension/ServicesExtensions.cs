@@ -14,6 +14,16 @@ namespace PersonalApp.ConfigureServicesExtension
 {
     public static class ServicesExtensions
     {
+        public static void ConfigureSession(this IServiceCollection services)
+        {
+            services.AddSession(option =>
+            {
+                option.IdleTimeout = TimeSpan.FromMinutes(30);
+                option.Cookie.HttpOnly = true;
+                option.Cookie.IsEssential = true;
+            });
+        }
+
         public static void ConfigureIdentity(this IServiceCollection services)
         {
             services.Configure<IdentityOptions>(options =>

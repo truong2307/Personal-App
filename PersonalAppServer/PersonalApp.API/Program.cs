@@ -21,6 +21,7 @@ builder.Services.ConfigureIdentity();
 builder.Services.ConfigureJWT(builder.Configuration);
 builder.Services.ConfigureAutoMapper();
 builder.Services.ConfigureServiceLifeTime();
+//builder.Services.ConfigureSession();
 builder.Services.AddCors(o =>
 {
     o.AddPolicy("AllowAll", builder =>
@@ -53,6 +54,8 @@ app.ConfigureExceptionHandler();
 app.UseHttpsRedirection();
 
 app.UseCors("AllowAll");
+
+//app.UseSession();
 
 app.UseAuthentication();
 
