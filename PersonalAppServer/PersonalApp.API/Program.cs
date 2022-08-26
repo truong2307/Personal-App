@@ -3,6 +3,7 @@ using PersonalApp.DataAccess.Data;
 using PersonalApp.DataAccess.Hubs;
 using PersonalApp.DataAccess.Initializer;
 using PersonalApp.ConfigureServicesExtension;
+using Microsoft.AspNetCore.Http.Features;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -21,14 +22,7 @@ builder.Services.ConfigureIdentity();
 builder.Services.ConfigureJWT(builder.Configuration);
 builder.Services.ConfigureAutoMapper();
 builder.Services.ConfigureServiceLifeTime();
-//builder.Services.ConfigureSession();
-builder.Services.AddCors(o =>
-{
-    o.AddPolicy("AllowAll", builder =>
-    builder.AllowAnyOrigin()
-    .AllowAnyMethod()
-    .AllowAnyHeader());
-});
+builder.Services.ConfigureService();
 
 builder.Services.AddSignalR();
 

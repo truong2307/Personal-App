@@ -1,5 +1,11 @@
 <div class="container-fluid" *ngIf="!openFormCreateQuizz">
   <app-menu-bar></app-menu-bar>
+  <button class="mt-2" type="button" mat-raised-button (click)="fileInput.click()">{{'quizz.Image' | translate}}
+    <mat-icon matSuffix>file_upload</mat-icon>
+  </button>
+  <input hidden #fileInput type="file" accept="image/*"
+  (change)="processFile(fileInput)">
+
   <div class="d-flex justify-content-end mb-4">
     <button mat-raised-button color="success"
     (click)="createQuizz()"

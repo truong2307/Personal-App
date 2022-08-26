@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -14,13 +15,28 @@ namespace PersonalApp.ConfigureServicesExtension
 {
     public static class ServicesExtensions
     {
-        public static void ConfigureSession(this IServiceCollection services)
+        public static void ConfigureService(this IServiceCollection services)
         {
-            services.AddSession(option =>
+            //services.AddSession(option =>
+            //{
+            //    option.IdleTimeout = TimeSpan.FromMinutes(30);
+            //    option.Cookie.HttpOnly = true;
+            //    option.Cookie.IsEssential = true;
+            //});
+
+            services.AddCors(o =>
             {
-                option.IdleTimeout = TimeSpan.FromMinutes(30);
-                option.Cookie.HttpOnly = true;
-                option.Cookie.IsEssential = true;
+                o.AddPolicy("AllowAll", builder =>
+                builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+            });
+
+            services.Configure<FormOptions>(o =>
+            {
+                o.ValueLengthLimit = int.MaxValue;
+                o.MultipartBodyLengthLimit = int.MaxValue;
+                o.MemoryBufferThreshold = int.MaxValue;
             });
         }
 

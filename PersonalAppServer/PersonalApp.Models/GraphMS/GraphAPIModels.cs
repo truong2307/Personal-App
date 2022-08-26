@@ -22,4 +22,17 @@ namespace PersonalApp.Models.GraphMS
         [JsonPropertyName("refresh_token")]
         public string RefreshToken { get; set; }
     }
+
+    public class GraphResponseImage
+    {
+        [JsonPropertyName("height")]
+        public int Heigth { get; set; }
+
+        [JsonPropertyName("url")]
+        public string Url { get; set; }
+
+        [JsonPropertyName("width")]
+        public int Width { get; set; }
+
+    }
 }

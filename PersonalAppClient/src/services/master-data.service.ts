@@ -35,4 +35,8 @@ export class MasterDataService {
   deleteQuizzTopics(id: number) : Observable<ResponseData> {
     return this.httpClient.delete(environment.baseUri + `master-data/delete-quizz-topics/${id}`);
   }
+
+  test(data : any) : Observable<ResponseData> {
+    return this.httpClient.post(environment.baseUri + `test`,data);
+  }
 }
