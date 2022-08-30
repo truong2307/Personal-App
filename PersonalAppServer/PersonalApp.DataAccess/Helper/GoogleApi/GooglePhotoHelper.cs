@@ -1,14 +1,11 @@
 ﻿using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json.Linq;
 using PersonalApp.DataAccess.Utility.BaseURI;
 using PersonalApp.Models.GooglePhoto;
-using System;
-using System.IO;
 using System.Net;
 using System.Net.Http.Headers;
-using System.Reflection.Metadata;
-using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using static PersonalApp.Models.GooglePhoto.UploadImage;
@@ -55,25 +52,62 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
             return new ImageResponse();
         }
 
-
-        public async Task CreateAlbum()
+        public async Task CreateAlbum(string title)
         {
-
+            await CheckAuthorization();
             var album = new Album()
             {
-                Title = "TestAlbum"
+                Title = title
             };
+
             string jsonString = JsonSerializer.Serialize(new { album });
-            var Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-            var rs = await _client.PostAsync("https://photoslibrary.googleapis.com/v1/albums", Content);
+            var Content = new StringContent(jsonString, Encoding.UTF8, GoogleApiConstants.JSON_TYPE);
+            var rs = await _client.PostAsync(GoogleApiConstants.EndPoint.CREATE_ALBUM, Content);
             var apiContent2 = await rs.Content.ReadAsStringAsync();
         }
 
-        public async Task UploadImageAsync(IFormFile file)
+        public async Task<ImageCreateResponse> UploadImageAsync(IFormFile file, string albumId)
         {
             await CheckAuthorization();
-            //await CreateAlbum();
+            var uploadToken = await UploadImageBytes(file);
+            var newMediaItem = new UploadImage()
+            {
+                Description = string.Empty,
+                SimpleMediaItem = new SimpleMedia()
+                {
+                    FileName = Guid.NewGuid().ToString(),
+                    UploadToken = uploadToken,
+                }
+            };
 
+            var newMediaItems = new List<UploadImage>() { newMediaItem };
+            string jsonString = JsonSerializer.Serialize(new { newMediaItems, albumId });
+
+            using (var request = new HttpRequestMessage(HttpMethod.Post, GoogleApiConstants.EndPoint.UPLOAD_IMAGE))
+            {
+                request.Content = new StringContent(jsonString, Encoding.UTF8, GoogleApiConstants.JSON_TYPE);
+
+                var response = await _client.SendAsync(request);
+                var apiContent = await response.Content.ReadAsStringAsync();
+                var data = JsonSerializer.Deserialize<ImageCreateResponse[]>
+                                        (JObject.Parse(apiContent)[GoogleApiConstants.NEW_MEDIA_PROP_JSON].ToString());
+                return data[0];
+            }
+
+            return new ImageCreateResponse();
+        }
+
+        #endregion
+
+        #region Private method
+
+        /// <summary>
+        /// Upload byte image to get upload token
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        private async Task<string> UploadImageBytes(IFormFile file)
+        {
             byte[] fileBytes = { };
 
             using (var ms = new MemoryStream())
@@ -81,7 +115,6 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
                 file.CopyTo(ms);
                 fileBytes = ms.ToArray();
             }
-
 
             var headers = new List<(string name, string value)>
             {
@@ -92,52 +125,19 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
             {
                 headers.Add((GoogleApiConstants.X_GOOG_UPLOAD_CONTENT_TYPE, GetMimeType(file.FileName)));
             }
-            var message = new HttpRequestMessage()
-            {
-                Method = HttpMethod.Post,
-                RequestUri = new Uri(GoogleApiConstants.EndPoint.UPLOAD_IMAGE_BYTES),
-                Content = new ByteArrayContent(fileBytes),
-            };
-            message.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
 
-            foreach (var header in headers)
+            using (var request = new HttpRequestMessage(HttpMethod.Post, GoogleApiConstants.EndPoint.UPLOAD_IMAGE_BYTES))
             {
-                message.Headers.Add(header.name, header.value);
-            }
-
-            var rs = await _client.SendAsync(message);
-            var apiContent = await rs.Content.ReadAsStringAsync();
-
-            var newMediaItem = new UploadImage()
-            {
-                Description = string.Empty,
-                SimpleMediaItem = new SimpleMedia()
+                request.Content = new ByteArrayContent(fileBytes);
+                request.Content.Headers.ContentType = new MediaTypeHeaderValue(GoogleApiConstants.MEDIA_TYPE);
+                foreach (var header in headers)
                 {
-                    FileName = Guid.NewGuid().ToString(),
-                    UploadToken = apiContent,
+                    request.Headers.Add(header.name, header.value);
                 }
-            };
-
-            var newMediaItems = new List<UploadImage>() { newMediaItem };
-            var albumId = "AOr7KUMcsYLFN9qavVXtMkUk42ugvZskHXL38q7189u2thATjgBwZ0EzTi3TLjAtKyKOGfG81KHZ";
-            string jsonString = JsonSerializer.Serialize(new { newMediaItems, albumId });
-
-            var message2 = new HttpRequestMessage()
-            {
-                Method = HttpMethod.Post,
-                RequestUri = new Uri("https://photoslibrary.googleapis.com/v1/mediaItems:batchCreate"),
-                Content = new StringContent(jsonString, Encoding.UTF8, "application/json"),
-            };
-            var rs2 = await _client.SendAsync(message2);
-            var apiContent2 = await rs2.Content.ReadAsStringAsync();
-
+                var rs = await _client.SendAsync(request);
+                return await rs.Content.ReadAsStringAsync();
+            }
         }
-
-
-
-        #endregion
-
-        #region Private method
 
         /// <summary>
         /// Check author
@@ -212,9 +212,9 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
         /// Get mine type
         /// </summary>
         /// <param name="str"></param>
-        /// <param name="mimeType"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
+        private string GetMimeType(string str) => TryGetMimeType(str, out var mimeType) ? mimeType : "application/octet-stream";
+
         public static bool TryGetMimeType(string str, out string mimeType)
         {
             var _mappings = new Lazy<IDictionary<string, string>>(GoogleApiConstants.BuildMappings);
@@ -242,9 +242,6 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
 
             return _mappings.Value.TryGetValue(str, out mimeType);
         }
-
-        private string GetMimeType(string str) => TryGetMimeType(str, out var mimeType) ? mimeType : "application/octet-stream";
-        
         #endregion
     }
 }

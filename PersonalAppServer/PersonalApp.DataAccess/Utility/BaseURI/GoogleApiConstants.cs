@@ -15,14 +15,20 @@
             /// {0} is image id
             /// </summary>
             public const string GET_IMAGE_BY_ID = "https://photoslibrary.googleapis.com/v1/mediaItems/{0}";
-
             public const string UPLOAD_IMAGE_BYTES = "https://photoslibrary.googleapis.com/v1/uploads";
-
+            public const string UPLOAD_IMAGE = "https://photoslibrary.googleapis.com/v1/mediaItems:batchCreate";
+            public const string CREATE_ALBUM = "https://photoslibrary.googleapis.com/v1/albums";
         }
 
+        public const string NEW_MEDIA_PROP_JSON = "newMediaItemResults";
+
+        //Header
         public const string X_GOOG_UPLOAD_CONTENT_TYPE = "X-Goog-Upload-Content-Type";
         public const string X_GOOG_UPLOAD_PROTOCOL = "X-Goog-Upload-Protocol";
+        public const string MEDIA_TYPE = "application/octet-stream";
+        public const string JSON_TYPE = "application/json";
 
+        //Format Image
         public static readonly HashSet<string> AcceptedMimeTypesImage = new(StringComparer.OrdinalIgnoreCase)
         {
             { "image/bmp" },

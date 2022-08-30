@@ -43,4 +43,33 @@ namespace PersonalApp.Models.GooglePhoto
         [JsonPropertyName("title")]
         public string Title { get; set; }
     }
+
+    public class ImageCreateResponse
+    {
+        [JsonPropertyName("uploadToken")]
+        public string UploadToken { get; set; }
+
+        [JsonPropertyName("mediaItem")]
+        public MediaItem MediaItem { get; set; }
+
+        
+    }
+    public class MediaItem
+    {
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
+
+        [JsonPropertyName("description")]
+        public string Description { get; set; }
+
+        [JsonPropertyName("productUrl")]
+        public string ProductUrl { get; set; }
+
+        [JsonPropertyName("mimeType")]
+        public string MimeType { get; set; }
+
+        [JsonPropertyName("filename")]
+        public string Filename { get; set; }
+    }
+
 }

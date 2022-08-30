@@ -7,6 +7,6 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
     {
         Task<ImageResponse> GetImageByIdAsync(string id);
 
-        Task UploadImageAsync(IFormFile file);
+        Task<ImageCreateResponse> UploadImageAsync(IFormFile file, string albumId);
     }
 }
