@@ -6,6 +6,8 @@
   <input hidden #fileInput type="file" accept="image/*"
   (change)="processFile(fileInput)">
 
+  <img *ngIf="imageSrc" src="{{imageSrc}}" alt="" style="height: 300px; width:500px">
+
   <div class="d-flex justify-content-end mb-4">
     <button mat-raised-button color="success"
     (click)="createQuizz()"

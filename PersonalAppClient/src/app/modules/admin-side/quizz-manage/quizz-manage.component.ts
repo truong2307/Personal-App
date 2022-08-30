@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MasterDataService } from 'src/services/master-data.service';
 
-class ImageSnippet {
-  constructor(public src: string, public file: File) {}
-}
-
 @Component({
   selector: 'app-quizz-manage',
   templateUrl: './quizz-manage.component.html',
@@ -12,11 +8,13 @@ class ImageSnippet {
 })
 export class QuizzManageComponent implements OnInit {
 
-  selectedFile : any;
+  imageSrc: string = '';
   openFormCreateQuizz: boolean = false;
   constructor(
     private service : MasterDataService
   ) { }
+
+
 
   ngOnInit(): void {
   }
@@ -29,25 +27,27 @@ export class QuizzManageComponent implements OnInit {
     this.openFormCreateQuizz = event;
   }
 
-  processFile(imageInput : any){
-    if (imageInput.length === 0) {
-      return;
-    }
+  processFile(imageInput: any){
+    if (imageInput.files.length === 0) return;
     const file: File = imageInput.files[0];
-
-
     //Convert bytes to Mb
     const sizeFileMb = file.size / Math.pow(1024,2);
     if(sizeFileMb > 4){
       console.log('File quá lớn');
       return;
     }
-    const formData = new FormData();
-    formData.append('file', file, file.name);
-    this.service.test(formData).subscribe((result) => {
-      console.log(result);
 
-    })
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.imageSrc = reader.result as string;
+      const formData = new FormData();
+      formData.append('file', file, file.name);
+      this.service.test(formData).subscribe((result) => {
+        console.log(result);
+      })
+    };
   }
+
 
 }

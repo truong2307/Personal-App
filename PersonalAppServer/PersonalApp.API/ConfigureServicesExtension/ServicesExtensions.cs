@@ -15,23 +15,19 @@ namespace PersonalApp.ConfigureServicesExtension
 {
     public static class ServicesExtensions
     {
-        public static void ConfigureService(this IServiceCollection services)
+        public static void ConfigureSession(this IServiceCollection services)
         {
-            //services.AddSession(option =>
-            //{
-            //    option.IdleTimeout = TimeSpan.FromMinutes(30);
-            //    option.Cookie.HttpOnly = true;
-            //    option.Cookie.IsEssential = true;
-            //});
-
-            services.AddCors(o =>
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
             {
-                o.AddPolicy("AllowAll", builder =>
-                builder.AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
+                options.IdleTimeout = TimeSpan.FromDays(1);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
             });
+        }
 
+        public static void ConfigureFileFormSize(this IServiceCollection services)
+        {
             services.Configure<FormOptions>(o =>
             {
                 o.ValueLengthLimit = int.MaxValue;

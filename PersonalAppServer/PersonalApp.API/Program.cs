@@ -22,8 +22,16 @@ builder.Services.ConfigureIdentity();
 builder.Services.ConfigureJWT(builder.Configuration);
 builder.Services.ConfigureAutoMapper();
 builder.Services.ConfigureServiceLifeTime();
-builder.Services.ConfigureService();
+builder.Services.ConfigureSession();
+builder.Services.ConfigureFileFormSize();
 
+builder.Services.AddCors(o =>
+{
+    o.AddPolicy("AllowAll", builder =>
+    builder.AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
+});
 builder.Services.AddSignalR();
 
 var app = builder.Build();
@@ -49,7 +57,7 @@ app.UseHttpsRedirection();
 
 app.UseCors("AllowAll");
 
-//app.UseSession();
+app.UseSession();
 
 app.UseAuthentication();
 

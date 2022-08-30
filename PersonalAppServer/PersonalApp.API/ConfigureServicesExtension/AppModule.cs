@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Cors.Infrastructure;
-using Microsoft.Extensions.DependencyInjection.Extensions;
+﻿using Microsoft.Extensions.DependencyInjection.Extensions;
 using PersonalApp.DataAccess.AuthenticationService;
 using PersonalApp.DataAccess.Data.Repository;
 using PersonalApp.DataAccess.Data.Repository.IRepository;
-using PersonalApp.DataAccess.Helper.OneDriveHandler;
+using PersonalApp.DataAccess.Helper.GoogleApi;
 using PersonalApp.DataAccess.Initializer;
 using PersonalApp.DataAccess.Services.ClaimUserServices;
 using PersonalApp.DataAccess.Services.EventServices;
@@ -18,9 +17,9 @@ namespace PersonalApp.ConfigureServicesExtension
     {
         public static void ConfigureServiceLifeTime(this IServiceCollection services)
         {
-            services.AddHttpClient<IGraphHelper, GraphHelper>();
+            services.AddHttpClient<IGooglePhotoHelper, GooglePhotoHelper>();
             services.AddTransient<IndentityUserSeeding>();
-            services.AddScoped<IGraphHelper, GraphHelper>();
+            services.AddSingleton<IGooglePhotoHelper, GooglePhotoHelper>();
             services.TryAddEnumerable(new[]
             {
                 ServiceDescriptor.Transient<IUnitOfWork, UnitOfWork>(),
