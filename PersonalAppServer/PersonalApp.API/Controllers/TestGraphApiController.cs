@@ -15,26 +15,13 @@ namespace PersonalApp.API.Controllersk
         }
 
         [HttpPost]
-        public async Task<IActionResult> test([FromBody] string test)
+        public async Task<IActionResult> test()
         {
+            //var formCollection = await Request.ReadFormAsync();
+            //var file = formCollection.Files.First();
 
-            var image = await _serviceTest.GetImageWithId("AOr7KUMfv0Hi0XXWG28reuv2DY10KeoayjyvH9GCwsUGdR-sap4dJJHbUemPD9ezFXVEjC-gIKmKyNEisTB6I8y1sGwYcGuEmA");
-            return Ok(image);
-
-            ////if (dtNow > DateTime.Now)
-            ////{
-            ////    return Ok();
-            ////}
-
-            ////var formCollection = await _httpContextAccessor.HttpContext.Request.ReadFormAsync();
-            ////var file = formCollection.Files.First();
-            ////byte[] fileBytes = { };
-
-            ////using (var ms = new MemoryStream())
-            ////{
-            ////    file.CopyTo(ms);
-            ////    fileBytes = ms.ToArray();
-            ////}
+            var a= await _serviceTest.GetImageByIdAsync("AOr7KUNydD62Ud-IroIpnn8mTvcTqGsL95iccXIyGEFEoKnqxYUwqTPvWkkZjPmoXEqUQhbfZu9D3HqZ551gnzb2U6NLQfzRMg");
+            return Ok(a);
 
             //var a = HttpContext.Session.GetString("token");
             //if (a == null)

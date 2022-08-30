@@ -19,4 +19,28 @@ namespace PersonalApp.Models.GooglePhoto
         [JsonPropertyName("filename")]
         public string Filename { get; set; }
     }
+
+    public class UploadImage
+    {
+        [JsonPropertyName("description")]
+        public string Description { get; set; }
+
+        [JsonPropertyName("simpleMediaItem")]
+        public SimpleMedia SimpleMediaItem { get; set; }
+
+        public class SimpleMedia
+        {
+            [JsonPropertyName("fileName")]
+            public string FileName { get; set; }
+
+            [JsonPropertyName("uploadToken")]
+            public string UploadToken { get; set; }
+        }
+    }
+
+    public class Album
+    {
+        [JsonPropertyName("title")]
+        public string Title { get; set; }
+    }
 }

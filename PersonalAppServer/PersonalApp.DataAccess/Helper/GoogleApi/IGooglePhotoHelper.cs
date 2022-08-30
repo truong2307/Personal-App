@@ -1,9 +1,12 @@
-﻿using PersonalApp.Models.GooglePhoto;
+﻿using Microsoft.AspNetCore.Http;
+using PersonalApp.Models.GooglePhoto;
 
 namespace PersonalApp.DataAccess.Helper.GoogleApi
 {
     public interface IGooglePhotoHelper
     {
-        Task<ImageResponse> GetImageWithId(string id);
+        Task<ImageResponse> GetImageByIdAsync(string id);
+
+        Task UploadImageAsync(IFormFile file);
     }
 }
