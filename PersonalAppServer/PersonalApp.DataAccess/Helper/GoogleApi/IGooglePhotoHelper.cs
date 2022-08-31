@@ -5,8 +5,8 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
 {
     public interface IGooglePhotoHelper
     {
-        Task<ImageResponse> GetImageByIdAsync(string id);
+        Task<GooglePhotoResult<ImageResponse>> GetImageByIdAsync(string id);
 
-        Task<ImageCreateResponse> UploadImageAsync(IFormFile file, string albumId);
+        Task<GooglePhotoResult<ImageCreateResponse>> UploadImageAsync(IFormFile file, string albumId);
     }
 }
