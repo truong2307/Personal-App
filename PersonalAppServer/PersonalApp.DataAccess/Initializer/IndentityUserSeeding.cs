@@ -18,7 +18,7 @@ namespace PersonalApp.DataAccess.Initializer
         }
         public async Task Initialize()
         {
-            string[] roles = new string[] { Role.ADMIN_ROLE, Role.USER_ROLE, Role.MANAGER_ROLE };
+            string[] roles = new string[] { Identity.Role.ADMIN_ROLE, Identity.Role.USER_ROLE, Identity.Role.MANAGER_ROLE };
 
             foreach (string role in roles)
             {
@@ -52,7 +52,7 @@ namespace PersonalApp.DataAccess.Initializer
             if (userInDb == null)
             {
                 await _userManager.CreateAsync(user, "@Abc123");
-                await _userManager.AddToRoleAsync(user, Role.ADMIN_ROLE);
+                await _userManager.AddToRoleAsync(user, Identity.Role.ADMIN_ROLE);
             }
         }
     }

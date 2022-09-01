@@ -19,7 +19,7 @@ namespace PersonalApp.DataAccess.Services.ClaimUserServices
 
         public string GetCurrentUserId()
         {
-            return _httpContextAccessor.HttpContext.User?.FindFirst(ClaimTypeUser.TYPE_USERID)?.Value;
+            return _httpContextAccessor.HttpContext.User?.FindFirst(Identity.ClaimTypeUser.TYPE_USERID)?.Value;
         }
 
         public string GetCurrentUserRole()

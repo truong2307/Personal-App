@@ -8,7 +8,7 @@ namespace PersonalAppAPI.Controllers
 {
     [Route("api/notifications")]
     [ApiController]
-    [Authorize(Roles = Role.ADMIN_ROLE)]
+    [Authorize(Roles = Identity.Role.ADMIN_ROLE)]
     public class NotificationController : ControllerBase
     {
         private readonly INotificationServices _notificationServices;

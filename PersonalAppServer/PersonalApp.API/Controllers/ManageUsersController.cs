@@ -8,7 +8,7 @@ namespace PersonalApp.Controllers
 {
     [Route("api/manage-user")]
     [ApiController]
-    [Authorize(Roles = Role.ADMIN_ROLE)]
+    [Authorize(Roles = Identity.Role.ADMIN_ROLE)]
     public class ManageUsersController : ControllerBase
     {
         private readonly IManageUserServices _manageUserServices;

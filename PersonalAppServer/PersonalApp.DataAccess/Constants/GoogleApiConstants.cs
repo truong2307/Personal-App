@@ -2,6 +2,8 @@
 {
     public class GoogleApiConstants
     {
+        public const string APP_NAME = "QuizzApp";
+
         public class Scope
         {
             public const string READ_ONLY = "https://www.googleapis.com/auth/photoslibrary.readonly";
@@ -20,7 +22,10 @@
             public const string CREATE_ALBUM = "https://photoslibrary.googleapis.com/v1/albums";
         }
 
-        public const string NEW_MEDIA_PROP_JSON = "newMediaItemResults";
+        public class PropName
+        {
+            public const string NEW_MEDIA_ITEM_RESULTS = "newMediaItemResults";
+        }
 
         //Header
         public const string X_GOOG_UPLOAD_CONTENT_TYPE = "X-Goog-Upload-Content-Type";

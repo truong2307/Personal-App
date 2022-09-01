@@ -8,7 +8,7 @@ namespace PersonalApp.Controllers
 {
     [Route("api/master-data")]
     [ApiController]
-    [Authorize(Roles = Role.ADMIN_ROLE)]
+    [Authorize(Roles = Identity.Role.ADMIN_ROLE)]
     public class MasterController : Controller
     {
         private readonly IMasterDataServices _masterDataServices;

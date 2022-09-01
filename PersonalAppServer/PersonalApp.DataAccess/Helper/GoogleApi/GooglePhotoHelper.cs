@@ -32,7 +32,7 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
         {
             _httpClient = httpClient;
             _configuration = configuration;
-            _client = _httpClient.CreateClient("quizzApp");
+            _client = _httpClient.CreateClient(GoogleApiConstants.APP_NAME);
         }
 
         #endregion
@@ -44,7 +44,7 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
             var response = new GooglePhotoResult<ImageResponse>();
             if (await CheckAuthorization())
             {
-                response.ErrorMessage = "Authorize google api failed.";
+                response.ErrorMessage = Message.GooglePhoto.ERROR_AUTHORIZE;
                 return response;
             }
 
@@ -56,7 +56,7 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
                 response.IsSuccess = true;
                 response.Result = JsonSerializer.Deserialize<ImageResponse>(apiContent);
             }
-            else response.ErrorMessage = "Fetch image has error";
+            else response.ErrorMessage = Message.GooglePhoto.ERROR_FETCH_IMAGE;
 
             return response;
         }
@@ -79,7 +79,7 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
             //Check authorize to use api
             if (await CheckAuthorization())
             {
-                result.ErrorMessage = "Authorize google api failed.";
+                result.ErrorMessage = Message.GooglePhoto.ERROR_AUTHORIZE;
                 return result;
             }
 
@@ -87,7 +87,7 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
             var uploadToken = await UploadImageBytes(file);
             if (string.IsNullOrEmpty(uploadToken))
             {
-                result.ErrorMessage = "Upload image has failed.";
+                result.ErrorMessage = Message.GooglePhoto.ERROR_UPLOAD_IMAGE;
                 return result;
             }
 
@@ -113,11 +113,12 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
 
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
-                    var data = JsonSerializer.Deserialize<ImageCreateResponse[]>(JObject.Parse(apiContent)[GoogleApiConstants.NEW_MEDIA_PROP_JSON].ToString());
+                    var data = JsonSerializer.Deserialize<ImageCreateResponse[]>
+                            (JObject.Parse(apiContent)[GoogleApiConstants.PropName.NEW_MEDIA_ITEM_RESULTS].ToString());
                     result.IsSuccess = true;
                     result.Result = data[0];
                 }
-                else result.ErrorMessage = "Upload image has failed.";
+                else result.ErrorMessage = Message.GooglePhoto.ERROR_UPLOAD_IMAGE;
             }
 
             return result;
@@ -245,7 +246,7 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        private string GetMimeType(string str) => TryGetMimeType(str, out var mimeType) ? mimeType : "application/octet-stream";
+        private string GetMimeType(string str) => TryGetMimeType(str, out var mimeType) ? mimeType : GoogleApiConstants.MEDIA_TYPE;
 
         public static bool TryGetMimeType(string str, out string mimeType)
         {

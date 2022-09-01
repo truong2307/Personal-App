@@ -41,7 +41,7 @@ namespace PersonalApp.Controllers
 
                 return BadRequest(ModelState);
             }
-            await _userManager.AddToRoleAsync(userToDb, Role.USER_ROLE);
+            await _userManager.AddToRoleAsync(userToDb, Identity.Role.USER_ROLE);
 
             return Accepted();
         }

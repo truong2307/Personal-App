@@ -8,7 +8,7 @@ namespace PersonalApp.API.Controllers
 {
     [Route("api/quizz-manage")]
     [ApiController]
-    [AuthorizeRoles(Role.ADMIN_ROLE, Role.MANAGER_ROLE)]
+    [AuthorizeRoles(Identity.Role.ADMIN_ROLE, Identity.Role.MANAGER_ROLE)]
     public class QuizzManageController : ControllerBase
     {
         private readonly IQuizzAdminServices _quizzAdminServices;

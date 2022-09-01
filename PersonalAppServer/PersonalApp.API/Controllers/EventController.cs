@@ -8,7 +8,7 @@ namespace PersonalApp.Controllers
 {
     [Route("api/events")]
     [ApiController]
-    [Authorize(Roles = Role.ADMIN_ROLE)]
+    [Authorize(Roles = Identity.Role.ADMIN_ROLE)]
     public class EventController : ControllerBase
     {
         private readonly IEventServices _eventServices;

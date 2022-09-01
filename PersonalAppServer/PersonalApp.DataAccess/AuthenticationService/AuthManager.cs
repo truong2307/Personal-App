@@ -67,15 +67,15 @@ namespace PersonalApp.DataAccess.AuthenticationService
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypeUser.TYPE_NAME, _user.UserName),
-                new Claim(ClaimTypeUser.TYPE_USERID, _user.Id),
+                new Claim(Identity.ClaimTypeUser.TYPE_NAME, _user.UserName),
+                new Claim(Identity.ClaimTypeUser.TYPE_USERID, _user.Id),
             };
 
             var roles = await _userManager.GetRolesAsync(_user);
 
             foreach (var role in roles)
             {
-                claims.Add(new Claim(ClaimTypeUser.TYPE_ROLE, role));
+                claims.Add(new Claim(Identity.ClaimTypeUser.TYPE_ROLE, role));
             }
 
             return claims;
