@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using PersonalApp.DataAccess.Comparer;
 using PersonalApp.DataAccess.Data.Repository.IRepository;
 using PersonalApp.DataAccess.Services.ClaimUserServices;
+using PersonalApp.DataAccess.Utility.Comparer;
 using PersonalApp.Models.Dto;
 using PersonalApp.Models.Entities;
 

@@ -1,9 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using PersonalApp.DataAccess.Data;
-using PersonalApp.DataAccess.Hubs;
-using PersonalApp.DataAccess.Initializer;
 using PersonalApp.ConfigureServicesExtension;
-using Microsoft.AspNetCore.Http.Features;
+using PersonalApp.DataAccess.Data;
+using PersonalApp.DataAccess.Initializer;
+using PersonalApp.DataAccess.Utility.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.

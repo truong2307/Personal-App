@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.SignalR;
 using PersonalApp.DataAccess.Data.Repository.IRepository;
-using PersonalApp.DataAccess.Hubs;
 using PersonalApp.DataAccess.Services.ClaimUserServices;
+using PersonalApp.DataAccess.Utility.Hubs;
 using PersonalApp.Models.Dto;
 using PersonalApp.Models.Entities;
 

@@ -1,4 +1,4 @@
-﻿namespace PersonalApp.DataAccess.Utility.BaseURI
+﻿namespace PersonalApp.DataAccess.Constants
 {
     public static class ClaimTypeUser
     {

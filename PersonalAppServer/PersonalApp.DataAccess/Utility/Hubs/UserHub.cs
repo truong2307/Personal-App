@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.SignalR;
 using PersonalApp.DataAccess.Services.ClaimUserServices;
 
-namespace PersonalApp.DataAccess.Hubs
+namespace PersonalApp.DataAccess.Utility.Hubs
 {
     [Authorize]
     public class UserHub : Hub

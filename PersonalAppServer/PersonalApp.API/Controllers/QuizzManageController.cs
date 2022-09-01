@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PersonalApp.API.Helper;
+using PersonalApp.DataAccess.Constants;
 using PersonalApp.DataAccess.Services.QuizzAdminServices;
-using PersonalApp.DataAccess.Utility.BaseURI;
 using PersonalApp.Models.Dto;
 
 namespace PersonalApp.API.Controllers

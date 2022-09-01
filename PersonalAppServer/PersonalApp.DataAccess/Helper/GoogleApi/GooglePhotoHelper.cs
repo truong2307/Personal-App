@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
-using PersonalApp.DataAccess.Utility.BaseURI;
+using PersonalApp.DataAccess.Constants;
 using PersonalApp.Models.GooglePhoto;
 using System.Net;
 using System.Net.Http.Headers;
@@ -47,7 +47,7 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
                 response.ErrorMessage = "Authorize google api failed.";
                 return response;
             }
-            
+
             var rs = await _client.GetAsync(string.Format(GoogleApiConstants.EndPoint.GET_IMAGE_BY_ID, id));
             var apiContent = await rs.Content.ReadAsStringAsync();
 

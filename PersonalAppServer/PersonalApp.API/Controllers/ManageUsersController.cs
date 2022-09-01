@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PersonalApp.DataAccess.Constants;
 using PersonalApp.DataAccess.Services.ManageUserServices;
-using PersonalApp.DataAccess.Utility.BaseURI;
 using PersonalApp.Models.Dto;
 
 namespace PersonalApp.Controllers

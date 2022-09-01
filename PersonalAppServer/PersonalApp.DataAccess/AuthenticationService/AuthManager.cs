@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using PersonalApp.DataAccess.Utility.BaseURI;
+using PersonalApp.DataAccess.Constants;
 using PersonalApp.Models.Dto;
 using PersonalApp.Models.Identity;
 using System.IdentityModel.Tokens.Jwt;

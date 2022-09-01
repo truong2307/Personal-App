@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
-using PersonalApp.DataAccess.Utility.BaseURI;
+using PersonalApp.DataAccess.Constants;
 using System.Security.Claims;
 
 namespace PersonalApp.DataAccess.Services.ClaimUserServices

@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PersonalApp.DataAccess.Constants;
 using PersonalApp.DataAccess.Services.MasterDataServices;
-using PersonalApp.DataAccess.Utility.BaseURI;
 using PersonalApp.Models.Dto;
-using System.Drawing.Printing;
 
 namespace PersonalApp.Controllers
 {

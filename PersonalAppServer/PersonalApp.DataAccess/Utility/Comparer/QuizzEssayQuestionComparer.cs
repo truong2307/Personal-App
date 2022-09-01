@@ -1,7 +1,7 @@
 ﻿using PersonalApp.Models.Entities;
 using System.Diagnostics.CodeAnalysis;
 
-namespace PersonalApp.DataAccess.Comparer
+namespace PersonalApp.DataAccess.Utility.Comparer
 {
     internal class QuizzEssayQuestionComparer : IEqualityComparer<QuizzEssayQuestion>
     {

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PersonalApp.DataAccess.AuthenticationService;
-using PersonalApp.DataAccess.Utility.BaseURI;
+using PersonalApp.DataAccess.Constants;
 using PersonalApp.Models.Dto;
 using PersonalApp.Models.Identity;
 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using PersonalApp.DataAccess.Constants;
 using PersonalApp.DataAccess.Data;
-using PersonalApp.DataAccess.Utility.BaseURI;
 using PersonalApp.Models.Identity;
 
 namespace PersonalApp.DataAccess.Initializer
@@ -10,7 +10,7 @@ namespace PersonalApp.DataAccess.Initializer
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApiUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
-        public IndentityUserSeeding(ApplicationDbContext context ,UserManager<ApiUser> userManager, RoleManager<ApplicationRole> roleManager)
+        public IndentityUserSeeding(ApplicationDbContext context, UserManager<ApiUser> userManager, RoleManager<ApplicationRole> roleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
