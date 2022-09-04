@@ -7,6 +7,7 @@ using Microsoft.OpenApi.Models;
 using PersonalApp.DataAccess.Data;
 using PersonalApp.Models.ExceptionGlobal;
 using PersonalApp.Models.Identity;
+using Serilog;
 using Swashbuckle.AspNetCore.Filters;
 using System.Reflection;
 using System.Text;
@@ -126,6 +127,17 @@ namespace PersonalApp.ConfigureServicesExtension
                     }
                 });
             });
+        }
+
+        public static void BuildSerilog(this WebApplicationBuilder builder)
+        {
+            var logger = new LoggerConfiguration()
+                          .ReadFrom.Configuration(builder.Configuration)
+                          .Enrich.FromLogContext()
+                          .CreateLogger();
+
+            builder.Logging.ClearProviders();
+            builder.Logging.AddSerilog(logger);
         }
     }
 }

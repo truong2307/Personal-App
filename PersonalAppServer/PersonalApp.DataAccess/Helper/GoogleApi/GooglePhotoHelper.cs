@@ -54,10 +54,20 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
 
         #region override method
 
+        /// <summary>
+        /// Remove image
+        /// </summary>
+        /// <param name="idImage"></param>
+        /// <param name="albumId"></param>
+        /// <returns></returns>
         public async Task<GooglePhotoResult<string>> RemoveImage(string idImage, string albumId)
         {
             var result = new GooglePhotoResult<string>();
-            await CheckAuthorization();
+            if (await IsErrorAuthorization())
+            {
+                result.ErrorMessage = Message.GooglePhoto.ERROR_AUTHORIZE;
+                return result;
+            }
 
             string[] mediaItemIds = { idImage };
             var jsonString = JsonSerializer.Serialize(new { mediaItemIds });
@@ -87,7 +97,7 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
         public async Task<GooglePhotoResult<ImageResponse>> GetImageByIdAsync(string id)
         {
             var result = new GooglePhotoResult<ImageResponse>();
-            if (await CheckAuthorization())
+            if (await IsErrorAuthorization())
             {
                 result.ErrorMessage = Message.GooglePhoto.ERROR_AUTHORIZE;
                 return result;
@@ -114,7 +124,7 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
         public async Task<GooglePhotoResult<AblumResponse>> CreateAlbum(string title)
         {
             var result = new GooglePhotoResult<AblumResponse>();
-            if (await CheckAuthorization())
+            if (await IsErrorAuthorization())
             {
                 result.ErrorMessage = Message.GooglePhoto.ERROR_AUTHORIZE;
                 return result;
@@ -147,7 +157,7 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
             var result = new GooglePhotoResult<ImageCreateResponse>();
 
             //Check authorize to use api
-            if (await CheckAuthorization())
+            if (await IsErrorAuthorization())
             {
                 result.ErrorMessage = Message.GooglePhoto.ERROR_AUTHORIZE;
                 return result;
@@ -186,13 +196,20 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
                 result.IsSuccess = true;
                 result.Result = data[0];
             }
-            else result.ErrorMessage = Message.GooglePhoto.ERROR_UPLOAD_IMAGE;
-
-            _logger.LogInformation("apiContent");
+            else
+            {
+                result.ErrorMessage = Message.GooglePhoto.ERROR_UPLOAD_IMAGE;
+                _logger.LogError(apiContent);
+            }
 
             return result;
         }
 
+        /// <summary>
+        /// Login google with code
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
         public async Task<GooglePhotoResult<string>> LoginAsync(string code)
         {
             var result = new GooglePhotoResult<string>();
@@ -217,13 +234,14 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
                                                                                     scopes,
                                                                                     user,
                                                                                     CancellationToken.None,
-                                                                                    dataStore: new FileDataStore(Directory.GetCurrentDirectory(), true),
-                                                                                    codeReceiver: new CustomReceiveCode(Code));
+                                                                                    new FileDataStore(Directory.GetCurrentDirectory(), true),
+                                                                                    new CustomReceiveCode(Code));
                 _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(UserCredential.Token.TokenType, UserCredential.Token.AccessToken);
                 result.IsSuccess = true;
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.ToString());
                 result.ErrorMessage = ex.ToString();
             }
 
@@ -275,8 +293,9 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
         /// Check author
         /// </summary>
         /// <returns></returns>
-        private async Task<bool> CheckAuthorization()
+        private async Task<bool> IsErrorAuthorization()
         {
+            _logger.LogInformation("Checking Authorization google...");
             if (UserCredential is null)
             {
                 var rs = await LoginAsync(Code);
@@ -299,12 +318,16 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
         {
             try
             {
+                _logger.LogInformation("Refreshing token...");
                 await UserCredential.RefreshTokenAsync(CancellationToken.None);
                 _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(UserCredential.Token.TokenType, UserCredential.Token.AccessToken);
+                _logger.LogInformation("Refresh token done");
                 return false;
             }
-            catch
+            catch (Exception ex)
             {
+                _logger.LogError("Refresh token error");
+                _logger.LogError(ex.ToString());
                 return true;
             }
         }
@@ -348,8 +371,6 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
 
             return _mappings.Value.TryGetValue(str, out mimeType);
         }
-
-
 
         #endregion
     }

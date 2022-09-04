@@ -24,6 +24,12 @@ namespace PersonalApp.Models.Entities
         [Required]
         public bool IsPublic { get; set; }
 
+        public string ImageUrl { get; set; }
+
+        public string ImageId { get; set; }
+
+        public string AlbumId { get; set; }
+
         [Required]
         public DateTime CreatedAt { get; set; }
 
@@ -32,7 +38,7 @@ namespace PersonalApp.Models.Entities
 
         public DateTime? UpdatedAt { get; set; }
 
-        public string? UpdatedBy { get; set; }
+        public string UpdatedBy { get; set; }
 
         public virtual ICollection<QuizzMultiplechoiceQuestion> MultiplechoiceQuestions { get; set; }
 
