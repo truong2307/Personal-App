@@ -9,6 +9,7 @@
             public const string READ_ONLY = "https://www.googleapis.com/auth/photoslibrary.readonly";
             public const string APPEND_ONLY = "https://www.googleapis.com/auth/photoslibrary.appendonly";
             public const string APP_CREATED_DATA = "https://www.googleapis.com/auth/photoslibrary.readonly.appcreateddata";
+            public const string ACCESS = "https://www.googleapis.com/auth/photoslibrary";
         }
 
         public class EndPoint
@@ -17,12 +18,18 @@
             /// {0} is image id
             /// </summary>
             public const string GET_IMAGE_BY_ID = "https://photoslibrary.googleapis.com/v1/mediaItems/{0}";
+
+            /// <summary>
+            /// {0} is album id
+            /// </summary>
+            public const string REMOVE_MEDIA_ITEM = "https://photoslibrary.googleapis.com/v1/albums/{0}:batchRemoveMediaItems";
+
             public const string UPLOAD_IMAGE_BYTES = "https://photoslibrary.googleapis.com/v1/uploads";
             public const string UPLOAD_IMAGE = "https://photoslibrary.googleapis.com/v1/mediaItems:batchCreate";
             public const string CREATE_ALBUM = "https://photoslibrary.googleapis.com/v1/albums";
         }
 
-        public class PropName
+        public class PropJsonName
         {
             public const string NEW_MEDIA_ITEM_RESULTS = "newMediaItemResults";
         }

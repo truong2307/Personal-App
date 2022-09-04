@@ -3,9 +3,17 @@ using PersonalApp.ConfigureServicesExtension;
 using PersonalApp.DataAccess.Data;
 using PersonalApp.DataAccess.Initializer;
 using PersonalApp.DataAccess.Utility.Hubs;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
+
+var logger = new LoggerConfiguration()
+  .ReadFrom.Configuration(builder.Configuration)
+  .Enrich.FromLogContext()
+  .CreateLogger();
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -44,11 +52,15 @@ using (var scope = scopedFactory.CreateScope())
 }
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwagger();
+//    app.UseSwaggerUI();
+//}
+
+app.UseSwagger();
+
+app.UseSwaggerUI();
 
 app.ConfigureExceptionHandler();
 

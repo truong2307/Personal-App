@@ -44,6 +44,21 @@ namespace PersonalApp.Models.GooglePhoto
         public string Title { get; set; }
     }
 
+    public class AblumResponse 
+    {
+        [JsonPropertyName("id")]
+        public string Id { get; set; }
+
+        [JsonPropertyName("title")]
+        public string Title { get; set; }
+
+        [JsonPropertyName("productUrl")]
+        public string ProductUrl { get; set; }
+
+        [JsonPropertyName("isWriteable")]
+        public bool IsWriteable { get; set; }
+    }
+
     public class ImageCreateResponse
     {
         [JsonPropertyName("uploadToken")]
@@ -51,9 +66,8 @@ namespace PersonalApp.Models.GooglePhoto
 
         [JsonPropertyName("mediaItem")]
         public MediaItem MediaItem { get; set; }
-
-        
     }
+
     public class MediaItem
     {
         [JsonPropertyName("id")]

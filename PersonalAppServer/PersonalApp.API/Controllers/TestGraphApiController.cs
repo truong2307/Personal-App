@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
 using PersonalApp.DataAccess.Helper.GoogleApi;
-using PersonalApp.Models.GooglePhoto;
-using System.Text.Json;
 
 namespace PersonalApp.API.Controllersk
 {
@@ -12,9 +9,14 @@ namespace PersonalApp.API.Controllersk
     {
         private readonly IGooglePhotoHelper _serviceTest;
 
-        public TestGraphApiController(IGooglePhotoHelper graphHelper)
+
+        private readonly ILogger<TestGraphApiController> _logger;
+
+        public TestGraphApiController(IGooglePhotoHelper graphHelper
+            , ILogger<TestGraphApiController> logger)
         {
             _serviceTest = graphHelper;
+            _logger = logger;
         }
 
         [HttpPost]
@@ -24,9 +26,16 @@ namespace PersonalApp.API.Controllersk
             var file = formCollection.Files.First();
 
             var rs = await _serviceTest.UploadImageAsync(file, "AOr7KUMcsYLFN9qavVXtMkUk42ugvZskHXL38q7189u2thATjgBwZ0EzTi3TLjAtKyKOGfG81KHZ");
+            //await _serviceTest.RemoveImage("AOr7KUMYCFeMvvnK6USs2TcQnbux9Xc7rVYnw2gdCZe0cE33jSkbaVuXkzE0S3zz3Yu707LDf2-dmCusDodAwRkT4wtrr1ybOA", "AOr7KUMcsYLFN9qavVXtMkUk42ugvZskHXL38q7189u2thATjgBwZ0EzTi3TLjAtKyKOGfG81KHZ");
 
             return Ok(rs);
         }
 
+        [HttpGet("login-for-google-photo/{code}")]
+        public async Task<IActionResult> LoginForGooglePhoto(string code)
+        {
+            _logger.LogInformation("Listening login-google...");
+            return Ok(await _serviceTest.LoginAsync(code));
+        }
     }
 }

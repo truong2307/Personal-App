@@ -1,6 +1,8 @@
 ﻿using Google.Apis.Auth.OAuth2;
+using Google.Apis.Util.Store;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using PersonalApp.DataAccess.Constants;
 using PersonalApp.Models.GooglePhoto;
@@ -22,16 +24,29 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
 
         private readonly IConfiguration _configuration;
 
+        private readonly ILogger<GooglePhotoHelper> _logger;
+
+        private string _code;
+        private string Code
+        {
+            get { return string.IsNullOrEmpty(_code) ? string.Empty : _code; }
+
+            set { _code = value; }
+        }
+
         private UserCredential UserCredential { get; set; }
 
         #endregion
 
         #region constructor
 
-        public GooglePhotoHelper(IHttpClientFactory httpClient, IConfiguration configuration)
+        public GooglePhotoHelper(IHttpClientFactory httpClient
+            , IConfiguration configuration
+            , ILogger<GooglePhotoHelper> logger)
         {
             _httpClient = httpClient;
             _configuration = configuration;
+            _logger = logger;
             _client = _httpClient.CreateClient(GoogleApiConstants.APP_NAME);
         }
 
@@ -39,39 +54,94 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
 
         #region override method
 
-        public async Task<GooglePhotoResult<ImageResponse>> GetImageByIdAsync(string id)
+        public async Task<GooglePhotoResult<string>> RemoveImage(string idImage, string albumId)
         {
-            var response = new GooglePhotoResult<ImageResponse>();
-            if (await CheckAuthorization())
+            var result = new GooglePhotoResult<string>();
+            await CheckAuthorization();
+
+            string[] mediaItemIds = { idImage };
+            var jsonString = JsonSerializer.Serialize(new { mediaItemIds });
+
+            using var request = new HttpRequestMessage(HttpMethod.Post, string.Format(GoogleApiConstants.EndPoint.REMOVE_MEDIA_ITEM, albumId));
+
+            request.Content = new StringContent(jsonString, Encoding.UTF8, GoogleApiConstants.JSON_TYPE);
+            var response = await _client.SendAsync(request);
+            var apiContent = await response.Content.ReadAsStringAsync();
+
+            if (response.StatusCode == HttpStatusCode.OK)
             {
-                response.ErrorMessage = Message.GooglePhoto.ERROR_AUTHORIZE;
-                return response;
+                result.IsSuccess = true;
+                result.Result = apiContent;
             }
+            else result.ErrorMessage = Message.GooglePhoto.ERROR_DELETE_ALBUM;
 
-            var rs = await _client.GetAsync(string.Format(GoogleApiConstants.EndPoint.GET_IMAGE_BY_ID, id));
-            var apiContent = await rs.Content.ReadAsStringAsync();
+            return result;
 
-            if (rs.StatusCode == HttpStatusCode.OK)
-            {
-                response.IsSuccess = true;
-                response.Result = JsonSerializer.Deserialize<ImageResponse>(apiContent);
-            }
-            else response.ErrorMessage = Message.GooglePhoto.ERROR_FETCH_IMAGE;
-
-            return response;
         }
 
-        public async Task CreateAlbum(string title)
+        /// <summary>
+        /// Get image with id from google photo
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<GooglePhotoResult<ImageResponse>> GetImageByIdAsync(string id)
         {
-            await CheckAuthorization();
+            var result = new GooglePhotoResult<ImageResponse>();
+            if (await CheckAuthorization())
+            {
+                result.ErrorMessage = Message.GooglePhoto.ERROR_AUTHORIZE;
+                return result;
+            }
+
+            var response = await _client.GetAsync(string.Format(GoogleApiConstants.EndPoint.GET_IMAGE_BY_ID, id));
+            var apiContent = await response.Content.ReadAsStringAsync();
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                result.IsSuccess = true;
+                result.Result = JsonSerializer.Deserialize<ImageResponse>(apiContent);
+            }
+            else result.ErrorMessage = Message.GooglePhoto.ERROR_FETCH_IMAGE;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Create album to google photo cloud
+        /// </summary>
+        /// <param name="title"></param>
+        /// <returns></returns>
+        public async Task<GooglePhotoResult<AblumResponse>> CreateAlbum(string title)
+        {
+            var result = new GooglePhotoResult<AblumResponse>();
+            if (await CheckAuthorization())
+            {
+                result.ErrorMessage = Message.GooglePhoto.ERROR_AUTHORIZE;
+                return result;
+            }
 
             var album = new Album() { Title = title };
             string jsonString = JsonSerializer.Serialize(new { album });
             var Content = new StringContent(jsonString, Encoding.UTF8, GoogleApiConstants.JSON_TYPE);
-            var rs = await _client.PostAsync(GoogleApiConstants.EndPoint.CREATE_ALBUM, Content);
-            var apiContent2 = await rs.Content.ReadAsStringAsync();
+            var response = await _client.PostAsync(GoogleApiConstants.EndPoint.CREATE_ALBUM, Content);
+            var apiContent = await response.Content.ReadAsStringAsync();
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                result.IsSuccess = true;
+                result.Result = JsonSerializer.Deserialize<AblumResponse>(apiContent);
+            }
+            else result.ErrorMessage = Message.GooglePhoto.ERROR_CREATED_ALBUM;
+
+            return result;
         }
 
+        /// <summary>
+        /// Upload image to google photo cloud
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="albumId"></param>
+        /// <returns></returns>
         public async Task<GooglePhotoResult<ImageCreateResponse>> UploadImageAsync(IFormFile file, string albumId)
         {
             var result = new GooglePhotoResult<ImageCreateResponse>();
@@ -101,24 +171,60 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
                     UploadToken = uploadToken,
                 }
             };
-
             var newMediaItems = new List<UploadImage>() { newMediaItem };
             string jsonString = JsonSerializer.Serialize(new { newMediaItems, albumId });
 
-            using (var request = new HttpRequestMessage(HttpMethod.Post, GoogleApiConstants.EndPoint.UPLOAD_IMAGE))
-            {
-                request.Content = new StringContent(jsonString, Encoding.UTF8, GoogleApiConstants.JSON_TYPE);
-                var response = await _client.SendAsync(request);
-                var apiContent = await response.Content.ReadAsStringAsync();
+            using var request = new HttpRequestMessage(HttpMethod.Post, GoogleApiConstants.EndPoint.UPLOAD_IMAGE);
+            request.Content = new StringContent(jsonString, Encoding.UTF8, GoogleApiConstants.JSON_TYPE);
+            var response = await _client.SendAsync(request);
+            var apiContent = await response.Content.ReadAsStringAsync();
 
-                if (response.StatusCode == HttpStatusCode.OK)
-                {
-                    var data = JsonSerializer.Deserialize<ImageCreateResponse[]>
-                            (JObject.Parse(apiContent)[GoogleApiConstants.PropName.NEW_MEDIA_ITEM_RESULTS].ToString());
-                    result.IsSuccess = true;
-                    result.Result = data[0];
-                }
-                else result.ErrorMessage = Message.GooglePhoto.ERROR_UPLOAD_IMAGE;
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                var data = JsonSerializer.Deserialize<ImageCreateResponse[]>
+                        (JObject.Parse(apiContent)[GoogleApiConstants.PropJsonName.NEW_MEDIA_ITEM_RESULTS].ToString());
+                result.IsSuccess = true;
+                result.Result = data[0];
+            }
+            else result.ErrorMessage = Message.GooglePhoto.ERROR_UPLOAD_IMAGE;
+
+            _logger.LogInformation("apiContent");
+
+            return result;
+        }
+
+        public async Task<GooglePhotoResult<string>> LoginAsync(string code)
+        {
+            var result = new GooglePhotoResult<string>();
+
+            Code = code;
+            var scopes = new List<string>()
+            {
+               GoogleApiConstants.Scope.READ_ONLY,
+               GoogleApiConstants.Scope.APPEND_ONLY,
+               GoogleApiConstants.Scope.APP_CREATED_DATA,
+               GoogleApiConstants.Scope.ACCESS,
+            };
+            var googleInfo = _configuration.GetSection("GoogleApi");
+            var clientId = googleInfo.GetSection("ClientId").Value;
+            var clientSecret = googleInfo.GetSection("ClientSecret").Value;
+            var user = googleInfo.GetSection("UserName").Value;
+            var secrets = new ClientSecrets { ClientId = clientId, ClientSecret = clientSecret };
+
+            try
+            {
+                UserCredential = await GoogleWebAuthorizationBroker.AuthorizeAsync(secrets,
+                                                                                    scopes,
+                                                                                    user,
+                                                                                    CancellationToken.None,
+                                                                                    dataStore: new FileDataStore(Directory.GetCurrentDirectory(), true),
+                                                                                    codeReceiver: new CustomReceiveCode(Code));
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(UserCredential.Token.TokenType, UserCredential.Token.AccessToken);
+                result.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                result.ErrorMessage = ex.ToString();
             }
 
             return result;
@@ -153,18 +259,16 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
                 headers.Add((GoogleApiConstants.X_GOOG_UPLOAD_CONTENT_TYPE, GetMimeType(file.FileName)));
             }
 
-            using (var request = new HttpRequestMessage(HttpMethod.Post, GoogleApiConstants.EndPoint.UPLOAD_IMAGE_BYTES))
+            using var request = new HttpRequestMessage(HttpMethod.Post, GoogleApiConstants.EndPoint.UPLOAD_IMAGE_BYTES);
+            request.Content = new ByteArrayContent(fileBytes);
+            request.Content.Headers.ContentType = new MediaTypeHeaderValue(GoogleApiConstants.MEDIA_TYPE);
+            foreach (var (name, value) in headers)
             {
-                request.Content = new ByteArrayContent(fileBytes);
-                request.Content.Headers.ContentType = new MediaTypeHeaderValue(GoogleApiConstants.MEDIA_TYPE);
-                foreach (var header in headers)
-                {
-                    request.Headers.Add(header.name, header.value);
-                }
-                var rs = await _client.SendAsync(request);
-                if (rs.StatusCode == HttpStatusCode.OK) return await rs.Content.ReadAsStringAsync();
-                return string.Empty;
+                request.Headers.Add(name, value);
             }
+            var rs = await _client.SendAsync(request);
+            if (rs.StatusCode == HttpStatusCode.OK) return await rs.Content.ReadAsStringAsync();
+            return string.Empty;
         }
 
         /// <summary>
@@ -175,7 +279,8 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
         {
             if (UserCredential is null)
             {
-                if (await IsErrorLoginGoogle()) return true;
+                var rs = await LoginAsync(Code);
+                if (!rs.IsSuccess) return true;
             }
 
             if (UserCredential.Token.IsExpired(UserCredential.Flow.Clock))
@@ -184,36 +289,6 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
             }
 
             return false;
-        }
-
-        /// <summary>
-        /// Author with gg console
-        /// </summary>
-        /// <returns></returns>
-        private async Task<bool> IsErrorLoginGoogle()
-        {
-            var scope = new List<string>()
-            {
-               GoogleApiConstants.Scope.READ_ONLY,
-               GoogleApiConstants.Scope.APPEND_ONLY,
-               GoogleApiConstants.Scope.APP_CREATED_DATA,
-            };
-            var googleInfo = _configuration.GetSection("GoogleApi");
-            var clientId = googleInfo.GetSection("ClientId").Value;
-            var clientSecret = googleInfo.GetSection("ClientSecret").Value;
-            var user = googleInfo.GetSection("UserName").Value;
-            var secrets = new ClientSecrets { ClientId = clientId, ClientSecret = clientSecret };
-
-            try
-            {
-                UserCredential = await GoogleWebAuthorizationBroker.AuthorizeAsync(secrets, scope, user, CancellationToken.None, dataStore: null);
-                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(UserCredential.Token.TokenType, UserCredential.Token.AccessToken);
-                return false;
-            }
-            catch
-            {
-                return true;
-            }
         }
 
         /// <summary>
@@ -248,13 +323,11 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
         /// <returns></returns>
         private string GetMimeType(string str) => TryGetMimeType(str, out var mimeType) ? mimeType : GoogleApiConstants.MEDIA_TYPE;
 
-        public static bool TryGetMimeType(string str, out string mimeType)
+        public bool TryGetMimeType(string str, out string mimeType)
         {
+            mimeType = string.Empty;
             var _mappings = new Lazy<IDictionary<string, string>>(GoogleApiConstants.BuildMappings);
-            if (str == null)
-            {
-                throw new ArgumentNullException("str");
-            }
+            if (str == null) return false;
 
             int num = str.IndexOf("?", StringComparison.Ordinal);
             if (num != -1)
@@ -275,6 +348,9 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
 
             return _mappings.Value.TryGetValue(str, out mimeType);
         }
+
+
+
         #endregion
     }
 }
