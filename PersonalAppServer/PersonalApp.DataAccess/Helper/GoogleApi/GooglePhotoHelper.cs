@@ -54,12 +54,6 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
 
         #region override method
 
-        /// <summary>
-        /// Remove image
-        /// </summary>
-        /// <param name="idImage"></param>
-        /// <param name="albumId"></param>
-        /// <returns></returns>
         public async Task<GooglePhotoResult<string>> RemoveImage(string idImage, string albumId)
         {
             var result = new GooglePhotoResult<string>();
@@ -89,11 +83,6 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
 
         }
 
-        /// <summary>
-        /// Get image with id from google photo
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         public async Task<GooglePhotoResult<ImageResponse>> GetImageByIdAsync(string id)
         {
             var result = new GooglePhotoResult<ImageResponse>();
@@ -116,11 +105,6 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
             return result;
         }
 
-        /// <summary>
-        /// Create album to google photo cloud
-        /// </summary>
-        /// <param name="title"></param>
-        /// <returns></returns>
         public async Task<GooglePhotoResult<AblumResponse>> CreateAlbum(string title)
         {
             var result = new GooglePhotoResult<AblumResponse>();
@@ -146,12 +130,6 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
             return result;
         }
 
-        /// <summary>
-        /// Upload image to google photo cloud
-        /// </summary>
-        /// <param name="file"></param>
-        /// <param name="albumId"></param>
-        /// <returns></returns>
         public async Task<GooglePhotoResult<ImageCreateResponse>> UploadImageAsync(IFormFile file, string albumId)
         {
             var result = new GooglePhotoResult<ImageCreateResponse>();
@@ -205,11 +183,6 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
             return result;
         }
 
-        /// <summary>
-        /// Login google with code
-        /// </summary>
-        /// <param name="code"></param>
-        /// <returns></returns>
         public async Task<GooglePhotoResult<string>> LoginAsync(string code)
         {
             var result = new GooglePhotoResult<string>();

@@ -3,7 +3,6 @@ using PersonalApp.ConfigureServicesExtension;
 using PersonalApp.DataAccess.Data;
 using PersonalApp.DataAccess.Initializer;
 using PersonalApp.DataAccess.Utility.Hubs;
-using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.

@@ -4,7 +4,7 @@ export const environment = {
   // allowDomain: 'localhost:44376',
   // signalRUri: 'https://localhost:44376/',
 
-  baseUri: 'http://quizzapp.api.com/api/',
-  allowDomain: 'quizzapp.api.com',
-  signalRUri: 'http://quizzapp.api.com/',
+  baseUri: 'http://quizzapp.com/api/',
+  allowDomain: 'quizzapp.com',
+  signalRUri: 'http://quizzapp.com/',
 };

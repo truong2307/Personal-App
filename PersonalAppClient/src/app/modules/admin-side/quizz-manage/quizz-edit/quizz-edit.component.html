@@ -2,7 +2,7 @@
   <form [formGroup]="createQuizzForm">
   <mat-card class="border-top border-3 border-primary">
     <button (click)="backToList()"
-    mat-raised-button type="button" style="min-width: 90px;" class="mb-2">Back</button>
+    mat-raised-button type="button" style="min-width: 90px;" class="mb-2">{{'common.Back' | translate}}</button>
     <div class="row justify-content-between">
       <div class="col col-md-9">
         <mat-card-title>
@@ -56,13 +56,25 @@
             <mat-form-field class="w-100" appearance="standard">
               <mat-label>{{'quizz.SelectLevel' | translate}}</mat-label>
               <mat-select formControlName="level">
-                <mat-option value="Easy">{{'quizz.Easy' | translate}}</mat-option>
-                <mat-option value="Medium">{{'quizz.Medium' | translate}}</mat-option>
-                <mat-option value="Hard">{{'quizz.Hard' | translate}}</mat-option>
+                <mat-option>--</mat-option>
+                <mat-option value="1">{{'quizz.Easy' | translate}}</mat-option>
+                <mat-option value="2">{{'quizz.Medium' | translate}}</mat-option>
+                <mat-option value="3">{{'quizz.Hard' | translate}}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
         </div>
+
+        <div class="mb-2">
+          <button class="mt-2" type="button" mat-raised-button (click)="fileInput.click()">{{'quizz.Image' | translate}}
+            <mat-icon matSuffix>file_upload</mat-icon>
+          </button>
+          <input hidden #fileInput type="file" accept="image/*"
+          (change)="processFile(fileInput)">
+
+          <img *ngIf="imageSrc" src="{{imageSrc}}" alt="" class="ms-2" style="height: 130px; width:200px">
+        </div>
+
         <mat-checkbox class="mt-2" formControlName="isPublic" [color]="'primary'">{{'quizz.PublicQuizz' | translate}}</mat-checkbox>
         <mat-card-subtitle class="mt-1 fs-11px" [innerHtml]="'quizz.HintPublicBtn' | translate"></mat-card-subtitle>
         <!-- add form multiple choice or essay question-->
@@ -134,10 +146,10 @@
                   </div>
                 </div>
                 <!-- button upload image -->
-                <button class="mt-2" type="button" mat-raised-button (click)="fileInput.click()">{{'quizz.Image' | translate}}
+                <!-- <button class="mt-2" type="button" mat-raised-button (click)="fileInput.click()">{{'quizz.Image' | translate}}
                   <mat-icon matSuffix>file_upload</mat-icon>
                 </button>
-                <input hidden #fileInput type="file" id="file">
+                <input hidden #fileInput type="file" id="file"> -->
                 <div class="row">
                   <mat-form-field appearance="standard">
                     <mat-label>{{'quizz.CorrectAnswer' | translate}}</mat-label>
@@ -197,10 +209,10 @@
                   </div>
                 </div>
                 <!-- button upload image -->
-                <button class="mt-2" type="button" mat-raised-button (click)="fileInput.click()">{{'quizz.Image' | translate}}
+                <!-- <button class="mt-2" type="button" mat-raised-button (click)="fileInput.click()">{{'quizz.Image' | translate}}
                   <mat-icon matSuffix>file_upload</mat-icon>
                 </button>
-                <input hidden #fileInput type="file" id="file">
+                <input hidden #fileInput type="file" id="file"> -->
                 <!-- Text answer A, B, C, D -->
                 <div class="row mt-3" *ngFor="let item of multipleChoices">
                   <div class="col">

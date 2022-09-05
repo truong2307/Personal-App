@@ -40,6 +40,7 @@ export class QuizzEditComponent implements OnInit {
     }
   ];
 
+  imageSrc: string = '';
   createQuizzForm! : FormGroup;
   topicList! : any;
   quizzTypeFormArr : any = QuizzTypeArrayForm;
@@ -76,6 +77,10 @@ export class QuizzEditComponent implements OnInit {
     return this.createQuizzForm.get('topicId');
   }
 
+  get imageQuizz(){
+    return this.createQuizzForm.get('imageQuizz');
+  }
+
   get multiplechoiceQuestions(){
     return this.createQuizzForm.get('multiplechoiceQuestions') as FormArray;
   }
@@ -90,8 +95,9 @@ export class QuizzEditComponent implements OnInit {
       title : ['', [Validators.required]],
       examTime : ['', [Validators.required, Validators.min(1)]],
       topicId : ['', [Validators.required]],
-      level : ['Easy', [Validators.required]],
+      level : ['', [Validators.required]],
       isPublic : false,
+      imageQuizz : '',
       multiplechoiceQuestions : this.formBuilder.array([this.createMultipleChoiceForm()]),
       essayQuestions : this.formBuilder.array([this.createEssayQuestion()])
     })
@@ -114,7 +120,7 @@ export class QuizzEditComponent implements OnInit {
     return this.formBuilder.group({
       questionText : ['', [Validators.required]],
       questionImage : '',
-      correctAnswer : ["", [Validators.required]],
+      correctAnswer : ['', [Validators.required]],
       mark : ['', [Validators.required]],
     });
   }
@@ -149,10 +155,33 @@ export class QuizzEditComponent implements OnInit {
       return;
     }
     console.log(this.createQuizzForm.value);
+
+    const formData = new FormData();
+    formData.append('file', this.imageQuizz?.value);
+    console.log(formData);
   }
 
   backToList(){
     this.displayForm.emit(false);
+  }
+
+  processFile(imageInput: any){
+    if (imageInput.files.length === 0) return;
+    const file: File = imageInput.files[0];
+    //Convert bytes to Mb
+    const sizeFileMb = file.size / Math.pow(1024,2);
+    if(sizeFileMb > 4){
+      this.toastr.error('Images must not be more than 4mb');
+      return;
+    }
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.imageSrc = reader.result as string;
+      this.createQuizzForm.patchValue({
+        imageQuizz: file,
+      });
+    };
   }
 
 }
