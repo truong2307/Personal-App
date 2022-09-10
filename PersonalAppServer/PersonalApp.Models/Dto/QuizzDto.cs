@@ -17,6 +17,8 @@ namespace PersonalApp.Models.Dto
         [Required]
         public int Level { get; set; }
 
+        public string ImageUrl { get; set; }
+
         [Required]
         public int TopicId { get; set; }
 

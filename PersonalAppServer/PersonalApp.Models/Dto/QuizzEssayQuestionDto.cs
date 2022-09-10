@@ -7,7 +7,7 @@ namespace PersonalApp.Models.Dto
         [Required]
         public string QuestionText { get; set; }
 
-        public string? QuestionImage { get; set; }
+        public string QuestionImage { get; set; }
 
         [Required]
         public string CorrectAnswer { get; set; }

@@ -18,6 +18,7 @@ namespace PersonalApp.API.Controllersk
             _logger = logger;
         }
 
+#if DEBUG
         [HttpPost]
         public async Task<IActionResult> test()
         {
@@ -29,7 +30,6 @@ namespace PersonalApp.API.Controllersk
             return Ok(rs);
         }
 
-#if DEBUG
         [HttpPost("login-for-google-photo")]
         public async Task<IActionResult> LoginForGooglePhoto([FromBody] string code)
         {
