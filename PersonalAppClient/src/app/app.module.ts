@@ -20,13 +20,14 @@ import { MaterialExampleModule } from 'src/shared/material/material.module';
 import { environment } from 'src/environments/environment';
 import { NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { EventsModule } from 'src/stores/events/events.module';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/services/translate-service.service';
 import { NotificationsModule } from 'src/stores/notification/notification.module';
 import { ManageUserModule } from 'src/stores/manage-user/manage-user.module';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { CustomMatPaginationService } from 'src/services/custom-mat-pagination.service';
 import { QuizzTopicModule } from 'src/stores/quizz-topic/quizz-topic.module';
+import { QuizzManageModule } from 'src/stores/quizz-manage/quizz-manage.module';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -57,6 +58,7 @@ export function tokenGetter() {
     NotificationsModule,
     ManageUserModule,
     QuizzTopicModule,
+    QuizzManageModule,
     HttpClientModule,
     JwtModule.forRoot(
       {
@@ -81,7 +83,7 @@ export function tokenGetter() {
       hasProgressBar: false,
       fgsSize: 40,
       bgsSize: 40,
-      blur: 10,
+      blur: 1,
     }),
     NgxUiLoaderRouterModule.forRoot(
       { showForeground: false }),

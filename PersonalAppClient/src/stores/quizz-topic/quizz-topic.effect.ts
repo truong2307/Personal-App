@@ -15,7 +15,7 @@ import { QuizzTopic } from "src/shared/model/quizz-topic.interface";
 @Injectable()
 export class ManageUserEffects {
 
-  quizzTopics: Array<QuizzTopic> = [];
+  quizzTopics!: Array<QuizzTopic>;
   totalItem: number = 0;
 
   constructor(

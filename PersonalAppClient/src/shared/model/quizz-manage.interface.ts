@@ -8,11 +8,11 @@ export interface QuizzManage {
   imageUrl : string,
   quizzTopic : QuizzTopic,
   isPublic : boolean,
-  multiplechoiceQuestions : QuizzMultiplechoiceQuestion[],
+  multipleChoiceQuestions : QuizzMultipleChoiceQuestion[],
   essayQuestions : QuizzEssayQuestion[],
 }
 
-export interface QuizzMultiplechoiceQuestion{
+export interface QuizzMultipleChoiceQuestion{
   id: number,
   quizzId : number,
   questionText : string,

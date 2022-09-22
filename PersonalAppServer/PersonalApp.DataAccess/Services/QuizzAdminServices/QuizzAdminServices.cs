@@ -28,7 +28,6 @@ namespace PersonalApp.DataAccess.Services.QuizzAdminServices
 
         public async Task<ResponseDto> CreateQuizz(QuizzCreateDto model)
         {
-
             var currUserId = _claimUserServices.GetCurrentUserId();
             var dataMap = _mapper.Map<QuizzTest>(model);
 
