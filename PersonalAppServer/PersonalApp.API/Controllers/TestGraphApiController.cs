@@ -22,12 +22,10 @@ namespace PersonalApp.API.Controllersk
         [HttpPost]
         public async Task<IActionResult> test()
         {
-            var formCollection = await Request.ReadFormAsync();
+            var formCollection = await Request?.ReadFormAsync();
             var file = formCollection.Files.First();
-
-            var rs = await _serviceTest.UploadImageAsync(file, "AOr7KUMcsYLFN9qavVXtMkUk42ugvZskHXL38q7189u2thATjgBwZ0EzTi3TLjAtKyKOGfG81KHZ");
-
-            return Ok(rs);
+            //var rs = await _serviceTest.UploadImageAsync(file, "AOr7KUMcsYLFN9qavVXtMkUk42ugvZskHXL38q7189u2thATjgBwZ0EzTi3TLjAtKyKOGfG81KHZ");
+            return Ok();
         }
 
         [HttpPost("login-for-google-photo")]

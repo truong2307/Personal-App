@@ -23,7 +23,7 @@ export class GetQuizzAction implements Action {
 
 export class CreateQuizzAction implements Action {
   readonly type = CREATE_QUIZZ;
-  constructor(public payLoad: QuizzManage){ }
+  constructor(public payLoad: FormData){ }
 }
 
 export class UpdateQuizzAction implements Action {

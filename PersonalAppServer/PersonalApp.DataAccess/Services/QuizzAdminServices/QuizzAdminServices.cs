@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using PersonalApp.DataAccess.Data.Repository.IRepository;
+using PersonalApp.DataAccess.Helper.GoogleApi;
 using PersonalApp.DataAccess.Services.ClaimUserServices;
 using PersonalApp.DataAccess.Utility.Comparer;
 using PersonalApp.Models.Dto;
@@ -14,16 +15,19 @@ namespace PersonalApp.DataAccess.Services.QuizzAdminServices
         private readonly ResponseDto _responseDto;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IClaimUserServices _claimUserServices;
+        private readonly IGooglePhotoHelper _googlePhotoHelper;
 
         public QuizzAdminServices(IMapper mapper
             , IUnitOfWork unitOfWork
             , IClaimUserServices claimUserServices
+            , IGooglePhotoHelper googlePhotoHelper
             )
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
             _claimUserServices = claimUserServices;
             _responseDto = new ResponseDto();
+            _googlePhotoHelper = googlePhotoHelper;
         }
 
         public async Task<ResponseDto> CreateQuizz(QuizzCreateDto model)
@@ -31,6 +35,11 @@ namespace PersonalApp.DataAccess.Services.QuizzAdminServices
             var currUserId = _claimUserServices.GetCurrentUserId();
             var dataMap = _mapper.Map<QuizzTest>(model);
 
+            var responseImage = await _googlePhotoHelper.UploadImageAsync(model.ImageQuizz, "AOr7KUMcsYLFN9qavVXtMkUk42ugvZskHXL38q7189u2thATjgBwZ0EzTi3TLjAtKyKOGfG81KHZ");
+            dataMap.AlbumId = "AOr7KUMcsYLFN9qavVXtMkUk42ugvZskHXL38q7189u2thATjgBwZ0EzTi3TLjAtKyKOGfG81KHZ";
+            dataMap.ImageId = responseImage.Result.MediaItem.Id;
+            dataMap.ImageUrl = (await _googlePhotoHelper.GetImageByIdAsync(responseImage.Result.MediaItem.Id))?.Result?.BaseUrl;
+            
             if (dataMap.MultiplechoiceQuestions.Count > 0)
             {
                 dataMap.MultiplechoiceQuestions.ToList().ForEach(c =>

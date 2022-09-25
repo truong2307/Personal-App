@@ -95,7 +95,7 @@
           </button>
         </mat-card-actions>
         <!-- close or open all question -->
-          <div *ngIf="multiplechoiceQuestions.controls.length || essayQuestions.controls.length">
+          <div *ngIf="multipleChoiceQuestions.controls.length || essayQuestions.controls.length">
             <button mat-button type="button" (click)="accordion.openAll()">{{'quizz.ExpandAll' | translate}}</button>
             <button mat-button type="button" (click)="accordion.closeAll()">{{'quizz.CollapseAll' | translate}}</button>
           </div>
@@ -108,7 +108,7 @@
                 <div class="d-flex justify-content-between">
                   <mat-panel-description>
                     <button type="button" color="warn"
-                    mat-icon-button (click)="removeMultipleQuestion(index, quizzTypeFormArr.ESSAY_QUESTIONS)">
+                    mat-icon-button (click)="removeQuestion(index, quizzTypeFormArr.ESSAY_QUESTIONS)">
                       <mat-icon>delete</mat-icon>
                     </button>
                   </mat-panel-description>
@@ -165,9 +165,9 @@
           <!-- End Essay question form -->
 
         <!-- Start multiple choice question form -->
-        <div formArrayName="multiplechoiceQuestions" *ngIf="multiplechoiceQuestions.controls.length">
+        <div formArrayName="multipleChoiceQuestions" *ngIf="multipleChoiceQuestions.controls.length">
             <mat-expansion-panel class="border-top border-4 border-success mt-3" expanded="{{false}}"
-            *ngFor="let item of multiplechoiceQuestions.controls; let index = index">
+            *ngFor="let item of multipleChoiceQuestions.controls; let index = index">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 <strong>{{'quizz.MultipleChoiceQuestion' | translate}} {{index + 1}}</strong>
@@ -175,7 +175,7 @@
               <div class="d-flex justify-content-between">
                 <mat-panel-description>
                   <button type="button" color="warn"
-                  mat-icon-button (click)="removeMultipleQuestion(index, quizzTypeFormArr.MULTIPLE_CHOICE_QUESTIONS)">
+                  mat-icon-button (click)="removeQuestion(index, quizzTypeFormArr.MULTIPLE_CHOICE_QUESTIONS)">
                     <mat-icon>delete</mat-icon>
                   </button>
                 </mat-panel-description>

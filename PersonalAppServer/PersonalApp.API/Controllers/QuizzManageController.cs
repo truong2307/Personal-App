@@ -18,7 +18,7 @@ namespace PersonalApp.API.Controllers
         }
 
         [HttpPost("create-quizz")]
-        public async Task<IActionResult> Post([FromBody] QuizzCreateDto model)
+        public async Task<IActionResult> Post([FromForm] QuizzCreateDto model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState.Values.ToString());
             var result = await _quizzAdminServices.CreateQuizz(model);
@@ -32,7 +32,7 @@ namespace PersonalApp.API.Controllers
             return result.IsSuccess ? Ok(result) : BadRequest(result.ErrorMessages);
         }
 
-        [HttpPut("update-quizz/")]
+        [HttpPut("update-quizz")]
         public async Task<IActionResult> UpdateQuizz([FromBody] QuizzDto model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState.Values.ToString());

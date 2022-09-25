@@ -1,4 +1,5 @@
-﻿using PersonalApp.Models.Entities;
+﻿using Microsoft.AspNetCore.Http;
+using PersonalApp.Models.Entities;
 using System.ComponentModel.DataAnnotations;
 
 namespace PersonalApp.Models.Dto
@@ -40,6 +41,8 @@ namespace PersonalApp.Models.Dto
 
         [Required]
         public int ExamTime { get; set; }
+
+        public IFormFile ImageQuizz { get; set; }
 
         [Required]
         public int Level { get; set; }
