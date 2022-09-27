@@ -20,6 +20,7 @@ namespace PersonalApp.DataAccess.Data
         public DbSet<QuizzUser> QuizzUsers { get; set; }
         public DbSet<QuizzUserMark> QuizzUserMarks { get; set; }
         public DbSet<QuizzUserAnswer> QuizzUserAnswers { get; set; }
-        public DbSet<GooglePhotoAlbum> GooglePhotoAlbums { get; set; }
+        public DbSet<GoogleAlbumImage> GoogleAlbumImages { get; set; }
+        public DbSet<GoogleImage> GoogleImages { get; set; }
     }
 }

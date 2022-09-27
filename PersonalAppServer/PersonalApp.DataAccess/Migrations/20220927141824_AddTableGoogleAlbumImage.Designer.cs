@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PersonalApp.DataAccess.Data;
 
@@ -11,9 +12,10 @@ using PersonalApp.DataAccess.Data;
 namespace PersonalApp.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220927141824_AddTableGoogleAlbumImage")]
+    partial class AddTableGoogleAlbumImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -196,33 +198,6 @@ namespace PersonalApp.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("GoogleAlbumImages");
-                });
-
-            modelBuilder.Entity("PersonalApp.Models.Entities.GoogleImage", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("AlbumId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("BaseUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Expires")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ImageName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AlbumId");
-
-                    b.ToTable("GoogleImages");
                 });
 
             modelBuilder.Entity("PersonalApp.Models.Entities.Notification", b =>
@@ -722,17 +697,6 @@ namespace PersonalApp.DataAccess.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("ApiUser");
-                });
-
-            modelBuilder.Entity("PersonalApp.Models.Entities.GoogleImage", b =>
-                {
-                    b.HasOne("PersonalApp.Models.Entities.GoogleAlbumImage", "AlbumImage")
-                        .WithMany()
-                        .HasForeignKey("AlbumId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AlbumImage");
                 });
 
             modelBuilder.Entity("PersonalApp.Models.Entities.Notification", b =>

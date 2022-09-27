@@ -3,19 +3,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PersonalApp.Models.Entities
 {
-    public class GooglePhotoAlbum
+    public class GoogleAlbumImage
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public string AlbumId { get; set; }
+        public string Id { get; set; }
 
         [Required]
         public string Title { get; set; }
 
         [Required]
-        public int TypeAlbum { get; set; }
+        public int AmountImage { get; set; }
 
         [Required]
-        public string LinkAlbum { get; set; }
+        public string LiveUrl { get; set; }
+
     }
 }

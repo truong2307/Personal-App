@@ -27,7 +27,10 @@ namespace PersonalApp.Models.Dto
 
         [Required]
         public bool IsPublic { get; set; }
+    }
 
+    public class QuizzDetailDto : QuizzDto
+    {
         public List<QuizzMultiplechoiceQuestionDto> MultiplechoiceQuestions { get; set; }
 
         public List<QuizzEssayQuestionDto> EssayQuestions { get; set; }

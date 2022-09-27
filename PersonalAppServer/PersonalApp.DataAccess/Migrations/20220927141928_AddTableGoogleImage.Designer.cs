@@ -12,8 +12,8 @@ using PersonalApp.DataAccess.Data;
 namespace PersonalApp.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220904134919_AddTableGooglePhotoAlbum")]
-    partial class AddTableGooglePhotoAlbum
+    [Migration("20220927141928_AddTableGoogleImage")]
+    partial class AddTableGoogleImage
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -179,12 +179,15 @@ namespace PersonalApp.DataAccess.Migrations
                     b.ToTable("Events");
                 });
 
-            modelBuilder.Entity("PersonalApp.Models.Entities.GooglePhotoAlbum", b =>
+            modelBuilder.Entity("PersonalApp.Models.Entities.GoogleAlbumImage", b =>
                 {
-                    b.Property<string>("AlbumId")
+                    b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("LinkAlbum")
+                    b.Property<int>("AmountImage")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LiveUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -192,12 +195,36 @@ namespace PersonalApp.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TypeAlbum")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("AlbumId");
+                    b.ToTable("GoogleAlbumImages");
+                });
 
-                    b.ToTable("GooglePhotoAlbums");
+            modelBuilder.Entity("PersonalApp.Models.Entities.GoogleImage", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AlbumId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("BaseUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Expires")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ImageName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AlbumId");
+
+                    b.ToTable("GoogleImages");
                 });
 
             modelBuilder.Entity("PersonalApp.Models.Entities.Notification", b =>
@@ -353,6 +380,9 @@ namespace PersonalApp.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("AlbumId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -362,6 +392,12 @@ namespace PersonalApp.DataAccess.Migrations
 
                     b.Property<int>("ExamTime")
                         .HasColumnType("int");
+
+                    b.Property<string>("ImageId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsPublic")
                         .HasColumnType("bit");
@@ -534,6 +570,15 @@ namespace PersonalApp.DataAccess.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("AlbumId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AvatarId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AvatarUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -679,6 +724,17 @@ namespace PersonalApp.DataAccess.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("ApiUser");
+                });
+
+            modelBuilder.Entity("PersonalApp.Models.Entities.GoogleImage", b =>
+                {
+                    b.HasOne("PersonalApp.Models.Entities.GoogleAlbumImage", "AlbumImage")
+                        .WithMany()
+                        .HasForeignKey("AlbumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AlbumImage");
                 });
 
             modelBuilder.Entity("PersonalApp.Models.Entities.Notification", b =>
