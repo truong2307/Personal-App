@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
+import { select, Store } from '@ngrx/store';
+import { QuizzManage } from 'src/shared/model/quizz-manage.interface';
+import { GetAllQuizzAction } from 'src/stores/quizz-manage/quizz-manaage.action';
+import { quizzManageSelector } from 'src/stores/quizz-manage/quizz-manage.selector';
 
 @Component({
   selector: 'app-quizz-manage',
@@ -7,11 +12,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuizzManageComponent implements OnInit {
 
+  pageSize = 12;
+  pageIndex = 0;
+  pageTotalOption = [12, 24, 36];
+  quizzList : QuizzManage[] = [];
+  totalQuizz :number = 0;
   openFormCreateQuizz: boolean = false;
   constructor(
+    private store: Store
   ) { }
 
   ngOnInit(): void {
+    this.store.dispatch(new GetAllQuizzAction(this.pageIndex, this.pageSize))
+    this.store.pipe(select(quizzManageSelector)).subscribe((result) => {
+      this.quizzList = result.items;
+      this.totalQuizz = result.totalItem;
+    });
   }
 
   createQuizz(){
@@ -21,4 +37,16 @@ export class QuizzManageComponent implements OnInit {
   backFromCreateForm(event : any){
     this.openFormCreateQuizz = event;
   }
+
+  changePageEvent(event: PageEvent){
+    this.pageSize = event.pageSize;
+    this.pageIndex = event.pageIndex
+    this.store.dispatch(new GetAllQuizzAction(this.pageIndex,this.pageSize));
+  }
+
+  testLoadImageEvent(event: any){
+    console.log(event);
+
+  }
+
 }

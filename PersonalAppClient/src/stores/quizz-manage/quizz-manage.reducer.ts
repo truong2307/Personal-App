@@ -9,6 +9,7 @@ const initialState : QuizzManageState = {
       examTime: 0,
       level: 0,
       imageUrl: '',
+      quizzTopic : {},
       topicId: 0,
       isPublic : false,
       multipleChoiceQuestions: [],

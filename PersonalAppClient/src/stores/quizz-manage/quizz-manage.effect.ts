@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { select, Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
@@ -29,6 +30,7 @@ totalItem: number = 0;
     private loader: NgxUiLoaderService,
     private service : QuizzManageService,
     private toastr: ToastrService,
+    private translate: TranslateService,
   ) {
     this.store.pipe(select(quizzManageSelector)).subscribe(
       result => {
@@ -128,7 +130,7 @@ crudQuizzFailed$ = createEffect(() => this.action$.pipe(
   tap((error : any) => {
     this.loader.stop();
     this.toastr.error(
-      error.error
+        this.translate.instant('common.Error')
     );
   })
 ),

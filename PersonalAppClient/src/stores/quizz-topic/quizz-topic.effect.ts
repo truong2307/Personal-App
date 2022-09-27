@@ -126,7 +126,7 @@ export class ManageUserEffects {
     tap((error : any) => {
       this.loader.stop();
       this.toastr.error(
-        error.error
+        this.translate.instant('common.Error')
       );
     })
   ),

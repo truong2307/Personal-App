@@ -7,6 +7,7 @@ export interface QuizzManage {
   level : number,
   imageUrl : string,
   topicId : number,
+  quizzTopic : QuizzTopic,
   isPublic : boolean,
   multipleChoiceQuestions : QuizzMultipleChoiceQuestion[],
   essayQuestions : QuizzEssayQuestion[],

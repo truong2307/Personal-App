@@ -90,9 +90,7 @@ namespace PersonalApp.DataAccess.Services.QuizzAdminServices
         public async Task<ResponseDatas<QuizzDto>> GetQuizzs(int pageIndex, int pageSize)
         {
             var quizzList = await _unitOfWork.QuizzTest.GetAllAsync(queryEntity: c => c.Skip(pageSize * pageIndex).Take(pageSize)
-               , include: c => c.Include(i => i.QuizzTopic)
-               .Include(i => i.MultiplechoiceQuestions)
-               .Include(i => i.EssayQuestions));
+               , include: c => c.Include(i => i.QuizzTopic));
 
             var responseData = new ResponseDatas<QuizzDto>()
             {
