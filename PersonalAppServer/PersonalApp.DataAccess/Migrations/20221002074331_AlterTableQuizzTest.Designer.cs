@@ -12,8 +12,8 @@ using PersonalApp.DataAccess.Data;
 namespace PersonalApp.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220927141928_AddTableGoogleImage")]
-    partial class AddTableGoogleImage
+    [Migration("20221002074331_AlterTableQuizzTest")]
+    partial class AlterTableQuizzTest
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -380,9 +380,6 @@ namespace PersonalApp.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("AlbumId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -394,10 +391,7 @@ namespace PersonalApp.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ImageId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsPublic")
                         .HasColumnType("bit");
@@ -420,6 +414,8 @@ namespace PersonalApp.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ImageId");
 
                     b.HasIndex("TopicId");
 
@@ -772,11 +768,17 @@ namespace PersonalApp.DataAccess.Migrations
 
             modelBuilder.Entity("PersonalApp.Models.Entities.QuizzTest", b =>
                 {
+                    b.HasOne("PersonalApp.Models.Entities.GoogleImage", "GoogleImage")
+                        .WithMany()
+                        .HasForeignKey("ImageId");
+
                     b.HasOne("PersonalApp.Models.Entities.QuizzTopic", "QuizzTopic")
                         .WithMany()
                         .HasForeignKey("TopicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("GoogleImage");
 
                     b.Navigation("QuizzTopic");
                 });

@@ -24,11 +24,10 @@ namespace PersonalApp.Models.Entities
         [Required]
         public bool IsPublic { get; set; }
 
-        public string ImageUrl { get; set; }
-
         public string ImageId { get; set; }
 
-        public string AlbumId { get; set; }
+        [ForeignKey("ImageId")]
+        public GoogleImage GoogleImage { get; set; }
 
         [Required]
         public DateTime CreatedAt { get; set; }

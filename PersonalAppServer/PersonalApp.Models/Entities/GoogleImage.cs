@@ -6,6 +6,7 @@ namespace PersonalApp.Models.Entities
     public class GoogleImage
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Id { get; set; }
 
         [Required]

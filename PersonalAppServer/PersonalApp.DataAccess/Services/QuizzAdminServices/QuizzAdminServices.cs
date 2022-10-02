@@ -35,10 +35,10 @@ namespace PersonalApp.DataAccess.Services.QuizzAdminServices
             var currUserId = _claimUserServices.GetCurrentUserId();
             var dataMap = _mapper.Map<QuizzTest>(model);
 
-            var responseImage = await _googlePhotoHelper.UploadImageAsync(model.ImageQuizz, "AOr7KUMcsYLFN9qavVXtMkUk42ugvZskHXL38q7189u2thATjgBwZ0EzTi3TLjAtKyKOGfG81KHZ");
-            dataMap.AlbumId = "AOr7KUMcsYLFN9qavVXtMkUk42ugvZskHXL38q7189u2thATjgBwZ0EzTi3TLjAtKyKOGfG81KHZ";
-            dataMap.ImageId = responseImage.Result.MediaItem.Id;
-            dataMap.ImageUrl = (await _googlePhotoHelper.GetImageByIdAsync(responseImage.Result.MediaItem.Id))?.Result?.BaseUrl;
+            //var responseImage = await _googlePhotoHelper.UploadImageAsync(model.ImageQuizz, "AOr7KUMcsYLFN9qavVXtMkUk42ugvZskHXL38q7189u2thATjgBwZ0EzTi3TLjAtKyKOGfG81KHZ");
+            //dataMap.AlbumId = "AOr7KUMcsYLFN9qavVXtMkUk42ugvZskHXL38q7189u2thATjgBwZ0EzTi3TLjAtKyKOGfG81KHZ";
+            //dataMap.ImageId = responseImage.Result.MediaItem.Id;
+            //dataMap.ImageUrl = (await _googlePhotoHelper.GetImageByIdAsync(responseImage.Result.MediaItem.Id))?.Result?.BaseUrl;
             
             if (dataMap.MultiplechoiceQuestions.Count > 0)
             {
