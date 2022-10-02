@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { QuizzTopic } from 'src/shared/model/quizz-topic.interface';
+import { QuizzTopic } from 'src/shared/model/quizz-topic';
 import { CreateQuizzTopicsAction, UpdateQuizzTopicsAction } from 'src/stores/quizz-topic/quizz-topic.action';
 
 @Component({

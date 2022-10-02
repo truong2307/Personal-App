@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
-import { UserForAdminManagerDto } from 'src/shared/model/user.interface';
+import { UserForAdminManagerDto } from 'src/shared/model/user';
 import { GetUsersAction, UpdateUsersAction } from 'src/stores/manage-user/manage-user.action';
 import { manageUserSelector } from '../../../../stores/manage-user/manage-user.selector';
 import { EditUserComponent } from './edit-user/edit-user.component';

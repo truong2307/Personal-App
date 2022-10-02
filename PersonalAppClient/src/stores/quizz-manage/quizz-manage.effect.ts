@@ -6,8 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { QuizzManageService } from 'src/services/quizz-manage.service';
-import { QuizzManage } from 'src/shared/model/quizz-manage.interface';
-import { ResponseData, ResponseDatas } from 'src/shared/model/response-data.interface';
+import { QuizzManage } from 'src/shared/model/quizz-manage';
+import { ResponseData, ResponseDatas } from 'src/shared/model/response-data';
 
 import * as QuizzManageAction from "./quizz-manaage.action"
 import { quizzManageSelector } from './quizz-manage.selector';

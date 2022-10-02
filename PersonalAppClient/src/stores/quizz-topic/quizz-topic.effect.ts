@@ -6,11 +6,11 @@ import { ToastrService } from "ngx-toastr";
 import { NgxUiLoaderService } from "ngx-ui-loader";
 import { catchError, map, of, switchMap, tap } from "rxjs";
 import { MasterDataService } from "src/services/master-data.service";
-import { ResponseData, ResponseDatas } from "src/shared/model/response-data.interface";
+import { ResponseData, ResponseDatas } from "src/shared/model/response-data";
 import { quizzTopicSelector } from "./quizz-topic.selector";
 
 import * as QuizzTopicAction from "./quizz-topic.action"
-import { QuizzTopic } from "src/shared/model/quizz-topic.interface";
+import { QuizzTopic } from "src/shared/model/quizz-topic";
 
 @Injectable()
 export class ManageUserEffects {

@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { QuizzManage } from "src/shared/model/quizz-manage.interface";
+import { QuizzManage } from "src/shared/model/quizz-manage";
 
 
 export const GET_ALL_QUIZZ = 'GET_ALL_QUIZZ';

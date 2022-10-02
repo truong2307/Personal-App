@@ -1,5 +1,5 @@
 import { Action } from "@ngrx/store";
-import { QuizzTopic } from "src/shared/model/quizz-topic.interface";
+import { QuizzTopic } from "src/shared/model/quizz-topic";
 
 export const GET_QUIZZ_TOPICS = 'GET_QUIZZ_TOPICS';
 export const CREATE_QUIZZ_TOPIC = 'CREATE_QUIZZ_TOPIC';

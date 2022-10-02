@@ -7,8 +7,8 @@ import { ToastrService } from 'ngx-toastr';
 import { MasterDataService } from 'src/services/master-data.service';
 import message from 'src/shared/constants/message';
 import { QuizzTypeArrayForm } from 'src/shared/constants/quizz-create';
-import { QuizzEssayQuestion, QuizzManage, QuizzMultipleChoiceQuestion } from 'src/shared/model/quizz-manage.interface';
-import { ResponseDatas } from 'src/shared/model/response-data.interface';
+import { QuizzEssayQuestion, QuizzManage, QuizzMultipleChoiceQuestion } from 'src/shared/model/quizz-manage';
+import { ResponseDatas } from 'src/shared/model/response-data';
 import { CreateQuizzAction } from 'src/stores/quizz-manage/quizz-manaage.action';
 @Component({
   selector: 'app-quizz-edit',

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {  Store } from '@ngrx/store';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
-import { UserLogin } from 'src/shared/model/user.interface';
+import { UserLogin } from 'src/shared/model/user';
 import { validatePassword } from 'src/shared/validatePattern/validatePassword';
 import { AdminloginAction } from 'src/stores/auth/auth.actions';
 

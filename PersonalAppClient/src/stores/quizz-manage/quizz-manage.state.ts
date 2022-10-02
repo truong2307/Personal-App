@@ -1,4 +1,4 @@
-import { QuizzManage } from "src/shared/model/quizz-manage.interface";
+import { QuizzManage } from "src/shared/model/quizz-manage";
 
 export interface QuizzManageState {
   items: QuizzManage[];

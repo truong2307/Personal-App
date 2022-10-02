@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
-import { UserRegister } from 'src/shared/model/user.interface';
+import { UserRegister } from 'src/shared/model/user';
 import { AuthServices } from 'src/services/auth-services.service';
 import { validatePassword } from 'src/shared/validatePattern/validatePassword';
 import { RegisterAction } from 'src/stores/auth/auth.actions';

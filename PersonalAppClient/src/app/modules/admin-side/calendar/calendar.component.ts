@@ -9,7 +9,7 @@ import { select, Store } from '@ngrx/store';
 import { GetEventsAction } from 'src/stores/events/events.action';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { eventSelector } from '../../../../stores/events/events.selector';
-import {EventCalendar} from '../../../../shared/model/event.interface'
+import {EventCalendar} from '../../../../shared/model/event'
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

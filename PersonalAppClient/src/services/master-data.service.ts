@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { QuizzTopic } from 'src/shared/model/quizz-topic.interface';
-import { ResponseData, ResponseDatas } from 'src/shared/model/response-data.interface';
+import { QuizzTopic } from 'src/shared/model/quizz-topic';
+import { ResponseData, ResponseDatas } from 'src/shared/model/response-data';
 
 @Injectable({
   providedIn: 'root'

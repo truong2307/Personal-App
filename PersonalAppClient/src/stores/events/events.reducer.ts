@@ -1,4 +1,4 @@
-import { EventCalendar } from "src/shared/model/event.interface";
+import { EventCalendar } from "src/shared/model/event";
 import { EventState } from "./events.state";
 
 import * as EventAction from "./events.action"

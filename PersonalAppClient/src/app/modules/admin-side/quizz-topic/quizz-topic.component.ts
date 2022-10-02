@@ -4,7 +4,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { select, Store } from '@ngrx/store';
 import { ConfirmDialogComponent } from 'src/shared/components/confirm-dialog/confirm-dialog.component';
-import { QuizzTopic } from 'src/shared/model/quizz-topic.interface';
+import { QuizzTopic } from 'src/shared/model/quizz-topic';
 import { DeleteEventAction } from 'src/stores/events/events.action';
 import { DeleteQuizzTopicsAction, GetQuizzTopicsAction } from 'src/stores/quizz-topic/quizz-topic.action';
 

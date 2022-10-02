@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { select, Store } from '@ngrx/store';
-import { QuizzManage } from 'src/shared/model/quizz-manage.interface';
+import { QuizzManage } from 'src/shared/model/quizz-manage';
 import { GetAllQuizzAction } from 'src/stores/quizz-manage/quizz-manaage.action';
 import { quizzManageSelector } from 'src/stores/quizz-manage/quizz-manage.selector';
 
