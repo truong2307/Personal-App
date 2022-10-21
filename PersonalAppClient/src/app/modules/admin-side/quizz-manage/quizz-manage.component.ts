@@ -45,7 +45,6 @@ export class QuizzManageComponent implements OnInit {
   }
 
   testLoadImageEvent(event: any){
-    console.log(event);
 
   }
 

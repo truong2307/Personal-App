@@ -35,11 +35,19 @@ namespace PersonalApp.DataAccess.Services.QuizzAdminServices
             var currUserId = _claimUserServices.GetCurrentUserId();
             var dataMap = _mapper.Map<QuizzTest>(model);
 
-            //var responseImage = await _googlePhotoHelper.UploadImageAsync(model.ImageQuizz, "AOr7KUMcsYLFN9qavVXtMkUk42ugvZskHXL38q7189u2thATjgBwZ0EzTi3TLjAtKyKOGfG81KHZ");
-            //dataMap.AlbumId = "AOr7KUMcsYLFN9qavVXtMkUk42ugvZskHXL38q7189u2thATjgBwZ0EzTi3TLjAtKyKOGfG81KHZ";
-            //dataMap.ImageId = responseImage.Result.MediaItem.Id;
-            //dataMap.ImageUrl = (await _googlePhotoHelper.GetImageByIdAsync(responseImage.Result.MediaItem.Id))?.Result?.BaseUrl;
-            
+            var responseImage = await _googlePhotoHelper.UploadImageAsync(model.ImageQuizz, "AOr7KUMcsYLFN9qavVXtMkUk42ugvZskHXL38q7189u2thATjgBwZ0EzTi3TLjAtKyKOGfG81KHZ");
+            dataMap.ImageId = responseImage.Result.MediaItem.Id;
+
+            dataMap.GoogleImage = new GoogleImage()
+            {
+                Id = responseImage.Result.MediaItem.Id,
+                AlbumId = "AOr7KUMcsYLFN9qavVXtMkUk42ugvZskHXL38q7189u2thATjgBwZ0EzTi3TLjAtKyKOGfG81KHZ",
+                ImageName = responseImage.Result.MediaItem.Filename,
+                BaseUrl = (await _googlePhotoHelper.GetImageByIdAsync(responseImage.Result.MediaItem.Id))?.Result?.BaseUrl,
+                Expires = DateTime.Now.AddMinutes(30),
+            };
+
+
             if (dataMap.MultiplechoiceQuestions.Count > 0)
             {
                 dataMap.MultiplechoiceQuestions.ToList().ForEach(c =>
@@ -89,8 +97,10 @@ namespace PersonalApp.DataAccess.Services.QuizzAdminServices
 
         public async Task<ResponseDatas<QuizzDto>> GetQuizzs(int pageIndex, int pageSize)
         {
-            var quizzList = await _unitOfWork.QuizzTest.GetAllAsync(queryEntity: c => c.Skip(pageSize * pageIndex).Take(pageSize)
-               , include: c => c.Include(i => i.QuizzTopic));
+            var quizzList = await _unitOfWork.QuizzTest.GetAllAsync(queryEntity: c => c.Skip(pageSize * pageIndex).Take(pageSize),
+                                                                    include: c => c.Include(i => i.QuizzTopic).Include(c => c.GoogleImage));
+
+            await CheckExpiredGoogleImage(quizzList.Select(c => c.GoogleImage).ToList());
 
             var responseData = new ResponseDatas<QuizzDto>()
             {
@@ -182,5 +192,35 @@ namespace PersonalApp.DataAccess.Services.QuizzAdminServices
 
             return _responseDto;
         }
+
+        #region private method 
+
+        private async Task CheckExpiredGoogleImage(List<GoogleImage> googleImages)
+        {
+            var expiredGoogleImage = new List<GoogleImage>();
+            googleImages.ForEach(item =>
+            {
+                if (DateTime.Now > item?.Expires)
+                {
+                    expiredGoogleImage.Add(item);
+                }
+            });
+
+            if (expiredGoogleImage.Any())
+            {
+                var rs = await _googlePhotoHelper.GetImagesAsync(expiredGoogleImage.Select(c => c.Id).ToList());
+                foreach (var item in rs.Result.MediaItemResults)
+                {
+                    var curGoogleImamge = expiredGoogleImage?.FirstOrDefault(c => c.Id == item.MediaItem.Id);
+                    curGoogleImamge.BaseUrl = item.MediaItem.BaseUrl;
+                    curGoogleImamge.Expires = DateTime.Now.AddMinutes(30);
+                    await _unitOfWork.GoogleImage.UpdateAsync(curGoogleImamge);
+                }
+
+                await _unitOfWork.SaveChangeAsync();
+            }
+        }
+
+        #endregion
     }
 }

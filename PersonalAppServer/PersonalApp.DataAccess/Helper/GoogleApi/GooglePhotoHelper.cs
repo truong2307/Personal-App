@@ -54,6 +54,51 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
 
         #region override method
 
+        public async Task<GooglePhotoResult<ListImageResponse>> GetImagesAsync(List<string> ids)
+        {
+            var result = new GooglePhotoResult<ListImageResponse>();
+            if (await IsErrorAuthorization())
+            {
+                result.ErrorMessage = Message.GooglePhoto.ERROR_AUTHORIZE;
+                return result;
+            }
+
+            var queryString = string.Join("&", ids.Select(c => string.Concat("mediaItemIds=",c)));
+            var response = await _client.GetAsync(string.Format(GoogleApiConstants.EndPoint.GET_IMAGES, queryString));
+            var apiContent = await response.Content.ReadAsStringAsync();
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                result.IsSuccess = true;
+                result.Result = JsonSerializer.Deserialize<ListImageResponse>(apiContent);
+            }
+            else result.ErrorMessage = Message.GooglePhoto.ERROR_FETCH_IMAGE;
+
+            return result;
+        }
+
+        public async Task<GooglePhotoResult<ImageResponse>> GetImageByIdAsync(string id)
+        {
+            var result = new GooglePhotoResult<ImageResponse>();
+            if (await IsErrorAuthorization())
+            {
+                result.ErrorMessage = Message.GooglePhoto.ERROR_AUTHORIZE;
+                return result;
+            }
+
+            var response = await _client.GetAsync(string.Format(GoogleApiConstants.EndPoint.GET_IMAGE_BY_ID, id));
+            var apiContent = await response.Content.ReadAsStringAsync();
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                result.IsSuccess = true;
+                result.Result = JsonSerializer.Deserialize<ImageResponse>(apiContent);
+            }
+            else result.ErrorMessage = Message.GooglePhoto.ERROR_FETCH_IMAGE;
+
+            return result;
+        }
+
         public async Task<GooglePhotoResult<string>> RemoveImage(string idImage, string albumId)
         {
             var result = new GooglePhotoResult<string>();
@@ -81,28 +126,6 @@ namespace PersonalApp.DataAccess.Helper.GoogleApi
 
             return result;
 
-        }
-
-        public async Task<GooglePhotoResult<ImageResponse>> GetImageByIdAsync(string id)
-        {
-            var result = new GooglePhotoResult<ImageResponse>();
-            if (await IsErrorAuthorization())
-            {
-                result.ErrorMessage = Message.GooglePhoto.ERROR_AUTHORIZE;
-                return result;
-            }
-
-            var response = await _client.GetAsync(string.Format(GoogleApiConstants.EndPoint.GET_IMAGE_BY_ID, id));
-            var apiContent = await response.Content.ReadAsStringAsync();
-
-            if (response.StatusCode == HttpStatusCode.OK)
-            {
-                result.IsSuccess = true;
-                result.Result = JsonSerializer.Deserialize<ImageResponse>(apiContent);
-            }
-            else result.ErrorMessage = Message.GooglePhoto.ERROR_FETCH_IMAGE;
-
-            return result;
         }
 
         public async Task<GooglePhotoResult<AblumResponse>> CreateAlbum(string title)

@@ -7,13 +7,14 @@ namespace PersonalApp.DataAccess.Data.Repository
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _context;
-        private IGenericRepository<Event> _events;
-        private IGenericRepository<Notification> _notifications;
-        private IGenericRepository<ApplicationRole> _applicationRole;
-        private IGenericRepository<QuizzTest> _quizzTest;
-        private IGenericRepository<QuizzTopic> _quizzTopic;
-        private IGenericRepository<QuizzMultiplechoiceQuestion> _quizzMultiplechoiceQuestion;
-        private IGenericRepository<QuizzEssayQuestion> _quizzEssayQuestion;
+        private readonly IGenericRepository<Event> _events;
+        private readonly IGenericRepository<Notification> _notifications;
+        private readonly IGenericRepository<ApplicationRole> _applicationRole;
+        private readonly IGenericRepository<QuizzTest> _quizzTest;
+        private readonly IGenericRepository<QuizzTopic> _quizzTopic;
+        private readonly IGenericRepository<QuizzMultiplechoiceQuestion> _quizzMultiplechoiceQuestion;
+        private readonly IGenericRepository<QuizzEssayQuestion> _quizzEssayQuestion;
+        private readonly IGenericRepository<GoogleImage> _googleImage;
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -34,10 +35,9 @@ namespace PersonalApp.DataAccess.Data.Repository
 
         public IGenericRepository<QuizzEssayQuestion> QuizzEssayQuestion => _quizzEssayQuestion ?? new GenericRepository<QuizzEssayQuestion>(_context);
 
-        public void Dispose()
-        {
-            _context.Dispose();
-        }
+        public IGenericRepository<GoogleImage> GoogleImage => _googleImage ?? new GenericRepository<GoogleImage>(_context);
+
+        public void Dispose() => _context.Dispose();
 
         public async Task<bool> SaveChangeAsync()
         {

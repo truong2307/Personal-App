@@ -19,7 +19,9 @@ namespace PersonalApp.MapperConfig
             CreateMap<ApplicationRole, RoleDto>().ReverseMap();
 
             //quizz config
-            CreateMap<QuizzTest, QuizzDto>().ReverseMap();
+            CreateMap<QuizzTest, QuizzDto>()
+                .ForMember(c => c.ImageUrl, o => o.MapFrom(m => m.GoogleImage.BaseUrl))
+                .ReverseMap();
             CreateMap<QuizzTest, QuizzDetailDto>().ReverseMap();
             CreateMap<QuizzTest, QuizzCreateDto>().ReverseMap();
             CreateMap<QuizzMultiplechoiceQuestion, QuizzMultiplechoiceQuestionCreateDto>().ReverseMap();

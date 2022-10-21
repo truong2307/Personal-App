@@ -19,6 +19,8 @@
             /// </summary>
             public const string GET_IMAGE_BY_ID = "https://photoslibrary.googleapis.com/v1/mediaItems/{0}";
 
+            public const string GET_IMAGES = "https://photoslibrary.googleapis.com/v1/mediaItems:batchGet?{0}";
+
             /// <summary>
             /// {0} is album id
             /// </summary>

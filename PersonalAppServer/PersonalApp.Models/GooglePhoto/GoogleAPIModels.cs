@@ -18,6 +18,9 @@ namespace PersonalApp.Models.GooglePhoto
 
         [JsonPropertyName("filename")]
         public string Filename { get; set; }
+
+        [JsonPropertyName("mediaMetadata")]
+        public MediaMetaDataInfo MediaMetadata { get; set; }
     }
 
     public class UploadImage
@@ -84,6 +87,33 @@ namespace PersonalApp.Models.GooglePhoto
 
         [JsonPropertyName("filename")]
         public string Filename { get; set; }
+
+        [JsonPropertyName("mediaMetadata")]
+        public MediaMetaDataInfo MediaMetadata { get; set; }
+    }
+
+    public class MediaMetaDataInfo
+    {
+        [JsonPropertyName("creationTime")]
+        public DateTime CreationTime { get; set; }
+
+        [JsonPropertyName("width")]
+        public string Width { get; set; }
+
+        [JsonPropertyName("Height")]
+        public string Height { get; set; }
+    }
+
+    public class ListImageResponse
+    {
+        [JsonPropertyName("mediaItemResults")]
+        public List<InfoImages> MediaItemResults { get; set; }
+
+        public class InfoImages
+        {
+            [JsonPropertyName("mediaItem")]
+            public ImageResponse MediaItem { get; set; }
+        }
     }
 
 }

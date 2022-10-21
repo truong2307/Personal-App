@@ -10,7 +10,7 @@
         </mat-card-title>
       </div>
       <div class="col col-md-3">
-          <button mat-raised-button type="submit" color="primary" class="float-end"
+          <button mat-raised-button type="submit" color="primary" class="float-end" [disabled]="createQuizzForm.invalid"
           (click)="submit()">{{'quizz.QuizzCreateBtn' | translate}}</button>
       </div>
     </div>
