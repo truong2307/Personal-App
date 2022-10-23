@@ -32,8 +32,15 @@ namespace PersonalApp.API.Controllers
             return result.IsSuccess ? Ok(result) : BadRequest(result.ErrorMessages);
         }
 
+        [HttpGet("get-quizz-by-id/{id:int}")]
+        public async Task<IActionResult> GetAllQuizz(int id)
+        {
+            var result = await _quizzAdminServices.GetQuizzById(id);
+            return result.IsSuccess ? Ok(result) : BadRequest(result.ErrorMessages);
+        }
+
         [HttpPut("update-quizz")]
-        public async Task<IActionResult> UpdateQuizz([FromBody] QuizzDto model)
+        public async Task<IActionResult> UpdateQuizz([FromForm] QuizzUpdateDto model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState.Values.ToString());
             var result = await _quizzAdminServices.UpdateQuizz(model);

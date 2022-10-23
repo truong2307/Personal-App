@@ -10,8 +10,8 @@
         </mat-card-title>
       </div>
       <div class="col col-md-3">
-          <button mat-raised-button type="submit" color="primary" class="float-end" [disabled]="createQuizzForm.invalid"
-          (click)="submit()">{{'quizz.QuizzCreateBtn' | translate}}</button>
+          <button mat-raised-button type="submit" color="primary" class="float-end"
+          (click)="submit()">{{ (isEdit? 'quizz.QuizzUpdateBtn' : 'quizz.QuizzCreateBtn') | translate}}</button>
       </div>
     </div>
 
@@ -102,7 +102,8 @@
           <mat-accordion multi>
             <!-- Start Essay question form -->
             <div formArrayName="essayQuestions" *ngIf="essayQuestions.controls.length">
-              <mat-expansion-panel class="border-top border-4 border-secondary mt-3" expanded="{{false}}"
+              <mat-expansion-panel class="border-top border-4 border-secondary mt-3"
+              expanded="{{true}}"
               *ngFor="let item of essayQuestions.controls; let index = index">
               <mat-expansion-panel-header>
                 <div class="d-flex justify-content-between">
@@ -166,7 +167,8 @@
 
         <!-- Start multiple choice question form -->
         <div formArrayName="multipleChoiceQuestions" *ngIf="multipleChoiceQuestions.controls.length">
-            <mat-expansion-panel class="border-top border-4 border-success mt-3" expanded="{{false}}"
+            <mat-expansion-panel class="border-top border-4 border-success mt-3"
+            expanded="{{true}}"
             *ngFor="let item of multipleChoiceQuestions.controls; let index = index">
             <mat-expansion-panel-header>
               <mat-panel-title>

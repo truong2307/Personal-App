@@ -3,14 +3,14 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace PersonalApp.DataAccess.Utility.Comparer
 {
-    public class QuizzMultiplechoiceQuestionComparer : IEqualityComparer<QuizzMultiplechoiceQuestion>
+    public class QuizzMultiplechoiceQuestionComparer : IEqualityComparer<QuizzMultipleChoiceQuestion>
     {
-        public bool Equals(QuizzMultiplechoiceQuestion? x, QuizzMultiplechoiceQuestion? y)
+        public bool Equals(QuizzMultipleChoiceQuestion? x, QuizzMultipleChoiceQuestion? y)
         {
             return x.Id == y.Id;
         }
 
-        public int GetHashCode([DisallowNull] QuizzMultiplechoiceQuestion obj)
+        public int GetHashCode([DisallowNull] QuizzMultipleChoiceQuestion obj)
         {
             return obj.Id.GetHashCode();
         }

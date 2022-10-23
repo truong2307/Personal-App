@@ -17,6 +17,11 @@ export class QuizzManageService {
       environment.baseUri + `quizz-manage/get-all-quizz/${pageIndex}/${pageSize}`);
   }
 
+  getQuizzById(id: number) : Observable<ResponseData>{
+    return this.httpClient.get(
+      environment.baseUri + `quizz-manage/get-quizz-by-id/${id}`);
+  }
+
   createQuizz(quizzToCreate : FormData) : Observable<ResponseData> {
     return this.httpClient.post(
       environment.baseUri + 'quizz-manage/create-quizz' , quizzToCreate);

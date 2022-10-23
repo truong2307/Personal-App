@@ -8,8 +8,8 @@
     <div class="row g-2 g-lg-3">
 
       <div *ngFor="let item of quizzList" class="col-12 col-md-6 col-xl-3">
-        <mat-card class="cursor-pointer" role="button" matRipple>
-          <img (load)="testLoadImageEvent($event)" [src]="item.imageUrl ? item.imageUrl :  '../../../../assets/image/imageNotFound.png'" class="card-img-top" alt="...">
+        <mat-card class="cursor-pointer" role="button" matRipple (click)="editQuizz(item.id)">
+          <img [src]="item.imageUrl ? item.imageUrl :  '../../../../assets/image/imageNotFound.png'" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">{{item.title}}</h5>
             <mat-card-content>
@@ -53,5 +53,7 @@
 </div>
 
 <app-quizz-edit *ngIf="openFormCreateQuizz"
+[isEdit]="isEditQuizz"
+[curIdQuizz]="curIdQuizz"
 (displayForm)="backFromCreateForm($event)">
 </app-quizz-edit>

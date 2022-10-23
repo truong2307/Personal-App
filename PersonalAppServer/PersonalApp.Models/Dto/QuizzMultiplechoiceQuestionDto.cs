@@ -28,6 +28,12 @@ namespace PersonalApp.Models.Dto
         public decimal Mark { get; set; }
     }
 
+    public class QuizzMultiplechoiceQuestionUpdateDto : QuizzMultiplechoiceQuestionCreateDto
+    {
+        public int Id { get; set; }
+    }
+
+
     public class QuizzMultiplechoiceQuestionDto : QuizzMultiplechoiceQuestionCreateDto
     {
         public int Id { get; set; }

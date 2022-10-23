@@ -12,7 +12,7 @@ namespace PersonalApp.DataAccess.Data.Repository
         private readonly IGenericRepository<ApplicationRole> _applicationRole;
         private readonly IGenericRepository<QuizzTest> _quizzTest;
         private readonly IGenericRepository<QuizzTopic> _quizzTopic;
-        private readonly IGenericRepository<QuizzMultiplechoiceQuestion> _quizzMultiplechoiceQuestion;
+        private readonly IGenericRepository<QuizzMultipleChoiceQuestion> _quizzMultipleChoiceQuestion;
         private readonly IGenericRepository<QuizzEssayQuestion> _quizzEssayQuestion;
         private readonly IGenericRepository<GoogleImage> _googleImage;
 
@@ -31,7 +31,7 @@ namespace PersonalApp.DataAccess.Data.Repository
 
         public IGenericRepository<QuizzTopic> QuizzTopic => _quizzTopic ?? new GenericRepository<QuizzTopic>(_context);
 
-        public IGenericRepository<QuizzMultiplechoiceQuestion> QuizzMultiplechoiceQuestion => _quizzMultiplechoiceQuestion ?? new GenericRepository<QuizzMultiplechoiceQuestion>(_context);
+        public IGenericRepository<QuizzMultipleChoiceQuestion> QuizzMultiplechoiceQuestion => _quizzMultipleChoiceQuestion ?? new GenericRepository<QuizzMultipleChoiceQuestion>(_context);
 
         public IGenericRepository<QuizzEssayQuestion> QuizzEssayQuestion => _quizzEssayQuestion ?? new GenericRepository<QuizzEssayQuestion>(_context);
 

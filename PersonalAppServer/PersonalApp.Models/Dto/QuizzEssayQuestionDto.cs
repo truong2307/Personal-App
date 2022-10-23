@@ -16,6 +16,11 @@ namespace PersonalApp.Models.Dto
         public decimal Mark { get; set; }
     }
 
+    public class QuizzEssayQuestionUpdateDto : QuizzEssayQuestionCreateDto
+    {
+        public int Id { get; set; }
+    }
+
     public class QuizzEssayQuestionDto : QuizzEssayQuestionCreateDto
     {
         public int Id { get; set; }

@@ -28,7 +28,7 @@ export class CreateQuizzAction implements Action {
 
 export class UpdateQuizzAction implements Action {
   readonly type = UPDATE_QUIZZ;
-  constructor(public payLoad: QuizzManage){ }
+  constructor(public payLoad: FormData){ }
 }
 
 export class DeleteQuizzAction implements Action {
@@ -38,7 +38,7 @@ export class DeleteQuizzAction implements Action {
 
 export class CrudQuizzSuccessAction implements Action {
   readonly type = CRUD_QUIZZ_SUCCESS;
-  constructor(public payLoad: QuizzManage[], public totalItem: number){ }
+  constructor(public payLoad: QuizzManage[], public item: QuizzManage, public totalItem: number){ }
 }
 
 export class CrudQuizzFailedAction implements Action {

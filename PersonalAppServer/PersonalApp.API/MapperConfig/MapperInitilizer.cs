@@ -22,11 +22,16 @@ namespace PersonalApp.MapperConfig
             CreateMap<QuizzTest, QuizzDto>()
                 .ForMember(c => c.ImageUrl, o => o.MapFrom(m => m.GoogleImage.BaseUrl))
                 .ReverseMap();
-            CreateMap<QuizzTest, QuizzDetailDto>().ReverseMap();
+            CreateMap<QuizzTest, QuizzDetailDto>()
+                .ForMember(c => c.ImageUrl, o => o.MapFrom(m => m.GoogleImage.BaseUrl))
+                .ReverseMap();
             CreateMap<QuizzTest, QuizzCreateDto>().ReverseMap();
-            CreateMap<QuizzMultiplechoiceQuestion, QuizzMultiplechoiceQuestionCreateDto>().ReverseMap();
-            CreateMap<QuizzMultiplechoiceQuestion, QuizzMultiplechoiceQuestionDto>().ReverseMap();
+            CreateMap<QuizzTest, QuizzUpdateDto>().ReverseMap();
+            CreateMap<QuizzMultipleChoiceQuestion, QuizzMultiplechoiceQuestionCreateDto>().ReverseMap();
+            CreateMap<QuizzMultipleChoiceQuestion, QuizzMultiplechoiceQuestionUpdateDto>().ReverseMap();
+            CreateMap<QuizzMultipleChoiceQuestion, QuizzMultiplechoiceQuestionDto>().ReverseMap();
             CreateMap<QuizzEssayQuestion, QuizzEssayQuestionCreateDto>().ReverseMap();
+            CreateMap<QuizzEssayQuestion, QuizzEssayQuestionUpdateDto>().ReverseMap();
             CreateMap<QuizzEssayQuestion, QuizzEssayQuestionDto>().ReverseMap();
             CreateMap<QuizzTopic, QuizzTopicCreateDto>().ReverseMap();
             CreateMap<QuizzTopic, QuizzTopicDto>().ReverseMap();

@@ -25,7 +25,7 @@ export function quizzManageReducer(
 ): QuizzManageState {
   switch (action.type) {
     case QuizzManageAction.CRUD_QUIZZ_SUCCESS:
-      return {...state, items: action.payLoad, totalItem: action.totalItem}
+      return {...state, item: action.item, items: action.payLoad, totalItem: action.totalItem}
       case QuizzManageAction.CRUD_QUIZZ_FAILED:
         return {...state, error: action.error}
     default:

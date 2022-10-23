@@ -10,6 +10,7 @@
   "ValidTopicName": "Enter at least 1 character",
   "QuizzCreate": "Create Quizz",
   "QuizzCreateBtn": "Create",
+  "QuizzUpdateBtn": "Update",
   "QuizzTitle": "Title quizz",
   "QuizzTitleError": "Title quizz is <strong>required</strong>",
   "ExamTime": "Exam time",

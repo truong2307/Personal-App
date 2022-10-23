@@ -10,6 +10,7 @@
   "ValidTopicName": "Nhập ít nhất 1 kí tự",
   "QuizzCreate": "Tạo bài thi",
   "QuizzCreateBtn": "Tạo",
+  "QuizzUpdateBtn": "Cập nhật",
   "QuizzTitle": "Tiêu đề bài thi",
   "QuizzTitleError": "Vui lòng <strong>nhập</strong> tiêu đề bài thi ",
   "ExamTime": "Thời gian làm bài",

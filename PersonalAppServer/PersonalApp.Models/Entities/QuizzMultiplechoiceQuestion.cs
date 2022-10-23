@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PersonalApp.Models.Entities
 {
-    public class QuizzMultiplechoiceQuestion : BaseEntity, IInfoCreateUpdate
+    public class QuizzMultipleChoiceQuestion : BaseEntity, IInfoCreateUpdate
     {
         [Required]
         public string QuestionText { get; set; }
 
-        public string? QuestionImage { get; set; }
+        public string QuestionImage { get; set; }
 
         [Required]
         public string AnswerA { get; set; }

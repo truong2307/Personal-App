@@ -35,6 +35,7 @@ namespace PersonalApp.DataAccess.Data.Repository
         public async Task DeleteRangeAsync(IEnumerable<T> entities)
         {
             dbSet.RemoveRange(entities);
+            await Task.CompletedTask;
         }
 
         public async Task<T> GetAsync(Expression<Func<T, bool>> filter

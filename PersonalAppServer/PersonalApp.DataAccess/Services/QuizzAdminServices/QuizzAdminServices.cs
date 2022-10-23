@@ -48,16 +48,16 @@ namespace PersonalApp.DataAccess.Services.QuizzAdminServices
             };
 
 
-            if (dataMap.MultiplechoiceQuestions.Count > 0)
+            if (dataMap.MultipleChoiceQuestions.Any())
             {
-                dataMap.MultiplechoiceQuestions.ToList().ForEach(c =>
+                dataMap.MultipleChoiceQuestions.ToList().ForEach(c =>
                 {
                     c.CreatedAt = DateTime.Now;
                     c.CreatedBy = currUserId;
                 });
             }
 
-            if (dataMap.EssayQuestions.Count > 0)
+            if (dataMap.EssayQuestions.Any())
             {
                 dataMap.EssayQuestions.ToList().ForEach(c =>
                 {
@@ -95,6 +95,27 @@ namespace PersonalApp.DataAccess.Services.QuizzAdminServices
             return _responseDto;
         }
 
+        public async Task<ResponseDto> GetQuizzById(int id)
+        {
+            var quizzFromDb = await _unitOfWork.QuizzTest.GetAsync(c => c.Id == id, 
+                include: c=> c.Include(c => c.EssayQuestions)
+                              .Include(c => c.MultipleChoiceQuestions)
+                              .Include(c => c.QuizzTopic)
+                              .Include(c => c.GoogleImage));
+
+            if (quizzFromDb == null)
+            {
+                _responseDto.ErrorMessages = "Quizz not exist in system";
+                return _responseDto;
+            }
+
+            await CheckExpiredGoogleImage(new List<GoogleImage>() { quizzFromDb.GoogleImage });
+
+            _responseDto.Result = _mapper.Map<QuizzDetailDto>(quizzFromDb);
+            _responseDto.IsSuccess = true;
+            return _responseDto;
+        }
+
         public async Task<ResponseDatas<QuizzDto>> GetQuizzs(int pageIndex, int pageSize)
         {
             var quizzList = await _unitOfWork.QuizzTest.GetAllAsync(queryEntity: c => c.Skip(pageSize * pageIndex).Take(pageSize),
@@ -112,10 +133,10 @@ namespace PersonalApp.DataAccess.Services.QuizzAdminServices
             return responseData;
         }
 
-        public async Task<ResponseDto> UpdateQuizz(QuizzDto model)
+        public async Task<ResponseDto> UpdateQuizz(QuizzUpdateDto model)
         {
             var quizzInDb = await _unitOfWork.QuizzTest.GetAsync(c => c.Id == model.Id
-            , include: c => c.Include(i => i.MultiplechoiceQuestions)
+            , include: c => c.Include(i => i.MultipleChoiceQuestions)
             .Include(i => i.EssayQuestions).Include(c => c.QuizzTopic)
             );
 
@@ -136,12 +157,12 @@ namespace PersonalApp.DataAccess.Services.QuizzAdminServices
             quizzInDb.UpdatedAt = DateTime.Now;
             quizzInDb.UpdatedBy = currUserId;
 
-            var multiplechoiceQuestionDelete = quizzInDb.MultiplechoiceQuestions
-                .Except(quizzMapFromRequest.MultiplechoiceQuestions, new QuizzMultiplechoiceQuestionComparer()).ToList();
-            var multiplechoiceQuestionAdd = quizzMapFromRequest.MultiplechoiceQuestions
-                .Except(quizzInDb.MultiplechoiceQuestions, new QuizzMultiplechoiceQuestionComparer()).ToList();
-            var multiplechoiceQuestionUpdate = quizzMapFromRequest.MultiplechoiceQuestions
-                .Except(multiplechoiceQuestionDelete, new QuizzMultiplechoiceQuestionComparer()).Where(c => c.Id > 0).ToList();
+            var multipleChoiceQuestionDelete = quizzInDb.MultipleChoiceQuestions
+                .Except(quizzMapFromRequest.MultipleChoiceQuestions, new QuizzMultiplechoiceQuestionComparer()).ToList();
+            var multipleChoiceQuestionAdd = quizzMapFromRequest.MultipleChoiceQuestions
+                .Except(quizzInDb.MultipleChoiceQuestions, new QuizzMultiplechoiceQuestionComparer()).ToList();
+            var multiplechoiceQuestionUpdate = quizzMapFromRequest.MultipleChoiceQuestions
+                .Except(multipleChoiceQuestionDelete, new QuizzMultiplechoiceQuestionComparer()).Where(c => c.Id > 0).ToList();
 
             var essayQuestionsDelete = quizzInDb.EssayQuestions
                 .Except(quizzMapFromRequest.EssayQuestions, new QuizzEssayQuestionComparer()).ToList();
@@ -150,15 +171,15 @@ namespace PersonalApp.DataAccess.Services.QuizzAdminServices
             var essayQuestionsUpdate = quizzMapFromRequest.EssayQuestions
                 .Except(essayQuestionsDelete, new QuizzEssayQuestionComparer()).Where(c => c.Id > 0).ToList();
 
-            await _unitOfWork.QuizzMultiplechoiceQuestion.DeleteRangeAsync(multiplechoiceQuestionDelete);
+            await _unitOfWork.QuizzMultiplechoiceQuestion.DeleteRangeAsync(multipleChoiceQuestionDelete);
             await _unitOfWork.QuizzEssayQuestion.DeleteRangeAsync(essayQuestionsDelete);
 
             quizzInDb.EssayQuestions.Clear();
-            quizzInDb.MultiplechoiceQuestions.Clear();
-            quizzInDb.MultiplechoiceQuestions = multiplechoiceQuestionUpdate;
+            quizzInDb.MultipleChoiceQuestions.Clear();
+            quizzInDb.MultipleChoiceQuestions = multiplechoiceQuestionUpdate;
             quizzInDb.EssayQuestions = essayQuestionsUpdate;
 
-            foreach (var item in quizzInDb.MultiplechoiceQuestions)
+            foreach (var item in quizzInDb.MultipleChoiceQuestions)
             {
                 item.UpdatedAt = DateTime.Now;
                 item.UpdatedBy = currUserId;
@@ -177,11 +198,11 @@ namespace PersonalApp.DataAccess.Services.QuizzAdminServices
                 quizzInDb.EssayQuestions.Add(item);
             });
 
-            multiplechoiceQuestionAdd.ForEach(item =>
+            multipleChoiceQuestionAdd.ForEach(item =>
             {
                 item.CreatedAt = DateTime.Now;
                 item.CreatedBy = currUserId;
-                quizzInDb.MultiplechoiceQuestions.Add(item);
+                quizzInDb.MultipleChoiceQuestions.Add(item);
             });
 
             await _unitOfWork.QuizzTest.UpdateAsync(quizzInDb);
@@ -198,7 +219,7 @@ namespace PersonalApp.DataAccess.Services.QuizzAdminServices
         private async Task CheckExpiredGoogleImage(List<GoogleImage> googleImages)
         {
             var expiredGoogleImage = new List<GoogleImage>();
-            googleImages.ForEach(item =>
+            googleImages?.ForEach(item =>
             {
                 if (DateTime.Now > item?.Expires)
                 {
@@ -208,7 +229,7 @@ namespace PersonalApp.DataAccess.Services.QuizzAdminServices
 
             if (expiredGoogleImage.Any())
             {
-                var rs = await _googlePhotoHelper.GetImagesAsync(expiredGoogleImage.Select(c => c.Id).ToList());
+                var rs = await _googlePhotoHelper.GetImagesAsync(expiredGoogleImage?.Select(c => c.Id).ToList());
                 foreach (var item in rs.Result.MediaItemResults)
                 {
                     var curGoogleImamge = expiredGoogleImage?.FirstOrDefault(c => c.Id == item.MediaItem.Id);

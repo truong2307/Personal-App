@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { select, Store } from '@ngrx/store';
 import { QuizzManage } from 'src/shared/model/quizz-manage';
-import { GetAllQuizzAction } from 'src/stores/quizz-manage/quizz-manaage.action';
+import { GetAllQuizzAction, GetQuizzAction } from 'src/stores/quizz-manage/quizz-manaage.action';
 import { quizzManageSelector } from 'src/stores/quizz-manage/quizz-manage.selector';
 
 @Component({
@@ -18,6 +18,8 @@ export class QuizzManageComponent implements OnInit {
   quizzList : QuizzManage[] = [];
   totalQuizz :number = 0;
   openFormCreateQuizz: boolean = false;
+  isEditQuizz: boolean = false;
+  curIdQuizz: number = -1;
   constructor(
     private store: Store
   ) { }
@@ -35,6 +37,8 @@ export class QuizzManageComponent implements OnInit {
   }
 
   backFromCreateForm(event : any){
+    this.isEditQuizz = false;
+    this.curIdQuizz = -1;
     this.openFormCreateQuizz = event;
   }
 
@@ -44,8 +48,10 @@ export class QuizzManageComponent implements OnInit {
     this.store.dispatch(new GetAllQuizzAction(this.pageIndex,this.pageSize));
   }
 
-  testLoadImageEvent(event: any){
-
+  editQuizz(data: number){
+    this.openFormCreateQuizz = true;
+    this.isEditQuizz = true;
+    this.curIdQuizz = data;
   }
 
 }

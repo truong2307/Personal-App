@@ -50,7 +50,21 @@ getQuizzs$ = createEffect(() => this.action$.pipe(
     this.loader.start();
     return this.service.getQuizzs(payLoad.pageIndex, payLoad.pageSize).pipe(
       map((result: ResponseDatas) => {
-        return new QuizzManageAction.CrudQuizzSuccessAction(result.datas, result.totalItem as number);
+        return new QuizzManageAction.CrudQuizzSuccessAction(result.datas, null as any, result.totalItem as number);
+      }),
+      catchError(error =>
+        of(new QuizzManageAction.CrudQuizzFailedAction(error)))
+    )
+  })
+));
+
+getQuizzById$ = createEffect(() => this.action$.pipe(
+  ofType(QuizzManageAction.GET_QUIZZ),
+  switchMap((payLoad: any) => {
+    this.loader.start();
+    return this.service.getQuizzById(payLoad.payLoad).pipe(
+      map((result: ResponseData) => {
+        return new QuizzManageAction.CrudQuizzSuccessAction(this.quizzList, result.result , this.totalItem);
       }),
       catchError(error =>
         of(new QuizzManageAction.CrudQuizzFailedAction(error)))
@@ -70,7 +84,7 @@ createQuizz$ = createEffect(() => this.action$.pipe(
           );
           this.quizzList.push(result.result);
         }
-        return new QuizzManageAction.CrudQuizzSuccessAction(this.quizzList, this.totalItem + 1 as number);
+        return new QuizzManageAction.CrudQuizzSuccessAction(this.quizzList, null as any, this.totalItem + 1 as number);
       }),
       catchError(error =>
         of(new QuizzManageAction.CrudQuizzFailedAction(error)))
@@ -82,12 +96,11 @@ updateQuizz$ = createEffect(() => this.action$.pipe(
   ofType(QuizzManageAction.UPDATE_QUIZZ),
   switchMap((payLoad: any) => {
     this.loader.start();
-
     return this.service.updateQuizz(payLoad.payLoad).pipe(
       map((result: ResponseData) => {
-        var curIndex = this.quizzList.findIndex(c => c.id == payLoad.payLoad.id);
+        var curIndex = this.quizzList.findIndex(c => c.id == result.result.id);
         this.quizzList[curIndex] = result.result;
-        return new QuizzManageAction.CrudQuizzSuccessAction(this.quizzList, this.totalItem + 1 as number);
+        return new QuizzManageAction.CrudQuizzSuccessAction(this.quizzList, null as any,this.totalItem + 1 as number);
       }),
       catchError(error =>
         of(new QuizzManageAction.CrudQuizzFailedAction(error)))
@@ -108,7 +121,7 @@ removeQuizz$ = createEffect(() => this.action$.pipe(
           var curIndex = this.quizzList.findIndex(c => c.id == payLoad.id);
         this.quizzList.splice(curIndex, 1);
         }
-        return new QuizzManageAction.CrudQuizzSuccessAction(this.quizzList, this.totalItem - 1);
+        return new QuizzManageAction.CrudQuizzSuccessAction(this.quizzList,null as any, this.totalItem - 1);
       }),
       catchError(error =>
         of(new QuizzManageAction.CrudQuizzFailedAction(error)))

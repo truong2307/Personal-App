@@ -39,7 +39,7 @@ namespace PersonalApp.Models.Entities
 
         public string UpdatedBy { get; set; }
 
-        public virtual ICollection<QuizzMultiplechoiceQuestion> MultiplechoiceQuestions { get; set; }
+        public virtual ICollection<QuizzMultipleChoiceQuestion> MultipleChoiceQuestions { get; set; }
 
         public virtual ICollection<QuizzEssayQuestion> EssayQuestions { get; set; }
     }
