@@ -31,6 +31,15 @@ namespace PersonalApp.Models.Dto
     public class QuizzMultiplechoiceQuestionUpdateDto : QuizzMultiplechoiceQuestionCreateDto
     {
         public int Id { get; set; }
+
+        [Required]
+        public int QuizzId { get; set; }
+
+        [Required]
+        public DateTime CreatedAt { get; set; }
+
+        [Required]
+        public string CreatedBy { get; set; }
     }
 
 

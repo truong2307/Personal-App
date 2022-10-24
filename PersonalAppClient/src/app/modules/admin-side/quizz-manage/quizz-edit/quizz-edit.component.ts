@@ -161,6 +161,9 @@ createMultipleChoiceForm(initValue?: QuizzMultipleChoiceQuestion) : FormGroup{
     answerD : [initValue?.answerD, [Validators.required]],
     correctAnswer : [initValue?.correctAnswer, [Validators.required]],
     mark : [initValue?.mark, [Validators.required]],
+    createdAt : [(initValue as any)?.createdAt],
+    createdBy : [(initValue as any)?.createdBy],
+    quizzId : [initValue?.quizzId],
   })
 }
 
@@ -171,6 +174,9 @@ createEssayQuestion(initValue?: QuizzEssayQuestion) : FormGroup{
     questionImage : '',
     correctAnswer : [initValue?.correctAnswer, [Validators.required]],
     mark : [initValue?.mark, [Validators.required]],
+    createdAt : [(initValue as any)?.createdAt, [Validators.required]],
+    createdBy : [(initValue as any)?.createdBy, [Validators.required]],
+    quizzId : [initValue?.quizzId],
   });
 }
 
@@ -204,6 +210,8 @@ submit(){
       this.toastr.error('Input all field before submit');
       return;
     case this.isEdit:
+      console.log(this.createQuizzForm.value);
+
     this.store.dispatch(new UpdateQuizzAction(this.createFormData()));
     break;
     default:

@@ -173,9 +173,9 @@ namespace PersonalApp.DataAccess.Services.QuizzAdminServices
 
             await _unitOfWork.QuizzMultiplechoiceQuestion.DeleteRangeAsync(multipleChoiceQuestionDelete);
             await _unitOfWork.QuizzEssayQuestion.DeleteRangeAsync(essayQuestionsDelete);
+            await _unitOfWork.QuizzEssayQuestion.DeleteRangeAsync(quizzInDb.EssayQuestions);
+            await _unitOfWork.QuizzMultiplechoiceQuestion.DeleteRangeAsync(quizzInDb.MultipleChoiceQuestions);
 
-            quizzInDb.EssayQuestions.Clear();
-            quizzInDb.MultipleChoiceQuestions.Clear();
             quizzInDb.MultipleChoiceQuestions = multiplechoiceQuestionUpdate;
             quizzInDb.EssayQuestions = essayQuestionsUpdate;
 

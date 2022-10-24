@@ -5,7 +5,7 @@ namespace PersonalApp.DataAccess.Utility.Comparer
 {
     internal class QuizzEssayQuestionComparer : IEqualityComparer<QuizzEssayQuestion>
     {
-        public bool Equals(QuizzEssayQuestion? x, QuizzEssayQuestion? y)
+        public bool Equals(QuizzEssayQuestion x, QuizzEssayQuestion y)
         {
             return x.Id == y.Id;
         }

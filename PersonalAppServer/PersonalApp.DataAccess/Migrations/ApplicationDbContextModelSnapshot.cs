@@ -310,7 +310,7 @@ namespace PersonalApp.DataAccess.Migrations
                     b.ToTable("QuizzEssayQuestions");
                 });
 
-            modelBuilder.Entity("PersonalApp.Models.Entities.QuizzMultiplechoiceQuestion", b =>
+            modelBuilder.Entity("PersonalApp.Models.Entities.QuizzMultipleChoiceQuestion", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -753,10 +753,10 @@ namespace PersonalApp.DataAccess.Migrations
                     b.Navigation("QuizzTest");
                 });
 
-            modelBuilder.Entity("PersonalApp.Models.Entities.QuizzMultiplechoiceQuestion", b =>
+            modelBuilder.Entity("PersonalApp.Models.Entities.QuizzMultipleChoiceQuestion", b =>
                 {
                     b.HasOne("PersonalApp.Models.Entities.QuizzTest", "QuizzTest")
-                        .WithMany("MultiplechoiceQuestions")
+                        .WithMany("MultipleChoiceQuestions")
                         .HasForeignKey("QuizzId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -842,7 +842,7 @@ namespace PersonalApp.DataAccess.Migrations
                 {
                     b.Navigation("EssayQuestions");
 
-                    b.Navigation("MultiplechoiceQuestions");
+                    b.Navigation("MultipleChoiceQuestions");
                 });
 #pragma warning restore 612, 618
         }
