@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using PersonalApp.DataAccess.Data.Repository.IRepository;
 using PersonalApp.DataAccess.Helper.GoogleApi;
@@ -35,36 +36,23 @@ namespace PersonalApp.DataAccess.Services.QuizzAdminServices
             var currUserId = _claimUserServices.GetCurrentUserId();
             var dataMap = _mapper.Map<QuizzTest>(model);
 
-            var responseImage = await _googlePhotoHelper.UploadImageAsync(model.ImageQuizz, "AOr7KUMcsYLFN9qavVXtMkUk42ugvZskHXL38q7189u2thATjgBwZ0EzTi3TLjAtKyKOGfG81KHZ");
-            dataMap.ImageId = responseImage.Result.MediaItem.Id;
-
-            dataMap.GoogleImage = new GoogleImage()
+            if (model.ImageQuizz != null)
             {
-                Id = responseImage.Result.MediaItem.Id,
-                AlbumId = "AOr7KUMcsYLFN9qavVXtMkUk42ugvZskHXL38q7189u2thATjgBwZ0EzTi3TLjAtKyKOGfG81KHZ",
-                ImageName = responseImage.Result.MediaItem.Filename,
-                BaseUrl = (await _googlePhotoHelper.GetImageByIdAsync(responseImage.Result.MediaItem.Id))?.Result?.BaseUrl,
-                Expires = DateTime.Now.AddMinutes(30),
-            };
-
-
-            if (dataMap.MultipleChoiceQuestions.Any())
-            {
-                dataMap.MultipleChoiceQuestions.ToList().ForEach(c =>
-                {
-                    c.CreatedAt = DateTime.Now;
-                    c.CreatedBy = currUserId;
-                });
+                dataMap.GoogleImage = await CreateGoogleImage(model.ImageQuizz);
+                dataMap.ImageId = dataMap.GoogleImage.Id;
             }
 
-            if (dataMap.EssayQuestions.Any())
+            dataMap?.MultipleChoiceQuestions?.ToList().ForEach(c =>
             {
-                dataMap.EssayQuestions.ToList().ForEach(c =>
-                {
-                    c.CreatedAt = DateTime.Now;
-                    c.CreatedBy = currUserId;
-                });
-            }
+                c.CreatedAt = DateTime.Now;
+                c.CreatedBy = currUserId;
+            });
+
+            dataMap?.EssayQuestions?.ToList().ForEach(c =>
+            {
+                c.CreatedAt = DateTime.Now;
+                c.CreatedBy = currUserId;
+            });
 
             dataMap.CreatedAt = DateTime.Now;
             dataMap.CreatedBy = currUserId;
@@ -97,8 +85,8 @@ namespace PersonalApp.DataAccess.Services.QuizzAdminServices
 
         public async Task<ResponseDto> GetQuizzById(int id)
         {
-            var quizzFromDb = await _unitOfWork.QuizzTest.GetAsync(c => c.Id == id, 
-                include: c=> c.Include(c => c.EssayQuestions)
+            var quizzFromDb = await _unitOfWork.QuizzTest.GetAsync(c => c.Id == id,
+                include: c => c.Include(c => c.EssayQuestions)
                               .Include(c => c.MultipleChoiceQuestions)
                               .Include(c => c.QuizzTopic)
                               .Include(c => c.GoogleImage));
@@ -137,8 +125,7 @@ namespace PersonalApp.DataAccess.Services.QuizzAdminServices
         {
             var quizzInDb = await _unitOfWork.QuizzTest.GetAsync(c => c.Id == model.Id
             , include: c => c.Include(i => i.MultipleChoiceQuestions)
-            .Include(i => i.EssayQuestions).Include(c => c.QuizzTopic)
-            );
+            .Include(i => i.EssayQuestions).Include(c => c.QuizzTopic));
 
             if (quizzInDb == null)
             {
@@ -191,19 +178,19 @@ namespace PersonalApp.DataAccess.Services.QuizzAdminServices
                 item.UpdatedBy = currUserId;
             }
 
-            essayQuestionsAdd.ForEach(item =>
+            foreach (var item in essayQuestionsAdd)
             {
                 item.CreatedAt = DateTime.Now;
                 item.CreatedBy = currUserId;
                 quizzInDb.EssayQuestions.Add(item);
-            });
+            }
 
-            multipleChoiceQuestionAdd.ForEach(item =>
+            foreach (var item in multipleChoiceQuestionAdd)
             {
                 item.CreatedAt = DateTime.Now;
                 item.CreatedBy = currUserId;
                 quizzInDb.MultipleChoiceQuestions.Add(item);
-            });
+            }
 
             await _unitOfWork.QuizzTest.UpdateAsync(quizzInDb);
             await _unitOfWork.SaveChangeAsync();
@@ -215,6 +202,20 @@ namespace PersonalApp.DataAccess.Services.QuizzAdminServices
         }
 
         #region private method 
+
+        private async Task<GoogleImage> CreateGoogleImage(IFormFile image)
+        {
+            var responseImage = await _googlePhotoHelper.UploadImageAsync(image, "AOr7KUMcsYLFN9qavVXtMkUk42ugvZskHXL38q7189u2thATjgBwZ0EzTi3TLjAtKyKOGfG81KHZ");
+            return new GoogleImage()
+            {
+                Id = responseImage.Result.MediaItem.Id,
+                //AlbumId = "AOr7KUMcsYLFN9qavVXtMkUk42ugvZskHXL38q7189u2thATjgBwZ0EzTi3TLjAtKyKOGfG81KHZ",
+                ImageName = responseImage.Result.MediaItem.Filename,
+                BaseUrl = (await _googlePhotoHelper.GetImageByIdAsync(responseImage.Result.MediaItem.Id))?.Result?.BaseUrl,
+                Expires = DateTime.Now.AddMinutes(30),
+            };
+
+        }
 
         private async Task CheckExpiredGoogleImage(List<GoogleImage> googleImages)
         {

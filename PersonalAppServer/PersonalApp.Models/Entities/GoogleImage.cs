@@ -15,11 +15,11 @@ namespace PersonalApp.Models.Entities
         [Required]
         public string BaseUrl { get; set; }
 
-        [Required]
-        public string AlbumId { get; set; }
+        //[Required]
+        //public string AlbumId { get; set; }
 
-        [ForeignKey("AlbumId")]
-        public virtual GoogleAlbumImage AlbumImage { get; set; }
+        //[ForeignKey("AlbumId")]
+        //public virtual GoogleAlbumImage AlbumImage { get; set; }
 
         [Required]
         public DateTime Expires { get; set; }
