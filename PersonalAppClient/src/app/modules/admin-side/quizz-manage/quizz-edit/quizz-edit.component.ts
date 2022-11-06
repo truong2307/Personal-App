@@ -126,7 +126,7 @@ initialForm(initialValue? : QuizzManage){
     examTime : [initialValue?.examTime, [Validators.required, Validators.min(1)]],
     topicId : [initialValue?.topicId, [Validators.required]],
     level : [initialValue?.level.toString(), [Validators.required]],
-    isPublic : initialValue?.isPublic,
+    isPublic : initialValue? initialValue.isPublic : false,
     imageQuizz : '',
     multipleChoiceQuestions : this.formBuilder.array([]),
     essayQuestions : this.formBuilder.array([])
@@ -174,8 +174,8 @@ createEssayQuestion(initValue?: QuizzEssayQuestion) : FormGroup{
     questionImage : '',
     correctAnswer : [initValue?.correctAnswer, [Validators.required]],
     mark : [initValue?.mark, [Validators.required]],
-    createdAt : [(initValue as any)?.createdAt, [Validators.required]],
-    createdBy : [(initValue as any)?.createdBy, [Validators.required]],
+    createdAt : [(initValue as any)?.createdAt],
+    createdBy : [(initValue as any)?.createdBy],
     quizzId : [initValue?.quizzId],
   });
 }
@@ -231,20 +231,20 @@ createFormData():FormData{
       case 'essayQuestions':
         this.quizzData.essayQuestions.forEach((c, index) => {
           for (var key in c) {
-            formData.append(`essayQuestions[${index}][${key}]`, c[key as keyof QuizzEssayQuestion].toString());
+            formData.append(`essayQuestions[${index}][${key}]`, c[key as keyof QuizzEssayQuestion]?.toString());
           }
         })
         break;
         case 'multipleChoiceQuestions':
           this.quizzData.multipleChoiceQuestions.forEach((c, index) => {
             for (var key in c) {
-              formData.append(`multipleChoiceQuestions[${index}][${key}]`, c[key as keyof QuizzMultipleChoiceQuestion].toString());
+              formData.append(`multipleChoiceQuestions[${index}][${key}]`, c[key as keyof QuizzMultipleChoiceQuestion]?.toString());
             }
           })
           break;
 
       default:
-        formData.append(key, this.quizzData[key as keyof QuizzManage].toString());
+        formData.append(key, this.quizzData[key as keyof QuizzManage]?.toString());
         break;
     }
   }
