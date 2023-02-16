@@ -1,3 +1,4 @@
+# This project is pending, it being refactor
 # Quizz app
 
 Angular for client
